@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.cerc</groupId>
-	<artifactId>jmis</artifactId>
-	<version>1.2.2</version>
+	<artifactId>summer-mis</artifactId>
+	<version>1.0.0</version>
 	<name>mis app framework</name>
 	<build>
 		<plugins>
@@ -83,7 +83,7 @@
 	<properties>
 		<org.springframework.version>4.2.6.RELEASE</org.springframework.version>
 		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
-		<cn.cerc.lib.version>1.2.2</cn.cerc.lib.version>
+		<cn.cerc.summer.version>1.0.0</cn.cerc.summer.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -100,23 +100,18 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.cerc</groupId>
-			<artifactId>jdb</artifactId>
-			<version>${cn.cerc.lib.version}</version>
+			<artifactId>summer-db</artifactId>
+			<version>${cn.cerc.summer.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.cerc</groupId>
-			<artifactId>jbean</artifactId>
-			<version>${cn.cerc.lib.version}</version>
+			<artifactId>summer-bean</artifactId>
+			<version>${cn.cerc.summer.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.cerc</groupId>
-			<artifactId>jimport</artifactId>
-			<version>${cn.cerc.lib.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.cerc</groupId>
-			<artifactId>jexport</artifactId>
-			<version>${cn.cerc.lib.version}</version>
+			<artifactId>summer-io</artifactId>
+			<version>${cn.cerc.summer.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
@@ -172,4 +167,5 @@
 		</plugins>
 	</reporting>
 	<description>用于快速开发资讯管理系统（MIS），如进销存系统、财务系统、人力资源系统等</description>
+	<url>https://github.com/cn-cerc/summer-mis</url>
 </project>
