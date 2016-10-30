@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	<!-- 增加客制化菜单 -->
+	<bean id="SvrCustomMenus.append" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="append" />
+	</bean>
+	<!-- 获取客制化菜单 -->
+	<bean id="SvrCustomMenus.list" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="list" />
+	</bean>
+	<!-- 搜索客制化菜单 -->
+	<bean id="SvrCustomMenus.search" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="search" />
+	</bean>
+
+	<!-- 登入系统 -->
+	<bean id="SvrUserLogin.check" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="Check" />
+	</bean>
+	<!-- 校验硬件码 -->
+	<bean id="SvrUserLogin.verifyMachine" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="verifyMachine" />
+	</bean>
+	<!-- 根据手机号，转化成用户帐号 -->
+	<bean id="SvrUserLogin.getUserCodeByMobile" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="getTelToUserCode" />
+	</bean>
+	<!-- 微信自动登录 -->
+	<bean id="SvrUserLogin.autoLogin" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="autoLogin" />
+	</bean>
+	<!-- 发送校验码 -->
+	<bean id="SvrUserLogin.sendVerifyCode" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="sendVerifyCode" />
+	</bean>
+	<!-- 获取当前登录状态(client.exe使用) -->
+	<bean id="SvrUserLogin.getState" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="getState" />
+	</bean>
+	<!-- 退出系统 -->
+	<bean id="SvrUserLogin.exitSystem" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="ExitSystem" />
+	</bean>
+
+	<!-- 异步消息处理 -->
+	<bean id="SvrUserMessages.getWaitList" class="cn.cerc.jmis.services.SvrUserMessages" scope="prototype">
+		<property name="funcCode" value="getWaitList" />
+	</bean>
+	<!-- 增加消息记录，含队列服务 -->
+	<bean id="SvrUserMessages.appendRecord" class="cn.cerc.jmis.services.SvrUserMessages" scope="prototype">
+		<property name="funcCode" value="appendRecord" />
+	</bean>
+	<!-- 读取待处理的任务：队列服务 -->
+	<bean id="SvrUserMessages.readAsyncService" class="cn.cerc.jmis.services.SvrUserMessages" scope="prototype">
+		<property name="funcCode" value="readAsyncService" />
+	</bean>
+	<!-- 更新任务处理进度：队列服务 -->
+	<bean id="SvrUserMessages.updateAsyncService" class="cn.cerc.jmis.services.SvrUserMessages" scope="prototype">
+		<property name="funcCode" value="updateAsyncService" />
+	</bean>
+
+
+	<!-- 取得指定的帐套讯息 -->
+	<bean id="SvrBookInfo.getRecord" class="cn.cerc.jmis.services.SvrBookInfo" scope="prototype">
+		<property name="funcCode" value="getRecord" />
+	</bean>
+
+	<!-- 以下为旧的应用使用，新的框架不再需要 -->
+	<!-- 增加客制化菜单 -->
+	<bean id="TAppCustom.appendMemu" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="append" />
+	</bean>
+	<!-- 获取客制化菜单 -->
+	<bean id="TAppCustom.getCustomMemu" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="list" />
+	</bean>
+	<!-- 搜索客制化菜单 -->
+	<bean id="TAppCustom.search" class="cn.cerc.jmis.services.SvrCustomMenus" scope="prototype">
+		<property name="funcCode" value="search" />
+	</bean>
+	<!-- 登入系统 -->
+	<bean id="TAppLogin.Check" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="Check" />
+	</bean>
+	<!-- 校验硬件码 -->
+	<bean id="TAppLogin.verifyMachine" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="verifyMachine" />
+	</bean>
+	<!-- 根据手机号，转化成用户帐号 -->
+	<bean id="TAppLogin.getTelToUserCode" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="getTelToUserCode" />
+	</bean>
+	<!-- 微信自动登录 -->
+	<bean id="TAppLogin.autoLogin" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="autoLogin" />
+	</bean>
+	<!-- 发送校验码 -->
+	<bean id="TAppLogin.sendVerifyCode" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="sendVerifyCode" />
+	</bean>
+	<!-- 获取当前登录状态 -->
+	<bean id="TAppLogin.getState" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="getState" />
+	</bean>
+	<!-- 退出系统 -->
+	<bean id="TAppLogin.ExitSystem" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="ExitSystem" />
+	</bean>
+
+</beans>
