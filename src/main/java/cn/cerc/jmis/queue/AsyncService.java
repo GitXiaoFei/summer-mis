@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.cerc.jbean.client.IServiceProxy;
-import cn.cerc.jbean.mail.appQueue;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.queue.QueueQuery;
+import cn.cerc.jdb.queue.QueueSession;
 import cn.cerc.jmis.message.MessageLevel;
 import cn.cerc.jmis.message.MessageRecord;
 import net.sf.json.JSONObject;
@@ -95,7 +95,7 @@ public class AsyncService implements IServiceProxy {
 		if (this.process == 2) {
 			// 返回消息的编号插入到阿里云消息队列
 			QueueQuery ds = new QueueQuery(handle);
-			ds.add("select * from %s", appQueue.queueJobList);
+			ds.add("select * from %s", QueueSession.defaultQueue);
 			ds.open();
 			ds.appendDataSet(this.getDataIn(), true);
 			ds.getHead().setField("_queueId_", msgId);
