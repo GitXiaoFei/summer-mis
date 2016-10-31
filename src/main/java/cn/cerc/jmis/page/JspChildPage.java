@@ -32,6 +32,11 @@ public class JspChildPage extends Component implements IJspPage {
 	protected IForm form;
 	private CustomDocument document;
 
+	public JspChildPage(IForm form) {
+		super();
+		this.setForm(form);
+	}
+
 	public String getMessage() {
 		return form.getParam("message", null);
 	}
