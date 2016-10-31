@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.cerc</groupId>
 	<artifactId>summer-mis</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>mis app framework</name>
 	<build>
 		<plugins>
@@ -85,7 +85,7 @@
 		<org.hibernate.version>4.3.5.Final</org.hibernate.version>
 		<org.springframework.version>4.2.6.RELEASE</org.springframework.version>
 		<quartz.version>2.2.1</quartz.version>
-		<cn.cerc.summer.version>1.0.0</cn.cerc.summer.version>
+		<cn.cerc.summer.version>1.0.1</cn.cerc.summer.version>
 	</properties>
 	<dependencies>
 		<dependency>
