@@ -10,9 +10,6 @@ import cn.cerc.jbean.core.AbstractHandle;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IClient;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IJspPage;
-import cn.cerc.jbean.other.MemoryBuffer;
-import cn.cerc.jdb.other.utils;
 import cn.cerc.jmis.core.ClientDevice;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
@@ -28,23 +25,6 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 		this.setClient(owner.getClient());
 		this.setRequest(owner.getRequest());
 		this.setResponse(owner.getResponse());
-	}
-
-	// 从请求或缓存读取数据
-	protected String getValue(IJspPage page, MemoryBuffer buff, String reqKey) {
-		String result = getRequest().getParameter(reqKey);
-		if (result == null) {
-			String val = buff.getString(reqKey).replace("{}", "");
-			if (utils.isNumeric(val) && val.endsWith(".0"))
-				result = val.substring(0, val.length() - 2);
-			else
-				result = val;
-		} else {
-			result = result.trim();
-			buff.setField(reqKey, result);
-		}
-		page.add(reqKey, result);
-		return result;
 	}
 
 	@Override

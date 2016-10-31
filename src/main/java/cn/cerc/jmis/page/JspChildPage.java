@@ -17,6 +17,8 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IJspPage;
 import cn.cerc.jbean.form.IMainForm;
+import cn.cerc.jbean.other.MemoryBuffer;
+import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.TMutiPage;
 import cn.cerc.jpage.document.CustomDocument;
@@ -245,6 +247,23 @@ public class JspChildPage extends Component implements IJspPage {
 		Object result = request.getAttribute(Id);
 		if (result == null)
 			return def;
+		return result;
+	}
+
+	// 从请求或缓存读取数据
+	public String getValue(MemoryBuffer buff, String reqKey) {
+		String result = getRequest().getParameter(reqKey);
+		if (result == null) {
+			String val = buff.getString(reqKey).replace("{}", "");
+			if (utils.isNumeric(val) && val.endsWith(".0"))
+				result = val.substring(0, val.length() - 2);
+			else
+				result = val;
+		} else {
+			result = result.trim();
+			buff.setField(reqKey, result);
+		}
+		this.add(reqKey, result);
 		return result;
 	}
 }
