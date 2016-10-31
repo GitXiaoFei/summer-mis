@@ -26,7 +26,7 @@ public class JspPage extends AbstractPage implements IJspPage {
 		if (form != null) {
 			IMainForm obj = Application.getMainPage();
 			if (obj != null)
-				obj.execute(form);
+				obj.execute(form, this);
 		}
 		url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());

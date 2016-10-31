@@ -150,7 +150,7 @@ public class JspChildPage extends Component implements IJspPage {
 		if ("system/document.jsp".equals(this.getPage())) {
 			IMainForm obj = Application.getMainPage();
 			if (obj != null)
-				obj.execute(form);
+				obj.execute(form, this);
 			PrintWriter out = response.getWriter();
 			CustomDocument doc = (CustomDocument) request.getAttribute("document");
 			out.println("<!DOCTYPE html>");

@@ -17,7 +17,7 @@ import cn.cerc.jpage.other.Url_Record;
 
 public class JspMainPage extends AbstractHandle implements IMainForm {
 	@Override
-	public void execute(IForm form) {
+	public void execute(IForm form, IJspPage page) {
 		HttpServletRequest request = form.getRequest();
 		CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
 		request.setAttribute("passport", sess.logon());
@@ -39,9 +39,8 @@ public class JspMainPage extends AbstractHandle implements IMainForm {
 			request.setAttribute("message", "");
 
 		if (form instanceof AbstractForm) {
-			IJspPage view = ((AbstractForm) form).getJspView();
-			if (view instanceof JspChildPage) {
-				JspChildPage obj = (JspChildPage) view;
+			if (page instanceof JspChildPage) {
+				JspChildPage obj = (JspChildPage) page;
 				String device = form.getClient().getDevice();
 				((AbstractForm) form).getMainMenu().finish(obj, sess.logon(), device);
 				if (obj.getDocument() != null)
