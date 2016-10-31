@@ -2,6 +2,7 @@ package cn.cerc.jmis.core;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -28,6 +29,7 @@ import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.other.SystemTable;
+import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
@@ -110,16 +112,33 @@ public class StartForms implements Filter {
 					String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
 							handle.getUserName());
 					new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
-					call(form);
+					// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
+					if (checkEnableTime())
+						call(form);
 				}
 			} catch (Exception e) {
 				Throwable err = e.getCause();
 				if (err == null)
 					err = e;
 				req.setAttribute("msg", err.getMessage());
-				err.printStackTrace();
+				ErrorPage opera = new ErrorPage(form, err);
+				opera.execute();
 			}
 		}
+	}
+
+	private boolean checkEnableTime() {
+		Calendar cal = Calendar.getInstance();
+		// 月底最后一天
+		if (TDate.Today().compareTo(TDate.Today().monthEof()) == 0) {
+			if (cal.get(Calendar.HOUR_OF_DAY) >= 23)
+				throw new RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
+		}
+		// 月初第一天
+		if (TDate.Today().compareTo(TDate.Today().monthBof()) == 0)
+			if (cal.get(Calendar.HOUR_OF_DAY) < 5)
+				throw new RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
+		return true;
 	}
 
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
