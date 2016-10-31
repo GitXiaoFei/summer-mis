@@ -104,16 +104,19 @@
 			<groupId>cn.cerc</groupId>
 			<artifactId>summer-db</artifactId>
 			<version>${cn.cerc.summer.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cn.cerc</groupId>
 			<artifactId>summer-bean</artifactId>
 			<version>${cn.cerc.summer.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cn.cerc</groupId>
 			<artifactId>summer-io</artifactId>
 			<version>${cn.cerc.summer.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
@@ -174,11 +177,6 @@
 			<groupId>org.dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>2.0.0-RC1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.jexcelapi</groupId>
-			<artifactId>jxl</artifactId>
-			<version>2.6.12</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-configuration</groupId>
@@ -292,21 +290,6 @@
 			<groupId>com.aliyun.openservices</groupId>
 			<artifactId>ots-public</artifactId>
 			<version>2.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.jexcelapi</groupId>
-			<artifactId>jxl</artifactId>
-			<version>2.6.12</version>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itextpdf</artifactId>
-			<version>5.5.8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itext-asian</artifactId>
-			<version>5.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>

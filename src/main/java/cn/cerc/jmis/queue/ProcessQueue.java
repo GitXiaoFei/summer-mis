@@ -5,10 +5,10 @@ import org.apache.log4j.Logger;
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
 import cn.cerc.jbean.core.ServerConfig;
-import cn.cerc.jbean.mail.appQueue;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
+import cn.cerc.jdb.queue.QueueSession;
 import cn.cerc.jmis.message.MessageProcess;
 import cn.cerc.jmis.task.AbstractTask;
 import net.sf.json.JSONObject;
@@ -20,23 +20,34 @@ public class ProcessQueue extends AbstractTask {
 	public void execute() throws Exception {
 		QueueQuery ds = new QueueQuery(this);
 		ds.setQueueMode(QueueMode.recevie);
-		ds.add("select * from %s ", appQueue.queueJobList);
+		ds.add("select * from %s ", QueueSession.defaultQueue);
 		ds.open();
 		if (!ds.getActive())
 			return;
 		ds.remove();
 
 		String msgId = ds.getHead().getString("_queueId_");
-		String service = ds.getHead().getString("_service_");
 		JSONObject content = JSONObject.fromObject(ds.getHead().getString("_content_"));
 
-		BookHandle bh = new BookHandle(this, ds.getHead().getString("_corpNo_"));
-		bh.setUserCode(ds.getHead().getString("_userCode_"));
-		if ("".equals(bh.getCorpNo()) || "".equals(bh.getUserCode())) {
-			log.error("corpNo or userCode is null");
+		// 建立服务执行环境
+		String corpNo = ds.getHead().getString("_corpNo_");
+		String userCode = ds.getHead().getString("_userCode_");
+		String service = ds.getHead().getString("_service_");
+		if ("".equals(corpNo)) {
+			log.error("_corpNo_ is null");
 			return;
 		}
-
+		if ("".equals(userCode)) {
+			log.error("_userCode_ is null");
+			return;
+		}
+		if ("".equals(service)) {
+			log.error("_service_ is null");
+			return;
+		}
+		// 调用队列内容中指定的服务
+		BookHandle bh = new BookHandle(this, corpNo);
+		bh.setUserCode(userCode);
 		LocalService svr = new LocalService(bh);
 		svr.setService(service);
 		svr.getDataIn().appendDataSet(ds, true);
