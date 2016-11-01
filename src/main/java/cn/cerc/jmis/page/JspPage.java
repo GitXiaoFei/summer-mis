@@ -29,7 +29,6 @@ public class JspPage extends AbstractPage implements IJspPage {
 		return jspFile;
 	}
 
-	@Override
 	public void setFile(String jspFile) {
 		this.jspFile = jspFile;
 	}

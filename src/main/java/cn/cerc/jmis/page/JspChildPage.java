@@ -51,11 +51,11 @@ public class JspChildPage extends Component implements IJspPage {
 		return file;
 	}
 
-	@Override
 	public void setFile(String jspFile) {
 		this.file = jspFile;
 	}
 
+	@Override
 	public String getViewFile() {
 		if (getRequest() == null || file == null)
 			return file;
