@@ -13,14 +13,12 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.core.ClientDevice;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
-	private MainMenu mainMenu;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private IClient client;
 	private Map<String, String> params = new HashMap<>();
 
 	public void init(AbstractForm owner) {
-		this.setMainMenu(owner.getMainMenu());
 		this.setHandle(owner.getHandle());
 		this.setClient(owner.getClient());
 		this.setRequest(owner.getRequest());
@@ -71,16 +69,6 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 		String formNo = this.getParam("formNo", "000");
 		String formCatpion = this.getParam("title", "");
 		return String.format("%s(%s)", formCatpion, formNo);
-	}
-
-	public MainMenu getMainMenu() {
-		if (mainMenu == null)
-			mainMenu = new MainMenu();
-		return mainMenu;
-	}
-
-	public void setMainMenu(MainMenu mainMenu) {
-		this.mainMenu = mainMenu;
 	}
 
 	@Override

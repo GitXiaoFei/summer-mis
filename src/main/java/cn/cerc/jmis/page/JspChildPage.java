@@ -32,6 +32,7 @@ public class JspChildPage extends Component implements IJspPage {
 	private String file;
 	protected IForm form;
 	private CustomDocument document;
+	private MainMenu mainMenu = new MainMenu();
 
 	public JspChildPage(IForm form) {
 		super();
@@ -164,7 +165,6 @@ public class JspChildPage extends Component implements IJspPage {
 		CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
 		request.setAttribute("passport", sess.logon());
 		request.setAttribute("logon", sess.logon());
-		MainMenu mainMenu = ((AbstractForm) form).getMainMenu();
 		if (sess.logon()) {
 			List<Url_Record> rightMenus = mainMenu.getRightMenus();
 			RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
@@ -184,7 +184,7 @@ public class JspChildPage extends Component implements IJspPage {
 			if (page instanceof JspChildPage) {
 				JspChildPage obj = (JspChildPage) page;
 				String device = form.getClient().getDevice();
-				((AbstractForm) form).getMainMenu().finish(obj, sess.logon(), device);
+				mainMenu.finish(obj, sess.logon(), device);
 				if (obj.getDocument() != null)
 					obj.getDocument().register();
 			}
@@ -193,5 +193,9 @@ public class JspChildPage extends Component implements IJspPage {
 		request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
 		request.setAttribute("formno", form.getParam("formNo", "000"));
 		request.setAttribute("form", form);
+	}
+
+	public MainMenu getMainMenu() {
+		return mainMenu;
 	}
 }
