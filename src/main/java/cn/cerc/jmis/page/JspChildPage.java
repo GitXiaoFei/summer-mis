@@ -31,7 +31,7 @@ import cn.cerc.jpage.tools.PhonePages;
 public class JspChildPage extends Component implements IJspPage {
 	private String file;
 	protected IForm form;
-	private AbstractContent document;
+	private AbstractContent content;
 	private MainMenu mainMenu = new MainMenu();
 
 	public JspChildPage(IForm form) {
@@ -97,7 +97,7 @@ public class JspChildPage extends Component implements IJspPage {
 	@Override
 	public void addComponent(Component component) {
 		if (component instanceof AbstractContent) {
-			this.document = (AbstractContent) component;
+			this.content = (AbstractContent) component;
 		}
 		if (component.getId() != null)
 			this.add(component.getId(), component);
@@ -138,12 +138,12 @@ public class JspChildPage extends Component implements IJspPage {
 		}
 	}
 
-	public AbstractContent getDocument() {
-		return document;
+	public AbstractContent getContent() {
+		return content;
 	}
 
-	public void setDocument(AbstractContent document) {
-		this.document = document;
+	public void setContent(AbstractContent document) {
+		this.content = document;
 	}
 
 	@Override
@@ -184,8 +184,8 @@ public class JspChildPage extends Component implements IJspPage {
 				JspChildPage obj = (JspChildPage) page;
 				String device = form.getClient().getDevice();
 				mainMenu.finish(obj, sess.logon(), device);
-				if (obj.getDocument() != null)
-					obj.getDocument().register();
+				if (obj.getContent() != null)
+					obj.getContent().register();
 			}
 		}
 		String msg = form.getParam("message", "");
