@@ -6,13 +6,11 @@ import static cn.cerc.jmis.core.ClientDevice.device_pc;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
@@ -57,11 +55,6 @@ public class JspChildPage extends Component implements IJspPage {
 	@Override
 	public void setFile(String jspFile) {
 		this.file = jspFile;
-	}
-
-	public IJspPage getPage() {
-		ready(this, form);
-		return new JspPage(this.form, getViewFile());
 	}
 
 	public String getViewFile() {
@@ -157,105 +150,15 @@ public class JspChildPage extends Component implements IJspPage {
 
 	@Override
 	public void execute() throws ServletException, IOException {
-		HttpServletRequest request = getRequest();
-		HttpServletResponse response = getResponse();
-		if ("system/document.jsp".equals(this.getPage())) {
-			ready(this, form);
-			PrintWriter out = response.getWriter();
-			CustomDocument doc = (CustomDocument) request.getAttribute("document");
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.printf("<title>%s</title>\n", form.getTitle());
-			out.printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
-			out.printf("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n");
-			out.printf("<link href=\"css/style-phone.css\" rel=\"stylesheet\">\n");
-			if (!form.getClient().isPhone())
-				out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");
-			out.print(doc.getCss());
-			out.print(doc.getScript());
-			out.println("<script>");
-			out.println("var Application = new TApplication();");
-			out.printf("Application.device = '%s';\n", getAttribute("device", ""));
-
-			Component bottom = (Component) request.getAttribute("bottom");
-			if (bottom != null)
-				out.printf("Application.bottom = '%s';\n", bottom.getId());
-			out.printf("Application.message = '%s';\n", getAttribute("msg", ""));
-			out.printf("Application.searchFormId = '%s';\n", getAttribute("searchFormId", ""));
-
-			out.printf("session().set('childForm', '%s');\n", getAttribute("scriptFile", ""));
-			out.println("$(document).ready(function() {");
-			out.println("Application.init();");
-			out.println("if (Application.onready)");
-			out.println("	Application.onready();");
-			out.println("if (!localStorage) {");
-			out.println("	$('.main').attr('display', 'block');");
-			out.println("}");
-			out.println("head_main();");
-			out.println("});");
-			out.println("</script>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println(getAttribute("_showAd_", ""));
-			out.println(doc.getHeader());
-
-			out.write("<div class=\"main\">\n");
-			if (bottom != null)
-				out.write("<div class=\"info-newStyle\">\n");
-
-			if (!form.getClient().isPhone()) {
-				if (request.getAttribute("bottom") == null)
-					out.println("<div id='msg'></div>");
-			} else {
-				out.println("<div id='msg'></div>");
-				out.println("<span id='back-top' style='display: none'>顶部</span>");
-				out.println("<span id='back-bottom' style='display: none'>底部</span>");
-			}
-			out.println("<div class='leftSide'>");
-			out.print(getAttribute("search", ""));
-			Grid grid = (Grid) request.getAttribute("grid");
-			if (grid != null) {
-				if (!form.getClient().isPhone()) {
-					if (grid.isExtGrid()) {
-						out.print(grid);
-					} else {
-						out.printf("<div class='scrollArea'>%s</div>", grid);
-					}
-				} else
-					out.printf("<div class='scrollArea'>%s</div>", grid);
-			}
-			out.println("</div>");
-
-			out.println("<div class='rightSide'>");
-			out.print(getAttribute("rightSide", ""));
-			out.print(getAttribute("_operaPages_", ""));
-			out.println("</div>");
-
-			if (bottom == null)
-				out.print(getAttribute("_operaPages_", ""));
-			else {
-				out.print(bottom);
-				out.println("</div>");
-			}
-			out.println("</div>\n");
-			out.println("<div class='bottom-space'></div>");
-			out.print(doc.getContents());
-			out.println("</body>");
-			out.println("</html>");
-		} else {
-			JspPage output = new JspPage(form);
-			output.setFile(this.getViewFile());
-			output.execute();
-		}
+		ready(this, form);
+		JspPage output = new JspPage(form);
+		output.setFile(this.getViewFile());
+		output.execute();
 	}
 
-	private Object getAttribute(String Id, String def) {
-		HttpServletRequest request = getRequest();
-		Object result = request.getAttribute(Id);
-		if (result == null)
-			return def;
-		return result;
+	public IJspPage getPage() {
+		ready(this, form);
+		return new JspPage(this.form, getViewFile());
 	}
 
 	// 从请求或缓存读取数据
@@ -274,7 +177,7 @@ public class JspChildPage extends Component implements IJspPage {
 		this.add(reqKey, result);
 		return result;
 	}
-	
+
 	private void ready(IJspPage page, IForm form) {
 		HttpServletRequest request = form.getRequest();
 		CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
