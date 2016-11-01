@@ -59,7 +59,6 @@ public class JspChildPage extends Component implements IJspPage {
 		this.file = jspFile;
 	}
 
-	@Override
 	public IJspPage getPage() {
 		ready(this, form);
 		return new JspPage(this.form, getViewFile());
