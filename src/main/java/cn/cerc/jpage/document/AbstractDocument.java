@@ -36,11 +36,6 @@ public abstract class AbstractDocument extends Component {
 
 	public HtmlWriter getScript() {
 		HtmlWriter html = new HtmlWriter();
-		html.println("<script src=\"js/jquery-1.11.1.min.js\"></script>");
-		html.println("<script src=\"js/delphi.vcl.js\"></script>");
-		html.println("<script src=\"js/TApplication.js\"></script>");
-		html.println("<script src=\"js/dialog.js\"></script>");
-		html.println("<script src=\"js/Shopping.js\"></script>");
 
 		// 加入脚本文件
 		for (String file : scriptFiles) {

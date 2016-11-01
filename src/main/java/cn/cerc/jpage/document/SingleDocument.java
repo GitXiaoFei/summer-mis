@@ -40,5 +40,10 @@ public class SingleDocument extends AbstractDocument {
 	@Override
 	public void init() {
 		this.getPage().setFile("system/document.jsp");
+		this.addScriptFile("js/jquery-1.11.1.min.js");
+		this.addScriptFile("js/delphi.vcl.js");
+		this.addScriptFile("js/TApplication.js");
+		this.addScriptFile("js/dialog.js");
+		this.addScriptFile("js/Shopping.js");
 	}
 }
