@@ -98,7 +98,6 @@ public class JspChildPage extends Component implements IJspPage {
 	public void addComponent(Component component) {
 		if (component instanceof AbstractDocument) {
 			this.document = (AbstractDocument) component;
-			setFile(document.getViewFile());
 		}
 		if (component.getId() != null)
 			this.add(component.getId(), component);

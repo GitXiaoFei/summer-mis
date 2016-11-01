@@ -8,7 +8,7 @@ public class CardDocument extends AbstractDocument {
 	}
 
 	@Override
-	public String getViewFile() {
-		return "system/document-card.jsp";
+	public void init() {
+		this.getPage().setFile("system/document-card.jsp");
 	}
 }

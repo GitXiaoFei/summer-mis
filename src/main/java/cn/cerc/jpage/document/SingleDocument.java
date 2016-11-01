@@ -24,11 +24,6 @@ public class SingleDocument extends AbstractDocument {
 		return result;
 	}
 
-	@Override
-	public String getViewFile() {
-		return "system/document.jsp";
-	}
-
 	public Component getBody() {
 		if (body == null) {
 			body = new Component();
@@ -40,5 +35,10 @@ public class SingleDocument extends AbstractDocument {
 
 	public void setBody(Component body) {
 		this.body = body;
+	}
+
+	@Override
+	public void init() {
+		this.getPage().setFile("system/document.jsp");
 	}
 }

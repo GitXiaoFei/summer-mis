@@ -21,13 +21,18 @@ public abstract class AbstractDocument extends Component {
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
+	private IJspPage page;
 
 	public AbstractDocument(IJspPage owner) {
 		super();
 		this.setId("document");
 		this.setOwner((Component) owner);
 		this.request = owner.getForm().getRequest();
+		this.page = owner;
 	}
+
+	// 进行各类初始化
+	public abstract void init();
 
 	public HtmlWriter getScript() {
 		HtmlWriter html = new HtmlWriter();
@@ -111,8 +116,6 @@ public abstract class AbstractDocument extends Component {
 		return request;
 	}
 
-	public abstract String getViewFile();
-
 	public String getHeader() {
 		return header != null ? header.getHtml() : null;
 	}
@@ -157,5 +160,9 @@ public abstract class AbstractDocument extends Component {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public IJspPage getPage() {
+		return page;
 	}
 }
