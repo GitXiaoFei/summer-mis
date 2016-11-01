@@ -5,39 +5,37 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jmis.page.IJspPage;
 import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.Document;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;
 import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.other.Url_Record;
 
-public abstract class CustomDocument extends Component implements Document {
-	private HttpServletRequest request;
-	private List<String> cssFiles = new ArrayList<>();
+public abstract class AbstractContent extends Component {
 	private HeaderSide header;
+	private HttpServletRequest request;
+	private List<String> styleFiles = new ArrayList<>();
 	private List<String> scriptFiles = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
+	private IJspPage page;
 
-	public CustomDocument(Component owner, HttpServletRequest req) {
+	public AbstractContent(IJspPage owner) {
 		super();
 		this.setId("document");
-		this.setOwner(owner);
-		this.request = req;
+		this.setOwner((Component) owner);
+		this.request = owner.getForm().getRequest();
+		this.page = owner;
 	}
 
+	// 进行各类初始化
+	public abstract void init();
+
 	public HtmlWriter getScript() {
-
 		HtmlWriter html = new HtmlWriter();
-
-		html.println("<script src=\"js/jquery-1.11.1.min.js\"></script>");
-		html.println("<script src=\"js/delphi.vcl.js\"></script>");
-		html.println("<script src=\"js/TApplication.js\"></script>");
-		html.println("<script src=\"js/dialog.js\"></script>");
-		html.println("<script src=\"js/Shopping.js\"></script>");
 
 		// 加入脚本文件
 		for (String file : scriptFiles) {
@@ -113,22 +111,20 @@ public abstract class CustomDocument extends Component implements Document {
 		return request;
 	}
 
-	public abstract String getViewFile();
-
 	public String getHeader() {
 		return header != null ? header.getHtml() : null;
 	}
 
 	public String getCss() {
 		HtmlWriter html = new HtmlWriter();
-		for (String file : cssFiles) {
+		for (String file : styleFiles) {
 			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
 		}
 		return html.toString();
 	}
 
 	public void addCSSFile(String file) {
-		cssFiles.add(file);
+		styleFiles.add(file);
 	}
 
 	public void appendContent(HtmlContent content) {
@@ -159,5 +155,9 @@ public abstract class CustomDocument extends Component implements Document {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public IJspPage getPage() {
+		return page;
 	}
 }

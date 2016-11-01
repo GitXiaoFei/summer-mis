@@ -6,8 +6,6 @@ import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IJspPage;
-import cn.cerc.jbean.form.IMainForm;
 
 public class JspPage extends AbstractPage implements IJspPage {
 	private String jspFile;
@@ -18,26 +16,21 @@ public class JspPage extends AbstractPage implements IJspPage {
 
 	public JspPage(IForm form, String jspFile) {
 		super(form);
-		this.setFile(jspFile);
+		this.setJspFile(jspFile);
 	}
 
 	public void execute() throws ServletException, IOException {
-		String url;
-		if (form != null) {
-			IMainForm obj = Application.getMainPage();
-			if (obj != null)
-				obj.execute(form);
-		}
-		url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
+		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
+	@Override
 	public String getJspFile() {
 		return jspFile;
 	}
 
 	@Override
-	public void setFile(String jspFile) {
+	public void setJspFile(String jspFile) {
 		this.jspFile = jspFile;
 	}
 

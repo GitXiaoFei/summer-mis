@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jbean.form.IJspPage;
+import cn.cerc.jmis.page.IJspPage;
 import cn.cerc.jpage.other.Url_Record;
 
 public class MainMenu {
@@ -15,12 +15,14 @@ public class MainMenu {
 	// 退出
 	private Url_Record exitPage = null;
 	// 首页
-	private Url_Record homePage = new Url_Record(Application.getConfig().getFormDefault(),
-			"<img src=\"images/Home.png\"/>");
+	private Url_Record homePage;
+	// 左边菜单
 	private List<Url_Record> leftMenus = new ArrayList<>();
+	// 右边菜单
 	private List<Url_Record> rightMenus = new ArrayList<>();
 
 	public MainMenu() {
+		homePage = new Url_Record(Application.getConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
 		leftMenus.add(homePage);
 	}
 

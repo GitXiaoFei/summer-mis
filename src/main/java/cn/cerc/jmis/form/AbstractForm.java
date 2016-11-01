@@ -6,50 +6,23 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.core.AbstractHandle;
+import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IClient;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.other.MemoryBuffer;
-import cn.cerc.jdb.other.utils;
 import cn.cerc.jmis.core.ClientDevice;
-import cn.cerc.jmis.page.JspChildPage;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
-
-	// 注意： view必须在其它所有属性赋值前，先进行赋值
-	private JspChildPage view;
-	private MainMenu mainMenu;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	// private MenuItem mark;
 	private IClient client;
 	private Map<String, String> params = new HashMap<>();
 
 	public void init(AbstractForm owner) {
-		this.setJspView(owner.getJspView());
-		this.setMainMenu(owner.getMainMenu());
 		this.setHandle(owner.getHandle());
 		this.setClient(owner.getClient());
 		this.setRequest(owner.getRequest());
 		this.setResponse(owner.getResponse());
-	}
-
-	// 从请求或缓存读取数据
-	protected String getValue(MemoryBuffer buff, String reqKey) {
-		String result = getRequest().getParameter(reqKey);
-		if (result == null) {
-			String val = buff.getString(reqKey).replace("{}", "");
-			if (utils.isNumeric(val) && val.endsWith(".0"))
-				result = val.substring(0, val.length() - 2);
-			else
-				result = val;
-		} else {
-			result = result.trim();
-			buff.setField(reqKey, result);
-		}
-		getJspView().add(reqKey, result);
-		return result;
 	}
 
 	@Override
@@ -96,29 +69,6 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 		String formNo = this.getParam("formNo", "000");
 		String formCatpion = this.getParam("title", "");
 		return String.format("%s(%s)", formCatpion, formNo);
-	}
-
-	public JspChildPage getJspView() {
-		if (view == null) {
-			view = new JspChildPage();
-			view.setForm(this);
-		}
-		return view;
-	}
-
-	public void setJspView(JspChildPage view) {
-		this.view = view;
-		view.setForm(this);
-	}
-
-	public MainMenu getMainMenu() {
-		if (mainMenu == null)
-			mainMenu = new MainMenu();
-		return mainMenu;
-	}
-
-	public void setMainMenu(MainMenu mainMenu) {
-		this.mainMenu = mainMenu;
 	}
 
 	@Override

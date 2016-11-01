@@ -239,7 +239,7 @@ public class StartForms implements Filter {
 					output.execute();
 				} else {
 					JspPage output = new JspPage(form);
-					output.setFile((String) pageOutput);
+					output.setJspFile((String) pageOutput);
 					output.execute();
 				}
 			}
