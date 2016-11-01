@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IJspPage;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;
@@ -22,11 +22,11 @@ public abstract class AbstractDocument extends Component {
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
 
-	public AbstractDocument(IForm form, Component owner) {
+	public AbstractDocument(IJspPage owner) {
 		super();
 		this.setId("document");
-		this.setOwner(owner);
-		this.request = form.getRequest();
+		this.setOwner((Component) owner);
+		this.request = owner.getForm().getRequest();
 	}
 
 	public HtmlWriter getScript() {

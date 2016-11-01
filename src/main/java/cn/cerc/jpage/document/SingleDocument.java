@@ -1,14 +1,14 @@
 package cn.cerc.jpage.document;
 
-import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IJspPage;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.form.FormView;
 
 public class SingleDocument extends AbstractDocument {
 	private Component body;
 
-	public SingleDocument(IForm form, Component owner) {
-		super(form, owner);
+	public SingleDocument(IJspPage owner) {
+		super(owner);
 	}
 
 	public FormView createForm() {

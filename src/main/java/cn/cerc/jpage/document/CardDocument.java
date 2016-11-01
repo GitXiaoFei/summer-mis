@@ -1,11 +1,10 @@
 package cn.cerc.jpage.document;
 
-import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.common.Component;
+import cn.cerc.jbean.form.IJspPage;
 
 public class CardDocument extends AbstractDocument {
-	public CardDocument(IForm form, Component owner) {
-		super(form, owner);
+	public CardDocument(IJspPage owner) {
+		super(owner);
 	}
 
 	@Override
