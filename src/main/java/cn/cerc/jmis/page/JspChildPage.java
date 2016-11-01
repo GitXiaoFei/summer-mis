@@ -161,23 +161,6 @@ public class JspChildPage extends Component implements IJspPage {
 		return new JspPage(this.form, getViewFile());
 	}
 
-	// 从请求或缓存读取数据
-	public String getValue(MemoryBuffer buff, String reqKey) {
-		String result = getRequest().getParameter(reqKey);
-		if (result == null) {
-			String val = buff.getString(reqKey).replace("{}", "");
-			if (utils.isNumeric(val) && val.endsWith(".0"))
-				result = val.substring(0, val.length() - 2);
-			else
-				result = val;
-		} else {
-			result = result.trim();
-			buff.setField(reqKey, result);
-		}
-		this.add(reqKey, result);
-		return result;
-	}
-
 	private void ready(IJspPage page, IForm form) {
 		HttpServletRequest request = form.getRequest();
 		CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
