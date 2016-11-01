@@ -8,22 +8,27 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.cerc.jbean.core.Application;
+import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IJspPage;
-import cn.cerc.jbean.form.IMainForm;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
+import cn.cerc.jmis.form.AbstractForm;
+import cn.cerc.jmis.form.MainMenu;
+import cn.cerc.jmis.form.RightMenus;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.TMutiPage;
 import cn.cerc.jpage.document.CustomDocument;
 import cn.cerc.jpage.grid.Grid;
 import cn.cerc.jpage.other.DBGrid;
+import cn.cerc.jpage.other.Url_Record;
 import cn.cerc.jpage.tools.OperaPages;
 import cn.cerc.jpage.tools.PhonePages;
 
@@ -56,6 +61,7 @@ public class JspChildPage extends Component implements IJspPage {
 
 	@Override
 	public IJspPage getPage() {
+		ready(this, form);
 		return new JspPage(this.form, getViewFile());
 	}
 
@@ -155,9 +161,7 @@ public class JspChildPage extends Component implements IJspPage {
 		HttpServletRequest request = getRequest();
 		HttpServletResponse response = getResponse();
 		if ("system/document.jsp".equals(this.getPage())) {
-			IMainForm obj = Application.getMainPage();
-			if (obj != null)
-				obj.execute(form, this);
+			ready(this, form);
 			PrintWriter out = response.getWriter();
 			CustomDocument doc = (CustomDocument) request.getAttribute("document");
 			out.println("<!DOCTYPE html>");
@@ -270,5 +274,41 @@ public class JspChildPage extends Component implements IJspPage {
 		}
 		this.add(reqKey, result);
 		return result;
+	}
+	
+	private void ready(IJspPage page, IForm form) {
+		HttpServletRequest request = form.getRequest();
+		CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
+		request.setAttribute("passport", sess.logon());
+		request.setAttribute("logon", sess.logon());
+		MainMenu mainMenu = ((AbstractForm) form).getMainMenu();
+		if (sess.logon()) {
+			List<Url_Record> rightMenus = mainMenu.getRightMenus();
+			RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
+			menus.setHandle(form.getHandle());
+			for (IMenuBar item : menus.getItems())
+				item.enrollMenu(form.getHandle(), request, rightMenus);
+		} else {
+			mainMenu.getHomePage().setUrl(Application.getConfig().getFormWelcome());
+		}
+		// 设置首页
+		request.setAttribute("_showMenu_", "true".equals(form.getParam("showMenus", "true")));
+		// 系统通知消息
+		if (request.getAttribute("message") == null)
+			request.setAttribute("message", "");
+
+		if (form instanceof AbstractForm) {
+			if (page instanceof JspChildPage) {
+				JspChildPage obj = (JspChildPage) page;
+				String device = form.getClient().getDevice();
+				((AbstractForm) form).getMainMenu().finish(obj, sess.logon(), device);
+				if (obj.getDocument() != null)
+					obj.getDocument().register();
+			}
+		}
+		String msg = form.getParam("message", "");
+		request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
+		request.setAttribute("formno", form.getParam("formNo", "000"));
+		request.setAttribute("form", form);
 	}
 }
