@@ -16,8 +16,6 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IJspPage;
-import cn.cerc.jbean.other.MemoryBuffer;
-import cn.cerc.jdb.other.utils;
 import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.form.MainMenu;
 import cn.cerc.jmis.form.RightMenus;
