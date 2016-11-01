@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.cerc.jbean.form.IJspPage;
+import cn.cerc.jmis.page.IJspPage;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;

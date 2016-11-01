@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IJspPage;
 
 public class JspPage extends AbstractPage implements IJspPage {
 	private String jspFile;

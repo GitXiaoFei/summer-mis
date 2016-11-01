@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jbean.form.IJspPage;
+import cn.cerc.jmis.page.IJspPage;
 import cn.cerc.jpage.other.Url_Record;
 
 public class MainMenu {
