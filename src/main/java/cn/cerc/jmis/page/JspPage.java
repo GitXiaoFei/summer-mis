@@ -16,7 +16,7 @@ public class JspPage extends AbstractPage implements IJspPage {
 
 	public JspPage(IForm form, String jspFile) {
 		super(form);
-		this.setFile(jspFile);
+		this.setJspFile(jspFile);
 	}
 
 	public void execute() throws ServletException, IOException {
@@ -24,11 +24,13 @@ public class JspPage extends AbstractPage implements IJspPage {
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
+	@Override
 	public String getJspFile() {
 		return jspFile;
 	}
 
-	public void setFile(String jspFile) {
+	@Override
+	public void setJspFile(String jspFile) {
 		this.jspFile = jspFile;
 	}
 

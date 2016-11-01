@@ -12,6 +12,12 @@ public interface IJspPage extends IPage {
 
 	public void setMessage(String message);
 
+	// 设置jspFile
+	public String getJspFile();
+
+	// 取得jspFile
+	public void setJspFile(String jspFile);
+
 	// 返回带设备码的jsp文件
 	public String getViewFile();
 
