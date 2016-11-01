@@ -6,17 +6,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.Document;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;
 import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.other.Url_Record;
 
-public abstract class CustomDocument extends Component implements Document {
-	private HttpServletRequest request;
-	private List<String> cssFiles = new ArrayList<>();
+public abstract class CustomDocument extends Component {
 	private HeaderSide header;
+	private HttpServletRequest request;
+	private List<String> styleFiles = new ArrayList<>();
 	private List<String> scriptFiles = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private List<HtmlContent> codes2 = new ArrayList<>();
@@ -30,9 +29,7 @@ public abstract class CustomDocument extends Component implements Document {
 	}
 
 	public HtmlWriter getScript() {
-
 		HtmlWriter html = new HtmlWriter();
-
 		html.println("<script src=\"js/jquery-1.11.1.min.js\"></script>");
 		html.println("<script src=\"js/delphi.vcl.js\"></script>");
 		html.println("<script src=\"js/TApplication.js\"></script>");
@@ -121,14 +118,14 @@ public abstract class CustomDocument extends Component implements Document {
 
 	public String getCss() {
 		HtmlWriter html = new HtmlWriter();
-		for (String file : cssFiles) {
+		for (String file : styleFiles) {
 			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
 		}
 		return html.toString();
 	}
 
 	public void addCSSFile(String file) {
-		cssFiles.add(file);
+		styleFiles.add(file);
 	}
 
 	public void appendContent(HtmlContent content) {
