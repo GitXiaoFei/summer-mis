@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;
@@ -12,7 +13,7 @@ import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.other.Url_Record;
 
-public abstract class CustomDocument extends Component {
+public abstract class AbstractDocument extends Component {
 	private HeaderSide header;
 	private HttpServletRequest request;
 	private List<String> styleFiles = new ArrayList<>();
@@ -21,11 +22,11 @@ public abstract class CustomDocument extends Component {
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
 
-	public CustomDocument(Component owner, HttpServletRequest req) {
+	public AbstractDocument(IForm form, Component owner) {
 		super();
 		this.setId("document");
 		this.setOwner(owner);
-		this.request = req;
+		this.request = form.getRequest();
 	}
 
 	public HtmlWriter getScript() {

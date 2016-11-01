@@ -21,7 +21,7 @@ import cn.cerc.jmis.form.MainMenu;
 import cn.cerc.jmis.form.RightMenus;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.TMutiPage;
-import cn.cerc.jpage.document.CustomDocument;
+import cn.cerc.jpage.document.AbstractDocument;
 import cn.cerc.jpage.grid.Grid;
 import cn.cerc.jpage.other.DBGrid;
 import cn.cerc.jpage.other.Url_Record;
@@ -31,7 +31,7 @@ import cn.cerc.jpage.tools.PhonePages;
 public class JspChildPage extends Component implements IJspPage {
 	private String file;
 	protected IForm form;
-	private CustomDocument document;
+	private AbstractDocument document;
 	private MainMenu mainMenu = new MainMenu();
 
 	public JspChildPage(IForm form) {
@@ -96,8 +96,8 @@ public class JspChildPage extends Component implements IJspPage {
 
 	@Override
 	public void addComponent(Component component) {
-		if (component instanceof CustomDocument) {
-			this.document = (CustomDocument) component;
+		if (component instanceof AbstractDocument) {
+			this.document = (AbstractDocument) component;
 			setFile(document.getViewFile());
 		}
 		if (component.getId() != null)
@@ -139,11 +139,11 @@ public class JspChildPage extends Component implements IJspPage {
 		}
 	}
 
-	public CustomDocument getDocument() {
+	public AbstractDocument getDocument() {
 		return document;
 	}
 
-	public void setDocument(CustomDocument document) {
+	public void setDocument(AbstractDocument document) {
 		this.document = document;
 	}
 

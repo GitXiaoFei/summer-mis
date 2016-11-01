@@ -1,15 +1,14 @@
 package cn.cerc.jpage.document;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.form.FormView;
 
-public class SingleDocument extends CustomDocument {
+public class SingleDocument extends AbstractDocument {
 	private Component body;
 
-	public SingleDocument(Component owner, HttpServletRequest req) {
-		super(owner, req);
+	public SingleDocument(IForm form, Component owner) {
+		super(form, owner);
 	}
 
 	public FormView createForm() {

@@ -1,12 +1,11 @@
 package cn.cerc.jpage.document;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jpage.common.Component;
 
-public class CardDocument extends CustomDocument {
-	public CardDocument(Component owner, HttpServletRequest req) {
-		super(owner, req);
+public class CardDocument extends AbstractDocument {
+	public CardDocument(IForm form, Component owner) {
+		super(form, owner);
 	}
 
 	@Override
