@@ -13,7 +13,7 @@ import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.other.Url_Record;
 
-public abstract class AbstractDocument extends Component {
+public abstract class AbstractContent extends Component {
 	private HeaderSide header;
 	private HttpServletRequest request;
 	private List<String> styleFiles = new ArrayList<>();
@@ -23,7 +23,7 @@ public abstract class AbstractDocument extends Component {
 	private List<HtmlContent> contents = new ArrayList<>();
 	private IJspPage page;
 
-	public AbstractDocument(IJspPage owner) {
+	public AbstractContent(IJspPage owner) {
 		super();
 		this.setId("document");
 		this.setOwner((Component) owner);

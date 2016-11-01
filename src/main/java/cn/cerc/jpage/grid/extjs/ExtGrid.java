@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.common.ActionForm;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.document.AbstractDocument;
+import cn.cerc.jpage.document.AbstractContent;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.grid.Grid;
@@ -15,7 +15,7 @@ public class ExtGrid extends Grid {
 	private String postUrl;
 	private String onPostSuccess;
 
-	public ExtGrid(AbstractDocument document) {
+	public ExtGrid(AbstractContent document) {
 		super(document);
 		document.addCSSFile("/ext4/resources/css/ext-all.css");
 		document.addScriptFile("/ext4/ext-all.js");
