@@ -15,12 +15,14 @@ public class MainMenu {
 	// 退出
 	private Url_Record exitPage = null;
 	// 首页
-	private Url_Record homePage = new Url_Record(Application.getConfig().getFormDefault(),
-			"<img src=\"images/Home.png\"/>");
+	private Url_Record homePage;
+	// 左边菜单
 	private List<Url_Record> leftMenus = new ArrayList<>();
+	// 右边菜单
 	private List<Url_Record> rightMenus = new ArrayList<>();
 
 	public MainMenu() {
+		homePage = new Url_Record(Application.getConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
 		leftMenus.add(homePage);
 	}
 
