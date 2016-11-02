@@ -17,7 +17,7 @@ public class StatuaBar extends Component {
 	private Url_Record checkAll;
 
 	public StatuaBar(IPage owner) {
-		super((Component) owner.getForm());
+		super((Component) owner);
 		this.form = owner.getForm();
 		this.setId("bottom");
 	}
