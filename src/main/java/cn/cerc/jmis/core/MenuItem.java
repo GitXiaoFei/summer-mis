@@ -1,178 +1,101 @@
 package cn.cerc.jmis.core;
 
-import com.google.gson.Gson;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MenuItem {
-	private String clazz;
-	// 页面类名代码，用于css定位
-	private String id = "";
-	// 页面标题
-	private String caption;
-	// 页面描述
-	private String describe;
-	private boolean security;
-	private String parent = "";
-	// 页面图标名称
-	private String image;
-	// 授权权限代码
-	private String proccode;
-	// 适用版本
-	private String versions;
-	// 页面版面代码，用于排版定位
-	private String formNo = "000";
-	private boolean web; // 是否支持Web调用
-	private boolean win; // 是否支持Window调用
-	private boolean hide; // 是否隐藏菜单
-	private String process; // Web化进度
-	private boolean folder; // 是否为目录结构
-	private boolean custom; // 是否客制化菜单
-	private String funcCode;
+import cn.cerc.jbean.form.IMenu;
 
+public class MenuItem implements IMenu {
+	// 菜单代码
+	private String id;
+	// 菜单标题
+	public static final String TITLE = "title";
+	// 菜单编号，一般为数字
+	public static final String PAGENO = "formNo";
+	// 软件类别，如 1,2,，其中1及2各代表一种软件
+	public static final String SOFTWARE = "versions";
+	// 菜单授权码
+	public static final String PERMISSION = "procCode";
+	// true: 需要登录方可使用
+	public static final String SECURITY = "security";
+	// 上级菜单，若无，则为""
+	public static final String PARENT = "parentId";
+	// 菜单图标，为URL值
+	public static final String IMAGE = "image";
+	// 所有参数值
+	private Map<String, String> params = new HashMap<>();
+
+	public MenuItem() {
+
+	}
+
+	@Override
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
-		if (id.indexOf('.') > -1)
-			throw new RuntimeException("error id: " + id);
 		this.id = id;
 	}
 
-	public String getCaption() {
-		return caption;
-	}
-
-	public void setCaption(String caption) {
-		if (caption != null) {
-			String[] captions = caption.split("\\\\");
-			this.caption = captions[captions.length - 1];
-		} else
-			this.caption = "";
-	}
-
-	public String getDescribe() {
-		return describe;
-	}
-
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
-
-	public boolean isSecurity() {
-		return security;
-	}
-
-	public void setSecurity(boolean security) {
-		this.security = security;
-	}
-
-	public String getParent() {
-		return parent;
-	}
-
-	public void setParent(String parent) {
-		this.parent = parent;
-	}
-
-	public String getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getProccode() {
-		return proccode;
-	}
-
-	public void setProccode(String proccode) {
-		this.proccode = proccode;
+	@Override
+	public String getTitle() {
+		String result = this.getParam(TITLE);
+		return result != null ? result : "";
 	}
 
 	@Override
-	public String toString() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
+	public String getPageNo() {
+		String result = this.getParam(PAGENO);
+		return result != null ? result : "";
 	}
 
-	public String getVersions() {
-		return versions;
+	@Override
+	public boolean isSecurityEnabled() {
+		String result = this.getParam(SECURITY);
+		return result != null ? "true".equals(result) : true;
 	}
 
-	public void setVersions(String versions) {
-		this.versions = versions;
+	@Override
+	public String getPermissionCode() {
+		String result = this.getParam(PERMISSION);
+		return result != null ? result : "";
 	}
 
-	public String getFormNo() {
-		return formNo;
+	@Override
+	public String getSoftwareList() {
+		String result = this.getParam(SOFTWARE);
+		return result != null ? result : "";
 	}
 
-	public void setFormNo(String formNo) {
-		this.formNo = formNo;
+	@Override
+	public String getParentId() {
+		String result = this.getParam(PARENT);
+		return result != null ? result : "";
 	}
 
-	public boolean isWeb() {
-		return web;
+	@Override
+	public String getImage() {
+		String result = this.getParam(IMAGE);
+		return result != null ? result : "";
 	}
 
-	public void setWeb(boolean web) {
-		this.web = web;
+	@Override
+	public void setParam(String key, String value) {
+		params.put(key, value);
 	}
 
-	public boolean isWin() {
-		return win;
+	@Override
+	public String getParam(String key) {
+		return params.get(key);
 	}
 
-	public void setWin(boolean win) {
-		this.win = win;
+	public Map<String, String> getParams() {
+		return params;
 	}
 
-	public boolean getHide() {
-		return hide;
+	public void setParams(Map<String, String> params) {
+		this.params = params;
 	}
 
-	public void setHide(boolean hide) {
-		this.hide = hide;
-	}
-
-	public String getProcess() {
-		return process;
-	}
-
-	public void setProcess(String process) {
-		this.process = process;
-	}
-
-	public boolean getFolder() {
-		return folder;
-	}
-
-	public void setFolder(boolean folder) {
-		this.folder = folder;
-	}
-
-	public boolean getCustom() {
-		return custom;
-	}
-
-	public void setCustom(boolean custom) {
-		this.custom = custom;
-	}
-
-	public String getFuncCode() {
-		return funcCode;
-	}
-
-	public void setFuncCode(String funcCode) {
-		this.funcCode = funcCode;
-	}
 }
