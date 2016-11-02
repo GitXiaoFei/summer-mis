@@ -29,6 +29,7 @@ public abstract class AbstractContent extends Component {
 		this.setOwner((Component) owner);
 		this.request = owner.getForm().getRequest();
 		this.page = owner;
+		this.init();
 	}
 
 	// 进行各类初始化
