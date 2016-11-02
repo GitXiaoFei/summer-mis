@@ -17,13 +17,16 @@ public class ClientDevice implements IClient {
 
 	public static final String deviceId_key = "CLIENTID";
 	public static final String deviceType_key = "device";
-	//
-	public static final String device_ee = "ee";
-	public static final String device_pc = "pc";
-	public static final String device_pad = "pad";
+	// 手机
 	public static final String device_phone = "phone";
-	
-	public ClientDevice(IForm form){
+	// 平板
+	public static final String device_pad = "pad";
+	// 电脑
+	public static final String device_pc = "pc";
+	// 电脑专用浏览器
+	public static final String device_ee = "ee";
+
+	public ClientDevice(IForm form) {
 		super();
 		this.setForm(form);
 	}
