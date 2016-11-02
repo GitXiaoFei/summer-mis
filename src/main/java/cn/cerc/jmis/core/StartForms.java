@@ -67,6 +67,7 @@ public class StartForms implements Filter {
 
 		String[] params = childCode.split("\\.");
 		String formId = params[0];
+		String funcCode = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
 
@@ -79,14 +80,13 @@ public class StartForms implements Filter {
 				req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 				return;
 			}
-			form.setParam("funcCode", params.length == 1 ? "execute" : params[1]);
 
 			// 设备讯息
 			ClientDevice info = new ClientDevice(form);
 			info.setRequest(req);
 			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
 
-			// 查找菜单属性定义
+			// 查找菜单定义
 			IMenu menu = form.getMenu();
 			if (menu == null)
 				form.setMenu(MenuFactory.getItem(formId));
@@ -104,7 +104,7 @@ public class StartForms implements Filter {
 						new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
 						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
 						if (checkEnableTime())
-							call(form);
+							call(form, funcCode);
 					}
 				} catch (Exception e) {
 					Throwable err = e.getCause();
@@ -180,10 +180,9 @@ public class StartForms implements Filter {
 
 	}
 
-	private final void call(IForm form) throws ServletException, IOException {
+	private final void call(IForm form, String funcCode) throws ServletException, IOException {
 		HttpServletResponse response = form.getResponse();
 		HttpServletRequest request = form.getRequest();
-		String funcCode = form.getParam("funcCode", "execute");
 		if ("excel".equals(funcCode)) {
 			response.setContentType("application/vnd.ms-excel; charset=UTF-8");
 			response.addHeader("Content-Disposition", "attachment; filename=excel.csv");

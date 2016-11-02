@@ -13,8 +13,9 @@ import cn.cerc.jbean.form.IMenu;
 
 public class MenuFactory {
 	// private static final Logger log = Logger.getLogger(MenuFactory.class);
+	
 	private static final String menuFile = "app-menus.xml";
-	private static final Map<String, MenuData> menus = new LinkedHashMap<>();
+	private static final Map<String, MenuItem> menus = new LinkedHashMap<>();
 
 	static {
 		try {
@@ -32,7 +33,7 @@ public class MenuFactory {
 				Element item = (Element) j.next();
 
 				if (!"true".equals(item.attributeValue("delete"))) {
-					MenuData menuItem = new MenuData();
+					MenuItem menuItem = new MenuItem();
 					menuItem.setId(item.attributeValue("code"));
 					menuItem.setCaption(item.attributeValue("name"));
 					if (item.attributeValue("security") != null)
@@ -70,26 +71,27 @@ public class MenuFactory {
 		}
 	}
 
-	public static Map<String, MenuData> getItems() {
+	public static Map<String, MenuItem> getItems() {
 		return menus;
 	}
 
-	public static MenuData get(String beanID) {
+	public static MenuItem get(String beanID) {
 		return menus.get(beanID);
 	}
 
-	public static IMenu getItem(String formId) {
-		MenuData item = get(formId);
+	public static IMenu getItem(String menuId) {
+		MenuItem item = get(menuId);
 		if (item == null)
-			throw new RuntimeException(String.format("menu %s not find!", formId));
+			throw new RuntimeException(String.format("menu %s not find!", menuId));
 		
-		FormMenu form = new FormMenu();
-		form.setParam("formNo", item.getFormNo());
-		form.setParam("title", item.getCaption());
-		form.setParam("security", item.isSecurity() ? "true" : "false");
-		form.setParam("versions", item.getVersions());
-		form.setParam("procCode", item.getProccode());
-		return form;
+		CustomMenu menu = new CustomMenu();
+		menu.setId(menuId);
+		menu.setParam(CustomMenu.ID, item.getFormNo());
+		menu.setParam(CustomMenu.TITLE, item.getCaption());
+		menu.setParam(CustomMenu.SECURITY, item.isSecurity() ? "true" : "false");
+		menu.setParam(CustomMenu.VERSIONS, item.getVersions());
+		menu.setParam(CustomMenu.PROCCODE, item.getProccode());
+		return menu;
 	}
 
 }
