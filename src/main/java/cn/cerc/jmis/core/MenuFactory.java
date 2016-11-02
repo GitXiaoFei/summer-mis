@@ -13,7 +13,7 @@ import cn.cerc.jbean.form.IMenu;
 
 public class MenuFactory {
 	// private static final Logger log = Logger.getLogger(MenuFactory.class);
-	
+
 	private static final String menuFile = "app-menus.xml";
 	private static final Map<String, MenuData> menus = new LinkedHashMap<>();
 
@@ -83,14 +83,16 @@ public class MenuFactory {
 		MenuData item = get(menuId);
 		if (item == null)
 			throw new RuntimeException(String.format("menu %s not find!", menuId));
-		
+
 		MenuItem menu = new MenuItem();
 		menu.setId(menuId);
-		menu.setParam(MenuItem.ID, item.getFormNo());
 		menu.setParam(MenuItem.TITLE, item.getCaption());
+		menu.setParam(MenuItem.PAGENO, item.getFormNo());
 		menu.setParam(MenuItem.SECURITY, item.isSecurity() ? "true" : "false");
-		menu.setParam(MenuItem.VERSIONS, item.getVersions());
-		menu.setParam(MenuItem.PROCCODE, item.getProccode());
+		menu.setParam(MenuItem.SOFTWARE, item.getVersions());
+		menu.setParam(MenuItem.PERMISSION, item.getProccode());
+		menu.setParam(MenuItem.PARENT, item.getParent());
+		menu.setParam(MenuItem.IMAGE, item.getImage());
 		return menu;
 	}
 
