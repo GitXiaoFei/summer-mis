@@ -20,6 +20,14 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 	private IMenu menu;
 	private Map<String, String> params = new HashMap<>();
 
+	public Map<String, String> getParams() {
+		return params;
+	}
+
+	public void setParams(Map<String, String> params) {
+		this.params = params;
+	}
+
 	public void init(AbstractForm owner) {
 		this.setHandle(owner.getHandle());
 		this.setClient(owner.getClient());
