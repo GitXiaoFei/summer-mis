@@ -9,10 +9,12 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import cn.cerc.jbean.form.IMenu;
+
 public class MenuFactory {
 	// private static final Logger log = Logger.getLogger(MenuFactory.class);
 	private static final String menuFile = "app-menus.xml";
-	private static final Map<String, MenuItem> menus = new LinkedHashMap<>();
+	private static final Map<String, MenuData> menus = new LinkedHashMap<>();
 
 	static {
 		try {
@@ -30,7 +32,7 @@ public class MenuFactory {
 				Element item = (Element) j.next();
 
 				if (!"true".equals(item.attributeValue("delete"))) {
-					MenuItem menuItem = new MenuItem();
+					MenuData menuItem = new MenuData();
 					menuItem.setId(item.attributeValue("code"));
 					menuItem.setCaption(item.attributeValue("name"));
 					if (item.attributeValue("security") != null)
@@ -68,11 +70,26 @@ public class MenuFactory {
 		}
 	}
 
-	public static Map<String, MenuItem> getItems() {
+	public static Map<String, MenuData> getItems() {
 		return menus;
 	}
 
-	public static MenuItem get(String beanID) {
+	public static MenuData get(String beanID) {
 		return menus.get(beanID);
 	}
+
+	public static IMenu getItem(String formId) {
+		MenuData item = get(formId);
+		if (item == null)
+			throw new RuntimeException(String.format("menu %s not find!", formId));
+		
+		FormMenu form = new FormMenu();
+		form.setParam("formNo", item.getFormNo());
+		form.setParam("title", item.getCaption());
+		form.setParam("security", item.isSecurity() ? "true" : "false");
+		form.setParam("versions", item.getVersions());
+		form.setParam("procCode", item.getProccode());
+		return form;
+	}
+
 }

@@ -13,7 +13,7 @@ import org.junit.Test;
 import cn.cerc.jbean.other.BookVersion;
 import cn.cerc.jbean.rds.StubHandle;
 import cn.cerc.jmis.core.ClientDevice;
-import cn.cerc.jmis.core.MenuItem;
+import cn.cerc.jmis.core.MenuData;
 import cn.cerc.jmis.tools.SystemMenu;
 
 public class SystemMenuTest {
@@ -29,7 +29,7 @@ public class SystemMenuTest {
 	@Test
 	@Ignore
 	public void test_passItem() {
-		MenuItem item = new MenuItem();
+		MenuData item = new MenuData();
 		item.setId("TMenuGather");
 		item.setParent("");
 		item.setSecurity(true);
@@ -47,9 +47,9 @@ public class SystemMenuTest {
 		boolean security = true;
 		String device = ClientDevice.device_phone;
 		obj.setCorpType(BookVersion.ctUltimate);
-		List<MenuItem> menus = obj.getList(parentMenu, security, device);
+		List<MenuData> menus = obj.getList(parentMenu, security, device);
 		List<String> items = new ArrayList<>();
-		for (MenuItem item : menus) {
+		for (MenuData item : menus) {
 			if (item.getId().equals("TOrd"))
 				assertEquals("在旗舰版中，【批发管理】应叫【销售管理】", "销售管理", item.getCaption());
 			items.add(item.getId());

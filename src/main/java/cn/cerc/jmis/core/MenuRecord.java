@@ -16,7 +16,7 @@ public class MenuRecord {
 		this.img = img;
 	}
 
-	public MenuRecord(MenuItem item) {
+	public MenuRecord(MenuData item) {
 		setHrip(item.isWin() && item.isWeb() ? 2 : item.isWin() ? 1 : 0);
 		setUrl(item.getId());
 

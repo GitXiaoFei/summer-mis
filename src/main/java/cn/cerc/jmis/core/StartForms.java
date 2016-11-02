@@ -23,6 +23,7 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.PageException;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.HistoryLevel;
@@ -66,7 +67,6 @@ public class StartForms implements Filter {
 
 		String[] params = childCode.split("\\.");
 		String formId = params[0];
-		String formFunc = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
 
@@ -79,6 +79,7 @@ public class StartForms implements Filter {
 				req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 				return;
 			}
+			form.setParam("funcCode", params.length == 1 ? "execute" : params[1]);
 
 			// 设备讯息
 			ClientDevice info = new ClientDevice(form);
@@ -86,15 +87,9 @@ public class StartForms implements Filter {
 			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
 
 			// 查找菜单属性定义
-			MenuItem item = MenuFactory.get(formId);
-			if (item == null)
-				throw new RuntimeException(String.format("menu %s not find!", formId));
-			form.setParam("formNo", item.getFormNo());
-			form.setParam("title", item.getCaption());
-			form.setParam("security", item.isSecurity() ? "true" : "false");
-			form.setParam("versions", item.getVersions());
-			form.setParam("procCode", item.getProccode());
-			form.setParam("funcCode", formFunc);
+			IMenu menu = form.getMenu();
+			if (menu == null)
+				form.setMenu(MenuFactory.getItem(formId));
 
 			// 建立数据库资源
 			try (AppHandle handle = new AppHandle()) {
