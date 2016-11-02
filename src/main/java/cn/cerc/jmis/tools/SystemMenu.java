@@ -12,7 +12,7 @@ import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jmis.core.MenuFactory;
-import cn.cerc.jmis.core.MenuItem;
+import cn.cerc.jmis.core.MenuData;
 
 public class SystemMenu {
 	// private static final Logger log = Logger.getLogger(SystemMenu.class);
@@ -26,12 +26,12 @@ public class SystemMenu {
 		this.handle = sess;
 	}
 
-	public List<MenuItem> getList(String parentMenu, boolean security, String device) {
-		Map<String, MenuItem> menus = MenuFactory.getItems();
-		List<MenuItem> result = new ArrayList<MenuItem>();
+	public List<MenuData> getList(String parentMenu, boolean security, String device) {
+		Map<String, MenuData> menus = MenuFactory.getItems();
+		List<MenuData> result = new ArrayList<MenuData>();
 		// 初筛出符合要求的菜单项
 		for (String key : menus.keySet()) {
-			MenuItem item = menus.get(key);
+			MenuData item = menus.get(key);
 			if (passItem(item, parentMenu, security, device)) {
 				result.add(item);
 			}
@@ -39,7 +39,7 @@ public class SystemMenu {
 		return result;
 	}
 
-	protected boolean passItem(MenuItem item, String parentMenu, boolean security, String device) {
+	protected boolean passItem(MenuData item, String parentMenu, boolean security, String device) {
 		// 不返回首页
 		if (item.getId().equals(Application.getConfig().getFormDefault()))
 			return false;

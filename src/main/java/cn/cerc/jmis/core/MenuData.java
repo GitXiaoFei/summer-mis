@@ -2,7 +2,7 @@ package cn.cerc.jmis.core;
 
 import com.google.gson.Gson;
 
-public class MenuItem {
+public class MenuData {
 	private String clazz;
 	// 页面类名代码，用于css定位
 	private String id = "";

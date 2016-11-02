@@ -15,7 +15,7 @@ public class MenuFactory {
 	// private static final Logger log = Logger.getLogger(MenuFactory.class);
 	
 	private static final String menuFile = "app-menus.xml";
-	private static final Map<String, MenuItem> menus = new LinkedHashMap<>();
+	private static final Map<String, MenuData> menus = new LinkedHashMap<>();
 
 	static {
 		try {
@@ -33,7 +33,7 @@ public class MenuFactory {
 				Element item = (Element) j.next();
 
 				if (!"true".equals(item.attributeValue("delete"))) {
-					MenuItem menuItem = new MenuItem();
+					MenuData menuItem = new MenuData();
 					menuItem.setId(item.attributeValue("code"));
 					menuItem.setCaption(item.attributeValue("name"));
 					if (item.attributeValue("security") != null)
@@ -71,16 +71,16 @@ public class MenuFactory {
 		}
 	}
 
-	public static Map<String, MenuItem> getItems() {
+	public static Map<String, MenuData> getItems() {
 		return menus;
 	}
 
-	public static MenuItem get(String beanID) {
+	public static MenuData get(String beanID) {
 		return menus.get(beanID);
 	}
 
 	public static IMenu getItem(String menuId) {
-		MenuItem item = get(menuId);
+		MenuData item = get(menuId);
 		if (item == null)
 			throw new RuntimeException(String.format("menu %s not find!", menuId));
 		
