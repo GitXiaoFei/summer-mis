@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.cerc.jbean.form.IMenu;
 
-public class CustomMenu implements IMenu {
+public class MenuItem implements IMenu {
 	private String id;
 	private Map<String, String> params = new HashMap<>();
 
@@ -15,7 +15,7 @@ public class CustomMenu implements IMenu {
 	public static final String VERSIONS = "versions";
 	public static final String PROCCODE = "procCode";
 
-	public CustomMenu() {
+	public MenuItem() {
 
 	}
 

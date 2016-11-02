@@ -84,13 +84,13 @@ public class MenuFactory {
 		if (item == null)
 			throw new RuntimeException(String.format("menu %s not find!", menuId));
 		
-		CustomMenu menu = new CustomMenu();
+		MenuItem menu = new MenuItem();
 		menu.setId(menuId);
-		menu.setParam(CustomMenu.ID, item.getFormNo());
-		menu.setParam(CustomMenu.TITLE, item.getCaption());
-		menu.setParam(CustomMenu.SECURITY, item.isSecurity() ? "true" : "false");
-		menu.setParam(CustomMenu.VERSIONS, item.getVersions());
-		menu.setParam(CustomMenu.PROCCODE, item.getProccode());
+		menu.setParam(MenuItem.ID, item.getFormNo());
+		menu.setParam(MenuItem.TITLE, item.getCaption());
+		menu.setParam(MenuItem.SECURITY, item.isSecurity() ? "true" : "false");
+		menu.setParam(MenuItem.VERSIONS, item.getVersions());
+		menu.setParam(MenuItem.PROCCODE, item.getProccode());
 		return menu;
 	}
 
