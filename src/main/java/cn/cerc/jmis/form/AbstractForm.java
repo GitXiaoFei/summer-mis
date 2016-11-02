@@ -36,7 +36,6 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 	@Override
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
-		getClient().setRequest(request);
 	}
 
 	@Override
@@ -74,8 +73,7 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 	@Override
 	public IClient getClient() {
 		if (client == null) {
-			client = new ClientDevice();
-			client.setRequest(getRequest());
+			client = new ClientDevice(this);
 		}
 		return client;
 	}

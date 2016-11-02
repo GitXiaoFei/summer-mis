@@ -57,11 +57,6 @@ public class StartForms implements Filter {
 		}
 
 		log.info(uri);
-		// 设备讯息
-		ClientDevice info = new ClientDevice();
-		info.setRequest(req);
-		req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
-		//
 		String childCode = getRequestForm(req);
 		if (childCode == null) {
 			req.setAttribute("message", "无效的请求：" + childCode);
@@ -85,6 +80,11 @@ public class StartForms implements Filter {
 				return;
 			}
 
+			// 设备讯息
+			ClientDevice info = new ClientDevice(form);
+			info.setRequest(req);
+			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
+
 			// 查找菜单属性定义
 			MenuItem item = MenuFactory.get(formId);
 			if (item == null)
@@ -95,35 +95,36 @@ public class StartForms implements Filter {
 			form.setParam("versions", item.getVersions());
 			form.setParam("procCode", item.getProccode());
 			form.setParam("funcCode", formFunc);
+
+			// 建立数据库资源
+			try (AppHandle handle = new AppHandle()) {
+				try {
+					handle.setProperty(Application.sessionId, req.getSession().getId());
+					form.setHandle(handle);
+					log.debug("进行安全检查，若未登录则显示登录对话框");
+					AppSecurity check = new AppSecurity(req, resp, handle);
+					if (check.execute(form, info.getSid())) {
+						String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
+								handle.getUserName());
+						new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
+						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
+						if (checkEnableTime())
+							call(form);
+					}
+				} catch (Exception e) {
+					Throwable err = e.getCause();
+					if (err == null)
+						err = e;
+					req.setAttribute("msg", err.getMessage());
+					ErrorPage opera = new ErrorPage(form, err);
+					opera.execute();
+				}
+			}
 		} catch (Exception e) {
 			req.setAttribute("message", e.getMessage());
 			AppConfig conf = Application.getConfig();
 			req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 			return;
-		}
-		// 建立数据库资源
-		try (AppHandle handle = new AppHandle()) {
-			try {
-				handle.setProperty(Application.sessionId, req.getSession().getId());
-				form.setHandle(handle);
-				log.debug("进行安全检查，若未登录则显示登录对话框");
-				AppSecurity check = new AppSecurity(req, resp, handle);
-				if (check.execute(form, info.getSid())) {
-					String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
-							handle.getUserName());
-					new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
-					// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-					if (checkEnableTime())
-						call(form);
-				}
-			} catch (Exception e) {
-				Throwable err = e.getCause();
-				if (err == null)
-					err = e;
-				req.setAttribute("msg", err.getMessage());
-				ErrorPage opera = new ErrorPage(form, err);
-				opera.execute();
-			}
 		}
 	}
 

@@ -1,10 +1,14 @@
 package cn.cerc.jmis.page;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 
 public interface IJspPage extends IPage {
+	// 返回所在的Form
+	public IForm getForm();
+
 	// 输出到支持Jstl的jsp文件
 	public void add(String id, Object value);
 

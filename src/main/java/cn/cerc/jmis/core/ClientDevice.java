@@ -3,11 +3,13 @@ package cn.cerc.jmis.core;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IClient;
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.MemoryBuffer;
 
 public class ClientDevice implements IClient {
 	// private static final Logger log = Logger.getLogger(DeviceInfo.class);
+	private IForm form;
 	private String sid; // application session id;
 	private String deviceId; // device id
 	private String deviceType; // phone/pad/ee/pc
@@ -15,11 +17,19 @@ public class ClientDevice implements IClient {
 
 	public static final String deviceId_key = "CLIENTID";
 	public static final String deviceType_key = "device";
-	//
-	public static final String device_ee = "ee";
-	public static final String device_pc = "pc";
-	public static final String device_pad = "pad";
+	// 手机
 	public static final String device_phone = "phone";
+	// 平板
+	public static final String device_pad = "pad";
+	// 电脑
+	public static final String device_pc = "pc";
+	// 电脑专用浏览器
+	public static final String device_ee = "ee";
+
+	public ClientDevice(IForm form) {
+		super();
+		this.setForm(form);
+	}
 
 	private String getValue(MemoryBuffer buff, String key, String def) {
 		String result = def;
@@ -118,12 +128,10 @@ public class ClientDevice implements IClient {
 		return device_phone.equals(getDevice());
 	}
 
-	@Override
 	public HttpServletRequest getRequest() {
 		return request;
 	}
 
-	@Override
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 		// 保存设备类型
@@ -148,5 +156,16 @@ public class ClientDevice implements IClient {
 			sid = (String) request.getSession().getAttribute(RequestData.appSession_Key);
 		// 设置sid
 		setSid(sid);
+	}
+
+	@Override
+	public IForm getForm() {
+		return form;
+	}
+
+	@Override
+	public void setForm(IForm form) {
+		this.form = form;
+		this.setRequest(form.getRequest());
 	}
 }

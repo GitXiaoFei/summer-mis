@@ -2,6 +2,8 @@ package cn.cerc.jmis.tools;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IPage;
 import cn.cerc.jmis.core.ClientDevice;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
@@ -9,12 +11,14 @@ import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.other.Url_Record;
 
 public class StatuaBar extends Component {
+	private IForm form;
 	private HttpServletRequest request;
 	private static final int MAX_MENUS = 6;
 	private Url_Record checkAll;
 
-	public StatuaBar(Component owner) {
-		super(owner);
+	public StatuaBar(IPage owner) {
+		super((Component) owner);
+		this.form = owner.getForm();
 		this.setId("bottom");
 	}
 
@@ -28,7 +32,7 @@ public class StatuaBar extends Component {
 		UrlMenu item = new UrlMenu(this, caption, url);
 		item.setCssClass("bottomBotton");
 		item.setId("button" + count);
-		ClientDevice info = new ClientDevice();
+		ClientDevice info = new ClientDevice(form);
 		info.setRequest(request);
 		if (!info.isPhone())
 			item.setName(String.format("F%s:%s", count, item.getName()));
@@ -59,7 +63,7 @@ public class StatuaBar extends Component {
 		}
 		super.output(html);
 		if (request != null) {
-			ClientDevice info = new ClientDevice();
+			ClientDevice info = new ClientDevice(form);
 			info.setRequest(request);
 			if (!info.isPhone()) {
 				String msg = request.getParameter("msg");
@@ -80,5 +84,9 @@ public class StatuaBar extends Component {
 	public StatuaBar setRequest(HttpServletRequest request) {
 		this.request = request;
 		return this;
+	}
+
+	public IForm getForm() {
+		return form;
 	}
 }
