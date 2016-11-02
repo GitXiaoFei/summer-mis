@@ -10,12 +10,14 @@ import cn.cerc.jbean.core.AbstractHandle;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IClient;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jmis.core.ClientDevice;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private IClient client;
+	private IMenu menu;
 	private Map<String, String> params = new HashMap<>();
 
 	public void init(AbstractForm owner) {
@@ -91,7 +93,22 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 	public String getParam(String key, String def) {
 		if (params.containsKey(key))
 			return params.get(key);
-		else
-			return def;
+		else {
+			if (menu != null) {
+				String result = menu.getParam(key);
+				return result != null ? result : def;
+			} else
+				return def;
+		}
+	}
+
+	@Override
+	public IMenu getMenu() {
+		return menu;
+	}
+
+	@Override
+	public void setMenu(IMenu menu) {
+		this.menu = menu;
 	}
 }
