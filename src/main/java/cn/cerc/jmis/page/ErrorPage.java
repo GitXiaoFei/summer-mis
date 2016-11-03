@@ -6,13 +6,35 @@ import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IPage;
 
-public class ErrorPage extends AbstractPage {
+public class ErrorPage implements IPage {
 	private Throwable error;
+	protected IForm form;
 
+	public ErrorPage() {
+		super();
+	}
+
+	public ErrorPage(IForm page) {
+		super();
+		this.setForm(page);
+	}
+	
 	public ErrorPage(IForm form, Throwable error) {
-		super(form);
+		super();
+		this.setForm(form);
 		this.error = error;
+	}
+
+	@Override
+	public void setForm(IForm form) {
+		this.form = form;
+	}
+
+	@Override
+	public IForm getForm() {
+		return form;
 	}
 
 	@Override

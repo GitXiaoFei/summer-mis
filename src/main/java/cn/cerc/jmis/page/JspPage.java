@@ -7,16 +7,29 @@ import javax.servlet.ServletException;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 
-public class JspPage extends AbstractPage implements IJspPage {
+public class JspPage implements IJspPage {
 	private String jspFile;
+	protected IForm form;
 
 	public JspPage(IForm form) {
-		super(form);
+		super();
+		this.setForm(form);
 	}
 
 	public JspPage(IForm form, String jspFile) {
-		super(form);
+		super();
+		this.setForm(form);
 		this.setJspFile(jspFile);
+	}
+
+	@Override
+	public void setForm(IForm form) {
+		this.form = form;
+	}
+
+	@Override
+	public IForm getForm() {
+		return form;
 	}
 
 	public void execute() throws ServletException, IOException {
