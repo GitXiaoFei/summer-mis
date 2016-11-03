@@ -37,7 +37,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
-		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
+		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
@@ -62,6 +62,23 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public String getViewFile() {
+		String jspFile = this.getJspFile();
+		if (getRequest() == null || jspFile == null)
+			return jspFile;
+		if (jspFile.indexOf(".jsp") == -1)
+			return jspFile;
+
+		if (this.getForm().getClient().isPhone())
+			return jspFile;
+
+		// 检查是否存在特定版本的jsp文件
+		String rootPath = String.format("/WEB-INF/%s/", Application.getConfig().getPathForms());
+		String fileName = jspFile.substring(0, jspFile.indexOf(".jsp"));
+		String extName = jspFile.substring(jspFile.indexOf(".jsp") + 1);
+		String newFile = String.format("%s-%s.%s", fileName, "pc", extName);
+		if (fileExists(rootPath + newFile))
+			return newFile;
+
 		return jspFile;
 	}
 
