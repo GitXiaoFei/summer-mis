@@ -36,6 +36,13 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		return form;
 	}
 
+	@Override
+	public void addComponent(Component component) {
+		if (component.getId() != null)
+			this.add(component.getId(), component);
+		super.addComponent(component);
+	}
+
 	public void execute() throws ServletException, IOException {
 		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
