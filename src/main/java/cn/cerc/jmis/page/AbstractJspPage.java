@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.other.MemoryBuffer;
+import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
 
 public abstract class AbstractJspPage extends Component implements IJspPage {
@@ -77,6 +79,23 @@ public abstract class AbstractJspPage extends Component implements IJspPage {
 		String file = appPath + fileName;
 		File f = new File(file);
 		return f.exists();
+	}
+
+	// 从请求或缓存读取数据
+	public String getValue(MemoryBuffer buff, String reqKey) {
+		String result = getRequest().getParameter(reqKey);
+		if (result == null) {
+			String val = buff.getString(reqKey).replace("{}", "");
+			if (utils.isNumeric(val) && val.endsWith(".0"))
+				result = val.substring(0, val.length() - 2);
+			else
+				result = val;
+		} else {
+			result = result.trim();
+			buff.setField(reqKey, result);
+		}
+		this.add(reqKey, result);
+		return result;
 	}
 
 }
