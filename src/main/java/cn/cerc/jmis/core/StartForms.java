@@ -88,8 +88,11 @@ public class StartForms implements Filter {
 
 			// 查找菜单定义
 			IMenu menu = form.getMenu();
-			if (menu == null)
-				form.setMenu(MenuFactory.getItem(formId));
+			if (menu == null) {
+				IAppMenus menus = Application.getBean("AppMenus", IAppMenus.class);
+				if (menus != null)
+					form.setMenu(menus.getItem(formId));
+			}
 
 			// 建立数据库资源
 			try (AppHandle handle = new AppHandle()) {
