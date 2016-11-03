@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.cerc.jmis.page.IJspPage;
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.GoBackButton;
@@ -21,9 +21,9 @@ public abstract class AbstractContent extends Component {
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
-	private IJspPage page;
+	private AbstractJspPage page;
 
-	public AbstractContent(IJspPage owner) {
+	public AbstractContent(AbstractJspPage owner) {
 		super();
 		this.setId("document");
 		this.setOwner((Component) owner);
@@ -158,7 +158,7 @@ public abstract class AbstractContent extends Component {
 		this.request = request;
 	}
 
-	public IJspPage getPage() {
+	public AbstractJspPage getPage() {
 		return page;
 	}
 }
