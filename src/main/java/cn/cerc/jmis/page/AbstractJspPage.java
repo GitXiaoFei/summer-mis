@@ -1,6 +1,8 @@
 package cn.cerc.jmis.page;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.servlet.ServletException;
 
@@ -11,6 +13,10 @@ import cn.cerc.jpage.common.Component;
 public abstract class AbstractJspPage extends Component implements IJspPage {
 	private String jspFile;
 	private IForm form;
+
+	public AbstractJspPage() {
+		super();
+	}
 
 	public AbstractJspPage(IForm form) {
 		super();
@@ -48,18 +54,29 @@ public abstract class AbstractJspPage extends Component implements IJspPage {
 	}
 
 	@Override
-	public String getMessage() {
+	public final String getMessage() {
 		return form.getParam("message", null);
 	}
 
 	@Override
-	public void setMessage(String message) {
+	public final void setMessage(String message) {
 		form.setParam("message", message);
 	}
 
 	@Override
 	public String getViewFile() {
 		return jspFile;
+	}
+
+	protected boolean fileExists(String fileName) {
+		URL url = AbstractJspPage.class.getClassLoader().getResource("");
+		if (url == null)
+			return false;
+		String filepath = url.getPath();
+		String appPath = filepath.substring(0, filepath.indexOf("/WEB-INF"));
+		String file = appPath + fileName;
+		File f = new File(file);
+		return f.exists();
 	}
 
 }
