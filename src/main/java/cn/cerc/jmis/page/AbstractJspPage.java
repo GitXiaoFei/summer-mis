@@ -8,11 +8,12 @@ import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
 
-public abstract class AbstractJspPage extends Component implements IJspPage {
+public abstract class AbstractJspPage extends Component implements IPage {
 	private String jspFile;
 	private IForm form;
 
@@ -40,32 +41,26 @@ public abstract class AbstractJspPage extends Component implements IJspPage {
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
-	@Override
 	public String getJspFile() {
 		return jspFile;
 	}
 
-	@Override
 	public void setJspFile(String jspFile) {
 		this.jspFile = jspFile;
 	}
 
-	@Override
 	public void add(String id, Object value) {
 		getRequest().setAttribute(id, value);
 	}
 
-	@Override
 	public final String getMessage() {
 		return form.getParam("message", null);
 	}
 
-	@Override
 	public final void setMessage(String message) {
 		form.setParam("message", message);
 	}
 
-	@Override
 	public String getViewFile() {
 		return jspFile;
 	}

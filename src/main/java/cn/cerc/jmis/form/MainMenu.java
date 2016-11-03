@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jmis.page.IJspPage;
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.other.Url_Record;
 
 public class MainMenu {
@@ -26,7 +26,7 @@ public class MainMenu {
 		leftMenus.add(homePage);
 	}
 
-	public void finish(IJspPage page, boolean logon, String device) {
+	public void finish(AbstractJspPage page, boolean logon, String device) {
 		// 刷新
 		if (this.pageTitle != null) {
 			leftMenus.add(new Url_Record("javascript:location.reload()", this.pageTitle));
