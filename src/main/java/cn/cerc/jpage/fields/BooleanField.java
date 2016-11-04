@@ -25,6 +25,11 @@ public class BooleanField extends StringField implements SearchItem {
 	public String getText(Record dataSet) {
 		if (dataSet == null)
 			return null;
+		if (buildText != null) {
+			HtmlWriter html = new HtmlWriter();
+			buildText.outputText(dataSet, html);
+			return html.toString();
+		}
 		return dataSet.getBoolean(field) ? trueText : falseText;
 	}
 
