@@ -13,12 +13,13 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jmis.core.IAppLogon;
 import cn.cerc.jmis.core.RequestData;
 
-public class LoginPage extends AbstractJspPage {
-	private static final Logger log = Logger.getLogger(LoginPage.class);
+public class AppLoginPage extends AbstractJspPage implements IAppLogon {
+	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
-	public LoginPage(IForm form) {
+	public AppLoginPage(IForm form) {
 		this.setForm(form);
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
@@ -26,6 +27,7 @@ public class LoginPage extends AbstractJspPage {
 		this.add("needVerify", "false");
 	}
 
+	@Override
 	public boolean checkSecurity(String token) throws IOException, ServletException {
 		IForm form = this.getForm();
 		try {
@@ -47,6 +49,7 @@ public class LoginPage extends AbstractJspPage {
 		return false;
 	}
 
+	@Override
 	public boolean checkLogin(String userCode, String password) throws ServletException, IOException {
 		IForm form = this.getForm();
 		HttpServletRequest req = this.getRequest();
