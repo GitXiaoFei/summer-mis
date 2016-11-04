@@ -53,7 +53,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
-		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
+		String url = this.getViewFile();
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
