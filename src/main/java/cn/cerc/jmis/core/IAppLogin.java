@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-public interface IAppLogon {
+public interface IAppLogin {
 
 	boolean checkSecurity(String token) throws IOException, ServletException;
 

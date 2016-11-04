@@ -13,10 +13,10 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jmis.core.IAppLogon;
+import cn.cerc.jmis.core.IAppLogin;
 import cn.cerc.jmis.core.RequestData;
 
-public class AppLoginPage extends AbstractJspPage implements IAppLogon {
+public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
 	public AppLoginPage(IForm form) {
