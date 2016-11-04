@@ -1,4 +1,4 @@
-package cn.cerc.jmis.core;
+package cn.cerc.jmis.page;
 
 import java.io.IOException;
 
@@ -13,12 +13,12 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jmis.page.AbstractJspPage;
+import cn.cerc.jmis.core.RequestData;
 
-public class AppSecurity extends AbstractJspPage{
-	private static final Logger log = Logger.getLogger(AppSecurity.class);
+public class LoginPage extends AbstractJspPage {
+	private static final Logger log = Logger.getLogger(LoginPage.class);
 
-	public AppSecurity(IForm form) {
+	public LoginPage(IForm form) {
 		this.setForm(form);
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
@@ -29,8 +29,11 @@ public class AppSecurity extends AbstractJspPage{
 	public boolean checkSecurity(String token) throws IOException, ServletException {
 		IForm form = this.getForm();
 		try {
-			if (form.getRequest().getParameter("login_usr") != null)
-				return checkLogin();
+			if (form.getRequest().getParameter("login_usr") != null) {
+				String userCode = getRequest().getParameter("login_usr");
+				String password = getRequest().getParameter("login_pwd");
+				return checkLogin(userCode, password);
+			}
 			log.debug(String.format("根据 token(%s) 创建 Session", token));
 			IHandle sess = (IHandle) form.getHandle().getProperty(null);
 			if (sess.init(token))
@@ -44,12 +47,10 @@ public class AppSecurity extends AbstractJspPage{
 		return false;
 	}
 
-	private boolean checkLogin() throws ServletException, IOException {
+	public boolean checkLogin(String userCode, String password) throws ServletException, IOException {
 		IForm form = this.getForm();
 		HttpServletRequest req = this.getRequest();
 
-		String userCode = req.getParameter("login_usr");
-		String password = req.getParameter("login_pwd");
 		log.debug(String.format("校验用户帐号(%s)与密码", userCode));
 
 		// 进行设备首次登记
