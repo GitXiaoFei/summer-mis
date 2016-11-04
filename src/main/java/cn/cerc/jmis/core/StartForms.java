@@ -33,9 +33,9 @@ import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
+import cn.cerc.jmis.page.AppLoginPage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
-import cn.cerc.jmis.page.AppLoginPage;
 import cn.cerc.jmis.page.RedirectPage;
 
 public class StartForms implements Filter {
@@ -101,7 +101,9 @@ public class StartForms implements Filter {
 					handle.setProperty(Application.sessionId, req.getSession().getId());
 					form.setHandle(handle);
 					log.debug("进行安全检查，若未登录则显示登录对话框");
-					AppLoginPage page = new AppLoginPage(form);
+					IAppLogin page = Application.getBean("AppLogin", IAppLogin.class);
+					if (page == null)
+						page = new AppLoginPage(form);
 					if (page.checkSecurity(info.getSid())) {
 						String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
 								handle.getUserName());

@@ -19,8 +19,17 @@ import cn.cerc.jmis.core.RequestData;
 public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
+	public AppLoginPage() {
+
+	}
+
 	public AppLoginPage(IForm form) {
 		this.setForm(form);
+		this.init(form);
+	}
+
+	@Override
+	public void init(IForm form) {
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
 		this.add("homePage", conf.getFormWelcome());
@@ -105,4 +114,5 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		} else
 			return app.getDataOut().getHead().getString("UserCode_");
 	}
+
 }
