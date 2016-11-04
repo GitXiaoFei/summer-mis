@@ -14,12 +14,14 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.document.HtmlContent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
 	private String jspFile;
 	private IForm form;
 	private List<String> styleFiles = new ArrayList<>();
 	private List<String> scriptFiles = new ArrayList<>();
+	private List<HtmlContent> scriptCodes = new ArrayList<>();
 
 	public AbstractJspPage() {
 		super();
@@ -129,11 +131,19 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		return scriptFiles;
 	}
 
+	public List<HtmlContent> getScriptCodes() {
+		return scriptCodes;
+	}
+
 	public final void addStyleFile(String file) {
 		styleFiles.add(file);
 	}
 
 	public final void addScriptFile(String scriptFile) {
 		scriptFiles.add(scriptFile);
+	}
+
+	public void addScriptCode(HtmlContent scriptCode) {
+		scriptCodes.add(scriptCode);
 	}
 }

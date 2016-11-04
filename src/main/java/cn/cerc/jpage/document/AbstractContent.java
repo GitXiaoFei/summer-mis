@@ -16,7 +16,6 @@ import cn.cerc.jpage.other.Url_Record;
 public abstract class AbstractContent extends Component {
 	private HeaderSide header;
 	private List<HtmlContent> codes1 = new ArrayList<>();
-	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
 	private AbstractJspPage page;
 
@@ -39,14 +38,15 @@ public abstract class AbstractContent extends Component {
 			html.println("<script src=\"%s\"></script>", file);
 		}
 		// 加入脚本代码
-		if (codes1.size() > 0 || codes2.size() > 0) {
+		List<HtmlContent> scriptCodes = this.getPage().getScriptCodes();
+		if (codes1.size() > 0 || scriptCodes.size() > 0) {
 			html.println("<script>");
 			for (HtmlContent func : codes1) {
 				func.output(html);
 			}
-			if (codes2.size() > 0) {
+			if (scriptCodes.size() > 0) {
 				html.println("$(function(){");
-				for (HtmlContent func : codes2) {
+				for (HtmlContent func : scriptCodes) {
 					func.output(html);
 				}
 				html.println("});");
@@ -123,10 +123,6 @@ public abstract class AbstractContent extends Component {
 
 	public void addDefineScript(HtmlContent scriptCode) {
 		codes1.add(scriptCode);
-	}
-
-	public void addScriptCode(HtmlContent scriptCode) {
-		codes2.add(scriptCode);
 	}
 
 	public String getContents() {
