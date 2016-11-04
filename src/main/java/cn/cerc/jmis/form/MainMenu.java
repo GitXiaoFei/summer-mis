@@ -26,7 +26,8 @@ public class MainMenu {
 		leftMenus.add(homePage);
 	}
 
-	public void finish(AbstractJspPage page, boolean logon, String device) {
+	public void finish(AbstractJspPage page, boolean logon) {
+		String device = page.getForm().getClient().getDevice();
 		// 刷新
 		if (this.pageTitle != null) {
 			leftMenus.add(new Url_Record("javascript:location.reload()", this.pageTitle));
