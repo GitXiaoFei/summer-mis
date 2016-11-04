@@ -14,6 +14,7 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.document.HtmlContent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
@@ -50,6 +51,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
+		this.add("jspPage", this);
 		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
@@ -145,5 +147,36 @@ public abstract class AbstractJspPage extends Component implements IPage {
 
 	public void addScriptCode(HtmlContent scriptCode) {
 		scriptCodes.add(scriptCode);
+	}
+
+	// 返回所有的样式定义
+	public HtmlWriter getCss() {
+		HtmlWriter html = new HtmlWriter();
+		for (String file : styleFiles)
+			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
+		return html;
+	}
+
+	// 返回所有的脚本
+	public HtmlWriter getScript() {
+		HtmlWriter html = new HtmlWriter();
+
+		// 加入脚本文件
+		for (String file : getScriptFiles()) {
+			html.println("<script src=\"%s\"></script>", file);
+		}
+		// 加入脚本代码
+		if (scriptCodes.size() > 0) {
+			html.println("<script>");
+			if (scriptCodes.size() > 0) {
+				html.println("$(function(){");
+				for (HtmlContent func : scriptCodes) {
+					func.output(html);
+				}
+				html.println("});");
+			}
+			html.println("</script>");
+		}
+		return html;
 	}
 }

@@ -109,12 +109,9 @@ public abstract class AbstractContent extends Component {
 		return header != null ? header.getHtml() : null;
 	}
 
-	public String getCss() {
-		HtmlWriter html = new HtmlWriter();
-		for (String file : page.getStyleFiles()) {
-			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
-		}
-		return html.toString();
+	@Deprecated
+	public HtmlWriter getCss() {
+		return page.getCss();
 	}
 
 	public void appendContent(HtmlContent content) {
@@ -125,14 +122,13 @@ public abstract class AbstractContent extends Component {
 		codes1.add(scriptCode);
 	}
 
-	public String getContents() {
-		if (contents.size() == 0)
-			return "";
+	public HtmlWriter getContents() {
 		HtmlWriter html = new HtmlWriter();
-		for (HtmlContent content : contents) {
+		if (contents.size() == 0)
+			return html;
+		for (HtmlContent content : contents) 
 			content.output(html);
-		}
-		return html.toString();
+		return html;
 	}
 
 	public AbstractJspPage getPage() {
