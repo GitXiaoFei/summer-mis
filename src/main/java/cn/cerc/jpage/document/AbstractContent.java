@@ -15,9 +15,6 @@ import cn.cerc.jpage.other.Url_Record;
 
 public abstract class AbstractContent extends Component {
 	private HeaderSide header;
-	private HttpServletRequest request;
-	private List<String> styleFiles = new ArrayList<>();
-	private List<String> scriptFiles = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
@@ -27,7 +24,6 @@ public abstract class AbstractContent extends Component {
 		super();
 		this.setId("document");
 		this.setOwner((Component) owner);
-		this.request = owner.getForm().getRequest();
 		this.page = owner;
 		this.init();
 	}
@@ -39,7 +35,7 @@ public abstract class AbstractContent extends Component {
 		HtmlWriter html = new HtmlWriter();
 
 		// 加入脚本文件
-		for (String file : scriptFiles) {
+		for (String file : this.page.getScriptFiles()) {
 			html.println("<script src=\"%s\"></script>", file);
 		}
 		// 加入脚本代码
@@ -65,6 +61,7 @@ public abstract class AbstractContent extends Component {
 	 */
 
 	public void register() {
+		HttpServletRequest request = page.getRequest();
 		Boolean _showMenu_ = (Boolean) request.getAttribute("_showMenu_");
 		if (_showMenu_ != null && _showMenu_) {
 			header = new HeaderSide();
@@ -108,24 +105,16 @@ public abstract class AbstractContent extends Component {
 		}
 	}
 
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
 	public String getHeader() {
 		return header != null ? header.getHtml() : null;
 	}
 
 	public String getCss() {
 		HtmlWriter html = new HtmlWriter();
-		for (String file : styleFiles) {
+		for (String file : page.getStyleFiles()) {
 			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
 		}
 		return html.toString();
-	}
-
-	public void addCSSFile(String file) {
-		styleFiles.add(file);
 	}
 
 	public void appendContent(HtmlContent content) {
@@ -148,14 +137,6 @@ public abstract class AbstractContent extends Component {
 			content.output(html);
 		}
 		return html.toString();
-	}
-
-	public void addScriptFile(String scriptFile) {
-		scriptFiles.add(scriptFile);
-	}
-
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
 	}
 
 	public AbstractJspPage getPage() {
