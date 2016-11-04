@@ -100,8 +100,8 @@ public class StartForms implements Filter {
 					handle.setProperty(Application.sessionId, req.getSession().getId());
 					form.setHandle(handle);
 					log.debug("进行安全检查，若未登录则显示登录对话框");
-					AppSecurity check = new AppSecurity(req, resp, handle);
-					if (check.execute(form, info.getSid())) {
+					AppSecurity page = new AppSecurity(form);
+					if (page.checkSecurity(info.getSid())) {
 						String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
 								handle.getUserName());
 						new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
