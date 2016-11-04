@@ -34,8 +34,10 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	@Override
-	public void setForm(IForm form) {
+	public final void setForm(IForm form) {
 		this.form = form;
+		if(form != null)
+			this.add("jspPage", this);
 	}
 
 	@Override
@@ -51,7 +53,6 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
-		this.add("jspPage", this);
 		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
@@ -133,7 +134,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		return scriptFiles;
 	}
 
-	public List<HtmlContent> getScriptCodes() {
+	public final List<HtmlContent> getScriptCodes() {
 		return scriptCodes;
 	}
 
@@ -145,20 +146,20 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		scriptFiles.add(scriptFile);
 	}
 
-	public void addScriptCode(HtmlContent scriptCode) {
+	public final void addScriptCode(HtmlContent scriptCode) {
 		scriptCodes.add(scriptCode);
 	}
 
-	// 返回所有的样式定义
-	public HtmlWriter getCss() {
+	// 返回所有的样式定义，供jsp中使用 ${jspPage.css}调用
+	public final HtmlWriter getCss() {
 		HtmlWriter html = new HtmlWriter();
 		for (String file : styleFiles)
 			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
 		return html;
 	}
 
-	// 返回所有的脚本
-	public HtmlWriter getScript() {
+	// 返回所有的脚本，供jsp中使用 ${jspPage.script}调用
+	public final HtmlWriter getScript() {
 		HtmlWriter html = new HtmlWriter();
 
 		// 加入脚本文件
