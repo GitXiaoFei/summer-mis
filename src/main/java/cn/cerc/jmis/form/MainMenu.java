@@ -86,4 +86,8 @@ public class MainMenu {
 	public List<Url_Record> getRightMenus() {
 		return rightMenus;
 	}
+
+	public List<Url_Record> getLeftMenus() {
+		return leftMenus;
+	}
 }
