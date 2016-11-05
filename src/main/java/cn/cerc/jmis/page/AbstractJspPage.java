@@ -180,4 +180,8 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		}
 		return html;
 	}
+	
+	public void setDocument(Component document){
+		this.add("document", document);
+	}
 }

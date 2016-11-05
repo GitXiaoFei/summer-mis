@@ -20,10 +20,9 @@ public abstract class AbstractContent extends Component {
 	private AbstractJspPage page;
 
 	public AbstractContent(AbstractJspPage owner) {
-		super();
-		this.setId("document");
-		this.setOwner((Component) owner);
+		super(owner);
 		this.page = owner;
+		owner.setDocument(this);
 		this.init();
 	}
 
