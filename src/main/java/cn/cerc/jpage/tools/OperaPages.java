@@ -18,11 +18,6 @@ public class OperaPages extends Component {
 		this.request = request;
 	}
 
-	public OperaPages(Component owner) {
-		super(owner);
-		this.setId("_operaPages_");
-	}
-
 	@Override
 	public void output(HtmlWriter html) {
 		if (pages.getCount() <= 1)

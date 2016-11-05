@@ -10,11 +10,6 @@ public class PhonePages extends Component {
 	private TMutiPage pages;
 	private HttpServletRequest request;
 
-	public PhonePages(Component owner) {
-		super(owner);
-		this.setId("_operaPages_");
-	}
-
 	@Override
 	public void output(HtmlWriter html) {
 		if (pages.getCount() <= 1)
