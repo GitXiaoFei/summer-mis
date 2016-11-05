@@ -15,11 +15,7 @@ import cn.cerc.jpage.other.Url_Record;
 
 public abstract class AbstractContent extends Component {
 	private HeaderSide header;
-	private HttpServletRequest request;
-	private List<String> styleFiles = new ArrayList<>();
-	private List<String> scriptFiles = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
-	private List<HtmlContent> codes2 = new ArrayList<>();
 	private List<HtmlContent> contents = new ArrayList<>();
 	private AbstractJspPage page;
 
@@ -27,7 +23,6 @@ public abstract class AbstractContent extends Component {
 		super();
 		this.setId("document");
 		this.setOwner((Component) owner);
-		this.request = owner.getForm().getRequest();
 		this.page = owner;
 		this.init();
 	}
@@ -39,18 +34,19 @@ public abstract class AbstractContent extends Component {
 		HtmlWriter html = new HtmlWriter();
 
 		// 加入脚本文件
-		for (String file : scriptFiles) {
+		for (String file : this.page.getScriptFiles()) {
 			html.println("<script src=\"%s\"></script>", file);
 		}
 		// 加入脚本代码
-		if (codes1.size() > 0 || codes2.size() > 0) {
+		List<HtmlContent> scriptCodes = this.getPage().getScriptCodes();
+		if (codes1.size() > 0 || scriptCodes.size() > 0) {
 			html.println("<script>");
 			for (HtmlContent func : codes1) {
 				func.output(html);
 			}
-			if (codes2.size() > 0) {
+			if (scriptCodes.size() > 0) {
 				html.println("$(function(){");
-				for (HtmlContent func : codes2) {
+				for (HtmlContent func : scriptCodes) {
 					func.output(html);
 				}
 				html.println("});");
@@ -65,6 +61,7 @@ public abstract class AbstractContent extends Component {
 	 */
 
 	public void register() {
+		HttpServletRequest request = page.getRequest();
 		Boolean _showMenu_ = (Boolean) request.getAttribute("_showMenu_");
 		if (_showMenu_ != null && _showMenu_) {
 			header = new HeaderSide();
@@ -108,24 +105,13 @@ public abstract class AbstractContent extends Component {
 		}
 	}
 
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
 	public String getHeader() {
 		return header != null ? header.getHtml() : null;
 	}
 
-	public String getCss() {
-		HtmlWriter html = new HtmlWriter();
-		for (String file : styleFiles) {
-			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
-		}
-		return html.toString();
-	}
-
-	public void addCSSFile(String file) {
-		styleFiles.add(file);
+	@Deprecated
+	public HtmlWriter getCss() {
+		return page.getCss();
 	}
 
 	public void appendContent(HtmlContent content) {
@@ -136,26 +122,13 @@ public abstract class AbstractContent extends Component {
 		codes1.add(scriptCode);
 	}
 
-	public void addScriptCode(HtmlContent scriptCode) {
-		codes2.add(scriptCode);
-	}
-
-	public String getContents() {
-		if (contents.size() == 0)
-			return "";
+	public HtmlWriter getContents() {
 		HtmlWriter html = new HtmlWriter();
-		for (HtmlContent content : contents) {
+		if (contents.size() == 0)
+			return html;
+		for (HtmlContent content : contents) 
 			content.output(html);
-		}
-		return html.toString();
-	}
-
-	public void addScriptFile(String scriptFile) {
-		scriptFiles.add(scriptFile);
-	}
-
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
+		return html;
 	}
 
 	public AbstractJspPage getPage() {

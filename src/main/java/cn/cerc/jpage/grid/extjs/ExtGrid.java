@@ -17,10 +17,10 @@ public class ExtGrid extends Grid {
 
 	public ExtGrid(AbstractContent document) {
 		super(document);
-		document.addCSSFile("/ext4/resources/css/ext-all.css");
-		document.addScriptFile("/ext4/ext-all.js");
+		document.getPage().addStyleFile("/ext4/resources/css/ext-all.css");
+		document.getPage().addScriptFile("/ext4/ext-all.js");
 		// document.addScriptFile("/ext4/ext-all-debug.js");
-		document.addScriptFile("/ext4/ext-lang-zh_CN.js");
+		document.getPage().addScriptFile("/ext4/ext-lang-zh_CN.js");
 		this.setExtGrid(true);
 	}
 

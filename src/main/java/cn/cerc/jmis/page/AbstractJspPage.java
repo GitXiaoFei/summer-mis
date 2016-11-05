@@ -3,6 +3,8 @@ package cn.cerc.jmis.page;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -12,10 +14,15 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.document.HtmlContent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
 	private String jspFile;
 	private IForm form;
+	private List<String> styleFiles = new ArrayList<>();
+	private List<String> scriptFiles = new ArrayList<>();
+	private List<HtmlContent> scriptCodes = new ArrayList<>();
 
 	public AbstractJspPage() {
 		super();
@@ -27,12 +34,14 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	@Override
-	public void setForm(IForm form) {
+	public final void setForm(IForm form) {
 		this.form = form;
+		if(form != null)
+			this.add("jspPage", this);
 	}
 
 	@Override
-	public IForm getForm() {
+	public final IForm getForm() {
 		return form;
 	}
 
@@ -44,15 +53,15 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
-		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
+		String url = this.getViewFile();
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
-	public String getJspFile() {
+	public final String getJspFile() {
 		return jspFile;
 	}
 
-	public void setJspFile(String jspFile) {
+	public final void setJspFile(String jspFile) {
 		this.jspFile = jspFile;
 	}
 
@@ -68,7 +77,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		form.setParam("message", message);
 	}
 
-	public String getViewFile() {
+	public final String getViewFile() {
 		String jspFile = this.getJspFile();
 		if (getRequest() == null || jspFile == null)
 			return jspFile;
@@ -101,7 +110,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	// 从请求或缓存读取数据
-	public String getValue(MemoryBuffer buff, String reqKey) {
+	public final String getValue(MemoryBuffer buff, String reqKey) {
 		String result = getRequest().getParameter(reqKey);
 		if (result == null) {
 			String val = buff.getString(reqKey).replace("{}", "");
@@ -117,4 +126,58 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		return result;
 	}
 
+	public final List<String> getStyleFiles() {
+		return styleFiles;
+	}
+
+	public final List<String> getScriptFiles() {
+		return scriptFiles;
+	}
+
+	public final List<HtmlContent> getScriptCodes() {
+		return scriptCodes;
+	}
+
+	public final void addStyleFile(String file) {
+		styleFiles.add(file);
+	}
+
+	public final void addScriptFile(String scriptFile) {
+		scriptFiles.add(scriptFile);
+	}
+
+	public final void addScriptCode(HtmlContent scriptCode) {
+		scriptCodes.add(scriptCode);
+	}
+
+	// 返回所有的样式定义，供jsp中使用 ${jspPage.css}调用
+	public final HtmlWriter getCss() {
+		HtmlWriter html = new HtmlWriter();
+		for (String file : styleFiles)
+			html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
+		return html;
+	}
+
+	// 返回所有的脚本，供jsp中使用 ${jspPage.script}调用
+	public final HtmlWriter getScript() {
+		HtmlWriter html = new HtmlWriter();
+
+		// 加入脚本文件
+		for (String file : getScriptFiles()) {
+			html.println("<script src=\"%s\"></script>", file);
+		}
+		// 加入脚本代码
+		if (scriptCodes.size() > 0) {
+			html.println("<script>");
+			if (scriptCodes.size() > 0) {
+				html.println("$(function(){");
+				for (HtmlContent func : scriptCodes) {
+					func.output(html);
+				}
+				html.println("});");
+			}
+			html.println("</script>");
+		}
+		return html;
+	}
 }
