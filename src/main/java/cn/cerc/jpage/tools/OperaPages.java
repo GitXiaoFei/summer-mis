@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.TMutiPage;
+import cn.cerc.jpage.grid.TMutiPage;
 
 public class OperaPages extends Component {
 	private TMutiPage pages;

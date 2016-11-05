@@ -11,7 +11,6 @@ import cn.cerc.jpage.common.ActionForm;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.TMutiPage;
 import cn.cerc.jpage.fields.Field;
 
 public abstract class Grid extends Component implements DataView {

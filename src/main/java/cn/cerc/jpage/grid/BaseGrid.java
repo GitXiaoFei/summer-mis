@@ -9,7 +9,6 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.BuildUrl;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.TMutiPage;
 import cn.cerc.jpage.common.UrlRecord;
 import cn.cerc.jpage.fields.Field;
 
