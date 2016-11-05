@@ -15,7 +15,6 @@ import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.document.AbstractContent;
 import cn.cerc.jpage.document.HtmlContent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
@@ -24,7 +23,6 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	private List<String> styleFiles = new ArrayList<>();
 	private List<String> scriptFiles = new ArrayList<>();
 	private List<HtmlContent> scriptCodes = new ArrayList<>();
-	private AbstractContent content;
 
 	public AbstractJspPage() {
 		super();
@@ -183,11 +181,4 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		return html;
 	}
 
-	public AbstractContent getContent() {
-		return content;
-	}
-
-	public void setContent(AbstractContent content) {
-		this.content = content;
-	}
 }
