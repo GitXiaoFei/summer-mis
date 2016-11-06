@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.common.TMutiPage;
+import cn.cerc.jpage.grid.TMutiPage;
 
 public class DBGrid<T> {
 	private DataSet dataset;

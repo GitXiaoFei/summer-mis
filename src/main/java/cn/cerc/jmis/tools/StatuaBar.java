@@ -12,9 +12,8 @@ import cn.cerc.jpage.other.Url_Record;
 
 public class StatuaBar extends Component {
 	private IForm form;
-	private HttpServletRequest request;
 	private static final int MAX_MENUS = 6;
-	private Url_Record checkAll;
+	protected Url_Record checkAll;
 
 	public StatuaBar(IPage owner) {
 		super((Component) owner);
@@ -33,7 +32,7 @@ public class StatuaBar extends Component {
 		item.setCssClass("bottomBotton");
 		item.setId("button" + count);
 		ClientDevice info = new ClientDevice(form);
-		info.setRequest(request);
+		info.setRequest(form.getRequest());
 		if (!info.isPhone())
 			item.setName(String.format("F%s:%s", count, item.getName()));
 	}
@@ -62,6 +61,7 @@ public class StatuaBar extends Component {
 			html.println("<label for=\"selectAll\">全选</label>");
 		}
 		super.output(html);
+		HttpServletRequest request = getForm().getRequest();
 		if (request != null) {
 			ClientDevice info = new ClientDevice(form);
 			info.setRequest(request);
@@ -75,15 +75,6 @@ public class StatuaBar extends Component {
 			}
 		}
 		html.println("</div>");
-	}
-
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
-	public StatuaBar setRequest(HttpServletRequest request) {
-		this.request = request;
-		return this;
 	}
 
 	public IForm getForm() {

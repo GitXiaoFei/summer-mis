@@ -36,7 +36,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	@Override
 	public final void setForm(IForm form) {
 		this.form = form;
-		if(form != null)
+		if (form != null)
 			this.add("jspPage", this);
 	}
 
@@ -180,4 +180,5 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		}
 		return html;
 	}
+
 }

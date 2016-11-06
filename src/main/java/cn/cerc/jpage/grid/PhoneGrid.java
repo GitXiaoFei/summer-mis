@@ -3,7 +3,6 @@ package cn.cerc.jpage.grid;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.TMutiPage;
 
 public class PhoneGrid extends Grid {
 

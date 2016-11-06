@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.grid;
 
 import net.sf.json.JSONObject;
 

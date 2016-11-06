@@ -3,9 +3,9 @@ package cn.cerc.jpage.grid.extjs;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.common.ActionForm;
 import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.document.AbstractContent;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.grid.Grid;
@@ -15,12 +15,12 @@ public class ExtGrid extends Grid {
 	private String postUrl;
 	private String onPostSuccess;
 
-	public ExtGrid(AbstractContent document) {
-		super(document);
-		document.getPage().addStyleFile("/ext4/resources/css/ext-all.css");
-		document.getPage().addScriptFile("/ext4/ext-all.js");
-		// document.addScriptFile("/ext4/ext-all-debug.js");
-		document.getPage().addScriptFile("/ext4/ext-lang-zh_CN.js");
+	public ExtGrid(AbstractJspPage page) {
+		super(page);
+		page.addStyleFile("/ext4/resources/css/ext-all.css");
+		page.addScriptFile("/ext4/ext-all.js");
+		// Page.addScriptFile("/ext4/ext-all-debug.js");
+		page.addScriptFile("/ext4/ext-lang-zh_CN.js");
 		this.setExtGrid(true);
 	}
 
