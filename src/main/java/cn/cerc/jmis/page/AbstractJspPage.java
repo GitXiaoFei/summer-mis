@@ -95,7 +95,9 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		if (fileExists(rootPath + newFile))
 			return newFile;
 
-		return jspFile;
+		if (jspFile.indexOf("/WEB-INF/") != -1)
+			return jspFile;
+		return String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
 	}
 
 	protected boolean fileExists(String fileName) {
