@@ -53,7 +53,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 	}
 
 	public void execute() throws ServletException, IOException {
-		String url = this.getViewFile();
+		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), this.getViewFile());
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
@@ -94,10 +94,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		String newFile = String.format("%s-%s.%s", fileName, "pc", extName);
 		if (fileExists(rootPath + newFile))
 			return newFile;
-
-		if (jspFile.indexOf("/WEB-INF/") != -1)
-			return jspFile;
-		return String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
+		return jspFile;
 	}
 
 	protected boolean fileExists(String fileName) {
