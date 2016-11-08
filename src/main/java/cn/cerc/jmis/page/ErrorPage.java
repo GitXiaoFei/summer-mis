@@ -43,7 +43,8 @@ public class ErrorPage implements IPage {
 		String message = error.toString();
 		getRequest().setAttribute("msg", message.substring(message.indexOf(":") + 1));
 		String jspFile = Application.getConfig().getJspErrorFile();
-		getRequest().getServletContext().getRequestDispatcher(jspFile).forward(getRequest(), getResponse());
+		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
+		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 
 	public Throwable getError() {
