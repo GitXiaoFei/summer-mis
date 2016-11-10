@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.ActionForm;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.ActionForm;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.Field;
 
 public abstract class Grid extends Component implements DataView {

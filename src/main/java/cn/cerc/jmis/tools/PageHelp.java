@@ -3,7 +3,7 @@ package cn.cerc.jmis.tools;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.other.HelpSide;
 
 public class PageHelp {

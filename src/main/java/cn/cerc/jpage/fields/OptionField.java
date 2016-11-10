@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class OptionField extends StringField {
 	private String defaultValue;

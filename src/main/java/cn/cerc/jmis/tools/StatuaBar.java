@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jmis.core.ClientDevice;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.UrlRecord;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.form.UrlMenu;
 
 public class StatuaBar extends Component {

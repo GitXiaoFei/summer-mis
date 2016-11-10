@@ -4,7 +4,7 @@ import static cn.cerc.jdb.other.utils.roundTo;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
 public class DoubleField extends StringField {

@@ -3,6 +3,9 @@ package cn.cerc.jpage.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+
 public class HtmlForm extends Component {
 	private String action;
 	private String method = "post";

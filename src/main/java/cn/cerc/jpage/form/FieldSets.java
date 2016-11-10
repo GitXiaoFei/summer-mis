@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.Field;
 
 public class FieldSets extends Component implements DataView {

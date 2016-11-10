@@ -3,8 +3,8 @@ package cn.cerc.jpage.tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.UrlRecord;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.UrlRecord;
 
 public class OperaPanel extends Component {
 	// 操作提示

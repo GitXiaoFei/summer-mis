@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.core;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class PhoneGrid extends Grid {
 	// 手机专用行

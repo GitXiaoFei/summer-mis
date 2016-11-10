@@ -1,7 +1,7 @@
 package cn.cerc.jpage.grid.extjs;
 
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.DateField;
 import cn.cerc.jpage.fields.Field;

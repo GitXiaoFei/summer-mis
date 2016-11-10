@@ -3,8 +3,8 @@ package cn.cerc.jpage.grid.extjs;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.grid.Grid;

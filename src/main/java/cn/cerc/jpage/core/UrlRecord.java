@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -39,6 +39,10 @@ public class UrlRecord {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @return 请改为getName
+	 */
 	@Deprecated
 	public String getCaption() {
 		return name;

@@ -1,7 +1,7 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class ButtonField extends Field {
 	private String data;
