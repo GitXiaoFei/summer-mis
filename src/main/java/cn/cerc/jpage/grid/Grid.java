@@ -18,8 +18,6 @@ public abstract class Grid extends Component implements DataView {
 	private DataSet dataSet;
 	// PC专用表格列
 	private List<Field> fields = new ArrayList<>();
-	// 手机专用行
-	private List<PhoneLine> lines = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -70,12 +68,6 @@ public abstract class Grid extends Component implements DataView {
 
 	public void addField(Field field) {
 		fields.add(field);
-	}
-
-	public PhoneLine addLine() {
-		PhoneLine line = new PhoneLine(this);
-		lines.add(line);
-		return line;
 	}
 
 	public String getCSSClass_PC() {
@@ -139,10 +131,12 @@ public abstract class Grid extends Component implements DataView {
 		return dataSet.getRecNo();
 	}
 
+	@Deprecated
 	public ActionForm getForm() {
 		return form;
 	}
 
+	@Deprecated
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}
@@ -157,14 +151,12 @@ public abstract class Grid extends Component implements DataView {
 
 	public abstract void outputGrid(HtmlWriter html);
 
-	public List<PhoneLine> getLines() {
-		return lines;
-	}
-
+	@Deprecated
 	public boolean isExtGrid() {
 		return this.extGrid;
 	}
 
+	@Deprecated
 	public void setExtGrid(boolean extGrid) {
 		this.extGrid = extGrid;
 	}
