@@ -1,8 +1,8 @@
 package cn.cerc.jpage.other;
 
 public class Url_Record {
-	private String url;
-	private String caption;
+	private String site;
+	private String name;
 	private String title;
 
 	public Url_Record() {
@@ -11,25 +11,25 @@ public class Url_Record {
 
 	public Url_Record(String url, String caption) {
 		super();
-		this.url = url;
-		this.caption = caption;
+		this.site = url;
+		this.name = caption;
 	}
 
 	public String getUrl() {
-		return url;
+		return site;
 	}
 
-	public Url_Record setUrl(String url) {
-		this.url = url;
+	public Url_Record setSite(String url) {
+		this.site = url;
 		return this;
 	}
 
 	public String getCaption() {
-		return caption;
+		return name;
 	}
 
-	public Url_Record setCaption(String caption) {
-		this.caption = caption;
+	public Url_Record setName(String caption) {
+		this.name = caption;
 		return this;
 	}
 

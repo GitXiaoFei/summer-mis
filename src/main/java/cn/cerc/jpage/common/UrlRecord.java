@@ -11,6 +11,10 @@ public class UrlRecord {
 	private String title;
 	private Map<String, String> params = new HashMap<>();
 
+	public UrlRecord() {
+
+	}
+
 	public UrlRecord addParam(String key, String value) {
 		params.put(key, value);
 		return this;
@@ -26,6 +30,11 @@ public class UrlRecord {
 	}
 
 	public String getName() {
+		return name;
+	}
+
+	@Deprecated
+	public String getCaption() {
 		return name;
 	}
 
@@ -46,7 +55,7 @@ public class UrlRecord {
 			sl.append(key);
 			sl.append("=");
 			String value = params.get(key);
-			if(value != null)
+			if (value != null)
 				sl.append(encodeUTF8(value));
 		}
 		return sl.toString();

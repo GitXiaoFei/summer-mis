@@ -32,7 +32,7 @@ public class MainMenu {
 		// 设置退出
 		String tmp = (String) form.getRequest().getAttribute("exitPage");
 		if (exitPage != null && tmp != null && !tmp.equals(""))
-			exitPage.setCaption("<=").setUrl(tmp);
+			exitPage.setName("<=").setSite(tmp);
 
 		if (exitPage != null)
 			rightMenus.add(exitPage);
@@ -61,8 +61,8 @@ public class MainMenu {
 	public void setExitUrl(String url) {
 		if (exitPage == null)
 			exitPage = new Url_Record();
-		exitPage.setCaption("<img src=\"images/return.png\"/>");
-		exitPage.setUrl(url);
+		exitPage.setName("<img src=\"images/return.png\"/>");
+		exitPage.setSite(url);
 	}
 
 	public String getPageTitle() {
