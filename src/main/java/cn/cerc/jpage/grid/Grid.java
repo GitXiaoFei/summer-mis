@@ -106,13 +106,11 @@ public abstract class Grid extends Component implements DataView {
 	public void output(HtmlWriter html) {
 		if (this.dataSet.size() == 0)
 			return;
-		if (form != null)
+		if (form != null) {
+			form.addComponent(this);
 			form.output(html);
-
-		outputGrid(html);
-
-		if (form != null)
-			html.println("</form>");
+		} else
+			outputGrid(html);
 	}
 
 	public TMutiPage getPages() {

@@ -55,6 +55,7 @@ public class ActionForm extends Component {
 			html.println("/>");
 		}
 		super.output(html);
+		html.println("</form>");
 	}
 
 	public void addHidden(String key, String value) {
