@@ -23,7 +23,7 @@ public abstract class Grid extends Component implements DataView {
 	private String CSSClass_Phone = "context";
 	private String CSSStyle;
 	// 分页控制
-	private TMutiPage pages = new TMutiPage();
+	private MutiPage pages = new MutiPage();
 	// 是否允许修改
 	private boolean readonly = true;
 	//
@@ -105,7 +105,7 @@ public abstract class Grid extends Component implements DataView {
 			outputGrid(html);
 	}
 
-	public TMutiPage getPages() {
+	public MutiPage getPages() {
 		return pages;
 	}
 

@@ -28,7 +28,7 @@ public class BaseGrid extends Grid {
 	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
-		TMutiPage pages = this.getPages();
+		MutiPage pages = this.getPages();
 		List<Field> fields = this.getFields();
 
 		double sumFieldWidth = 0;

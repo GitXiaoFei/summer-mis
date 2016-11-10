@@ -22,7 +22,7 @@ public class PhoneGrid extends Grid {
 	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
-		TMutiPage pages = this.getPages();
+		MutiPage pages = this.getPages();
 		if (dataSet.size() == 0)
 			return;
 
