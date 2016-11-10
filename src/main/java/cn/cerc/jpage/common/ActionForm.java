@@ -13,6 +13,7 @@ public class ActionForm extends Component {
 		this.setId(id);
 	}
 
+	@Deprecated
 	public ActionForm(String id, String action) {
 		this.setId(id);
 		this.setAction(action);
