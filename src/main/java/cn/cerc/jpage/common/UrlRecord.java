@@ -15,6 +15,12 @@ public class UrlRecord {
 
 	}
 
+	public UrlRecord(String site, String caption) {
+		super();
+		this.site = site;
+		this.name = caption;
+	}
+
 	public UrlRecord addParam(String key, String value) {
 		params.put(key, value);
 		return this;

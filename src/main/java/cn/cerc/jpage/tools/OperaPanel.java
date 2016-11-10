@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.other.Url_Record;
+import cn.cerc.jpage.common.Url_Record;
 
 public class OperaPanel extends Component {
 	// 操作提示

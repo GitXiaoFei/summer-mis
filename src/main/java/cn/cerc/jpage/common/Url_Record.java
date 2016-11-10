@@ -1,4 +1,4 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jpage.common;
 
 public class Url_Record {
 	private String site;

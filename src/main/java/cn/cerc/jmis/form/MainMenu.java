@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.other.Url_Record;
+import cn.cerc.jpage.common.Url_Record;
 
 public class MainMenu {
 	// 页面标题
