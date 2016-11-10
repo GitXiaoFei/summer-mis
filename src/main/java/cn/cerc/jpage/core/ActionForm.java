@@ -7,6 +7,11 @@ public class ActionForm extends Component {
 	private String action;
 	private String method = "post";
 	private Map<String, String> items = new HashMap<>();
+	private String enctype;
+
+	public ActionForm() {
+
+	}
 
 	public ActionForm(String id) {
 		super();
@@ -44,6 +49,8 @@ public class ActionForm extends Component {
 			html.print(" method=\"%s\"", this.method);
 		if (this.getId() != null)
 			html.print(" id=\"%s\"", this.getId());
+		if (this.enctype != null)
+			html.print(" enctype=\"%s\"", this.enctype);
 		html.println(">");
 		for (String key : items.keySet()) {
 			String value = items.get(key);
@@ -61,4 +68,13 @@ public class ActionForm extends Component {
 	public void addHidden(String key, String value) {
 		items.put(key, value);
 	}
+
+	public String getEnctype() {
+		return enctype;
+	}
+
+	public void setEnctype(String enctype) {
+		this.enctype = enctype;
+	}
+
 }
