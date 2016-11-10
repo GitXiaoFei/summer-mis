@@ -1,12 +1,10 @@
 package cn.cerc.jmis.form;
 
-import static cn.cerc.jmis.core.ClientDevice.device_phone;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jmis.page.AbstractJspPage;
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jpage.other.Url_Record;
 
 public class MainMenu {
@@ -26,15 +24,13 @@ public class MainMenu {
 		leftMenus.add(homePage);
 	}
 
-	public void finish(AbstractJspPage page, boolean logon) {
-		String device = page.getForm().getClient().getDevice();
+	public List<Url_Record> getBarMenus(IForm form) {
 		// 刷新
 		if (this.pageTitle != null) {
 			leftMenus.add(new Url_Record("javascript:location.reload()", this.pageTitle));
 		}
-
 		// 设置退出
-		String tmp = (String) page.getForm().getRequest().getAttribute("exitPage");
+		String tmp = (String) form.getRequest().getAttribute("exitPage");
 		if (exitPage != null && tmp != null && !tmp.equals(""))
 			exitPage.setCaption("<=").setUrl(tmp);
 
@@ -42,18 +38,16 @@ public class MainMenu {
 			rightMenus.add(exitPage);
 
 		if (leftMenus.size() > 0) {
-			if (device_phone.equals(device) && leftMenus.size() > 2) {
+			if (form.getClient().isPhone() && leftMenus.size() > 2) {
 				List<Url_Record> tmp1 = new ArrayList<>();
 				tmp1.add(leftMenus.get(0));
 				tmp1.add(leftMenus.get(leftMenus.size() - 1));
-				page.add("barMenus", tmp1);
+				return tmp1;
 			} else {
-				page.add("barMenus", leftMenus);
+				return leftMenus;
 			}
 		}
-
-		if (rightMenus.size() > 0)
-			page.add("subMenus", rightMenus);
+		return null;
 	}
 
 	public void addLeftMenu(String url, String name) {
@@ -85,9 +79,5 @@ public class MainMenu {
 
 	public List<Url_Record> getRightMenus() {
 		return rightMenus;
-	}
-
-	public List<Url_Record> getLeftMenus() {
-		return leftMenus;
 	}
 }
