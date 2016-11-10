@@ -8,11 +8,8 @@ public class ActionForm extends Component {
 	private String method = "post";
 	private Map<String, String> items = new HashMap<>();
 
-	public ActionForm() {
-
-	}
-
 	public ActionForm(String id) {
+		super();
 		this.setId(id);
 	}
 
