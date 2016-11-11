@@ -99,10 +99,30 @@ public abstract class Grid extends Component implements DataView {
 		if (this.dataSet.size() == 0)
 			return;
 		if (form != null) {
-			form.addComponent(this);
-			form.output(html);
-		} else
+			html.print("<form");
+			if (form.getAction() != null)
+				html.print(" action=\"%s\"", form.getAction());
+			if (form.getMethod() != null)
+				html.print(" method=\"%s\"", form.getMethod());
+			if (form.getId() != null)
+				html.print(" id=\"%s\"", form.getId());
+			if (form.getEnctype() != null)
+				html.print(" enctype=\"%s\"", form.getEnctype());
+			html.println(">");
+			for (String key : form.getItems().keySet()) {
+				String value = form.getItems().get(key);
+				html.print("<input");
+				html.print(" type=\"hidden\"");
+				html.print(" name=\"%s\"", key);
+				html.print(" id=\"%s\"", key);
+				html.print(" value=\"%s\"", value);
+				html.println("/>");
+			}
 			outputGrid(html);
+			html.println("</form>");
+		} else{
+			outputGrid(html);
+		}
 	}
 
 	public MutiPage getPages() {

@@ -77,4 +77,8 @@ public class ActionForm extends Component {
 		this.enctype = enctype;
 	}
 
+	public Map<String, String> getItems() {
+		return items;
+	}
+
 }
