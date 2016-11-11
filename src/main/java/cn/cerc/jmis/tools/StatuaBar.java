@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
-import cn.cerc.jmis.core.ClientDevice;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
@@ -31,9 +30,7 @@ public class StatuaBar extends Component {
 		UrlMenu item = new UrlMenu(this, caption, url);
 		item.setCssClass("bottomBotton");
 		item.setId("button" + count);
-		ClientDevice info = new ClientDevice(form);
-		info.setRequest(form.getRequest());
-		if (!info.isPhone())
+		if (!form.getClient().isPhone())
 			item.setName(String.format("F%s:%s", count, item.getName()));
 	}
 
@@ -63,9 +60,7 @@ public class StatuaBar extends Component {
 		super.output(html);
 		HttpServletRequest request = getForm().getRequest();
 		if (request != null) {
-			ClientDevice info = new ClientDevice(form);
-			info.setRequest(request);
-			if (!info.isPhone()) {
+			if (!form.getClient().isPhone()) {
 				String msg = request.getParameter("msg");
 				html.print("<div class=\"bottom-message\"");
 				html.print(" id=\"msg\">");
