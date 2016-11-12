@@ -103,9 +103,12 @@ public class StartForms implements Filter {
 					log.debug("进行安全检查，若未登录则显示登录对话框");
 					AppLoginPage page = new AppLoginPage(form);
 					if (page.checkSecurity(info.getSid())) {
-						String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
-								handle.getUserName());
-						new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
+						String corpNo = handle.getCorpNo();
+						if (null != corpNo && !"".equals(corpNo)) {
+							String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
+									handle.getUserName());
+							new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
+						}
 						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
 						if (checkEnableTime())
 							call(form, funcCode);
