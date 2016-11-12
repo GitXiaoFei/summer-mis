@@ -138,13 +138,6 @@ public abstract class Field extends Component implements IField {
 	}
 
 	public abstract String getText(Record ds);
-	// public String getText(Record ds) {
-	// if (buildText == null)
-	// return null;
-	// HtmlWriter html = new HtmlWriter();
-	// buildText.outputText(ds, html);
-	// return html.toString();
-	// }
 
 	/**
 	 * 
