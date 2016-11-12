@@ -8,7 +8,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.grid.Grid;
 import net.sf.json.JSONArray;
 
@@ -29,7 +29,7 @@ public class GridData extends Component {
 		while (i <= grid.getPages().getEnd()) {
 			dataSet.setRecNo(i + 1);
 			JSONArray json = new JSONArray();
-			for (AbstractField field : grid.getFields()) {
+			for (Field field : grid.getFields()) {
 				if (field instanceof ExpendField)
 					continue;
 				// json.add(field.getText(dataSet.getCurrent()));

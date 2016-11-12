@@ -4,10 +4,10 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.DateField;
-import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.Field;
 
 public class Column extends Component {
-	private AbstractField field;
+	private Field field;
 	private String text;
 	private String width;
 	private String dataIndex;
@@ -16,7 +16,7 @@ public class Column extends Component {
 	private boolean sortable;
 	private boolean locked;
 
-	public Column(AbstractField field) {
+	public Column(Field field) {
 		this.field = field;
 	}
 

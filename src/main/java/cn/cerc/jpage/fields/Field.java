@@ -14,7 +14,7 @@ import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField {
+public abstract class Field extends Component implements IField {
 	private String name;
 	private String shortName;
 	private String align;
@@ -58,7 +58,7 @@ public abstract class AbstractField extends Component implements IField {
 	// 由extGrid调用
 	private Column column;
 
-	public AbstractField(DataView dataView, String name, int width) {
+	public Field(DataView dataView, String name, int width) {
 		this.dataView = dataView;
 		if (dataView != null) {
 			dataView.addField(this);
@@ -68,7 +68,7 @@ public abstract class AbstractField extends Component implements IField {
 		this.width = width;
 	}
 
-	public AbstractField(DataView owner, String name, String field, int width) {
+	public Field(DataView owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
 	}
@@ -77,7 +77,7 @@ public abstract class AbstractField extends Component implements IField {
 		return mark;
 	}
 
-	public AbstractField setMark(HtmlText mark) {
+	public Field setMark(HtmlText mark) {
 		this.mark = mark;
 		return this;
 	}
@@ -100,22 +100,22 @@ public abstract class AbstractField extends Component implements IField {
 		return this.getName();
 	}
 
-	public AbstractField setWidth(int width) {
+	public Field setWidth(int width) {
 		this.width = width;
 		return this;
 	}
 
-	public AbstractField setShortName(String shortName) {
+	public Field setShortName(String shortName) {
 		this.shortName = shortName;
 		return this;
 	}
 
-	public AbstractField setAlign(String align) {
+	public Field setAlign(String align) {
 		this.align = align;
 		return this;
 	}
 
-	public AbstractField setName(String name) {
+	public Field setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -132,7 +132,7 @@ public abstract class AbstractField extends Component implements IField {
 		return field;
 	}
 
-	public AbstractField setField(String field) {
+	public Field setField(String field) {
 		this.field = field;
 		return this;
 	}
@@ -167,7 +167,7 @@ public abstract class AbstractField extends Component implements IField {
 		return buildText;
 	}
 
-	public AbstractField createText(BuildText buildText) {
+	public Field createText(BuildText buildText) {
 		this.buildText = buildText;
 		return this;
 	}
@@ -192,7 +192,7 @@ public abstract class AbstractField extends Component implements IField {
 		return readonly;
 	}
 
-	public AbstractField setReadonly(boolean readonly) {
+	public Field setReadonly(boolean readonly) {
 		this.readonly = readonly;
 		return this;
 	}
@@ -201,7 +201,7 @@ public abstract class AbstractField extends Component implements IField {
 		return value;
 	}
 
-	public AbstractField setValue(String value) {
+	public Field setValue(String value) {
 		this.value = value;
 		return this;
 	}
@@ -210,7 +210,7 @@ public abstract class AbstractField extends Component implements IField {
 		return autofocus;
 	}
 
-	public AbstractField setAutofocus(boolean autofocus) {
+	public Field setAutofocus(boolean autofocus) {
 		this.autofocus = autofocus;
 		return this;
 	}
@@ -219,7 +219,7 @@ public abstract class AbstractField extends Component implements IField {
 		return required;
 	}
 
-	public AbstractField setRequired(boolean required) {
+	public Field setRequired(boolean required) {
 		this.required = required;
 		return this;
 	}
@@ -228,7 +228,7 @@ public abstract class AbstractField extends Component implements IField {
 		return placeholder;
 	}
 
-	public AbstractField setPlaceholder(String placeholder) {
+	public Field setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
 		return this;
 	}
@@ -237,7 +237,7 @@ public abstract class AbstractField extends Component implements IField {
 		return pattern;
 	}
 
-	public AbstractField setPattern(String pattern) {
+	public Field setPattern(String pattern) {
 		this.pattern = pattern;
 		return this;
 	}
@@ -246,7 +246,7 @@ public abstract class AbstractField extends Component implements IField {
 		return hidden;
 	}
 
-	public AbstractField setHidden(boolean hidden) {
+	public Field setHidden(boolean hidden) {
 		this.hidden = hidden;
 		return this;
 	}
@@ -316,7 +316,7 @@ public abstract class AbstractField extends Component implements IField {
 		return dialog;
 	}
 
-	public AbstractField setDialog(String dialog) {
+	public Field setDialog(String dialog) {
 		this.dialog = dialog;
 		return this;
 	}
@@ -352,7 +352,7 @@ public abstract class AbstractField extends Component implements IField {
 		return expender;
 	}
 
-	public AbstractField setExpender(Expender expender) {
+	public Field setExpender(Expender expender) {
 		this.expender = expender;
 		return this;
 	}
@@ -373,7 +373,7 @@ public abstract class AbstractField extends Component implements IField {
 		return oninput;
 	}
 
-	public AbstractField setOninput(String oninput) {
+	public Field setOninput(String oninput) {
 		this.oninput = oninput;
 		return this;
 	}
@@ -382,7 +382,7 @@ public abstract class AbstractField extends Component implements IField {
 		return onclick;
 	}
 
-	public AbstractField setOnclick(String onclick) {
+	public Field setOnclick(String onclick) {
 		this.onclick = onclick;
 		return this;
 	}

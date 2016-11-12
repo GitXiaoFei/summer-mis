@@ -14,7 +14,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ButtonField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.form.FieldSets;
 
 public class SearchView extends Component implements DataView {
@@ -22,7 +22,7 @@ public class SearchView extends Component implements DataView {
 	protected String CSSClass = "search";
 	protected String method = "post";
 	protected HttpServletRequest request;
-	protected List<AbstractField> fields = new ArrayList<>();
+	protected List<Field> fields = new ArrayList<>();
 	protected String action;
 
 	private FieldSets buttons;
@@ -60,7 +60,7 @@ public class SearchView extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(AbstractField field) {
+	public void addField(Field field) {
 		if (field instanceof SearchItem)
 			((SearchItem) field).setSearch(true);
 		fields.add(field);
@@ -85,7 +85,7 @@ public class SearchView extends Component implements DataView {
 			html.print(" class=\"%s\"", this.CSSClass);
 		html.println(">");
 
-		for (AbstractField field : fields) {
+		for (Field field : fields) {
 			if (field.isHidden()) {
 				field.output(html);
 			}
@@ -93,7 +93,7 @@ public class SearchView extends Component implements DataView {
 
 		html.println("<ul>");
 
-		for (AbstractField field : fields) {
+		for (Field field : fields) {
 			if (!field.isHidden()) {
 				html.print("<li");
 				if (field.getExpender() != null) {
@@ -160,7 +160,7 @@ public class SearchView extends Component implements DataView {
 
 		submit = null;
 		// 取 form submit 按钮
-		for (AbstractField field : buttons.getFields()) {
+		for (Field field : buttons.getFields()) {
 			if (field instanceof ButtonField) {
 				ButtonField button = (ButtonField) field;
 				String key = button.getField();
@@ -173,7 +173,7 @@ public class SearchView extends Component implements DataView {
 		}
 
 		// 将用户值或缓存值存入到dataSet中
-		for (AbstractField field : this.fields) {
+		for (Field field : this.fields) {
 			field.updateField();
 		}
 

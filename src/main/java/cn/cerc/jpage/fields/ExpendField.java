@@ -6,7 +6,7 @@ import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class ExpendField extends AbstractField implements SearchItem, Expender {
+public class ExpendField extends Field implements SearchItem, Expender {
 	private boolean search;
 	private String hiddenId = "hidden";
 

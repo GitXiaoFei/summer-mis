@@ -6,7 +6,7 @@ import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.extjs.Column;
 
-public class BooleanField extends AbstractField implements SearchItem {
+public class BooleanField extends Field implements SearchItem {
 	private String trueText = "是";
 	private String falseText = "否";
 	private String title;

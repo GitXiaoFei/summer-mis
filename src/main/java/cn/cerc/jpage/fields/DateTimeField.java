@@ -4,7 +4,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class DateTimeField extends AbstractField {
+public class DateTimeField extends Field {
 
 	public DateTimeField(DataView owner, String name, String field) {
 		super(owner, name, field, 10);

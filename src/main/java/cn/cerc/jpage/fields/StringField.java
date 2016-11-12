@@ -3,7 +3,7 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 
-public class StringField extends AbstractField {
+public class StringField extends Field {
 	// private static final Logger log = Logger.getLogger(Field.class);
 
 	public StringField(DataView owner, String name, String field) {
