@@ -1,7 +1,7 @@
 package cn.cerc.jpage.form;
 
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class HeaderSide extends Component {
 	private Component left = new Component();

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jmis.page.AbstractJspPage;
-import cn.cerc.jpage.common.ActionForm;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.ActionForm;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;
 import cn.cerc.jpage.grid.Grid;

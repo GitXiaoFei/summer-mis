@@ -4,16 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
-import cn.cerc.jmis.core.ClientDevice;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.form.UrlMenu;
-import cn.cerc.jpage.other.Url_Record;
 
 public class StatuaBar extends Component {
 	private IForm form;
 	private static final int MAX_MENUS = 6;
-	protected Url_Record checkAll;
+	protected UrlRecord checkAll;
 
 	public StatuaBar(IPage owner) {
 		super((Component) owner);
@@ -31,13 +30,11 @@ public class StatuaBar extends Component {
 		UrlMenu item = new UrlMenu(this, caption, url);
 		item.setCssClass("bottomBotton");
 		item.setId("button" + count);
-		ClientDevice info = new ClientDevice(form);
-		info.setRequest(form.getRequest());
-		if (!info.isPhone())
+		if (!form.getClient().isPhone())
 			item.setName(String.format("F%s:%s", count, item.getName()));
 	}
 
-	public Url_Record getCheckAll() {
+	public UrlRecord getCheckAll() {
 		return checkAll;
 	}
 
@@ -46,7 +43,7 @@ public class StatuaBar extends Component {
 			throw new RuntimeException("targetId is null");
 		if (checkAll != null)
 			throw new RuntimeException("checkAll is not null");
-		checkAll = new Url_Record(String.format("selectItems('%s')", targetId), "全选");
+		checkAll = new UrlRecord(String.format("selectItems('%s')", targetId), "全选");
 	}
 
 	@Override
@@ -63,9 +60,7 @@ public class StatuaBar extends Component {
 		super.output(html);
 		HttpServletRequest request = getForm().getRequest();
 		if (request != null) {
-			ClientDevice info = new ClientDevice(form);
-			info.setRequest(request);
-			if (!info.isPhone()) {
+			if (!form.getClient().isPhone()) {
 				String msg = request.getParameter("msg");
 				html.print("<div class=\"bottom-message\"");
 				html.print(" id=\"msg\">");

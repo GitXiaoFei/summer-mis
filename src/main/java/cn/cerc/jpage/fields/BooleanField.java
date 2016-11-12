@@ -2,8 +2,8 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.common.SearchItem;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.extjs.Column;
 
 public class BooleanField extends StringField implements SearchItem {

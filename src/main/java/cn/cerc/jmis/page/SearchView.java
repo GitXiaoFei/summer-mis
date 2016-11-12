@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.Expender;
-import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.common.SearchItem;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ButtonField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;

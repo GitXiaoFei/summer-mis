@@ -2,7 +2,7 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
 public class DateField extends StringField {

@@ -7,9 +7,9 @@ import java.util.List;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.UrlRecord;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.Field;
 
 public class BaseGrid extends Grid {
@@ -28,7 +28,7 @@ public class BaseGrid extends Grid {
 	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
-		TMutiPage pages = this.getPages();
+		MutiPage pages = this.getPages();
 		List<Field> fields = this.getFields();
 
 		double sumFieldWidth = 0;

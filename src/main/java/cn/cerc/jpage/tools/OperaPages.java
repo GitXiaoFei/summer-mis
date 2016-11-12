@@ -3,15 +3,15 @@ package cn.cerc.jpage.tools;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.grid.TMutiPage;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.grid.MutiPage;
 
 public class OperaPages extends Component {
 	private IForm form;
-	private TMutiPage pages;
+	private MutiPage pages;
 
-	public OperaPages(IForm form, TMutiPage pages) {
+	public OperaPages(IForm form, MutiPage pages) {
 		this.form = form;
 		this.pages = pages;
 	}

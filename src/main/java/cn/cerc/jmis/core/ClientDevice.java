@@ -57,9 +57,10 @@ public class ClientDevice implements IClient {
 		return deviceType == null ? device_ee : deviceType;
 	}
 
-	public ClientDevice setDevice(String deviceType) {
+	@Override
+	public void setDevice(String deviceType) {
 		if (deviceType == null || "".equals(deviceType))
-			return this;
+			return;
 
 		this.deviceType = deviceType;
 		request.setAttribute(deviceType_key, deviceType == null ? "" : deviceType);
@@ -69,7 +70,7 @@ public class ClientDevice implements IClient {
 				getValue(buff, deviceType_key, deviceType);
 			}
 		}
-		return this;
+		return;
 	}
 
 	public void setSid(String value) {

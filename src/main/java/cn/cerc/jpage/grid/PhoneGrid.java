@@ -1,10 +1,15 @@
 package cn.cerc.jpage.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class PhoneGrid extends Grid {
+	// 手机专用行
+	private List<PhoneLine> lines = new ArrayList<>();
 
 	public PhoneGrid() {
 		super();
@@ -17,7 +22,7 @@ public class PhoneGrid extends Grid {
 	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
-		TMutiPage pages = this.getPages();
+		MutiPage pages = this.getPages();
 		if (dataSet.size() == 0)
 			return;
 
@@ -28,7 +33,7 @@ public class PhoneGrid extends Grid {
 			dataSet.setRecNo(i + 1);
 			int flag = 0;
 			html.println("<li>");
-			for (PhoneLine line : this.getLines()) {
+			for (PhoneLine line : this.lines) {
 				if (line.isTable()) {
 					if (flag == 0) {
 						html.println("<table>");
@@ -55,4 +60,9 @@ public class PhoneGrid extends Grid {
 		return;
 	}
 
+	public PhoneLine addLine() {
+		PhoneLine line = new PhoneLine(this);
+		lines.add(line);
+		return line;
+	}
 }

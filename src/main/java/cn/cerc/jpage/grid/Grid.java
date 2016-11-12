@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.ActionForm;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.ActionForm;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.Field;
 
 public abstract class Grid extends Component implements DataView {
@@ -18,14 +18,12 @@ public abstract class Grid extends Component implements DataView {
 	private DataSet dataSet;
 	// PC专用表格列
 	private List<Field> fields = new ArrayList<>();
-	// 手机专用行
-	private List<PhoneLine> lines = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
 	private String CSSStyle;
 	// 分页控制
-	private TMutiPage pages = new TMutiPage();
+	private MutiPage pages = new MutiPage();
 	// 是否允许修改
 	private boolean readonly = true;
 	//
@@ -72,12 +70,6 @@ public abstract class Grid extends Component implements DataView {
 		fields.add(field);
 	}
 
-	public PhoneLine addLine() {
-		PhoneLine line = new PhoneLine(this);
-		lines.add(line);
-		return line;
-	}
-
 	public String getCSSClass_PC() {
 		return CSSClass_PC;
 	}
@@ -106,16 +98,34 @@ public abstract class Grid extends Component implements DataView {
 	public void output(HtmlWriter html) {
 		if (this.dataSet.size() == 0)
 			return;
-		if (form != null)
-			form.output(html);
-
-		outputGrid(html);
-
-		if (form != null)
+		if (form != null) {
+			html.print("<form");
+			if (form.getAction() != null)
+				html.print(" action=\"%s\"", form.getAction());
+			if (form.getMethod() != null)
+				html.print(" method=\"%s\"", form.getMethod());
+			if (form.getId() != null)
+				html.print(" id=\"%s\"", form.getId());
+			if (form.getEnctype() != null)
+				html.print(" enctype=\"%s\"", form.getEnctype());
+			html.println(">");
+			for (String key : form.getItems().keySet()) {
+				String value = form.getItems().get(key);
+				html.print("<input");
+				html.print(" type=\"hidden\"");
+				html.print(" name=\"%s\"", key);
+				html.print(" id=\"%s\"", key);
+				html.print(" value=\"%s\"", value);
+				html.println("/>");
+			}
+			outputGrid(html);
 			html.println("</form>");
+		} else{
+			outputGrid(html);
+		}
 	}
 
-	public TMutiPage getPages() {
+	public MutiPage getPages() {
 		return pages;
 	}
 
@@ -141,10 +151,12 @@ public abstract class Grid extends Component implements DataView {
 		return dataSet.getRecNo();
 	}
 
+	@Deprecated
 	public ActionForm getForm() {
 		return form;
 	}
 
+	@Deprecated
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}
@@ -159,14 +171,12 @@ public abstract class Grid extends Component implements DataView {
 
 	public abstract void outputGrid(HtmlWriter html);
 
-	public List<PhoneLine> getLines() {
-		return lines;
-	}
-
+	@Deprecated
 	public boolean isExtGrid() {
 		return this.extGrid;
 	}
 
+	@Deprecated
 	public void setExtGrid(boolean extGrid) {
 		this.extGrid = extGrid;
 	}
