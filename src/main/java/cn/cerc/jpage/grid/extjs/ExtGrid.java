@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.Grid;
 
 public class ExtGrid extends Grid {
@@ -79,14 +79,14 @@ public class ExtGrid extends Grid {
 		html.println("var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {clicksToEdit: 1});");
 		if (this.isMoreContext()) {
 			// 定义展开的内容
-			List<Field> items = new ArrayList<>();
-			for (Field field : this.getFields()) {
+			List<AbstractField> items = new ArrayList<>();
+			for (AbstractField field : this.getFields()) {
 				if (field.getExpender() != null)
 					items.add(field);
 			}
 			html.println("var tpl = new Ext.XTemplate(");
 			for (int i = 0; i < items.size(); i++) {
-				Field field = items.get(i);
+				AbstractField field = items.get(i);
 				html.print("'<b>%s: </b>{%s} &nbsp;'", field.getName(), field.getField());
 				if (i < items.size() - 1)
 					html.println(",");
@@ -164,7 +164,7 @@ public class ExtGrid extends Grid {
 
 	private boolean isMoreContext() {
 		boolean result = false;
-		for (Field field : this.getFields()) {
+		for (AbstractField field : this.getFields()) {
 			if (field instanceof ExpendField) {
 				result = true;
 				break;

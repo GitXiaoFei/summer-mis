@@ -2,9 +2,8 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.core.HtmlWriter;
 
-public class StringField extends Field {
+public class StringField extends AbstractField {
 	// private static final Logger log = Logger.getLogger(Field.class);
 
 	public StringField(DataView owner, String name, String field) {
@@ -13,20 +12,12 @@ public class StringField extends Field {
 	}
 
 	public StringField(DataView owner, String name, String field, int width) {
-		super(owner, name, width);
-		this.setField(field);
+		super(owner, name, field, width);
 	}
 
 	@Override
-	public String getText(Record dataSet) {
-		if (dataSet == null)
-			return null;
-		if (buildText != null) {
-			HtmlWriter html = new HtmlWriter();
-			buildText.outputText(dataSet, html);
-			return html.toString();
-		}
-		return dataSet.getString(getField());
+	public String getText(Record rs) {
+		return getDefaultText(rs);
 	}
 
 }
