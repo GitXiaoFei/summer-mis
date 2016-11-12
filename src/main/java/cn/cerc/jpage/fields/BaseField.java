@@ -4,7 +4,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class BaseField extends Field {
+public class BaseField extends AbstractField {
 
 	public BaseField(DataView dataView, String name, int width) {
 		super(dataView, name, width);

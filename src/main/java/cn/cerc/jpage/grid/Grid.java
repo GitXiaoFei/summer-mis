@@ -11,13 +11,13 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 
 public abstract class Grid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
 	// PC专用表格列
-	private List<Field> fields = new ArrayList<>();
+	private List<AbstractField> fields = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -65,7 +65,7 @@ public abstract class Grid extends Component implements DataView {
 		pages.setCurrent(pageno);
 	}
 
-	public void addField(Field field) {
+	public void addField(AbstractField field) {
 		fields.add(field);
 	}
 
@@ -97,7 +97,7 @@ public abstract class Grid extends Component implements DataView {
 		return pages;
 	}
 
-	public List<Field> getFields() {
+	public List<AbstractField> getFields() {
 		return this.fields;
 	}
 
@@ -109,7 +109,7 @@ public abstract class Grid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (Field field : this.getFields())
+		for (AbstractField field : this.getFields())
 			field.setReadonly(readonly);
 		this.readonly = readonly;
 	}

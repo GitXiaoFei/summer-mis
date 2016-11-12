@@ -3,11 +3,11 @@ package cn.cerc.jpage.common;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 
 public interface DataView {
 
-	public void addField(Field field);
+	public void addField(AbstractField field);
 
 	public Record getRecord();
 

@@ -4,7 +4,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class CodeNameField extends Field {
+public class CodeNameField extends AbstractField {
 	private String nameField;
 
 	public CodeNameField(DataView owner, String name, String field) {

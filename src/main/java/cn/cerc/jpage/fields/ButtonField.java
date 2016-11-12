@@ -4,7 +4,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class ButtonField extends Field {
+public class ButtonField extends AbstractField {
 	private String data;
 
 	public ButtonField() {
