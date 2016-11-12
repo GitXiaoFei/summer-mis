@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.Grid;
 
 public class GridColumns extends Component {
@@ -17,12 +17,12 @@ public class GridColumns extends Component {
 		html.print("[");
 		List<Column> columns = new ArrayList<>();
 		double sumFieldWidth = 0;
-		for (Field field : grid.getFields()) {
+		for (AbstractField field : grid.getFields()) {
 			if (field instanceof ExpendField || field.getExpender() != null)
 				continue;
 			sumFieldWidth += field.getWidth();
 		}
-		for (Field field : grid.getFields()) {
+		for (AbstractField field : grid.getFields()) {
 			if (field instanceof ExpendField || field.getExpender() != null || field.getWidth() == 0)
 				continue;
 			Column col1 = field.getColumn();

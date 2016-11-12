@@ -5,7 +5,7 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
-public class DateField extends Field {
+public class DateField extends AbstractField {
 
 	public DateField(DataView owner, String name, String field) {
 		super(owner, name, field, 5);

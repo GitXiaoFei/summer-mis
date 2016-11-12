@@ -10,7 +10,7 @@ import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 
 public class PhoneLine extends Component implements DataView {
 	private DataView dataView;
@@ -18,7 +18,7 @@ public class PhoneLine extends Component implements DataView {
 	private String style;
 	private Expender expender;
 
-	private List<Field> columns = new ArrayList<>();
+	private List<AbstractField> columns = new ArrayList<>();
 
 	public PhoneLine(DataView dataView) {
 		this.dataView = dataView;
@@ -33,7 +33,7 @@ public class PhoneLine extends Component implements DataView {
 		return style;
 	}
 
-	public List<Field> getColumns() {
+	public List<AbstractField> getColumns() {
 		return columns;
 	}
 
@@ -56,7 +56,7 @@ public class PhoneLine extends Component implements DataView {
 		if (this.expender != null)
 			html.print(String.format(" role=\"%s\" style=\"display: none;\"", expender.getHiddenId()));
 		html.print(">");
-		for (Field field : columns) {
+		for (AbstractField field : columns) {
 			html.print("<td");
 			if (columns.size() == 1)
 				html.print(" colspan=2");
@@ -87,7 +87,7 @@ public class PhoneLine extends Component implements DataView {
 
 	public void outputListString(HtmlWriter html) {
 		html.print("<section>");
-		for (Field field : columns) {
+		for (AbstractField field : columns) {
 			html.print("<span");
 			if (field.getCSSClass_phone() != null)
 				html.print(String.format(" class=\"%s\"", field.getCSSClass_phone()));
@@ -112,7 +112,7 @@ public class PhoneLine extends Component implements DataView {
 		html.print("</section>");
 	}
 
-	private void outputColumn(Field field, HtmlWriter html) {
+	private void outputColumn(AbstractField field, HtmlWriter html) {
 		Record dataSet = dataView != null ? dataView.getRecord() : null;
 		String name = field.getShortName();
 		if (!"".equals(name))
@@ -129,13 +129,13 @@ public class PhoneLine extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(Field field) {
+	public void addField(AbstractField field) {
 		if (field != null)
 			columns.add(field);
 	}
 
-	public PhoneLine addItem(Field... fields) {
-		for (Field field : fields)
+	public PhoneLine addItem(AbstractField... fields) {
+		for (AbstractField field : fields)
 			addField(field);
 		return this;
 	}
