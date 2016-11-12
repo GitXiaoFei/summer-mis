@@ -7,7 +7,7 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
-public class DoubleField extends StringField {
+public class DoubleField extends Field {
 	private int scale = -4;
 
 	public DoubleField(DataView owner, String title, String field) {

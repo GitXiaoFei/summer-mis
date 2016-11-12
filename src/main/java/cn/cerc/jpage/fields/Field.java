@@ -14,7 +14,7 @@ import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
 import net.sf.json.JSONObject;
 
-public class Field extends Component implements IField {
+public abstract class Field extends Component implements IField {
 	private String name;
 	private String shortName;
 	private String align;
@@ -66,6 +66,11 @@ public class Field extends Component implements IField {
 		}
 		this.name = name;
 		this.width = width;
+	}
+
+	public Field(DataView owner, String name, String field, int width) {
+		this(owner, name, width);
+		this.setField(field);
 	}
 
 	public HtmlText getMark() {
@@ -132,12 +137,30 @@ public class Field extends Component implements IField {
 		return this;
 	}
 
-	public String getText(Record ds) {
-		if (buildText == null)
+	public abstract String getText(Record ds);
+	// public String getText(Record ds) {
+	// if (buildText == null)
+	// return null;
+	// HtmlWriter html = new HtmlWriter();
+	// buildText.outputText(ds, html);
+	// return html.toString();
+	// }
+
+	/**
+	 * 
+	 * @param rs
+	 *            当前记录集
+	 * @return 返回输出文本
+	 */
+	protected String getDefaultText(Record rs) {
+		if (rs == null)
 			return null;
-		HtmlWriter html = new HtmlWriter();
-		buildText.outputText(ds, html);
-		return html.toString();
+		if (buildText != null) {
+			HtmlWriter html = new HtmlWriter();
+			buildText.outputText(rs, html);
+			return html.toString();
+		}
+		return rs.getString(getField());
 	}
 
 	public BuildText getBuildText() {

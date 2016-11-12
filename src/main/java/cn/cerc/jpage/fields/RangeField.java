@@ -14,6 +14,11 @@ public class RangeField extends Field implements DataView {
 	}
 
 	@Override
+	public String getText(Record rs) {
+		return getDefaultText(rs);
+	}
+
+	@Override
 	public void output(HtmlWriter html) {
 		Record dataSet = dataView != null ? dataView.getRecord() : null;
 		if (this.hidden) {
