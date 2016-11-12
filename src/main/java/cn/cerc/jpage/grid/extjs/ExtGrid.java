@@ -20,7 +20,6 @@ public class ExtGrid extends Grid {
 		page.addScriptFile("/ext4/ext-all.js");
 		// Page.addScriptFile("/ext4/ext-all-debug.js");
 		page.addScriptFile("/ext4/ext-lang-zh_CN.js");
-		extGrid = true;
 	}
 
 	public String getPostUrl() {

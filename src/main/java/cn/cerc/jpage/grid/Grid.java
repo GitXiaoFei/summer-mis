@@ -29,7 +29,6 @@ public abstract class Grid extends Component implements DataView {
 	//
 	private HttpServletRequest request;
 	protected ActionForm form;
-	protected boolean extGrid;
 
 	public Grid() {
 		super();
@@ -94,37 +93,6 @@ public abstract class Grid extends Component implements DataView {
 		CSSStyle = cSSStyle;
 	}
 
-	@Override
-	public void output(HtmlWriter html) {
-		if (this.dataSet.size() == 0)
-			return;
-		if (form != null) {
-			html.print("<form");
-			if (form.getAction() != null)
-				html.print(" action=\"%s\"", form.getAction());
-			if (form.getMethod() != null)
-				html.print(" method=\"%s\"", form.getMethod());
-			if (form.getId() != null)
-				html.print(" id=\"%s\"", form.getId());
-			if (form.getEnctype() != null)
-				html.print(" enctype=\"%s\"", form.getEnctype());
-			html.println(">");
-			for (String key : form.getItems().keySet()) {
-				String value = form.getItems().get(key);
-				html.print("<input");
-				html.print(" type=\"hidden\"");
-				html.print(" name=\"%s\"", key);
-				html.print(" id=\"%s\"", key);
-				html.print(" value=\"%s\"", value);
-				html.println("/>");
-			}
-			outputGrid(html);
-			html.println("</form>");
-		} else{
-			outputGrid(html);
-		}
-	}
-
 	public MutiPage getPages() {
 		return pages;
 	}
@@ -170,14 +138,4 @@ public abstract class Grid extends Component implements DataView {
 	}
 
 	public abstract void outputGrid(HtmlWriter html);
-
-	@Deprecated
-	public boolean isExtGrid() {
-		return this.extGrid;
-	}
-
-	@Deprecated
-	public void setExtGrid(boolean extGrid) {
-		this.extGrid = extGrid;
-	}
 }

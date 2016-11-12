@@ -42,6 +42,18 @@ public class ActionForm extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
+		outHead(html);
+		super.output(html);
+		outFoot(html);
+	}
+
+	/**
+	 * 输入头部
+	 * 
+	 * @param html
+	 *            输出器
+	 */
+	public void outHead(HtmlWriter html) {
 		html.print("<form");
 		if (this.action != null)
 			html.print(" action=\"%s\"", this.action);
@@ -61,7 +73,15 @@ public class ActionForm extends Component {
 			html.print(" value=\"%s\"", value);
 			html.println("/>");
 		}
-		super.output(html);
+	}
+
+	/**
+	 * 输出尾部
+	 * 
+	 * @param html
+	 *            输出器
+	 */
+	public void outFoot(HtmlWriter html) {
 		html.println("</form>");
 	}
 

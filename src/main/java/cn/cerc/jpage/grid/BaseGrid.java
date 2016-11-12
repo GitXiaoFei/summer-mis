@@ -15,6 +15,7 @@ import cn.cerc.jpage.fields.Field;
 public class BaseGrid extends Grid {
 
 	private String trId;
+
 	public BaseGrid() {
 		super();
 		trId = "tr";
@@ -23,6 +24,21 @@ public class BaseGrid extends Grid {
 	public BaseGrid(Component owner) {
 		super(owner);
 		trId = "tr";
+	}
+
+	@Override
+	public void output(HtmlWriter html) {
+		html.print("<div class='scrollArea'>");
+		if (this.getDataSet().size() > 0) {
+			if (form != null) {
+				form.outHead(html);
+				outputGrid(html);
+				form.outFoot(html);
+			} else {
+				outputGrid(html);
+			}
+		}
+		html.print("</div>");
 	}
 
 	@Override
@@ -62,14 +78,14 @@ public class BaseGrid extends Grid {
 			int expendSum = 0;
 			// 输出正常字段
 			html.println("<tr");
-			html.println(" id='%s'",trId + dataSet.getRecNo());
+			html.println(" id='%s'", trId + dataSet.getRecNo());
 			html.println(">");
 			for (Field field : fields) {
 				if (field.getExpender() == null) {
 					html.print("<td");
 					if (field.getAlign() != null)
 						html.print(" align=\"%s\"", field.getAlign());
-					if(field.getField() != null)
+					if (field.getField() != null)
 						html.print(" role=\"%s\"", field.getField());
 					html.print(">");
 					outputField(html, field);

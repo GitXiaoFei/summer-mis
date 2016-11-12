@@ -20,6 +20,21 @@ public class PhoneGrid extends Grid {
 	}
 
 	@Override
+	public void output(HtmlWriter html) {
+		html.print("<div class='scrollArea'>");
+		if (this.getDataSet().size() > 0) {
+			if (form != null) {
+				form.outHead(html);
+				outputGrid(html);
+				form.outFoot(html);
+			} else {
+				outputGrid(html);
+			}
+		}
+		html.print("</div>");
+	}
+
+	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
