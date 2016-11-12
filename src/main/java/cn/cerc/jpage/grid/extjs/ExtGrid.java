@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jmis.page.AbstractJspPage;
-import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.Field;
@@ -21,7 +20,7 @@ public class ExtGrid extends Grid {
 		page.addScriptFile("/ext4/ext-all.js");
 		// Page.addScriptFile("/ext4/ext-all-debug.js");
 		page.addScriptFile("/ext4/ext-lang-zh_CN.js");
-		this.setExtGrid(true);
+		extGrid = true;
 	}
 
 	public String getPostUrl() {
@@ -36,7 +35,6 @@ public class ExtGrid extends Grid {
 	public void output(HtmlWriter html) {
 		outputGrid(html);
 
-		ActionForm form = this.getForm();
 		if (form != null)
 			form.output(html);
 

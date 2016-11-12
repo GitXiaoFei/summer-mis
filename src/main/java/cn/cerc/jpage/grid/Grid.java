@@ -28,8 +28,8 @@ public abstract class Grid extends Component implements DataView {
 	private boolean readonly = true;
 	//
 	private HttpServletRequest request;
-	private ActionForm form;
-	private boolean extGrid;
+	protected ActionForm form;
+	protected boolean extGrid;
 
 	public Grid() {
 		super();
