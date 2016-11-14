@@ -147,6 +147,7 @@ public class StartForms implements Filter {
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
 		String deviceId = form.getClient().getId();
+		String verifyCode = form.getRequest().getParameter("verifyCode");
 		log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
 		String userId = (String) form.getHandle().getProperty("UserID");
 		try (MemoryBuffer buff = new MemoryBuffer(BufferType.getSessionInfo, userId, deviceId)) {
@@ -161,7 +162,9 @@ public class StartForms implements Filter {
 			LocalService app = new LocalService(form.getHandle());
 			app.setService("SvrUserLogin.verifyMachine");
 			app.getDataIn().getHead().setField("deviceId", deviceId);
-
+			if (verifyCode != null && !"".equals(verifyCode))
+				app.getDataIn().getHead().setField("verifyCode", verifyCode);
+			
 			if (app.exec())
 				result = true;
 			else {
