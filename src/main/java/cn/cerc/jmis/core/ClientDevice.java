@@ -19,6 +19,8 @@ public class ClientDevice implements IClient {
 	public static final String deviceType_key = "device";
 	// 手机
 	public static final String device_phone = "phone";
+	public static final String device_android = "android";
+	public static final String device_iphone = "iphone";
 	// 平板
 	public static final String device_pad = "pad";
 	// 电脑
@@ -126,7 +128,8 @@ public class ClientDevice implements IClient {
 
 	@Override
 	public boolean isPhone() {
-		return device_phone.equals(getDevice());
+		return device_phone.equals(getDevice()) || device_android.equals(getDevice())
+				|| device_iphone.equals(getDevice());
 	}
 
 	public HttpServletRequest getRequest() {
