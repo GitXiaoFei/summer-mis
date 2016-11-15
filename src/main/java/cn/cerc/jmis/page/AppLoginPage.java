@@ -39,10 +39,12 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	@Override
 	public boolean checkSecurity(String token) throws IOException, ServletException {
 		IForm form = this.getForm();
+		String password = null;
+		String userCode = null;
 		try {
 			if (form.getRequest().getParameter("login_usr") != null) {
-				String userCode = getRequest().getParameter("login_usr");
-				String password = getRequest().getParameter("login_pwd");
+				userCode = getRequest().getParameter("login_usr");
+				password = getRequest().getParameter("login_pwd");
 				return checkLogin(userCode, password);
 			}
 			log.debug(String.format("根据 token(%s) 创建 Session", token));
@@ -52,7 +54,11 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			if (form.logon())
 				return true;
 		} catch (Exception e) {
-			this.add("loginMsg", e.getMessage());
+			if (password == null || "".equals(password)) {
+				getResponse().sendRedirect("TFrmEasyReg?phone=" + userCode);
+				return false;
+			} else
+				this.add("loginMsg", e.getMessage());
 		}
 		this.execute();
 		return false;
