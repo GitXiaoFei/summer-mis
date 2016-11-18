@@ -35,12 +35,12 @@ public class ExtGrid extends Grid {
 		outputGrid(html);
 
 		if (form != null)
-			form.output(html);
+			form.outHead(html);
 
 		html.println("<div id=\"%s\"></div>", this.getId());
 
 		if (form != null)
-			html.println("</form>");
+			form.outFoot(html);
 	}
 
 	@Override
