@@ -15,6 +15,7 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jmis.core.IAppLogin;
 import cn.cerc.jmis.core.RequestData;
+import cn.cerc.jmis.form.AbstractForm;
 
 public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
@@ -86,7 +87,11 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		boolean result = false;
 		log.debug(String.format("进行用户帐号(%s)与密码认证", userCode));
 		// 进行用户名、密码认证
-		LocalService app = new LocalService(form.getHandle());
+		LocalService app;
+		if (form instanceof AbstractForm)
+			app = new LocalService((AbstractForm) form);
+		else
+			app = new LocalService(form.getHandle());
 		app.setService("SvrUserLogin.check");
 		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId)) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
