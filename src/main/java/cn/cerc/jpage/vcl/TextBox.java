@@ -6,6 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class TextBox extends Component {
 	private Label caption;
 	private String name;
+	private String type;
 	private String value;
 	private String placeholder;
 	private boolean readonly;
@@ -22,12 +23,18 @@ public class TextBox extends Component {
 	public void output(HtmlWriter html) {
 		if (caption != null)
 			caption.output(html);
-		html.print("<input id='%s' name='%s'", this.getId(), this.getName());
+		html.print("<input");
+		if (this.getId() != null)
+			html.print(" id='%s'", this.getId());
+		if (this.name != null)
+			html.print(" name='%s'", this.getName());
+		if (type != null)
+			html.print(" type=\"%s\"", type);
 		if (value != null)
 			html.print(" value='%s'", this.value);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
-		if(this.readonly)
+		if (this.readonly)
 			html.print(" readonly");
 		html.println(">");
 	}
@@ -72,6 +79,14 @@ public class TextBox extends Component {
 
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
