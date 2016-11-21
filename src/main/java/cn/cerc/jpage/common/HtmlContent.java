@@ -1,6 +1,6 @@
-package cn.cerc.jpage.document;
+package cn.cerc.jpage.common;
 
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public interface HtmlContent {
 	public void output(HtmlWriter html);

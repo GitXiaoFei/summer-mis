@@ -23,6 +23,7 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.PageException;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.HistoryLevel;
@@ -32,6 +33,7 @@ import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
+import cn.cerc.jmis.page.AppLoginPage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
@@ -57,11 +59,6 @@ public class StartForms implements Filter {
 		}
 
 		log.info(uri);
-		// 设备讯息
-		ClientDevice info = new ClientDevice();
-		info.setRequest(req);
-		req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
-		//
 		String childCode = getRequestForm(req);
 		if (childCode == null) {
 			req.setAttribute("message", "无效的请求：" + childCode);
@@ -71,7 +68,7 @@ public class StartForms implements Filter {
 
 		String[] params = childCode.split("\\.");
 		String formId = params[0];
-		String formFunc = params.length == 1 ? "execute" : params[1];
+		String funcCode = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
 
@@ -85,45 +82,51 @@ public class StartForms implements Filter {
 				return;
 			}
 
-			// 查找菜单属性定义
-			MenuItem item = MenuFactory.get(formId);
-			if (item == null)
-				throw new RuntimeException(String.format("menu %s not find!", formId));
-			form.setParam("formNo", item.getFormNo());
-			form.setParam("title", item.getCaption());
-			form.setParam("security", item.isSecurity() ? "true" : "false");
-			form.setParam("versions", item.getVersions());
-			form.setParam("procCode", item.getProccode());
-			form.setParam("funcCode", formFunc);
+			// 设备讯息
+			ClientDevice info = new ClientDevice(form);
+			info.setRequest(req);
+			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
+
+			// 查找菜单定义
+			IMenu menu = form.getMenu();
+			if (menu == null) {
+				IAppMenus menus = Application.getBean("AppMenus", IAppMenus.class);
+				if (menus != null)
+					form.setMenu(menus.getItem(formId));
+			}
+
+			// 建立数据库资源
+			try (AppHandle handle = new AppHandle()) {
+				try {
+					handle.setProperty(Application.sessionId, req.getSession().getId());
+					form.setHandle(handle);
+					log.debug("进行安全检查，若未登录则显示登录对话框");
+					AppLoginPage page = new AppLoginPage(form);
+					if (page.checkSecurity(info.getSid())) {
+						String corpNo = handle.getCorpNo();
+						if (null != corpNo && !"".equals(corpNo)) {
+							String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
+									handle.getUserName());
+							new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
+						}
+						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
+						if (checkEnableTime())
+							call(form, funcCode);
+					}
+				} catch (Exception e) {
+					Throwable err = e.getCause();
+					if (err == null)
+						err = e;
+					req.setAttribute("msg", err.getMessage());
+					ErrorPage opera = new ErrorPage(form, err);
+					opera.execute();
+				}
+			}
 		} catch (Exception e) {
 			req.setAttribute("message", e.getMessage());
 			AppConfig conf = Application.getConfig();
 			req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 			return;
-		}
-		// 建立数据库资源
-		try (AppHandle handle = new AppHandle()) {
-			try {
-				handle.setProperty(Application.sessionId, req.getSession().getId());
-				form.setHandle(handle);
-				log.debug("进行安全检查，若未登录则显示登录对话框");
-				AppSecurity check = new AppSecurity(req, resp, handle);
-				if (check.execute(form, info.getSid())) {
-					String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
-							handle.getUserName());
-					new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
-					// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-					if (checkEnableTime())
-						call(form);
-				}
-			} catch (Exception e) {
-				Throwable err = e.getCause();
-				if (err == null)
-					err = e;
-				req.setAttribute("msg", err.getMessage());
-				ErrorPage opera = new ErrorPage(form, err);
-				opera.execute();
-			}
 		}
 	}
 
@@ -144,6 +147,7 @@ public class StartForms implements Filter {
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
 		String deviceId = form.getClient().getId();
+		String verifyCode = form.getRequest().getParameter("verifyCode");
 		log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
 		String userId = (String) form.getHandle().getProperty("UserID");
 		try (MemoryBuffer buff = new MemoryBuffer(BufferType.getSessionInfo, userId, deviceId)) {
@@ -158,7 +162,9 @@ public class StartForms implements Filter {
 			LocalService app = new LocalService(form.getHandle());
 			app.setService("SvrUserLogin.verifyMachine");
 			app.getDataIn().getHead().setField("deviceId", deviceId);
-
+			if (verifyCode != null && !"".equals(verifyCode))
+				app.getDataIn().getHead().setField("verifyCode", verifyCode);
+			
 			if (app.exec())
 				result = true;
 			else {
@@ -184,10 +190,9 @@ public class StartForms implements Filter {
 
 	}
 
-	private final void call(IForm form) throws ServletException, IOException {
+	private final void call(IForm form, String funcCode) throws ServletException, IOException {
 		HttpServletResponse response = form.getResponse();
 		HttpServletRequest request = form.getRequest();
-		String funcCode = form.getParam("funcCode", "execute");
 		if ("excel".equals(funcCode)) {
 			response.setContentType("application/vnd.ms-excel; charset=UTF-8");
 			response.addHeader("Content-Disposition", "attachment; filename=excel.csv");
@@ -239,7 +244,7 @@ public class StartForms implements Filter {
 					output.execute();
 				} else {
 					JspPage output = new JspPage(form);
-					output.setFile((String) pageOutput);
+					output.setJspFile((String) pageOutput);
 					output.execute();
 				}
 			}

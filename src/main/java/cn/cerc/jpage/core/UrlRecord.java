@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -10,6 +10,16 @@ public class UrlRecord {
 	private String name;
 	private String title;
 	private Map<String, String> params = new HashMap<>();
+
+	public UrlRecord() {
+
+	}
+
+	public UrlRecord(String site, String caption) {
+		super();
+		this.site = site;
+		this.name = caption;
+	}
 
 	public UrlRecord addParam(String key, String value) {
 		params.put(key, value);
@@ -26,6 +36,15 @@ public class UrlRecord {
 	}
 
 	public String getName() {
+		return name;
+	}
+
+	/**
+	 * 
+	 * @return 请改为getName
+	 */
+	@Deprecated
+	public String getCaption() {
 		return name;
 	}
 
@@ -46,7 +65,7 @@ public class UrlRecord {
 			sl.append(key);
 			sl.append("=");
 			String value = params.get(key);
-			if(value != null)
+			if (value != null)
 				sl.append(encodeUTF8(value));
 		}
 		return sl.toString();

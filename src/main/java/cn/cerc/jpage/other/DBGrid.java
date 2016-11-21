@@ -6,11 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.common.TMutiPage;
+import cn.cerc.jpage.grid.MutiPage;
 
 public class DBGrid<T> {
 	private DataSet dataset;
-	private TMutiPage pages = new TMutiPage();
+	private MutiPage pages = new MutiPage();
 	private List<T> items = new ArrayList<T>();
 
 	public DBGrid(DataSet dataset) {
@@ -70,7 +70,7 @@ public class DBGrid<T> {
 		return items;
 	}
 
-	public TMutiPage getPages() {
+	public MutiPage getPages() {
 		return pages;
 	}
 

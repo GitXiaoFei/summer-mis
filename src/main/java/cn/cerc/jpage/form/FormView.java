@@ -6,18 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.HtmlText;
-import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.AbstractField;
 
 public class FormView extends Component implements DataView {
 	protected String CSSClass = "info";
 	protected String method = "post";
 	protected HttpServletRequest request;
 	protected Record record;
-	protected List<Field> fields = new ArrayList<>();
+	protected List<AbstractField> fields = new ArrayList<>();
 	protected String action;
 	private String submit;
 	private boolean readAll;
@@ -43,7 +43,7 @@ public class FormView extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(Field field) {
+	public void addField(AbstractField field) {
 		fields.add(field);
 	}
 
@@ -64,7 +64,7 @@ public class FormView extends Component implements DataView {
 		html.println(">");
 
 		int i = 0;
-		for (Field field : fields) {
+		for (AbstractField field : fields) {
 			if (field.isHidden()) {
 				field.output(html);
 			} else {
@@ -84,7 +84,7 @@ public class FormView extends Component implements DataView {
 			html.print(" class=\"%s\"", this.CSSClass);
 		html.println(">");
 
-		for (Field field : fields) {
+		for (AbstractField field : fields) {
 			if (!field.isHidden()) {
 				html.print("<li");
 				if (field.getRole() != null)
@@ -121,7 +121,7 @@ public class FormView extends Component implements DataView {
 		submit = request.getParameter("opera");
 
 		// 将用户值或缓存值存入到dataSet中
-		for (Field field : this.fields) {
+		for (AbstractField field : this.fields) {
 			field.updateField();
 		}
 

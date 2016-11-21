@@ -2,9 +2,9 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 
-public class CodeNameField extends StringField {
+public class CodeNameField extends AbstractField {
 	private String nameField;
 
 	public CodeNameField(DataView owner, String name, String field) {
@@ -17,6 +17,18 @@ public class CodeNameField extends StringField {
 			dataView.updateValue(this.getId(), this.getField());
 			dataView.updateValue(getNameField(), getNameField());
 		}
+	}
+
+	@Override
+	public String getText(Record dataSet) {
+		if (dataSet == null)
+			return null;
+		if (buildText != null) {
+			HtmlWriter html = new HtmlWriter();
+			buildText.outputText(dataSet, html);
+			return html.toString();
+		}
+		return dataSet.getString(getField());
 	}
 
 	@Override

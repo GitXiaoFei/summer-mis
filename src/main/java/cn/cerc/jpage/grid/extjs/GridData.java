@@ -3,12 +3,12 @@ package cn.cerc.jpage.grid.extjs;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
-import cn.cerc.jpage.common.UrlRecord;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.fields.Field;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.Grid;
 import net.sf.json.JSONArray;
 
@@ -29,7 +29,7 @@ public class GridData extends Component {
 		while (i <= grid.getPages().getEnd()) {
 			dataSet.setRecNo(i + 1);
 			JSONArray json = new JSONArray();
-			for (Field field : grid.getFields()) {
+			for (AbstractField field : grid.getFields()) {
 				if (field instanceof ExpendField)
 					continue;
 				// json.add(field.getText(dataSet.getCurrent()));

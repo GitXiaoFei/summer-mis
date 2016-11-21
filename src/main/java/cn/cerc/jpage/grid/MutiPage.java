@@ -1,8 +1,8 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.grid;
 
 import net.sf.json.JSONObject;
 
-public class TMutiPage {
+public class MutiPage {
 	// 总记录数
 	private int recordCount;
 	// 页面大小
@@ -20,15 +20,15 @@ public class TMutiPage {
 	// 总页数
 	private int count;
 
-	public TMutiPage() {
+	public MutiPage() {
 
 	}
 
-	public TMutiPage(int recordCount) {
+	public MutiPage(int recordCount) {
 		this.setRecordCount(recordCount);
 	}
 
-	public TMutiPage(int recordCount, int current) {
+	public MutiPage(int recordCount, int current) {
 		this.setRecordCount(recordCount);
 		this.setCurrent(current);
 	}

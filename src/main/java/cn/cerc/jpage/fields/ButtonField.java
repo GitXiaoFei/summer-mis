@@ -1,9 +1,10 @@
 package cn.cerc.jpage.fields;
 
+import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.HtmlWriter;
 
-public class ButtonField extends Field {
+public class ButtonField extends AbstractField {
 	private String data;
 
 	public ButtonField() {
@@ -24,6 +25,18 @@ public class ButtonField extends Field {
 	public ButtonField setData(String data) {
 		this.data = data;
 		return this;
+	}
+
+	@Override
+	public String getText(Record dataSet) {
+		if (dataSet == null)
+			return null;
+		if (buildText != null) {
+			HtmlWriter html = new HtmlWriter();
+			buildText.outputText(dataSet, html);
+			return html.toString();
+		}
+		return dataSet.getString(getField());
 	}
 
 	@Override

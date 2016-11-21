@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.core;
 
 public class HtmlWriter {
 	private StringBuffer sl = new StringBuffer();

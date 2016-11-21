@@ -2,8 +2,8 @@ package cn.cerc.jpage.other;
 
 import java.text.DecimalFormat;
 
-import cn.cerc.jpage.common.Component;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class StrongItem extends Component {
 	private String name;

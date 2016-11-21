@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,22 @@ public class Component {
 		setOwner(owner);
 	}
 
+	public Component(Component owner, String id) {
+		this.id = id;
+		setOwner(owner);
+	}
+
 	public void setOwner(Component owner) {
 		this.owner = owner;
 		if (owner != null)
 			owner.addComponent(this);
+	}
+
+	public Component setId(String id) {
+		this.id = id;
+		if (owner != null && id != null)
+			owner.addComponent(this);
+		return this;
 	}
 
 	public void addComponent(Component component) {
@@ -60,13 +72,6 @@ public class Component {
 
 	public String getId() {
 		return id;
-	}
-
-	public Component setId(String id) {
-		this.id = id;
-		if (owner != null && id != null)
-			owner.addComponent(this);
-		return this;
 	}
 
 	public <T> T create(Class<T> clazz) throws InstantiationException, IllegalAccessException {

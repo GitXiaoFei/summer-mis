@@ -3,14 +3,19 @@ package cn.cerc.jpage.fields;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
-public class RangeField extends Field implements DataView {
+public class RangeField extends AbstractField implements DataView {
 
 	public RangeField(DataView dataView, String name) {
 		super(dataView, name, 0);
+	}
+
+	@Override
+	public String getText(Record rs) {
+		return getDefaultText(rs);
 	}
 
 	@Override
@@ -27,12 +32,12 @@ public class RangeField extends Field implements DataView {
 			html.println("/>");
 		} else {
 			html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
-			Field child = null;
+			AbstractField child = null;
 			for (Component component : this.getComponents()) {
-				if (component instanceof Field) {
+				if (component instanceof AbstractField) {
 					if (child != null)
 						html.print("-");
-					child = (Field) component;
+					child = (AbstractField) component;
 					String val = child.getCSSClass_phone();
 					child.setCSSClass_phone("price");
 					child.outputInput(html, dataSet);
@@ -52,7 +57,7 @@ public class RangeField extends Field implements DataView {
 	}
 
 	@Override
-	public void addField(Field field) {
+	public void addField(AbstractField field) {
 		this.addComponent(field);
 	}
 
@@ -73,10 +78,10 @@ public class RangeField extends Field implements DataView {
 
 	@Override
 	public void updateField() {
-		Field child = null;
+		AbstractField child = null;
 		for (Component component : this.getComponents()) {
-			if (component instanceof Field) {
-				child = (Field) component;
+			if (component instanceof AbstractField) {
+				child = (AbstractField) component;
 				child.updateField();
 			}
 		}

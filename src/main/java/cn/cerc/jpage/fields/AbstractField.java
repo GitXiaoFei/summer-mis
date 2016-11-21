@@ -3,18 +3,18 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.BuildText;
 import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.common.HtmlText;
-import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.common.IField;
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
 import net.sf.json.JSONObject;
 
-public class Field extends Component implements IField {
+public abstract class AbstractField extends Component implements IField {
 	private String name;
 	private String shortName;
 	private String align;
@@ -58,7 +58,7 @@ public class Field extends Component implements IField {
 	// 由extGrid调用
 	private Column column;
 
-	public Field(DataView dataView, String name, int width) {
+	public AbstractField(DataView dataView, String name, int width) {
 		this.dataView = dataView;
 		if (dataView != null) {
 			dataView.addField(this);
@@ -68,11 +68,16 @@ public class Field extends Component implements IField {
 		this.width = width;
 	}
 
+	public AbstractField(DataView owner, String name, String field, int width) {
+		this(owner, name, width);
+		this.setField(field);
+	}
+
 	public HtmlText getMark() {
 		return mark;
 	}
 
-	public Field setMark(HtmlText mark) {
+	public AbstractField setMark(HtmlText mark) {
 		this.mark = mark;
 		return this;
 	}
@@ -95,22 +100,22 @@ public class Field extends Component implements IField {
 		return this.getName();
 	}
 
-	public Field setWidth(int width) {
+	public AbstractField setWidth(int width) {
 		this.width = width;
 		return this;
 	}
 
-	public Field setShortName(String shortName) {
+	public AbstractField setShortName(String shortName) {
 		this.shortName = shortName;
 		return this;
 	}
 
-	public Field setAlign(String align) {
+	public AbstractField setAlign(String align) {
 		this.align = align;
 		return this;
 	}
 
-	public Field setName(String name) {
+	public AbstractField setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -127,24 +132,35 @@ public class Field extends Component implements IField {
 		return field;
 	}
 
-	public Field setField(String field) {
+	public AbstractField setField(String field) {
 		this.field = field;
 		return this;
 	}
 
-	public String getText(Record ds) {
-		if (buildText == null)
+	public abstract String getText(Record ds);
+
+	/**
+	 * 
+	 * @param rs
+	 *            当前记录集
+	 * @return 返回输出文本
+	 */
+	protected String getDefaultText(Record rs) {
+		if (rs == null)
 			return null;
-		HtmlWriter html = new HtmlWriter();
-		buildText.outputText(ds, html);
-		return html.toString();
+		if (buildText != null) {
+			HtmlWriter html = new HtmlWriter();
+			buildText.outputText(rs, html);
+			return html.toString();
+		}
+		return rs.getString(getField());
 	}
 
 	public BuildText getBuildText() {
 		return buildText;
 	}
 
-	public Field createText(BuildText buildText) {
+	public AbstractField createText(BuildText buildText) {
 		this.buildText = buildText;
 		return this;
 	}
@@ -169,7 +185,7 @@ public class Field extends Component implements IField {
 		return readonly;
 	}
 
-	public Field setReadonly(boolean readonly) {
+	public AbstractField setReadonly(boolean readonly) {
 		this.readonly = readonly;
 		return this;
 	}
@@ -178,7 +194,7 @@ public class Field extends Component implements IField {
 		return value;
 	}
 
-	public Field setValue(String value) {
+	public AbstractField setValue(String value) {
 		this.value = value;
 		return this;
 	}
@@ -187,7 +203,7 @@ public class Field extends Component implements IField {
 		return autofocus;
 	}
 
-	public Field setAutofocus(boolean autofocus) {
+	public AbstractField setAutofocus(boolean autofocus) {
 		this.autofocus = autofocus;
 		return this;
 	}
@@ -196,7 +212,7 @@ public class Field extends Component implements IField {
 		return required;
 	}
 
-	public Field setRequired(boolean required) {
+	public AbstractField setRequired(boolean required) {
 		this.required = required;
 		return this;
 	}
@@ -205,7 +221,7 @@ public class Field extends Component implements IField {
 		return placeholder;
 	}
 
-	public Field setPlaceholder(String placeholder) {
+	public AbstractField setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
 		return this;
 	}
@@ -214,7 +230,7 @@ public class Field extends Component implements IField {
 		return pattern;
 	}
 
-	public Field setPattern(String pattern) {
+	public AbstractField setPattern(String pattern) {
 		this.pattern = pattern;
 		return this;
 	}
@@ -223,7 +239,7 @@ public class Field extends Component implements IField {
 		return hidden;
 	}
 
-	public Field setHidden(boolean hidden) {
+	public AbstractField setHidden(boolean hidden) {
 		this.hidden = hidden;
 		return this;
 	}
@@ -293,7 +309,7 @@ public class Field extends Component implements IField {
 		return dialog;
 	}
 
-	public Field setDialog(String dialog) {
+	public AbstractField setDialog(String dialog) {
 		this.dialog = dialog;
 		return this;
 	}
@@ -329,7 +345,7 @@ public class Field extends Component implements IField {
 		return expender;
 	}
 
-	public Field setExpender(Expender expender) {
+	public AbstractField setExpender(Expender expender) {
 		this.expender = expender;
 		return this;
 	}
@@ -350,7 +366,7 @@ public class Field extends Component implements IField {
 		return oninput;
 	}
 
-	public Field setOninput(String oninput) {
+	public AbstractField setOninput(String oninput) {
 		this.oninput = oninput;
 		return this;
 	}
@@ -359,7 +375,7 @@ public class Field extends Component implements IField {
 		return onclick;
 	}
 
-	public Field setOnclick(String onclick) {
+	public AbstractField setOnclick(String onclick) {
 		this.onclick = onclick;
 		return this;
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 
-public class RadioField extends StringField {
+public class RadioField extends AbstractField {
 	private List<String> items = new ArrayList<>();
 
 	public RadioField(DataView owner, String name, String field, int width) {
