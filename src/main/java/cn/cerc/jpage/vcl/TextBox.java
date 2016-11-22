@@ -14,9 +14,10 @@ public class TextBox extends Component {
 	private Label caption;
 	private String name;
 	private String type;
-	private String value;
+	private Object value;
 	private String maxlength;
 	private String placeholder;
+	private String dialog;
 	private boolean readonly;
 	private String onclick;
 
@@ -48,8 +49,16 @@ public class TextBox extends Component {
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.readonly)
-			html.print(" readonly");
+			html.print(" readonly='readonly'");
 		html.println(">");
+
+		if (dialog != null) {
+			html.print("<span>");
+			html.print("<a href=\"javascript:%s('%s')\">", dialog, getId());
+			html.print("<img src='images/select-pic.png'>");
+			html.print("</a>");
+			html.print("</span>");
+		}
 	}
 
 	public Label getCaption() {
@@ -78,12 +87,20 @@ public class TextBox extends Component {
 		this.placeholder = placeholder;
 	}
 
-	public String getValue() {
+	public Object getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public String getDialog() {
+		return dialog;
+	}
+
+	public void setDialog(String dialog) {
+		this.dialog = dialog;
 	}
 
 	public boolean isReadonly() {

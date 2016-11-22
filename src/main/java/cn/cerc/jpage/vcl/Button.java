@@ -18,7 +18,7 @@ public class Button extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<button");
+		html.print("<button ");
 		if (getId() != null) {
 			html.print(String.format(" id=\"%s\"", getId()));
 		}
