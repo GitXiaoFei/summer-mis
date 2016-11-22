@@ -5,12 +5,27 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class Image extends Component {
 	private Integer width;
-	private Integer Height;
+	private Integer height;
 	private String src;
+	private String role;
+	private String onclick;
+
+	public Image() {
+		super();
+	}
+
+	public Image(Component owner) {
+		super(owner);
+	}
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.println("<img src='%s'/>", this.src);
+		html.print("<img src='%s'", this.src);
+		if (role != null)
+			html.print(" role='%s'", this.role);
+		if (onclick != null)
+			html.print(" onclick='%s'", this.onclick);
+		html.println("/>");
 	}
 
 	public int getWidth() {
@@ -22,11 +37,11 @@ public class Image extends Component {
 	}
 
 	public int getHeight() {
-		return Height;
+		return height;
 	}
 
 	public void setHeight(int height) {
-		Height = height;
+		this.height = height;
 	}
 
 	public String getSrc() {
@@ -35,5 +50,21 @@ public class Image extends Component {
 
 	public void setSrc(String src) {
 		this.src = src;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getOnclick() {
+		return onclick;
+	}
+
+	public void setOnclick(String onclick) {
+		this.onclick = onclick;
 	}
 }

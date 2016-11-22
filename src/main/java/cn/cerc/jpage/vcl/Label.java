@@ -5,10 +5,22 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class Label extends Component {
 	private String text;
+	private String role;
+
+	public Label() {
+		super();
+	}
+
+	public Label(Component owner) {
+		super(owner);
+	}
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<span>");
+		html.print("<span");
+		if (role != null)
+			html.print(" role='%s'", this.role);
+		html.print(">");
 		html.print(text);
 		html.print("</span>");
 	}
@@ -19,5 +31,13 @@ public class Label extends Component {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }
