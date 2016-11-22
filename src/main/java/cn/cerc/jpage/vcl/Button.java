@@ -8,6 +8,10 @@ public class Button extends Component {
 	private String value;
 	private String text;
 
+	public Button() {
+		super();
+	}
+
 	public Button(Component owner) {
 		super(owner);
 	}
