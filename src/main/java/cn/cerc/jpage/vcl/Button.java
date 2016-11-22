@@ -8,6 +8,10 @@ public class Button extends Component {
 	private String value;
 	private String text;
 
+	public Button() {
+		super();
+	}
+
 	public Button(Component owner) {
 		super(owner);
 	}
@@ -16,13 +20,13 @@ public class Button extends Component {
 	public void output(HtmlWriter html) {
 		html.print("<button ");
 		if (getId() != null) {
-			html.print(String.format("id=\"%s\" ", getId()));
+			html.print(String.format(" id=\"%s\"", getId()));
 		}
 		if (name != null) {
-			html.print(String.format("name=\"%s\" ", name));
+			html.print(String.format(" name=\"%s\"", name));
 		}
 		if (value != null) {
-			html.print(String.format("value=\"%s\" ", value));
+			html.print(String.format(" value=\"%s\"", value));
 		}
 		html.print(">");
 		html.print(text);

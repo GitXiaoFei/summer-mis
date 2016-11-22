@@ -3,14 +3,23 @@ package cn.cerc.jpage.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+/**
+ * 
+ * 单行文本输入框
+ * 
+ * @author 张弓
+ *
+ */
 public class TextBox extends Component {
 	private Label caption;
 	private String name;
 	private String type;
 	private Object value;
+	private String maxlength;
 	private String placeholder;
 	private String dialog;
 	private boolean readonly;
+	private String onclick;
 
 	public TextBox() {
 		super();
@@ -31,8 +40,12 @@ public class TextBox extends Component {
 			html.print(" name='%s'", this.getName());
 		if (type != null)
 			html.print(" type=\"%s\"", type);
+		if (maxlength != null)
+			html.print(" maxlength=%s", this.maxlength);
 		if (value != null)
 			html.print(" value='%s'", this.value);
+		if (onclick != null)
+			html.print(" onclick='%s'", this.onclick);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.readonly)
@@ -106,4 +119,19 @@ public class TextBox extends Component {
 		this.type = type;
 	}
 
+	public String getOnclick() {
+		return onclick;
+	}
+
+	public void setOnclick(String onclick) {
+		this.onclick = onclick;
+	}
+
+	public String getMaxlength() {
+		return maxlength;
+	}
+
+	public void setMaxlength(String maxlength) {
+		this.maxlength = maxlength;
+	}
 }
