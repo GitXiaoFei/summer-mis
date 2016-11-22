@@ -9,6 +9,7 @@ public class Image extends Component {
 	private String src;
 	private String role;
 	private String onclick;
+	private String alt;
 
 	public Image() {
 		super();
@@ -23,6 +24,8 @@ public class Image extends Component {
 		html.print("<img src='%s'", this.src);
 		if (role != null)
 			html.print(" role='%s'", this.role);
+		if (alt != null)
+			html.print(" alt='%s'", this.alt);
 		if (onclick != null)
 			html.print(" onclick='%s'", this.onclick);
 		html.println("/>");
@@ -66,5 +69,13 @@ public class Image extends Component {
 
 	public void setOnclick(String onclick) {
 		this.onclick = onclick;
+	}
+
+	public String getAlt() {
+		return alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
 	}
 }
