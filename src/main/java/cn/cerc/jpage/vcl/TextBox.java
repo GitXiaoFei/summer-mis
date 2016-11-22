@@ -3,6 +3,13 @@ package cn.cerc.jpage.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+/**
+ * 
+ * 单行文本输入框
+ * 
+ * @author 张弓
+ *
+ */
 public class TextBox extends Component {
 	private Label caption;
 	private String name;
