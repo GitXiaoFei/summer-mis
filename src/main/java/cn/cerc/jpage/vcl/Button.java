@@ -7,6 +7,7 @@ public class Button extends Component {
 	private String name;
 	private String value;
 	private String text;
+	private String onclick;
 
 	public Button() {
 		super();
@@ -27,6 +28,9 @@ public class Button extends Component {
 		}
 		if (value != null) {
 			html.print(String.format(" value=\"%s\"", value));
+		}
+		if (onclick != null) {
+			html.print(String.format(" onclick=\"%s\"", onclick));
 		}
 		html.print(">");
 		html.print(text);
@@ -55,5 +59,13 @@ public class Button extends Component {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getOnclick() {
+		return onclick;
+	}
+
+	public void setOnclick(String onclick) {
+		this.onclick = onclick;
 	}
 }
