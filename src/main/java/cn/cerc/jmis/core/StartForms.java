@@ -220,7 +220,14 @@ public class StartForms implements Filter {
 			// 检验此设备是否需要设备验证码
 			if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
 				try {
-					method = form.getClass().getMethod(funcCode);
+					if (form.getClient().isPhone()) {
+						try {
+							method = form.getClass().getMethod(funcCode + "_phone");
+						} catch (NoSuchMethodException e) {
+							method = form.getClass().getMethod(funcCode);
+						}
+					} else
+						method = form.getClass().getMethod(funcCode);
 					pageOutput = method.invoke(form);
 				} catch (PageException e) {
 					form.setParam("message", e.getMessage());
