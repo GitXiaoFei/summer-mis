@@ -14,7 +14,7 @@ public class TextBox extends Component {
 	private Label caption;
 	private String name;
 	private String type;
-	private Object value;
+	private String value;
 	private String maxlength;
 	private String placeholder;
 	private String dialog;
@@ -87,11 +87,11 @@ public class TextBox extends Component {
 		this.placeholder = placeholder;
 	}
 
-	public Object getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Object value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
