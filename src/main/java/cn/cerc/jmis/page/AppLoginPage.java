@@ -11,9 +11,9 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jmis.core.IAppLogin;
 import cn.cerc.jmis.core.RequestData;
 import cn.cerc.jmis.form.AbstractForm;
 
@@ -21,16 +21,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
 	public AppLoginPage() {
-
-	}
-
-	public AppLoginPage(IForm form) {
-		this.setForm(form);
-		this.init(form);
-	}
-
-	@Override
-	public void init(IForm form) {
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
 		this.add("homePage", conf.getFormWelcome());

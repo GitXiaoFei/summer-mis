@@ -30,10 +30,10 @@ import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.other.SystemTable;
+import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
-import cn.cerc.jmis.page.AppLoginPage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
@@ -101,7 +101,7 @@ public class StartForms implements Filter {
 					handle.setProperty(Application.sessionId, req.getSession().getId());
 					form.setHandle(handle);
 					log.debug("进行安全检查，若未登录则显示登录对话框");
-					AppLoginPage page = new AppLoginPage(form);
+					IAppLogin page = Application.getAppLogin(form);
 					if (page.checkSecurity(info.getSid())) {
 						String corpNo = handle.getCorpNo();
 						if (null != corpNo && !"".equals(corpNo)) {
