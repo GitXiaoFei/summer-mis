@@ -11,26 +11,18 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jmis.core.IAppLogin;
 import cn.cerc.jmis.core.RequestData;
 import cn.cerc.jmis.form.AbstractForm;
 
 public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
-	public AppLoginPage() {
-
-	}
-
-	public AppLoginPage(IForm form) {
-		this.setForm(form);
-		this.init(form);
-	}
-
 	@Override
 	public void init(IForm form) {
+		this.setForm(form);
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
 		this.add("homePage", conf.getFormWelcome());
@@ -55,11 +47,13 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			if (form.logon())
 				return true;
 		} catch (Exception e) {
-			if (password == null || "".equals(password)) {
-				getResponse().sendRedirect("TFrmEasyReg?phone=" + userCode);
-				return false;
-			} else
-				this.add("loginMsg", e.getMessage());
+			if (!e.getMessage().contains("</a>")) {
+				if (password == null || "".equals(password)) {
+					getResponse().sendRedirect("TFrmEasyReg?phone=" + userCode);
+					return false;
+				}
+			}
+			this.add("loginMsg", e.getMessage());
 		}
 		this.execute();
 		return false;
@@ -102,9 +96,20 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 				result = true;
 			}
 		} else {
-			log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
-			req.setAttribute("loginMsg", app.getMessage());
-			this.execute();
+			// 登陆验证失败，进行判断，手机号为空，则回到登陆页，手机不为空，密码为空，则跳到发送验证码页面
+			String mobile = app.getDataOut().getHead().getSafeString("Mobile_");
+			if (mobile == null || "".equals(mobile)) {
+				log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
+				req.setAttribute("loginMsg", app.getMessage());
+				this.execute();
+			} else if (password == null || "".equals(password)) {
+				getResponse().sendRedirect("TFrmEasyReg?phone=" + mobile);
+				return false;
+			} else {
+				log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
+				req.setAttribute("loginMsg", app.getMessage());
+				this.execute();
+			}
 		}
 		return result;
 	}
@@ -114,8 +119,10 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	 * 
 	 * @param tel
 	 * @return
+	 * @throws IOException
+	 * @throws ServletException
 	 */
-	private String getAccountFromTel(IHandle handle, String tel) {
+	private String getAccountFromTel(IHandle handle, String tel) throws ServletException, IOException {
 		LocalService app = new LocalService(handle);
 		app.setService("SvrUserLogin.getUserCodeByMobile");
 		app.getDataIn().getHead().setField("UserCode_", tel);
@@ -125,5 +132,4 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		} else
 			return app.getDataOut().getHead().getString("UserCode_");
 	}
-
 }

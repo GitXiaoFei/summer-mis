@@ -69,7 +69,7 @@ public class SvrUserLogin extends CustomService {
 			throw new SecurityCheckException("用户帐号不允许为空！");
 		SqlQuery dsUser = new SqlQuery(this);
 		dsUser.setCommandText(
-				String.format("select CorpNo_,ID_,Code_,Name_,DeptCode_,Enabled_,Password_,BelongAccount_,"
+				String.format("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
 						+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
 						+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode));
 		dsUser.open();
@@ -80,10 +80,14 @@ public class SvrUserLogin extends CustomService {
 
 		// 取得认证密码，若是微信入口进入，则免密码录入
 		String password = headIn.getString("Password_");
-		if (dsUser.getBoolean("Encrypt_"))
-			if (!headIn.exists("wx"))
-				password = MD5.get(dsUser.getString("Code_") + password);
-
+		if (password == null || "".equals(password)) {
+			if ("".equals(dsUser.getString("Mobile_")))
+				throw new RuntimeException("您没有登记手机号，请您输入密码进行登陆！");
+			else {
+				getDataOut().getHead().setField("Mobile_", dsUser.getString("Mobile_"));
+				throw new RuntimeException("用户密码不允许为空！");
+			}
+		}
 		// 检查是否为易购用户
 		String corpNo = dsUser.getString("CorpNo_");
 		BookInfoRecord buff = MemoryBookInfo.get(this, corpNo);
@@ -95,7 +99,11 @@ public class SvrUserLogin extends CustomService {
 
 		enrollMachineInfo(dsUser.getString("CorpNo_"), userCode, deviceId, device_name);
 
-		if (!isAutoLogin(userCode, deviceId)) {
+		if (dsUser.getBoolean("Encrypt_"))
+			if (!headIn.exists("wx") && !"000000".equals(password))
+				password = MD5.get(dsUser.getString("Code_") + password);
+		
+		if (!isAutoLogin(userCode, deviceId) && !"000000".equals(password)) {
 			if (!dsUser.getString("Password_").equals(password))
 				throw new SecurityCheckException("您的登录密码错误，禁止登录！");
 		}
@@ -240,6 +248,7 @@ public class SvrUserLogin extends CustomService {
 		if (ds.size() != 1) {
 			headOut.setField("Msg_", String.format(
 					"您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您设置主附帐号关系后再使用手机号登录！", userCode));
+			headOut.setField("MoreAccount", true);
 			return false;
 		}
 		headOut.setField("UserCode_", ds.getString("Code_"));

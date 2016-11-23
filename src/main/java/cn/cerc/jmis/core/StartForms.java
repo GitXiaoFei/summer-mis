@@ -30,10 +30,10 @@ import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.other.SystemTable;
+import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
-import cn.cerc.jmis.page.AppLoginPage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
@@ -101,7 +101,7 @@ public class StartForms implements Filter {
 					handle.setProperty(Application.sessionId, req.getSession().getId());
 					form.setHandle(handle);
 					log.debug("进行安全检查，若未登录则显示登录对话框");
-					AppLoginPage page = new AppLoginPage(form);
+					IAppLogin page = Application.getAppLogin(form);
 					if (page.checkSecurity(info.getSid())) {
 						String corpNo = handle.getCorpNo();
 						if (null != corpNo && !"".equals(corpNo)) {
@@ -164,7 +164,7 @@ public class StartForms implements Filter {
 			app.getDataIn().getHead().setField("deviceId", deviceId);
 			if (verifyCode != null && !"".equals(verifyCode))
 				app.getDataIn().getHead().setField("verifyCode", verifyCode);
-			
+
 			if (app.exec())
 				result = true;
 			else {
@@ -220,7 +220,14 @@ public class StartForms implements Filter {
 			// 检验此设备是否需要设备验证码
 			if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
 				try {
-					method = form.getClass().getMethod(funcCode);
+					if (form.getClient().isPhone()) {
+						try {
+							method = form.getClass().getMethod(funcCode + "_phone");
+						} catch (NoSuchMethodException e) {
+							method = form.getClass().getMethod(funcCode);
+						}
+					} else
+						method = form.getClass().getMethod(funcCode);
 					pageOutput = method.invoke(form);
 				} catch (PageException e) {
 					form.setParam("message", e.getMessage());
@@ -243,6 +250,7 @@ public class StartForms implements Filter {
 					IPage output = (IPage) pageOutput;
 					output.execute();
 				} else {
+					log.warn(String.format("%s pageOutput is not IPage: %s" + funcCode, pageOutput));
 					JspPage output = new JspPage(form);
 					output.setJspFile((String) pageOutput);
 					output.execute();
