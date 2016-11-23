@@ -20,7 +20,9 @@ import cn.cerc.jmis.form.AbstractForm;
 public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	private static final Logger log = Logger.getLogger(AppLoginPage.class);
 
-	public AppLoginPage() {
+	@Override
+	public void init(IForm form) {
+		this.setForm(form);
 		AppConfig conf = Application.getConfig();
 		this.setJspFile(conf.getJspLoginFile());
 		this.add("homePage", conf.getFormWelcome());
@@ -117,8 +119,8 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	 * 
 	 * @param tel
 	 * @return
-	 * @throws IOException 
-	 * @throws ServletException 
+	 * @throws IOException
+	 * @throws ServletException
 	 */
 	private String getAccountFromTel(IHandle handle, String tel) throws ServletException, IOException {
 		LocalService app = new LocalService(handle);
@@ -130,5 +132,4 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		} else
 			return app.getDataOut().getHead().getString("UserCode_");
 	}
-
 }
