@@ -20,6 +20,7 @@ public class TextBox extends Component {
 	private String dialog;
 	private boolean readonly;
 	private String onclick;
+	private String oninput;
 
 	public TextBox() {
 		super();
@@ -46,6 +47,8 @@ public class TextBox extends Component {
 			html.print(" value='%s'", this.value);
 		if (onclick != null)
 			html.print(" onclick='%s'", this.onclick);
+		if (oninput != null)
+			html.print(" oninput='%s'", this.oninput);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.readonly)
@@ -133,5 +136,13 @@ public class TextBox extends Component {
 
 	public void setMaxlength(String maxlength) {
 		this.maxlength = maxlength;
+	}
+
+	public String getOninput() {
+		return oninput;
+	}
+
+	public void setOninput(String oninput) {
+		this.oninput = oninput;
 	}
 }
