@@ -13,7 +13,10 @@ public class GroupBox extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<div role='group'>");
+		html.print("<div role='group'");
+		if (getId() != null)
+			html.print(" id='%s' ", getId());
+		html.print(">");
 		if (form != null) {
 			html.print(String.format("<form method='%s' action='%s' id='%s'>", form.getMethod(), form.getAction(),
 					form.getId()));
