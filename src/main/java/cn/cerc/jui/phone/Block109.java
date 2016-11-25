@@ -15,6 +15,7 @@ public class Block109 extends Component {
 	 * 文本+输入框+弹窗选择按钮
 	 * 
 	 * @param owner
+	 *            内容显示区
 	 */
 	public Block109(Component owner) {
 		super(owner);

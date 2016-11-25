@@ -15,6 +15,7 @@ public class Block111 extends Component {
 	 * 文本+输入框+查询按钮
 	 * 
 	 * @param owner
+	 *            内容显示区
 	 */
 	public Block111(Component owner) {
 		super(owner);

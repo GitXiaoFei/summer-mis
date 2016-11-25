@@ -13,6 +13,7 @@ public class Block108 extends Component {
 	 * 文本加输入框
 	 * 
 	 * @param owner
+	 *            内容显示区
 	 */
 	public Block108(Component owner) {
 		super(owner);
