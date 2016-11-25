@@ -39,11 +39,13 @@ public class Block112 extends Component {
 		return right;
 	}
 
-	public void setLeftText(String text) {
+	public Block112 setLeftText(String text) {
 		left.setText(text);
+		return this;
 	}
 
-	public void setRightText(String text) {
+	public Block112 setRightText(String text) {
 		right.setText(text);
+		return this;
 	}
 }

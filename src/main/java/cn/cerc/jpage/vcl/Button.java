@@ -68,4 +68,8 @@ public class Button extends Component {
 	public void setOnclick(String onclick) {
 		this.onclick = onclick;
 	}
+
+	public void setClickUrl(String url) {
+		this.setOnclick(String.format("location.href='%s'", url));
+	}
 }
