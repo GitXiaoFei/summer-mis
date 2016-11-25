@@ -18,6 +18,8 @@ public class Label extends Component {
 	@Override
 	public void output(HtmlWriter html) {
 		html.print("<span");
+		if (getId() != null)
+			html.print(" id='%s'", this.getId());
 		if (role != null)
 			html.print(" role='%s'", this.role);
 		html.print(">");
