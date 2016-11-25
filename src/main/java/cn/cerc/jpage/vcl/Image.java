@@ -4,8 +4,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class Image extends Component {
-	private Integer width;
-	private Integer height;
+	private String width;
+	private String height;
 	private String src;
 	private String role;
 	private String onclick;
@@ -26,25 +26,31 @@ public class Image extends Component {
 			html.print(" role='%s'", this.role);
 		if (alt != null)
 			html.print(" alt='%s'", this.alt);
+		if (width != null)
+			html.print(" width='%s'", this.width);
+		if (height != null)
+			html.print(" height='%s'", this.height);
 		if (onclick != null)
 			html.print(" onclick='%s'", this.onclick);
 		html.println("/>");
 	}
 
-	public int getWidth() {
+	public String getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public Image setWidth(String width) {
 		this.width = width;
+		return this;
 	}
 
-	public int getHeight() {
+	public String getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public Image setHeight(String height) {
 		this.height = height;
+		return this;
 	}
 
 	public String getSrc() {
