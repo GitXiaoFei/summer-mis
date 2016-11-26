@@ -25,7 +25,7 @@ public class Block108 extends Component {
 		html.print("<div class='block108'>");
 		label.output(html);
 		input.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getLabel() {

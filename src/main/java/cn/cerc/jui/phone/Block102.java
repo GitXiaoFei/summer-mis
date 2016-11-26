@@ -32,7 +32,7 @@ public class Block102 extends Component {
 		html.print("<div class='block102'>");
 		title.output(html);
 		image.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getTitle() {

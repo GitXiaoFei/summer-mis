@@ -23,6 +23,6 @@ public class Block103 extends Component {
 	public void output(HtmlWriter html) {
 		html.print("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block103'>");
-		html.print("</div>");
+		html.println("</div>");
 	}
 }

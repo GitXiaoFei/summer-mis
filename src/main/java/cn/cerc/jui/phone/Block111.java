@@ -29,7 +29,7 @@ public class Block111 extends Component {
 		label.output(html);
 		input.output(html);
 		search.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getLabel() {

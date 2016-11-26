@@ -68,7 +68,7 @@ public class Block402 extends Component {
 		html.print("</div>");
 		html.print("</div>");
 		html.print("<div class='info'>%s</div>", remark.toString());
-		html.print("</section>");
+		html.println("</section>");
 	}
 
 	public Label getDescribe() {

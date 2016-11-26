@@ -48,7 +48,7 @@ public class Block301 extends Component {
 		html.print("</div>");
 		html.print("</a>");
 		html.print("<div style='clear: both'></div>");
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Image getLeftIcon() {

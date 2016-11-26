@@ -29,7 +29,7 @@ public class Block105 extends Component {
 		html.print("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block105'>");
 		title.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getTitle() {

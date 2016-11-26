@@ -63,7 +63,7 @@ public class Block401 extends Component {
 		remark.output(html);
 		button.output(html);
 		html.print("</div>");
-		html.print("</section>");
+		html.println("</section>");
 	}
 
 	public String getTitle() {
