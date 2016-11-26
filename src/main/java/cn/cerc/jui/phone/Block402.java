@@ -29,7 +29,7 @@ public class Block402 extends Component {
 	public Block402(Component owner) {
 		super(owner);
 		product.setRole("product");
-		product.setSrc("jui/phone/block402-product.jpg");
+		product.setSrc("jui/phone/block402-product.png");
 
 		describe.setRole("describe");
 		describe.setText("(describe)");

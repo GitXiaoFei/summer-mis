@@ -32,7 +32,7 @@ public class Block401 extends Component {
 		super(owner);
 		product.setRole("product");
 		product.setAlt("(product)");
-		product.setSrc("jui/phone/block401-product.jpg");
+		product.setSrc("jui/phone/block401-product.png");
 		button.setText("(button)");
 
 		remark.setRole("remark");
