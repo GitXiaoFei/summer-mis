@@ -34,13 +34,11 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		IForm form = this.getForm();
 		String password = null;
 		String userCode = null;
-		String savePwd = null;
 		try {
 			if (form.getRequest().getParameter("login_usr") != null) {
 				userCode = getRequest().getParameter("login_usr");
 				password = getRequest().getParameter("login_pwd");
-				savePwd = this.getRequest().getParameter("checkName");
-				return checkLogin(userCode, password, savePwd);
+				return checkLogin(userCode, password);
 			}
 			log.debug(String.format("根据 token(%s) 创建 Session", token));
 			IHandle sess = (IHandle) form.getHandle().getProperty(null);
@@ -62,7 +60,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	}
 
 	@Override
-	public boolean checkLogin(String userCode, String password, String savePwd) throws ServletException, IOException {
+	public boolean checkLogin(String userCode, String password) throws ServletException, IOException {
 		IForm form = this.getForm();
 		HttpServletRequest req = this.getRequest();
 
@@ -89,7 +87,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		else
 			app = new LocalService(form.getHandle());
 		app.setService("SvrUserLogin.check");
-		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "savePwd", savePwd)) {
+		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId)) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
 			if (sid != null && !sid.equals("")) {
 				log.debug(String.format("认证成功，取得sid(%s)", sid));
