@@ -2,11 +2,11 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.common.SearchItem;
-import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.extjs.Column;
 
-public class BooleanField extends AbstractField implements SearchItem {
+public class BooleanField extends StringField implements SearchItem {
 	private String trueText = "是";
 	private String falseText = "否";
 	private String title;
@@ -25,11 +25,6 @@ public class BooleanField extends AbstractField implements SearchItem {
 	public String getText(Record dataSet) {
 		if (dataSet == null)
 			return null;
-		if (buildText != null) {
-			HtmlWriter html = new HtmlWriter();
-			buildText.outputText(dataSet, html);
-			return html.toString();
-		}
 		return dataSet.getBoolean(field) ? trueText : falseText;
 	}
 

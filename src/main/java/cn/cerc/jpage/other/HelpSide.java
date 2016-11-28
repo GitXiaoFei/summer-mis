@@ -3,8 +3,8 @@ package cn.cerc.jpage.other;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.UrlMenu;
 
 public class HelpSide extends Component {

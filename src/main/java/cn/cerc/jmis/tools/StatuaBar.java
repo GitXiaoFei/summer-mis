@@ -2,21 +2,19 @@ package cn.cerc.jmis.tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IPage;
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jmis.core.ClientDevice;
+import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.UrlMenu;
+import cn.cerc.jpage.other.Url_Record;
 
 public class StatuaBar extends Component {
-	private IForm form;
+	private HttpServletRequest request;
 	private static final int MAX_MENUS = 6;
-	protected UrlRecord checkAll;
+	private Url_Record checkAll;
 
-	public StatuaBar(IPage owner) {
-		super((Component) owner);
-		this.form = owner.getForm();
+	public StatuaBar(Component owner) {
+		super(owner);
 		this.setId("bottom");
 	}
 
@@ -30,11 +28,13 @@ public class StatuaBar extends Component {
 		UrlMenu item = new UrlMenu(this, caption, url);
 		item.setCssClass("bottomBotton");
 		item.setId("button" + count);
-		if (!form.getClient().isPhone())
+		ClientDevice info = new ClientDevice();
+		info.setRequest(request);
+		if (!info.isPhone())
 			item.setName(String.format("F%s:%s", count, item.getName()));
 	}
 
-	public UrlRecord getCheckAll() {
+	public Url_Record getCheckAll() {
 		return checkAll;
 	}
 
@@ -43,7 +43,7 @@ public class StatuaBar extends Component {
 			throw new RuntimeException("targetId is null");
 		if (checkAll != null)
 			throw new RuntimeException("checkAll is not null");
-		checkAll = new UrlRecord(String.format("selectItems('%s')", targetId), "全选");
+		checkAll = new Url_Record(String.format("selectItems('%s')", targetId), "全选");
 	}
 
 	@Override
@@ -58,9 +58,10 @@ public class StatuaBar extends Component {
 			html.println("<label for=\"selectAll\">全选</label>");
 		}
 		super.output(html);
-		HttpServletRequest request = getForm().getRequest();
 		if (request != null) {
-			if (!form.getClient().isPhone()) {
+			ClientDevice info = new ClientDevice();
+			info.setRequest(request);
+			if (!info.isPhone()) {
 				String msg = request.getParameter("msg");
 				html.print("<div class=\"bottom-message\"");
 				html.print(" id=\"msg\">");
@@ -72,7 +73,12 @@ public class StatuaBar extends Component {
 		html.println("</div>");
 	}
 
-	public IForm getForm() {
-		return form;
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public StatuaBar setRequest(HttpServletRequest request) {
+		this.request = request;
+		return this;
 	}
 }

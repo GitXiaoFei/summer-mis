@@ -7,28 +7,32 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jpage.common.ActionForm;
+import cn.cerc.jpage.common.Component;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.core.ActionForm;
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.common.TMutiPage;
+import cn.cerc.jpage.fields.Field;
 
 public abstract class Grid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
 	// PC专用表格列
-	private List<AbstractField> fields = new ArrayList<>();
+	private List<Field> fields = new ArrayList<>();
+	// 手机专用行
+	private List<PhoneLine> lines = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
 	private String CSSStyle;
 	// 分页控制
-	private MutiPage pages = new MutiPage();
+	private TMutiPage pages = new TMutiPage();
 	// 是否允许修改
 	private boolean readonly = true;
 	//
 	private HttpServletRequest request;
-	protected ActionForm form;
+	private ActionForm form;
+	private boolean extGrid;
 
 	public Grid() {
 		super();
@@ -65,8 +69,14 @@ public abstract class Grid extends Component implements DataView {
 		pages.setCurrent(pageno);
 	}
 
-	public void addField(AbstractField field) {
+	public void addField(Field field) {
 		fields.add(field);
+	}
+
+	public PhoneLine addLine() {
+		PhoneLine line = new PhoneLine(this);
+		lines.add(line);
+		return line;
 	}
 
 	public String getCSSClass_PC() {
@@ -93,11 +103,24 @@ public abstract class Grid extends Component implements DataView {
 		CSSStyle = cSSStyle;
 	}
 
-	public MutiPage getPages() {
+	@Override
+	public void output(HtmlWriter html) {
+		if (this.dataSet.size() == 0)
+			return;
+		if (form != null)
+			form.output(html);
+
+		outputGrid(html);
+
+		if (form != null)
+			html.println("</form>");
+	}
+
+	public TMutiPage getPages() {
 		return pages;
 	}
 
-	public List<AbstractField> getFields() {
+	public List<Field> getFields() {
 		return this.fields;
 	}
 
@@ -109,7 +132,7 @@ public abstract class Grid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (AbstractField field : this.getFields())
+		for (Field field : this.getFields())
 			field.setReadonly(readonly);
 		this.readonly = readonly;
 	}
@@ -119,12 +142,10 @@ public abstract class Grid extends Component implements DataView {
 		return dataSet.getRecNo();
 	}
 
-	@Deprecated
 	public ActionForm getForm() {
 		return form;
 	}
 
-	@Deprecated
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}
@@ -138,4 +159,16 @@ public abstract class Grid extends Component implements DataView {
 	}
 
 	public abstract void outputGrid(HtmlWriter html);
+
+	public List<PhoneLine> getLines() {
+		return lines;
+	}
+
+	public boolean isExtGrid() {
+		return this.extGrid;
+	}
+
+	public void setExtGrid(boolean extGrid) {
+		this.extGrid = extGrid;
+	}
 }

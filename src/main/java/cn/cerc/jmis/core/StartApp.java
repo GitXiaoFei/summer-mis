@@ -26,11 +26,6 @@ public class StartApp implements Filter {
 
 		// 处理默认首页问题
 		if (uri.equals("/")) {
-			if(req.getParameter(ClientDevice.deviceId_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceId_key, req.getParameter(ClientDevice.deviceId_key));
-			if(req.getParameter(ClientDevice.deviceType_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceType_key, req.getParameter(ClientDevice.deviceType_key));
-			
 			AppConfig conf = Application.getConfig();
 			resp.sendRedirect(String.format("/%s/%s", conf.getPathForms(), conf.getFormWelcome()));
 			return;

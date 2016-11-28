@@ -3,9 +3,6 @@ package cn.cerc.jpage.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
-
 /*
  * 专用于简单或原始文字输出
  */

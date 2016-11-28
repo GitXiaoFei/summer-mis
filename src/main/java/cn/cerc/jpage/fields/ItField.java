@@ -2,10 +2,10 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
-public class ItField extends AbstractField {
+public class ItField extends Field {
 	public ItField(DataView owner) {
 		super(owner, "序", 2);
 		this.setReadonly(true);

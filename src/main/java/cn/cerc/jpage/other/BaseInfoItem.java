@@ -1,7 +1,7 @@
 package cn.cerc.jpage.other;
 
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
 
 public class BaseInfoItem extends Component {
 	private String name;

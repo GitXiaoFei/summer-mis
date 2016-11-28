@@ -7,15 +7,15 @@ import java.util.List;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
+import cn.cerc.jpage.common.TMutiPage;
+import cn.cerc.jpage.common.UrlRecord;
+import cn.cerc.jpage.fields.Field;
 
 public class BaseGrid extends Grid {
 
 	private String trId;
-
 	public BaseGrid() {
 		super();
 		trId = "tr";
@@ -27,28 +27,13 @@ public class BaseGrid extends Grid {
 	}
 
 	@Override
-	public void output(HtmlWriter html) {
-		html.print("<div class='scrollArea'>");
-		if (this.getDataSet().size() > 0) {
-			if (form != null) {
-				form.outHead(html);
-				outputGrid(html);
-				form.outFoot(html);
-			} else {
-				outputGrid(html);
-			}
-		}
-		html.print("</div>");
-	}
-
-	@Override
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
-		MutiPage pages = this.getPages();
-		List<AbstractField> fields = this.getFields();
+		TMutiPage pages = this.getPages();
+		List<Field> fields = this.getFields();
 
 		double sumFieldWidth = 0;
-		for (AbstractField field : fields) {
+		for (Field field : fields) {
 			if (field.getExpender() == null) {
 				sumFieldWidth += field.getWidth();
 			}
@@ -65,7 +50,7 @@ public class BaseGrid extends Grid {
 		html.println(">");
 
 		html.println("<tr>");
-		for (AbstractField field : fields) {
+		for (Field field : fields) {
 			if (field.getExpender() == null) {
 				double val = roundTo(field.getWidth() / sumFieldWidth * 100, -2);
 				html.println("<th width=\"%f%%\">%s</th>", val, field.getName());
@@ -78,14 +63,14 @@ public class BaseGrid extends Grid {
 			int expendSum = 0;
 			// 输出正常字段
 			html.println("<tr");
-			html.println(" id='%s'", trId + dataSet.getRecNo());
+			html.println(" id='%s'",trId + dataSet.getRecNo());
 			html.println(">");
-			for (AbstractField field : fields) {
+			for (Field field : fields) {
 				if (field.getExpender() == null) {
 					html.print("<td");
 					if (field.getAlign() != null)
 						html.print(" align=\"%s\"", field.getAlign());
-					if (field.getField() != null)
+					if(field.getField() != null)
 						html.print(" role=\"%s\"", field.getField());
 					html.print(">");
 					outputField(html, field);
@@ -99,7 +84,7 @@ public class BaseGrid extends Grid {
 			if (expendSum > 0) {
 				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
 				html.println("<td colspan=\"%d\">", fields.size() - expendSum);
-				for (AbstractField field : fields) {
+				for (Field field : fields) {
 					if (field.getExpender() != null) {
 						html.print("<span>");
 						if (!"".equals(field.getName())) {
@@ -119,7 +104,7 @@ public class BaseGrid extends Grid {
 		return;
 	}
 
-	private void outputField(HtmlWriter html, AbstractField field) {
+	private void outputField(HtmlWriter html, Field field) {
 		Record record = getDataSet().getCurrent();
 		BuildUrl build = field.getBuildUrl();
 		if (build != null) {
