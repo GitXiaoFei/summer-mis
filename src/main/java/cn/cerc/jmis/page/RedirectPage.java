@@ -5,35 +5,20 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IPage;
 
-public class RedirectPage implements IPage {
+public class RedirectPage extends AbstractPage {
 	private String url;
-	protected IForm form;
 
 	public RedirectPage() {
-		super();
 	}
 
 	public RedirectPage(IForm form) {
-		super();
-		this.setForm(form);
+		super(form);
 	}
 
 	public RedirectPage(IForm form, String url) {
-		super();
-		this.setForm(form);
+		super(form);
 		this.url = url;
-	}
-
-	@Override
-	public void setForm(IForm form) {
-		this.form = form;
-	}
-
-	@Override
-	public IForm getForm() {
-		return form;
 	}
 
 	@Override

@@ -1,68 +1,71 @@
 package cn.cerc.jmis.form;
 
+import static cn.cerc.jmis.core.ClientDevice.device_phone;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jbean.form.IJspPage;
+import cn.cerc.jpage.other.Url_Record;
 
 public class MainMenu {
 	// 页面标题
 	private String pageTitle = null;
 	// 退出
-	private UrlRecord exitPage = null;
+	private Url_Record exitPage = null;
 	// 首页
-	private UrlRecord homePage;
-	// 左边菜单
-	private List<UrlRecord> leftMenus = new ArrayList<>();
-	// 右边菜单
-	private List<UrlRecord> rightMenus = new ArrayList<>();
+	private Url_Record homePage = new Url_Record(Application.getConfig().getFormDefault(),
+			"<img src=\"images/Home.png\"/>");
+	private List<Url_Record> leftMenus = new ArrayList<>();
+	private List<Url_Record> rightMenus = new ArrayList<>();
 
 	public MainMenu() {
-		homePage = new UrlRecord(Application.getConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
 		leftMenus.add(homePage);
 	}
 
-	public List<UrlRecord> getBarMenus(IForm form) {
+	public void finish(IJspPage page, boolean logon, String device) {
 		// 刷新
 		if (this.pageTitle != null) {
-			leftMenus.add(new UrlRecord("javascript:location.reload()", this.pageTitle));
+			leftMenus.add(new Url_Record("javascript:location.reload()", this.pageTitle));
 		}
+
 		// 设置退出
-		String tmp = (String) form.getRequest().getAttribute("exitPage");
+		String tmp = (String) page.getForm().getRequest().getAttribute("exitPage");
 		if (exitPage != null && tmp != null && !tmp.equals(""))
-			exitPage.setName("<=").setSite(tmp);
+			exitPage.setCaption("<=").setUrl(tmp);
 
 		if (exitPage != null)
 			rightMenus.add(exitPage);
 
 		if (leftMenus.size() > 0) {
-			if (form.getClient().isPhone() && leftMenus.size() > 2) {
-				List<UrlRecord> tmp1 = new ArrayList<>();
+			if (device_phone.equals(device) && leftMenus.size() > 2) {
+				List<Url_Record> tmp1 = new ArrayList<>();
 				tmp1.add(leftMenus.get(0));
 				tmp1.add(leftMenus.get(leftMenus.size() - 1));
-				return tmp1;
+				page.add("barMenus", tmp1);
 			} else {
-				return leftMenus;
+				page.add("barMenus", leftMenus);
 			}
 		}
-		return null;
+
+		if (rightMenus.size() > 0)
+			page.add("subMenus", rightMenus);
 	}
 
 	public void addLeftMenu(String url, String name) {
-		leftMenus.add(new UrlRecord(url, name));
+		leftMenus.add(new Url_Record(url, name));
 	}
 
 	public void addRightMenu(String url, String name) {
-		rightMenus.add(new UrlRecord(url, name));
+		rightMenus.add(new Url_Record(url, name));
 	}
 
 	public void setExitUrl(String url) {
 		if (exitPage == null)
-			exitPage = new UrlRecord();
-		exitPage.setName("<img src=\"images/return.png\"/>");
-		exitPage.setSite(url);
+			exitPage = new Url_Record();
+		exitPage.setCaption("<img src=\"images/return.png\"/>");
+		exitPage.setUrl(url);
 	}
 
 	public String getPageTitle() {
@@ -73,11 +76,11 @@ public class MainMenu {
 		this.pageTitle = pageTitle;
 	}
 
-	public UrlRecord getHomePage() {
+	public Url_Record getHomePage() {
 		return homePage;
 	}
 
-	public List<UrlRecord> getRightMenus() {
+	public List<Url_Record> getRightMenus() {
 		return rightMenus;
 	}
 }

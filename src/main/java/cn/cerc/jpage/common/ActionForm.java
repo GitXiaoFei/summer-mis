@@ -1,4 +1,4 @@
-package cn.cerc.jpage.core;
+package cn.cerc.jpage.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,18 +7,15 @@ public class ActionForm extends Component {
 	private String action;
 	private String method = "post";
 	private Map<String, String> items = new HashMap<>();
-	private String enctype;
 
 	public ActionForm() {
 
 	}
 
 	public ActionForm(String id) {
-		super();
 		this.setId(id);
 	}
 
-	@Deprecated
 	public ActionForm(String id, String action) {
 		this.setId(id);
 		this.setAction(action);
@@ -42,18 +39,6 @@ public class ActionForm extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		outHead(html);
-		super.output(html);
-		outFoot(html);
-	}
-
-	/**
-	 * 输入头部
-	 * 
-	 * @param html
-	 *            输出器
-	 */
-	public void outHead(HtmlWriter html) {
 		html.print("<form");
 		if (this.action != null)
 			html.print(" action=\"%s\"", this.action);
@@ -61,8 +46,6 @@ public class ActionForm extends Component {
 			html.print(" method=\"%s\"", this.method);
 		if (this.getId() != null)
 			html.print(" id=\"%s\"", this.getId());
-		if (this.enctype != null)
-			html.print(" enctype=\"%s\"", this.enctype);
 		html.println(">");
 		for (String key : items.keySet()) {
 			String value = items.get(key);
@@ -73,32 +56,10 @@ public class ActionForm extends Component {
 			html.print(" value=\"%s\"", value);
 			html.println("/>");
 		}
-	}
-
-	/**
-	 * 输出尾部
-	 * 
-	 * @param html
-	 *            输出器
-	 */
-	public void outFoot(HtmlWriter html) {
-		html.println("</form>");
+		super.output(html);
 	}
 
 	public void addHidden(String key, String value) {
 		items.put(key, value);
 	}
-
-	public String getEnctype() {
-		return enctype;
-	}
-
-	public void setEnctype(String enctype) {
-		this.enctype = enctype;
-	}
-
-	public Map<String, String> getItems() {
-		return items;
-	}
-
 }

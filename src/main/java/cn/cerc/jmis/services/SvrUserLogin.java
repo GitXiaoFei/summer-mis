@@ -112,6 +112,7 @@ public class SvrUserLogin extends CustomService {
 
 			sess.setProperty(Application.token, GuidFixStr(newGuid()));
 			sess.setProperty(Application.userId, dsUser.getString("ID_"));
+			;
 			sess.setProperty(Application.bookNo, dsUser.getString("CorpNo_"));
 			sess.setProperty(Application.userCode, dsUser.getString("Code_"));
 			if (dsUser.getBoolean("DiyRole_"))

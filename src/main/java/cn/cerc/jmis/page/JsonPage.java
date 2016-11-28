@@ -7,37 +7,17 @@ import javax.servlet.ServletException;
 import com.google.gson.Gson;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IPage;
 
-public class JsonPage implements IPage {
+public class JsonPage extends AbstractPage {
 	private Object data;
 
-	protected IForm form;
-
-	public JsonPage() {
-		super();
-	}
-
 	public JsonPage(IForm form) {
-		super();
-		this.setForm(form);
+		super(form);
 	}
 
-	@Deprecated
 	public JsonPage(IForm form, Object data) {
-		super();
-		this.setForm(form);
+		super(form);
 		this.data = data;
-	}
-
-	@Override
-	public void setForm(IForm form) {
-		this.form = form;
-	}
-
-	@Override
-	public IForm getForm() {
-		return form;
 	}
 
 	@Override

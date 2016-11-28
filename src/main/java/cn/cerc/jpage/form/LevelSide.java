@@ -1,7 +1,7 @@
 package cn.cerc.jpage.form;
 
-import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.Component;
+import cn.cerc.jpage.common.HtmlWriter;
 
 public class LevelSide extends Component {
 	private String title;

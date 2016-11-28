@@ -5,9 +5,9 @@ import java.util.Map;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.HtmlWriter;
 
-public class OptionField extends AbstractField {
+public class OptionField extends StringField {
 	private String defaultValue;
 	private int size;// 默认显示行数
 	private Map<String, String> items = new LinkedHashMap<>();
@@ -25,18 +25,6 @@ public class OptionField extends AbstractField {
 			defaultValue = key;
 		items.put(key, text);
 		return this;
-	}
-
-	@Override
-	public String getText(Record dataSet) {
-		if (dataSet == null)
-			return null;
-		if (buildText != null) {
-			HtmlWriter html = new HtmlWriter();
-			buildText.outputText(dataSet, html);
-			return html.toString();
-		}
-		return dataSet.getString(getField());
 	}
 
 	@Override

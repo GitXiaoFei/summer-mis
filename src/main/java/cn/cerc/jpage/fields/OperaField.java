@@ -2,9 +2,9 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.common.HtmlWriter;
 
-public class OperaField extends AbstractField {
+public class OperaField extends Field {
 	private String value = "内容";
 
 	public OperaField(DataView owner) {
