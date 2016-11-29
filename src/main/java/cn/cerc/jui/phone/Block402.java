@@ -53,7 +53,7 @@ public class Block402 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<section class='block402'>");
 		html.print("<div class='up_con'>");
 		product.output(html);

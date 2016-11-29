@@ -26,7 +26,7 @@ public class Block603 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.println("<div class=\"block603\">");
 		image.output(html);
 		html.println("</div>");
