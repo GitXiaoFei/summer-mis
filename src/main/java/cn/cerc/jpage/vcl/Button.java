@@ -34,7 +34,7 @@ public class Button extends Component {
 		}
 		html.print(">");
 		html.print(text);
-		html.print("</button>");
+		html.println("</button>");
 	}
 
 	public String getText() {

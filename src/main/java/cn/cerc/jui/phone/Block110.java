@@ -12,7 +12,7 @@ public class Block110 extends Component {
 	private Button search = new Button();
 
 	/**
-	 * 文本+输入框+查询按钮
+	 * 文本 + 输入框 + 查询按钮
 	 * 
 	 * @param owner
 	 *            内容显示区
@@ -23,8 +23,9 @@ public class Block110 extends Component {
 		search.setText("查询");
 	}
 
+	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block110'>");
 		label.output(html);
 		input.output(html);

@@ -27,13 +27,13 @@ public class Block601 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		if(items.size() == 0){
+		if (items.size() == 0) {
 			Image image = new Image();
 			image.setAlt("(image)");
 			image.setWidth("100%").setHeight("192px");
 			items.add(image);
 		}
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.println("<div class=\"block601\">");
 		for (Image image : items)
 			image.output(html);

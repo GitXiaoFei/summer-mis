@@ -10,7 +10,7 @@ public class Block108 extends Component {
 	private TextBox input = new TextBox();
 
 	/**
-	 * 文本加输入框
+	 * 文本 + 输入框
 	 * 
 	 * @param owner
 	 *            内容显示区
@@ -20,8 +20,9 @@ public class Block108 extends Component {
 		label.setText("(label)");
 	}
 
+	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block108'>");
 		label.output(html);
 		input.output(html);

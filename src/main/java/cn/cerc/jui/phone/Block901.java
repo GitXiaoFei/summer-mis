@@ -22,7 +22,7 @@ public class Block901 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block901'>");
 		for (Label item : items)
 			item.output(html);

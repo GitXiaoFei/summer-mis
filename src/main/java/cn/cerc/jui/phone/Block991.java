@@ -31,7 +31,7 @@ public class Block991 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.println("<div class=\"block991\">");
 		image.output(html);
 		button.output(html);
