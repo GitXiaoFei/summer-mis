@@ -246,8 +246,10 @@ public class SvrUserLogin extends CustomService {
 			return false;
 		}
 		if (ds.size() != 1) {
-			headOut.setField("Msg_", String.format(
-					"您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您设置主附帐号关系后再使用手机号登录！", userCode));
+			headOut.setField("Msg_",
+					String.format(
+							"您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！",
+							userCode));
 			headOut.setField("MoreAccount", true);
 			return false;
 		}
