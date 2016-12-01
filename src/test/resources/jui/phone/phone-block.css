@@ -24,7 +24,7 @@
 
 /* 段落标题栏2 */
 .block102 {
-	padding: 0.75em;
+	padding: 0.375em;
 	background-color: #f0f0f0;
 	/* text-align: center; */
 	border-bottom: 1px solid #bbbbbb;
@@ -48,27 +48,45 @@
 
 .block104 {
 	padding: 0.375em 0.75em;
-	position: relative;
 	font-size: 16px;
 	border-bottom: 1px solid #bbbbbb;
 }
 
+.block104 span {
+	display: block;
+	width: 100%;
+	border: 1px solid #dedede;
+	border-radius: 5px;
+	position: relative;
+}
+
 .block104 input {
-	padding: 0.375em;
 	padding-left: 0.75em;
+	border: 0 none;
 	outline: 0 none;
 	width: 100%;
+	height: 1.875em;
+	background: #ffffff;
+	padding-right: 6.25em;
+	box-sizing: border-box;
+	font-size: 1em;
 }
 
 .block104 button {
-	outline: 0 none;
+	padding: 0;
+	margin: 0;
 	position: absolute;
-	right: 1.25em;
-	top: 0.75em;
+	outline: 0 none;
+	height: 1.875em;
+	font-size: 1em;
+	top: 0;
+	right: 0.125em;
 	border-width: 0 0 0 1px;
+	border-color: #dedede;
 	border-radius: 0;
-	padding: 0.25em 0;
-	background: transparent;
+	text-align: center;
+	line-height: 1.875em;
+	background: #ffffff !important;
 }
 
 .block104 button::active {
@@ -86,7 +104,7 @@
 /* 段落标题栏 */
 .block105 {
 	padding: 0.75em;
-	background-color: #b2ffcb;
+	background-color: floralwhite;
 	text-align: center;
 	border-bottom: 1px solid #bbbbbb;
 }
@@ -99,7 +117,16 @@
 }
 
 .block106 {
-	
+	padding: 0.375em 0.75em;
+}
+
+.block106 span {
+	font-size: 1em;
+	height: 1.5em;
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	line-height: 1.5em;
 }
 
 .block107 {
@@ -163,7 +190,7 @@
 }
 
 .block107 .choice4 ul {
-	height: 200%;
+	height: 100%;
 	overflow-y: auto;
 }
 
@@ -181,16 +208,117 @@
 	border-bottom: 0 none;
 }
 
-.block112 span[role='left'] {
-	width: 25%;
-	display: inline-block;
-	text-align: right;
+.block108 {
+	padding: 0.25em 0;
+	padding-left: 5.5em;
 	padding-right: 0.75em;
+	background-color: #fff;
+	position: relative;
+}
+
+.block108 span {
+	text-align: right;
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 0.75em;
+	transform: translateY(-50%);
+	width: 5.5em;
+}
+
+.block108 input {
+	margin-left: .75em;
+	width: 80%;
+	color: #333;
+	line-height: 1.5em;
+	font-size: 1em;
+	border-radius: 5px;
+	padding: 0.125em 0.75em;
+	border: 1px solid #bbbbbb;
+}
+
+.block109 {
+	padding: 0.25em 0;
+	padding-left: 5.5em;
+	padding-right: 0.75em;
+	background-color: #fff;
+	position: relative;
+}
+
+.block109 span {
+	width: 5.5em;
+	text-align: right;
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 0.75em;
+	transform: translateY(-50%);
+}
+
+.block109 input {
+	margin-left: .75em;
+	width: 80%;
+	color: #333;
+	line-height: 1.5em;
+	font-size: 1em;
+	border-radius: 5px;
+	padding: 0.125em 0.75em;
+	border: 1px solid #bbbbbb;
+}
+
+.block112 {
+	padding: 0.25em;
+	background-color: #fff;
+	position: relative;
+}
+
+.block112 span[role='left'] {
+	width: 5.5em;
+	text-align: right;
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 0.75em;
+	transform: translateY(-50%);
 }
 
 .block112 span[role='right'] {
-	width: 74%;
+	line-height: 1.5em;
+	border-radius: 5px;
+	padding-left: 6em;
+	height: 1.5em;
+	overflow: hidden;
+}
+
+.block113 {
+	padding: 0.25em 0;
+	padding-left: 5.5em;
+	padding-right: 0.75em;
+	background-color: #fff;
+	position: relative;
+}
+
+.block113 span {
+	text-align: right;
 	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 0.75em;
+	transform: translateY(-50%);
+	width: 5.5em;
+}
+
+.block113 textarea {
+	resize: none;
+	vertical-align: middle;
+	margin-left: .75em;
+	width: 80%;
+	color: #333;
+	line-height: 1.5em;
+	font-size: 1em;
+	border-radius: 5px;
+	padding: 0.125em 0.75em;
+	border: 1px solid #bbbbbb;
 }
 
 .block301 {
@@ -231,7 +359,6 @@
 	font-size: 0.9em;
 	line-height: 1.6em;
 	overflow: hidden;
-	height: 1.6em;
 	max-height: 3.2em;
 }
 
@@ -296,15 +423,13 @@
 }
 
 .block401 div[role='operation'] span[role='describe'] {
-	float: right;
-	width: 6em;
+	width: 14em;
 	height: 1.25em;
 	margin: 0;
 	overflow: hidden;
-	text-align: center;
 	line-height: 1.25em;
-	font-size: 0.875em;
 	display: inline-block;
+	color: #3c0000;	
 }
 
 .block401 .info {
@@ -317,6 +442,12 @@
 	width: 13em;
 	height: 1.625em;
 	overflow: hidden;
+}
+
+.block401 span[role='sales'] {
+	border: 1px solid;
+    color: #ff0000;
+    padding: 0 0.125em;
 }
 
 .block401 .info button {
@@ -428,20 +559,36 @@
 
 .block601 {
 	width: 100%;
+	min-height: 192px;
+	padding: 0.5em 0.175em;
 }
-.block601 img{
+
+.block601 img {
 	width: 100%;
-	padding:0.175em;
 }
 
 .block602 {
 	width: 100%;
 }
-.block602 img{
+
+.block602 img {
 	width: 100%;
-	padding:0.175em;
+	padding: 0.175em;
 }
 
+.block603 {
+	margin: 3em 2em;
+	text-align: center;
+}
+
+.block901 {
+	margin: 3em 2em;
+}
+
+.block901 span {
+	display: inline-block;
+	margin: 0.5em 0;
+}
 
 /*底部确认购买*/
 .block991 {
@@ -494,6 +641,7 @@
 	background-color: #ffffff;
 	z-index: 99999;
 	text-align: center;
+	overflow: hidden;
 }
 
 .block992 button {
@@ -501,6 +649,6 @@
 	margin: 0 0.375em;
 }
 
-input[role="chkPartCode"][type="checkbox"]{
-	display:none;
+input[role="chkPartCode"][type="checkbox"] {
+	display: none;
 }
