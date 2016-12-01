@@ -26,7 +26,7 @@ public class Block111 extends Component {
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block110'>");
+		html.print("<div class='block111'>");
 		label.output(html);
 		input.output(html);
 		search.output(html);
