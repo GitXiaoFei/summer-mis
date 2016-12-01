@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.cerc.jbean.core.AppConfig;
+import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
@@ -47,6 +48,10 @@ public class StartApp implements Filter {
 				IForm form = Application.getBean("MobileConfig", IForm.class);
 				form.setRequest((HttpServletRequest) request);
 				form.setResponse((HttpServletResponse) response);
+				try (AppHandle handle = new AppHandle()) {
+						handle.setProperty(Application.sessionId, req.getSession().getId());
+						form.setHandle(handle);
+				}
 				IPage page = form.execute();
 				page.execute();
 			} catch (Exception e) {
