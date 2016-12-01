@@ -35,7 +35,7 @@ public class Block301 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block301'>");
 		leftIcon.output(html);
 		html.print("<a href='%s'>", operator.getUrl());
@@ -48,7 +48,7 @@ public class Block301 extends Component {
 		html.print("</div>");
 		html.print("</a>");
 		html.print("<div style='clear: both'></div>");
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Image getLeftIcon() {

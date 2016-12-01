@@ -11,7 +11,7 @@ function showChoice(choiceBox) {
 }
 
 function choiceItem(choiceBox, item, childPage, dataUrl){
-	var classType = "所有大类,所有中类,所有系列,(空),所有品牌";
+	var classType = "所有大类,所有中类,所有系列,(空),所有品牌,所有类别";
 	var value = classType.indexOf(item) == -1 ? item : "";
 	if(childPage){
 		$("#" + choiceBox + "input").attr({"value":value});
@@ -19,8 +19,10 @@ function choiceItem(choiceBox, item, childPage, dataUrl){
 				function(result){
 					$("#" + choiceBox + "choice").hide();
 					$("#" + childPage + "list ul").html(result);
+					$("#" + childPage + "list ul li").on("click", getPartInfo);
 		 		});
-		$("#" + childPage + "choice").show(200);
+		 if(classType.indexOf(item) == -1)
+			 $("#" + childPage + "choice").show(200);
 	}else{
 		$("#" + choiceBox + "choice").hide();
 		$("#" + choiceBox + "input").attr({"value":value});

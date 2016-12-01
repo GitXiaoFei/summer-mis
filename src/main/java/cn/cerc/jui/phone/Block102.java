@@ -28,11 +28,11 @@ public class Block102 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block102'>");
 		title.output(html);
 		image.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getTitle() {

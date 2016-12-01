@@ -2,37 +2,38 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Image;
 
 /**
  * 
  * @author 张弓
  *
  */
-public class Block105 extends Component {
-	private Label title = new Label();
+public class Block603 extends Component {
+	private Image image = new Image();
 
 	/**
-	 * 普通的分段标题
+	 * 单图片显示
 	 * 
 	 * @param owner
 	 *            内容显示区
-	 * 
 	 */
-	public Block105(Component owner) {
+	public Block603(Component owner) {
 		super(owner);
-		title.setText("(title)");
+		image.setAlt("(image)");
+		image.setSrc("jui/phone/block603_image.png");
 	}
 
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block105'>");
-		title.output(html);
+		html.println("<div class=\"block603\">");
+		image.output(html);
 		html.println("</div>");
 	}
 
-	public Label getTitle() {
-		return title;
+	public Image getImage() {
+		return image;
 	}
+
 }

@@ -29,7 +29,7 @@ public class Block402 extends Component {
 	public Block402(Component owner) {
 		super(owner);
 		product.setRole("product");
-		product.setSrc("jui/phone/block402-product.jpg");
+		product.setSrc("jui/phone/block402-product.png");
 
 		describe.setRole("describe");
 		describe.setText("(describe)");
@@ -53,7 +53,7 @@ public class Block402 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<section class='block402'>");
 		html.print("<div class='up_con'>");
 		product.output(html);
@@ -68,7 +68,7 @@ public class Block402 extends Component {
 		html.print("</div>");
 		html.print("</div>");
 		html.print("<div class='info'>%s</div>", remark.toString());
-		html.print("</section>");
+		html.println("</section>");
 	}
 
 	public Label getDescribe() {

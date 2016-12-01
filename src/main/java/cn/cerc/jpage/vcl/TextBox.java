@@ -52,7 +52,7 @@ public class TextBox extends Component {
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.readonly)
 			html.print(" readonly='readonly'");
-		html.println(">");
+		html.println(" />");
 	}
 
 	public Label getCaption() {

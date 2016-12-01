@@ -172,9 +172,9 @@ public class PhonePage extends AbstractJspPage {
 		out.println("</div>");
 		out.println("<div class='rightSide'>");
 
-		if (rightSite != null)
+		if (rightSite != null){
 			out.print(rightSite);
-
+		}
 		// 添加分页控制
 		Component operaPages = null;
 		if (pages != null)

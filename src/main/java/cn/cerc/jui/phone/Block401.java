@@ -32,7 +32,7 @@ public class Block401 extends Component {
 		super(owner);
 		product.setRole("product");
 		product.setAlt("(product)");
-		product.setSrc("jui/phone/block401-product.jpg");
+		product.setSrc("jui/phone/block401-product.png");
 		button.setText("(button)");
 
 		remark.setRole("remark");
@@ -43,7 +43,7 @@ public class Block401 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<section class='block401'>");
 		html.print("<div class='up_con'>");
 		product.output(html);
@@ -63,7 +63,7 @@ public class Block401 extends Component {
 		remark.output(html);
 		button.output(html);
 		html.print("</div>");
-		html.print("</section>");
+		html.println("</section>");
 	}
 
 	public String getTitle() {

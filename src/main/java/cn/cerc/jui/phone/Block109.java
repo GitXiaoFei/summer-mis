@@ -12,9 +12,10 @@ public class Block109 extends Component {
 	private Image select = new Image();
 
 	/**
-	 * 文本+输入框+弹窗选择按钮
+	 * 文本 + 输入框 + 弹窗选择按钮
 	 * 
 	 * @param owner
+	 *            内容显示区
 	 */
 	public Block109(Component owner) {
 		super(owner);
@@ -22,13 +23,14 @@ public class Block109 extends Component {
 		select.setSrc("jui/phone/block109-select.png");
 	}
 
+	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block109'>");
 		label.output(html);
 		input.output(html);
 		select.output(html);
-		html.print("</div>");
+		html.println("</div>");
 	}
 
 	public Label getLabel() {

@@ -24,7 +24,7 @@ public class Block112 extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<!-- %s -->", this.getClass().getName());
+		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block112' role='row'>");
 		left.output(html);
 		right.output(html);
@@ -39,11 +39,13 @@ public class Block112 extends Component {
 		return right;
 	}
 
-	public void setLeftText(String text) {
+	public Block112 setLeftText(String text) {
 		left.setText(text);
+		return this;
 	}
 
-	public void setRightText(String text) {
+	public Block112 setRightText(String text) {
 		right.setText(text);
+		return this;
 	}
 }

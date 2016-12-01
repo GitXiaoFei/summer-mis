@@ -24,7 +24,7 @@ public class Label extends Component {
 			html.print(" role='%s'", this.role);
 		html.print(">");
 		html.print(text);
-		html.print("</span>");
+		html.println("</span>");
 	}
 
 	public String getText() {

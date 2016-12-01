@@ -27,8 +27,10 @@ public class Block104 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block104'>");
+		html.print("<span>");
 		input.output(html);
 		submit.output(html);
+		html.print("</span>");
 		html.println("</div>");
 	}
 
