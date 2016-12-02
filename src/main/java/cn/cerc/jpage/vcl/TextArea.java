@@ -13,6 +13,7 @@ public class TextArea extends Component {
 	private Label caption;
 	private String name;
 	private String text;
+	private String placeholder;
 	private int cols;
 	private int rows;
 	private boolean readonly;
@@ -31,6 +32,9 @@ public class TextArea extends Component {
 		}
 
 		html.print("<textarea ");
+		if (this.getId() != null) {
+			html.print(" id='%s'", this.getId());
+		}
 		if (name != null) {
 			html.print("name='%s' ", name);
 		}
@@ -39,6 +43,9 @@ public class TextArea extends Component {
 		}
 		if (rows != 0) {
 			html.print("rows='%s' ", rows);
+		}
+		if (placeholder != null) {
+			html.print("placeholder=%s ", placeholder);
 		}
 		if (readonly) {
 			html.print("readonly='readonly'");
@@ -75,6 +82,14 @@ public class TextArea extends Component {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getPlaceholder() {
+		return placeholder;
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.placeholder = placeholder;
 	}
 
 	public int getCols() {
