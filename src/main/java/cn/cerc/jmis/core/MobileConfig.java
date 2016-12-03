@@ -28,6 +28,8 @@ public class MobileConfig {
 	private String msgService = "www.jiguang.cn";
 	// 推送服务商配置，如AppKey
 	private String msgConfig = "";
+	// 消息管理页
+	private String msgManage = "forms/FrmMessages";
 
 	// 最后更新时间，格式范例：2016-01-01 01:01:01
 	private String lastModified;
@@ -128,5 +130,13 @@ public class MobileConfig {
 
 	public void setLastModified(String lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public String getMsgManage() {
+		return msgManage;
+	}
+
+	public void setMsgManage(String msgManage) {
+		this.msgManage = msgManage;
 	}
 }
