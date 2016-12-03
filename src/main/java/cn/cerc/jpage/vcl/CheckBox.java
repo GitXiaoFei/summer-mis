@@ -16,13 +16,19 @@ public class CheckBox extends Component {
 	private String value;
 	private String role;
 	private boolean checked;
-	
+
+	public CheckBox() {
+		super();
+		type = "checkbox";
+		checked = false;
+	}
+
 	public CheckBox(Component owner) {
 		super(owner);
 		type = "checkbox";
 		checked = false;
 	}
-	
+
 	@Override
 	public void output(HtmlWriter html) {
 		html.print("<input");
