@@ -124,7 +124,7 @@ public abstract class Grid extends Component implements DataView {
 		return form;
 	}
 
-	@Deprecated
+	//FIXME: 此函数后需要去除！
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}

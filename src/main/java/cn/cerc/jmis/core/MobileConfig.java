@@ -30,6 +30,8 @@ public class MobileConfig {
 	private String msgConfig = "";
 	// 消息管理页
 	private String msgManage = "forms/FrmMessages";
+	// 静态文件列表
+	private List<String> cacheFiles = new ArrayList<>();
 
 	// 最后更新时间，格式范例：2016-01-01 01:01:01
 	private String lastModified;
@@ -64,16 +66,8 @@ public class MobileConfig {
 		return adImages;
 	}
 
-	public void setAdImages(List<String> adImages) {
-		this.adImages = adImages;
-	}
-
 	public Map<String, Boolean> getHomePages() {
 		return homePages;
-	}
-
-	public void setHomePages(Map<String, Boolean> homePages) {
-		this.homePages = homePages;
 	}
 
 	public String getMsgService() {
@@ -112,10 +106,6 @@ public class MobileConfig {
 		return welcomeImages;
 	}
 
-	public void setWelcomeImages(List<String> welcomeImages) {
-		this.welcomeImages = welcomeImages;
-	}
-
 	public String getStartImage() {
 		return startImage;
 	}
@@ -138,5 +128,13 @@ public class MobileConfig {
 
 	public void setMsgManage(String msgManage) {
 		this.msgManage = msgManage;
+	}
+
+	public List<String> getCacheFiles() {
+		return cacheFiles;
+	}
+	
+	public void setCacheFiles(List<String> cacheFiles) {
+		 this.cacheFiles = cacheFiles;
 	}
 }
