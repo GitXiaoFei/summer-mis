@@ -31,6 +31,7 @@ public class Block601 extends Component {
 			Image image = new Image();
 			image.setAlt("(image)");
 			image.setWidth("100%").setHeight("192px");
+			image.setSrc("");
 			items.add(image);
 		}
 		html.println("<!-- %s -->", this.getClass().getName());
