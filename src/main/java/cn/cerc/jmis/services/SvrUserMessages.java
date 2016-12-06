@@ -24,7 +24,7 @@ public class SvrUserMessages extends CustomService {
 		SqlQuery ds = new SqlQuery(this);
 		ds.setMaximum(5);
 		ds.add("select ms.UID_ from %s ms", SystemTable.get(SystemTable.getUserMessages));
-		ds.add("inner join %s oi on ms.CorpNo_=oi.CorpNo_ and oi.StartHost_='b.knowall.cn'",
+		ds.add("inner join %s oi on ms.CorpNo_=oi.CorpNo_ and (oi.StartHost_='b.knowall.cn' or oi.StartHost_='m.knowall.cn')",
 				SystemTable.get(SystemTable.getBookInfo));
 		ds.add("where ms.Level_=%s", MessageLevel.Service.ordinal());
 		ds.add("and ms.Process_=%s", MessageProcess.wait.ordinal());
