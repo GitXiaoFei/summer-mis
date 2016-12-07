@@ -4,7 +4,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 /**
  * 
@@ -14,7 +14,7 @@ import cn.cerc.jpage.vcl.Label;
 public class Block991 extends Component {
 	private Image image = new Image();
 	private Button button = new Button(this);
-	private Label remark = new Label(this);
+	private Span remark = new Span(this);
 
 	/**
 	 * 底部状态栏：1个功能按钮+提示文字
@@ -39,7 +39,7 @@ public class Block991 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getRemark() {
+	public Span getRemark() {
 		return remark;
 	}
 

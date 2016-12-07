@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
 /**
@@ -62,7 +62,7 @@ public class Block107 extends Component {
 		return input;
 	}
 
-	public Label getCaption() {
+	public Span getCaption() {
 		return input.getCaption();
 	}
 

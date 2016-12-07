@@ -4,14 +4,14 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 /**
  * @author 善贵
  *
  */
 public class Block116 extends Component {
-	private Label title = new Label();
+	private Span title = new Span();
 	private Image image = new Image();
 	private Button button = new Button();
 
@@ -39,7 +39,7 @@ public class Block116 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getTitle() {
+	public Span getTitle() {
 		return title;
 	}
 

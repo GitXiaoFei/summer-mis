@@ -5,10 +5,10 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 public class Block901 extends Component {
-	private List<Label> items = new ArrayList<>();
+	private List<Span> items = new ArrayList<>();
 
 	/**
 	 * 带图标的多行内容显示，如采购成功确认讯息显示
@@ -24,13 +24,13 @@ public class Block901 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block901'>");
-		for (Label item : items)
+		for (Span item : items)
 			item.output(html);
 		html.println("</div>");
 	}
 
-	public Label addLine(String text) {
-		Label item = new Label();
+	public Span addLine(String text) {
+		Span item = new Span();
 		item.setText(text);
 		items.add(item);
 		return item;

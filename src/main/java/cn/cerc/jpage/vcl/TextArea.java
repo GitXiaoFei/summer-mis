@@ -10,7 +10,7 @@ import cn.cerc.jpage.core.HtmlWriter;
  *
  */
 public class TextArea extends Component {
-	private Label caption;
+	private Span caption;
 	private String name;
 	private String text;
 	private String placeholder;
@@ -58,13 +58,13 @@ public class TextArea extends Component {
 		html.print("</textarea>");
 	}
 
-	public Label getCaption() {
+	public Span getCaption() {
 		if (caption == null)
-			caption = new Label();
+			caption = new Span();
 		return caption;
 	}
 
-	public void setCaption(Label caption) {
+	public void setCaption(Span caption) {
 		this.caption = caption;
 	}
 

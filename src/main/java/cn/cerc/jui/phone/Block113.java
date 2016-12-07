@@ -2,11 +2,11 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextArea;
 
 public class Block113 extends Component {
-	private Label label = new Label();
+	private Span label = new Span();
 	private TextArea input = new TextArea();
 
 	/**
@@ -31,7 +31,7 @@ public class Block113 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getLabel() {
+	public Span getLabel() {
 		return label;
 	}
 

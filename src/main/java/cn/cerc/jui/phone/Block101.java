@@ -4,10 +4,10 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 public class Block101 extends Component {
-	private Label title = new Label();
+	private Span title = new Span();
 	private Image image = new Image();
 	private UrlRecord url = new UrlRecord();
 
@@ -36,7 +36,7 @@ public class Block101 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getTitle() {
+	public Span getTitle() {
 		return title;
 	}
 
