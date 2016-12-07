@@ -11,7 +11,7 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 
 public class MemoryBookInfo {
-	private static final String buffVersion = "2";
+	private static final String buffVersion = "3";
 
 	public static BookInfoRecord get(IHandle handle, String corpNo) {
 		IMemcache buff = Application.getMemcache();
@@ -31,6 +31,8 @@ public class MemoryBookInfo {
 			result.setTel(ds.getString("tel"));
 			result.setManagerPhone(ds.getString("managerPhone"));
 			result.setStartHost(ds.getString("host"));
+			result.setContact(ds.getString("contact"));
+			result.setAuthentication(ds.getBoolean("authentication"));
 
 			result.setStatus(ds.getInt("status"));
 			result.setCorpType(ds.getInt("type"));

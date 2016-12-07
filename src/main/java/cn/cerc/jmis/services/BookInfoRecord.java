@@ -10,6 +10,8 @@ public class BookInfoRecord {
 	private String tel;
 	private String managerPhone;
 	private String startHost;
+	private String contact;
+	private boolean authentication;
 
 	public int getStatus() {
 		return status;
@@ -81,5 +83,21 @@ public class BookInfoRecord {
 
 	public void setStartHost(String startHost) {
 		this.startHost = startHost;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public boolean isAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(boolean authentication) {
+		this.authentication = authentication;
 	}
 }
