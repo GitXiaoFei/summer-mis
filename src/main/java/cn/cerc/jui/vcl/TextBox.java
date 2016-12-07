@@ -2,6 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.vcl.Label;
 import cn.cerc.jui.vcl.enums.TextEnum;
 
 public class TextBox extends Component {

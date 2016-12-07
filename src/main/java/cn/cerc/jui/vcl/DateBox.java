@@ -2,6 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.vcl.Label;
 
 public class DateBox extends Component {
 	private String name;

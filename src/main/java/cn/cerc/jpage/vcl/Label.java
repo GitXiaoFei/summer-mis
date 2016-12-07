@@ -1,4 +1,4 @@
-package cn.cerc.jui.vcl;
+package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -6,7 +6,15 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class Label extends Component {
 	private String caption;
 	private String url;
-	private String for_;
+	private String focusTarget;
+
+	public String getFocusTarget() {
+		return focusTarget;
+	}
+
+	public void setFocusTarget(String focusTarget) {
+		this.focusTarget = focusTarget;
+	}
 
 	public Label(Component component) {
 		super(component);
@@ -20,8 +28,8 @@ public class Label extends Component {
 	public void output(HtmlWriter html) {
 		if (url == null) {
 			html.print("<label");
-			if (for_ != null)
-				html.print(" for='%s'", for_);
+			if (focusTarget != null)
+				html.print(" for='%s'", focusTarget);
 			html.print(">%s</label>", this.caption);
 		} else
 			html.print("<a href='%s'>%s</a>", this.url, this.caption);
@@ -44,14 +52,6 @@ public class Label extends Component {
 
 	public void setCaption(String caption) {
 		this.caption = caption;
-	}
-
-	public String getFor_() {
-		return for_;
-	}
-
-	public void setFor_(String for_) {
-		this.for_ = for_;
 	}
 
 	public String getUrl() {
