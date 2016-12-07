@@ -12,7 +12,7 @@ public class CheckBox extends Component {
 	private Label label;
 	private String name = "";
 	private String value = "";
-	private boolean isChecked = false;
+	private boolean checked = false;
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -25,7 +25,7 @@ public class CheckBox extends Component {
 		if (this.getId() != null)
 			html.print(" id='%s'", this.getId());
 		html.print(" name='%s' value='%s' ", name, value);
-		if (isChecked)
+		if (checked)
 			html.print(" checked=checked");
 		html.print(" />");
 	}
@@ -54,12 +54,12 @@ public class CheckBox extends Component {
 		this.value = value;
 	}
 
-	public boolean getIsChecked() {
-		return isChecked;
+	public boolean getChecked() {
+		return checked;
 	}
 
-	public void setIsChecked(boolean isChecked) {
-		this.isChecked = isChecked;
+	public void setChecked(boolean isChecked) {
+		this.checked = isChecked;
 	}
 
 	public Label getLabel() {
