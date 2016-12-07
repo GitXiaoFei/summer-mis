@@ -2,11 +2,11 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 public class Block112 extends Component {
-	private Label left = new Label();
-	private Label right = new Label();
+	private Span left = new Span();
+	private Span right = new Span();
 
 	/**
 	 * 简单显示文字类信息，仅用于显示，不可修改
@@ -31,11 +31,11 @@ public class Block112 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getLeft() {
+	public Span getLeft() {
 		return left;
 	}
 
-	public Label getRight() {
+	public Span getRight() {
 		return right;
 	}
 

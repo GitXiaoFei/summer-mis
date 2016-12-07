@@ -3,11 +3,11 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Button;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
 public class Block110 extends Component {
-	private Label label = new Label();
+	private Span label = new Span();
 	private TextBox input = new TextBox();
 	private Button search = new Button();
 
@@ -33,7 +33,7 @@ public class Block110 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getLabel() {
+	public Span getLabel() {
 		return label;
 	}
 

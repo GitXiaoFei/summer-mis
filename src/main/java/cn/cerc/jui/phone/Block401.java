@@ -7,7 +7,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 /**
  * 
@@ -18,8 +18,8 @@ public class Block401 extends Component {
 	private String title = "(title)";
 	private Image product = new Image();
 	private List<Image> images = new ArrayList<>();
-	private Label remark = new Label();
-	private Label describe = new Label();
+	private Span remark = new Span();
+	private Span describe = new Span();
 	private Button button = new Button();
 
 	/**
@@ -92,11 +92,11 @@ public class Block401 extends Component {
 		return product;
 	}
 
-	public Label getRemark() {
+	public Span getRemark() {
 		return remark;
 	}
 
-	public Label getDescribe() {
+	public Span getDescribe() {
 		return describe;
 	}
 }

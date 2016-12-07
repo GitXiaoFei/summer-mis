@@ -3,7 +3,7 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
 /**
@@ -16,8 +16,8 @@ public class Block402 extends Component {
 	private Image product = new Image();
 	private Image add = new Image();
 	private Image diff = new Image();
-	private Label describe = new Label();
-	private Label remark = new Label();
+	private Span describe = new Span();
+	private Span remark = new Span();
 	private TextBox input = new TextBox();
 	private String role = new String();
 	private String dataName = new String();
@@ -81,11 +81,11 @@ public class Block402 extends Component {
 		html.println("</section>");
 	}
 
-	public Label getDescribe() {
+	public Span getDescribe() {
 		return describe;
 	}
 
-	public void setDescribe(Label describe) {
+	public void setDescribe(Span describe) {
 		this.describe = describe;
 	}
 
@@ -105,7 +105,7 @@ public class Block402 extends Component {
 		this.title = title;
 	}
 
-	public Label getRemark() {
+	public Span getRemark() {
 		return remark;
 	}
 

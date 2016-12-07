@@ -2,10 +2,10 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jpage.vcl.Span;
 
 public class Block106 extends Component {
-	private Label content = new Label();
+	private Span content = new Span();
 
 	/**
 	 * 简单显示文字类信息，仅用于显示，不可修改
@@ -26,7 +26,7 @@ public class Block106 extends Component {
 		html.println("</div>");
 	}
 
-	public Label getContent() {
+	public Span getContent() {
 		return content;
 	}
 

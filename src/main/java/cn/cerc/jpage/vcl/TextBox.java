@@ -11,7 +11,7 @@ import cn.cerc.jpage.core.HtmlWriter;
  *
  */
 public class TextBox extends Component {
-	private Label caption;
+	private Span caption;
 	private String name;
 	private String type;
 	private String value;
@@ -55,13 +55,13 @@ public class TextBox extends Component {
 		html.println(" />");
 	}
 
-	public Label getCaption() {
+	public Span getCaption() {
 		if (caption == null)
-			caption = new Label();
+			caption = new Span();
 		return caption;
 	}
 
-	public void setCaption(Label caption) {
+	public void setCaption(Span caption) {
 		this.caption = caption;
 	}
 

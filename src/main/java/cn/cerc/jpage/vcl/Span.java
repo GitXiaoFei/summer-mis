@@ -3,15 +3,15 @@ package cn.cerc.jpage.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class Label extends Component {
+public class Span extends Component {
 	private String text;
 	private String role;
 
-	public Label() {
+	public Span() {
 		super();
 	}
 
-	public Label(Component owner) {
+	public Span(Component owner) {
 		super(owner);
 	}
 
