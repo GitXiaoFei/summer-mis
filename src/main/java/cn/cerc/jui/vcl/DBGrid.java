@@ -31,30 +31,30 @@ public class DBGrid extends Component {
 		html.print("<table class='tbl'>");
 		html.print("<tr>");
 		for (AbstractColumn column : columns) {
-			if(column instanceof HideColumn){
+			if (column instanceof HideColumn) {
 				html.print("<th class='t-head tc hide'>%s</th>", column.getTitle());
-			}else if(column instanceof CheckBoxColumn){
-				CheckBoxColumn checkbox =(CheckBoxColumn) column; 
+			} else if (column instanceof CheckBoxColumn) {
+				CheckBoxColumn checkbox = (CheckBoxColumn) column;
 				html.print("<th class='t-head tc'>%s", column.getTitle());
-				html.print("<input type='checkbox' onclick=\"fnChkeckByName('%s',this)\" />",checkbox.getName());
+				html.print("<input type='checkbox' onclick=\"fnChkeckByName('%s',this)\" />", checkbox.getName());
 				html.print("</th>");
-			}else{
+			} else {
 				html.print("<th class='t-head tc'>%s</th>", column.getTitle());
 			}
 		}
 		html.print("<tr>");
 
 		html.print("<tbody class='t-body tc'>");
-		for(int i=0;i<dataSet.size();i++){
+		for (int i = 0; i < dataSet.size(); i++) {
 			Record record = dataSet.getRecords().get(i);
 			html.print("<tr>");
 			for (AbstractColumn column : columns) {
 				if (column instanceof HideColumn || column instanceof ConvertColumn || column instanceof OperatingColumn
-						|| column instanceof LinkColumn || column instanceof CheckBoxColumn){
+						|| column instanceof LinkColumn || column instanceof CheckBoxColumn) {
 					html.print(column.format(record));
-				}else if(column instanceof IndexColumn){//序号
-					html.print("<td>%s</td>",i+1);
-				}else{
+				} else if (column instanceof IndexColumn) {// 序号
+					html.print("<td>%s</td>", i + 1);
+				} else {
 					html.print("<td>");
 					html.print("%s", column.format(record));
 					html.print("</td>");

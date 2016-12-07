@@ -6,8 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 /**
  * 复选框
  * 
- * @author rick_zhou
- * @date 2016年11月9日 下午4:06:41
+ * @author rick_zhou 2016年11月9日 下午4:06:41
  */
 public class CheckBox extends Component {
 	private Label label;
@@ -26,21 +25,18 @@ public class CheckBox extends Component {
 		if (this.getId() != null)
 			html.print(" id='%s'", this.getId());
 		html.print(" name='%s' value='%s' ", name, value);
-		if(isChecked)
+		if (isChecked)
 			html.print(" checked=checked");
 		html.print(" />");
 	}
 
-
 	public CheckBox() {
 		super();
 	}
-	
 
 	public CheckBox(Component owner) {
 		super(owner);
 	}
-
 
 	public String getName() {
 		return name;

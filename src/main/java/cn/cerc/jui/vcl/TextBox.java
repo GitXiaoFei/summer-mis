@@ -10,9 +10,9 @@ public class TextBox extends Component {
 	private String placeholder = "";
 	private TextEnum type = TextEnum.text;
 	private Label label;
-	private String _class = "";//给元素添加Class
-	private String readonly="";//是否只读
-	private String required="";//输入验证验证
+	private String _class = "";// 给元素添加Class
+	private String readonly = "";// 是否只读
+	private String required = "";// 输入验证验证
 
 	public String getRequired() {
 		return required;
@@ -31,10 +31,12 @@ public class TextBox extends Component {
 		if (label != null)
 			label.output(html);
 		if (type.equals(TextEnum.multi)) {
-			html.print("<textarea class='%s' %s %s name='%s' placeholder='%s' >%s</textarea>",_class, readonly,required, name, placeholder, value);
+			html.print("<textarea class='%s' %s %s name='%s' placeholder='%s' >%s</textarea>", _class, readonly,
+					required, name, placeholder, value);
 		} else {
-			html.print("<input class='%s' %s %s type='%s' name='%s' placeholder='%s' value='%s' />",_class,readonly,required, type, name, placeholder, value);
-		} 
+			html.print("<input class='%s' %s %s type='%s' name='%s' placeholder='%s' value='%s' />", _class, readonly,
+					required, type, name, placeholder, value);
+		}
 
 	}
 
@@ -45,17 +47,16 @@ public class TextBox extends Component {
 	public TextBox() {
 		super();
 	}
-	
-	
+
 	public String getReadonly() {
 		return readonly;
 	}
 
 	public void setReadonly(Boolean flag) {
-		if(flag)
-		this.readonly = "readonly";
+		if (flag)
+			this.readonly = "readonly";
 	}
-	
+
 	public String get_class() {
 		return _class;
 	}

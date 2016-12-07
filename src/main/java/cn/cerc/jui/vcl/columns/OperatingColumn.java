@@ -6,8 +6,7 @@ import cn.cerc.jpage.core.Component;
 /**
  * 操作列,提供删除和修改按钮
  * 
- * @author rick_zhou
- * @date 2016年11月2日 上午11:29:37
+ * @author rick_zhou 2016年11月2日 上午11:29:37
  */
 public class OperatingColumn extends AbstractColumn {
 
@@ -21,10 +20,11 @@ public class OperatingColumn extends AbstractColumn {
 	public OperatingColumn(Component owner, String field, String title) {
 		super(owner, field, title);
 	}
-	public OperatingColumn(Component owner, String field, String title,String modifyUrl,String removeUrl) {
+
+	public OperatingColumn(Component owner, String field, String title, String modifyUrl, String removeUrl) {
 		super(owner, field, title);
-		this.removeUrl=removeUrl;
-		this.modifyUrl=modifyUrl;
+		this.removeUrl = removeUrl;
+		this.modifyUrl = modifyUrl;
 	}
 
 	public void add(String value) {
@@ -35,10 +35,14 @@ public class OperatingColumn extends AbstractColumn {
 	public String format(Object value) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<td>");
-		if(value instanceof Record){
-			sb.append(String.format("<input class='button addBtn'  type='button' onclick=\"javascript:window.location.href='%s?UID_=%s'\" value='修改' />",modifyUrl,super.format(value)));
-			sb.append(String.format("<input class='button editBtn' type='button' onclick=\"fnRemoveRow('%s','%s')\" value='删除' />",removeUrl,super.format(value)));
-		}else{
+		if (value instanceof Record) {
+			sb.append(String.format(
+					"<input class='button addBtn'  type='button' onclick=\"javascript:window.location.href='%s?UID_=%s'\" value='修改' />",
+					modifyUrl, super.format(value)));
+			sb.append(String.format(
+					"<input class='button editBtn' type='button' onclick=\"fnRemoveRow('%s','%s')\" value='删除' />",
+					removeUrl, super.format(value)));
+		} else {
 			sb.append(value);
 		}
 		sb.append("</td>");

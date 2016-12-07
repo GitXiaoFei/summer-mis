@@ -3,7 +3,7 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class DateBox extends Component{
+public class DateBox extends Component {
 	private String name;
 	private String value;
 	private String placeholder;
@@ -18,9 +18,9 @@ public class DateBox extends Component{
 		if (label != null)
 			label.output(html);
 		html.print("<input type='text' onClick='WdatePicker()' ");
-		html.print(" name='%s'",name);
-		html.print(" value='%s'",value==null?"":value);
-		html.print(" placeholder='%s'",placeholder==null?"":value);
+		html.print(" name='%s'", name);
+		html.print(" value='%s'", value == null ? "" : value);
+		html.print(" placeholder='%s'", placeholder == null ? "" : value);
 		html.print(" />");
 	}
 
@@ -57,5 +57,5 @@ public class DateBox extends Component{
 	public void setLabel(Label label) {
 		this.label = label;
 	}
-	
+
 }

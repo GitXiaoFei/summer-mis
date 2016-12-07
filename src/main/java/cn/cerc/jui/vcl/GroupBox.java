@@ -13,7 +13,7 @@ public class GroupBox extends Component {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<div class='group-box' name='%s' id='%s' visible='%s'>",name,this.getId(),visible);
+		html.print("<div class='group-box' name='%s' id='%s' visible='%s'>", name, this.getId(), visible);
 		super.output(html);
 		html.print("</div>");
 	}
