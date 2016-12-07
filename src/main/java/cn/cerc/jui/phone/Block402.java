@@ -19,6 +19,9 @@ public class Block402 extends Component {
 	private Label describe = new Label();
 	private Label remark = new Label();
 	private TextBox input = new TextBox();
+	private String role = new String();
+	private String dataName = new String();
+	private String dataJson = new String();
 
 	/**
 	 * 进出库单据明细之显示与数量修改
@@ -54,7 +57,14 @@ public class Block402 extends Component {
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<section class='block402'>");
+		html.print("<section class='block402'");
+		
+		if(!"".equals(this.role))
+			html.print(" role='%s'",this.role);
+		if(!"".equals(this.dataName))
+			html.print(" data-%s='%s'",this.dataName, this.dataJson);
+		
+		html.print(">");
 		html.print("<div class='up_con'>");
 		product.output(html);
 		html.print("<div class='name'>%s</div>", this.title);
@@ -105,5 +115,29 @@ public class Block402 extends Component {
 
 	public Image getDiff() {
 		return diff;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getDataJson() {
+		return dataJson;
+	}
+
+	public void setDataJson(String dataJson) {
+		this.dataJson = dataJson;
+	}
+
+	public String getDataName() {
+		return dataName;
+	}
+
+	public void setDataName(String dataName) {
+		this.dataName = dataName;
 	}
 }
