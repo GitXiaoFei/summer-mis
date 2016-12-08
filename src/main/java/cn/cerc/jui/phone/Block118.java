@@ -30,9 +30,8 @@ public class Block118 extends Component {
 		html.print("<div class='block117' role='row'>");
 		left.output(html);
 		if (urls.size() == 0) {
-			UrlRecord url = new UrlRecord();
+			UrlRecord url = addUrl();
 			url.setName("(Url)");
-			urls.add(url);
 		}
 		for (UrlRecord url : urls) {
 			html.print("<span role='right'>");
