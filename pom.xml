@@ -306,6 +306,13 @@
 			<groupId>cn.jpush.api</groupId>
 			<artifactId>jpush-client</artifactId>
 			<version>3.2.11</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j
+				</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>org.codehaus.plexus</groupId> -->
