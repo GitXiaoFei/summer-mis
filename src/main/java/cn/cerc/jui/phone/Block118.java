@@ -27,7 +27,7 @@ public class Block118 extends Component {
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block117' role='row'>");
+		html.print("<div class='block118' role='row'>");
 		left.output(html);
 		if (urls.size() == 0) {
 			UrlRecord url = addUrl();
