@@ -17,6 +17,7 @@ public class TextBox extends Component {
 	private String value;
 	private String maxlength;
 	private String placeholder;
+	private boolean autofocus;
 	private boolean readonly;
 	private String onclick;
 	private String oninput;
@@ -50,6 +51,9 @@ public class TextBox extends Component {
 			html.print(" oninput='%s'", this.oninput);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
+		if (this.autofocus) {
+			html.print(" autofocus");
+		}
 		if (this.readonly)
 			html.print(" readonly='readonly'");
 		html.println(" />");
@@ -95,6 +99,14 @@ public class TextBox extends Component {
 
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
+	}
+
+	public boolean isAutofocus() {
+		return autofocus;
+	}
+
+	public void setAutofocus(boolean autofocus) {
+		this.autofocus = autofocus;
 	}
 
 	public String getType() {
