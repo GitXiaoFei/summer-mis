@@ -109,5 +109,9 @@
 	<bean id="TAppLogin.ExitSystem" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
 		<property name="funcCode" value="ExitSystem" />
 	</bean>
+	<!-- 访问日志记录 -->
+	<bean id="SvrFormTimeout.save" class="cn.cerc.jmis.services.SvrFormTimeout" scope="prototype">
+		<property name="funcCode" value="save" />
+	</bean>
 
 </beans>
