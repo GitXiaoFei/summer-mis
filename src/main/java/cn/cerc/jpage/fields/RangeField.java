@@ -10,7 +10,7 @@ import cn.cerc.jui.vcl.columns.IColumn;
 
 public class RangeField extends AbstractField implements DataView {
 
-	public RangeField(DataView dataView, String name) {
+	public RangeField(Component dataView, String name) {
 		super(dataView, name, 0);
 	}
 

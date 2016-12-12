@@ -1,7 +1,7 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class ButtonField extends AbstractField {
@@ -11,7 +11,7 @@ public class ButtonField extends AbstractField {
 		super(null, null, 0);
 	}
 
-	public ButtonField(DataView owner, String name, String id, String data) {
+	public ButtonField(Component owner, String name, String id, String data) {
 		super(owner, name, 0);
 		this.setField(id);
 		this.data = data;

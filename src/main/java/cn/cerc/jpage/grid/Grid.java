@@ -31,6 +31,7 @@ public abstract class Grid extends Component implements DataView {
 	//
 	private HttpServletRequest request;
 	protected ActionForm form;
+	private String primaryKey;
 
 	public Grid() {
 		super();
@@ -151,6 +152,14 @@ public abstract class Grid extends Component implements DataView {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
 	}
 
 	public abstract void outputGrid(HtmlWriter html);

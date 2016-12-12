@@ -59,8 +59,11 @@ public abstract class AbstractField extends Component implements IField, IColumn
 	// 由extGrid调用
 	private Column column;
 
-	public AbstractField(DataView dataView, String name, int width) {
-		this.dataView = dataView;
+	public AbstractField(Component owner, String name, int width) {
+		super(owner);
+		if (!(owner instanceof DataView))
+			throw new RuntimeException("owner not is DataView");
+		this.dataView = (DataView) owner;
 		if (dataView != null) {
 			dataView.addField(this);
 			this.setReadonly(dataView.isReadonly());
@@ -69,7 +72,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.width = width;
 	}
 
-	public AbstractField(DataView owner, String name, String field, int width) {
+	public AbstractField(Component owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
 	}
