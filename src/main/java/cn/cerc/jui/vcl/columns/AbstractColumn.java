@@ -42,6 +42,7 @@ public class AbstractColumn extends Component implements IColumn {
 		this.title = title;
 	}
 
+	@Override
 	public String getField() {
 		return field;
 	}

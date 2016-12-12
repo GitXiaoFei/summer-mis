@@ -15,6 +15,7 @@ import cn.cerc.jpage.fields.StringField;
 import cn.cerc.jui.vcl.columns.IColumn;
 
 public class BaseGrid extends Grid {
+	private IColumnsManager manager;
 	private String trId;
 
 	public BaseGrid() {
@@ -47,7 +48,9 @@ public class BaseGrid extends Grid {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
 		List<IColumn> columns = this.getColumns();
-
+		if(manager != null)
+			columns = manager.Reindex(columns);
+		
 		double sumFieldWidth = 0;
 		for (IColumn column : columns)
 			sumFieldWidth += column.getWidth();
@@ -169,6 +172,14 @@ public class BaseGrid extends Grid {
 
 	public void setTrId(String trId) {
 		this.trId = trId;
+	}
+
+	public IColumnsManager getManager() {
+		return manager;
+	}
+
+	public void setManager(IColumnsManager manager) {
+		this.manager = manager;
 	}
 
 }
