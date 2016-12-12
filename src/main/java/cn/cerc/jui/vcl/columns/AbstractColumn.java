@@ -59,6 +59,7 @@ public class AbstractColumn extends Component implements IColumn {
 			return value.toString();
 	}
 
+	@Deprecated
 	public void writeInput(HtmlWriter html, Record record) {
 		html.print("<div>");
 		html.print("%s", this.getTitle());

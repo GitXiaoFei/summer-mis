@@ -14,7 +14,7 @@ public class LinkColumn extends AbstractColumn {
 	public LinkColumn(Component owner, String title, String url) {
 		super(owner);
 		this.setTitle(title);
-		this.url=url;
+		this.url = url;
 	}
 
 	public void addItem(String optionId, String optionValue) {
@@ -26,19 +26,19 @@ public class LinkColumn extends AbstractColumn {
 		String tempParam = url;
 		StringBuffer sb = new StringBuffer();
 		sb.append("<td>");
-		if(value instanceof Record){
-			Record rec = (Record) value; 
+		if (value instanceof Record) {
+			Record rec = (Record) value;
 			boolean flug = true;
 			for (String key : params.keySet()) {// 设置参数
 				if (flug) {
-					tempParam +="?"+ key + "=" + rec.getField(params.get(key));
+					tempParam += "?" + key + "=" + rec.getField(params.get(key));
 					flug = false;
 					continue;
 				}
 				tempParam += "&" + key + "=" + rec.getField(params.get(key));
 			}
-			sb.append(String.format("<a class='button' href='%s'>%s</a>", tempParam,this.getTitle()));
-		}else{
+			sb.append(String.format("<a class='button' href='%s'>%s</a>", tempParam, this.getTitle()));
+		} else {
 			sb.append(value);
 		}
 		sb.append("</td>");
@@ -57,4 +57,32 @@ public class LinkColumn extends AbstractColumn {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	public class Url {
+		private String name;
+		private String url;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public Url(String name, String url) {
+			super();
+			this.name = name;
+			this.url = url;
+		}
+	}
+
 }

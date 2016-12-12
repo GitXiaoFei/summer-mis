@@ -7,8 +7,12 @@ public interface IColumn {
 
 	public String format(Object value);
 
-	public int getWidth();
+	default public int getWidth() {
+		return 1;
+	}
 
-	public String getAlign();
+	default public String getAlign() {
+		return null;
+	}
 
 }
