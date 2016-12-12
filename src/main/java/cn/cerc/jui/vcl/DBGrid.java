@@ -3,10 +3,16 @@ package cn.cerc.jui.vcl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 import cn.cerc.jui.vcl.columns.CheckBoxColumn;
 import cn.cerc.jui.vcl.columns.ConvertColumn;
@@ -15,9 +21,15 @@ import cn.cerc.jui.vcl.columns.IndexColumn;
 import cn.cerc.jui.vcl.columns.LinkColumn;
 import cn.cerc.jui.vcl.columns.OperatingColumn;
 
-public class DBGrid extends Component {
+public class DBGrid extends Component implements DataView {
+	private static final Logger log = Logger.getLogger(DBGrid.class);
 	private List<AbstractColumn> columns = new ArrayList<>();
+	private HttpServletRequest request;
 	private DataSet dataSet;
+
+	public DBGrid(Component owner) {
+		super(owner);
+	}
 
 	@Override
 	public void addComponent(Component component) {
@@ -71,4 +83,20 @@ public class DBGrid extends Component {
 		this.dataSet = dataSet;
 	}
 
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	@Override
+	public void addField(AbstractField field) {
+		log.warn("此函数未实现，不能调用！");
+	}
+
+	@Override
+	public Record getRecord() {
+		return dataSet.getCurrent();	}
 }

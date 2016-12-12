@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.grid.MutiPage;
 
-public class DBGrid<T> {
+public class MutiGrid<T> {
 	private DataSet dataset;
 	private MutiPage pages = new MutiPage();
 	private List<T> items = new ArrayList<T>();
 
-	public DBGrid(DataSet dataset) {
+	public MutiGrid(DataSet dataset) {
 		this.setDataset(dataset);
 	}
 

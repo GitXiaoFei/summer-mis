@@ -29,7 +29,7 @@ import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.grid.Grid;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.DBGrid;
+import cn.cerc.jpage.other.MutiGrid;
 import cn.cerc.jpage.tools.OperaPages;
 
 /**
@@ -74,8 +74,8 @@ public class PhonePage extends AbstractJspPage {
 			Grid grid = (Grid) value;
 			request.setAttribute(id, value);
 			pages = grid.getPages();
-		} else if (value instanceof DBGrid) {
-			DBGrid<?> grid = (DBGrid<?>) value;
+		} else if (value instanceof MutiGrid) {
+			MutiGrid<?> grid = (MutiGrid<?>) value;
 			request.setAttribute(id, grid.getList());
 			pages = grid.getPages();
 		} else
