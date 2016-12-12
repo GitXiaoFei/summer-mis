@@ -12,9 +12,10 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
+import cn.cerc.jui.vcl.columns.IColumn;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField {
+public abstract class AbstractField extends Component implements IField, IColumn {
 	private String name;
 	private String shortName;
 	private String align;
@@ -91,6 +92,8 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	public int getWidth() {
+		if (this.getExpender() != null)
+			return 0;
 		return width;
 	}
 
@@ -120,6 +123,7 @@ public abstract class AbstractField extends Component implements IField {
 		return this;
 	}
 
+	@Override
 	public String getAlign() {
 		return align;
 	}
@@ -397,5 +401,18 @@ public abstract class AbstractField extends Component implements IField {
 
 	public void setColumn(Column column) {
 		this.column = column;
+	}
+
+	@Override
+	public String getTitle() {
+		return this.getName();
+	}
+
+	@Override
+	public String format(Object value) {
+		if (value instanceof Record)
+			return this.getText((Record) value);
+		else
+			throw new RuntimeException("不支持的数据类型：" + value.getClass().getName());
 	}
 }
