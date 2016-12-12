@@ -11,6 +11,7 @@ import cn.cerc.jpage.common.HtmlText;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jui.vcl.columns.IColumn;
 
 public class FormView extends Component implements DataView {
 	protected String CSSClass = "info";
@@ -43,8 +44,11 @@ public class FormView extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(AbstractField field) {
-		fields.add(field);
+	public void addField(IColumn field) {
+		if (field instanceof AbstractField)
+			fields.add((AbstractField) field);
+		else
+			throw new RuntimeException("不支持的数据类型：" + field.getClass().getName());
 	}
 
 	public String getAction() {

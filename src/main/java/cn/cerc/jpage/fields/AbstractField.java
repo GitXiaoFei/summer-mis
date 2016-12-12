@@ -12,9 +12,10 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
+import cn.cerc.jui.vcl.columns.IColumn;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField {
+public abstract class AbstractField extends Component implements IField, IColumn {
 	private String name;
 	private String shortName;
 	private String align;
@@ -58,8 +59,11 @@ public abstract class AbstractField extends Component implements IField {
 	// 由extGrid调用
 	private Column column;
 
-	public AbstractField(DataView dataView, String name, int width) {
-		this.dataView = dataView;
+	public AbstractField(Component owner, String name, int width) {
+		super(owner);
+		if (!(owner instanceof DataView))
+			throw new RuntimeException("owner not is DataView");
+		this.dataView = (DataView) owner;
 		if (dataView != null) {
 			dataView.addField(this);
 			this.setReadonly(dataView.isReadonly());
@@ -68,7 +72,7 @@ public abstract class AbstractField extends Component implements IField {
 		this.width = width;
 	}
 
-	public AbstractField(DataView owner, String name, String field, int width) {
+	public AbstractField(Component owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
 	}
@@ -91,6 +95,8 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	public int getWidth() {
+		if (this.getExpender() != null)
+			return 0;
 		return width;
 	}
 
@@ -120,6 +126,7 @@ public abstract class AbstractField extends Component implements IField {
 		return this;
 	}
 
+	@Override
 	public String getAlign() {
 		return align;
 	}
@@ -397,5 +404,18 @@ public abstract class AbstractField extends Component implements IField {
 
 	public void setColumn(Column column) {
 		this.column = column;
+	}
+
+	@Override
+	public String getTitle() {
+		return this.getName();
+	}
+
+	@Override
+	public String format(Object value) {
+		if (value instanceof Record)
+			return this.getText((Record) value);
+		else
+			throw new RuntimeException("不支持的数据类型：" + value.getClass().getName());
 	}
 }
