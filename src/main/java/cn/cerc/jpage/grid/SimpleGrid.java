@@ -111,8 +111,6 @@ public class SimpleGrid extends Component implements DataView {
 		if (field instanceof AbstractField) {
 			FieldAsColumn column = new FieldAsColumn(this);
 			column.setLink((AbstractField) field);
-		} else {
-			throw new RuntimeException("不支持的数据类型：" + field.getClass().getName());
 		}
 	}
 
