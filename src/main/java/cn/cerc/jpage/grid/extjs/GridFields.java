@@ -6,10 +6,10 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.Grid;
+import cn.cerc.jpage.grid.AbstractGrid;
 
 public class GridFields extends Component {
-	private Grid grid;
+	private AbstractGrid grid;
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -26,11 +26,11 @@ public class GridFields extends Component {
 		html.print("]");
 	}
 
-	public Grid getGrid() {
+	public AbstractGrid getGrid() {
 		return grid;
 	}
 
-	public GridFields setGrid(Grid grid) {
+	public GridFields setGrid(AbstractGrid grid) {
 		this.grid = grid;
 		return this;
 	}

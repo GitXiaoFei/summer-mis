@@ -7,7 +7,7 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.grid.BaseGrid;
+import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 import cn.cerc.jui.vcl.columns.IColumn;
 
@@ -38,11 +38,11 @@ public class StringColumn extends AbstractColumn {
 		if (this.isReadonly())
 			return data;
 
-		if (!(this.getOwner() instanceof BaseGrid))
+		if (!(this.getOwner() instanceof DataGrid))
 			return data;
 
 		if (!this.init) {
-			BaseGrid grid = (BaseGrid) this.getOwner();
+			DataGrid grid = (DataGrid) this.getOwner();
 			if (grid.getPrimaryKey() == null)
 				throw new RuntimeException("BaseGrid.primaryKey is null");
 			

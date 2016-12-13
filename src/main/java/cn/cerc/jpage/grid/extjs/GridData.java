@@ -9,11 +9,11 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.Grid;
+import cn.cerc.jpage.grid.AbstractGrid;
 import net.sf.json.JSONArray;
 
 public class GridData extends Component {
-	private Grid grid;
+	private AbstractGrid grid;
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -65,11 +65,11 @@ public class GridData extends Component {
 		html.print("]");
 	}
 
-	public Grid getGrid() {
+	public AbstractGrid getGrid() {
 		return grid;
 	}
 
-	public GridData setGrid(Grid grid) {
+	public GridData setGrid(AbstractGrid grid) {
 		this.grid = grid;
 		return this;
 	}
