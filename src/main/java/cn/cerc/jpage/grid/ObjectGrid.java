@@ -7,17 +7,17 @@ import java.util.Map;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.columns.AbstractColumn;
+import cn.cerc.jui.vcl.columns.IColumn;
 
 public class ObjectGrid extends Component {
-	private List<AbstractColumn> columns = new ArrayList<>();
+	private List<IColumn> columns = new ArrayList<>();
 	private List<RowData> rows = new ArrayList<>();
 	private RowData current;
 
 	@Override
 	public void addComponent(Component component) {
-		if (component instanceof AbstractColumn) {
-			columns.add((AbstractColumn) component);
+		if (component instanceof IColumn) {
+			columns.add((IColumn) component);
 		}
 		if (component instanceof RowData) {
 			rows.add((RowData) component);
@@ -28,14 +28,14 @@ public class ObjectGrid extends Component {
 	public void output(HtmlWriter html) {
 		html.print("<table>");
 		html.print("<tr>");
-		for (AbstractColumn column : columns) {
+		for (IColumn column : columns) {
 			html.print("<th>%s</th>", column.getTitle());
 		}
 		html.print("<tr>");
 
 		for (RowData row : rows) {
 			html.print("<tr>");
-			for (AbstractColumn column : columns) {
+			for (IColumn column : columns) {
 				html.print("<td>");
 				Object data = row.getData(column);
 				html.print("%s", column.format(data));
@@ -61,13 +61,13 @@ public class ObjectGrid extends Component {
 	}
 
 	public class RowData extends Component {
-		private Map<AbstractColumn, Object> items = new LinkedHashMap<>();
+		private Map<IColumn, Object> items = new LinkedHashMap<>();
 
-		public Object getData(AbstractColumn column) {
+		public Object getData(IColumn column) {
 			return items.get(column);
 		}
 
-		public void addData(AbstractColumn column, Object data) {
+		public void addData(IColumn column, Object data) {
 			items.put(column, data);
 		}
 	}
