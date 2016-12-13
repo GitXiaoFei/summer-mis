@@ -3,7 +3,6 @@ package cn.cerc.jmis.core;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,11 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
-
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.AppHandle;
@@ -29,10 +25,9 @@ import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
-import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jbean.tools.IAppLogin;
+import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
-import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
@@ -71,6 +66,13 @@ public class StartForms implements Filter {
 		String funcCode = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
+		
+		//验证菜单是否启停
+		IFormFilter ff = Application.getBean("AppFormFilter", IFormFilter.class);
+		if(ff != null){
+			if(ff.doFilter(resp, formId, funcCode))
+				return;
+		}
 
 		IForm form = null;
 		try {
@@ -283,12 +285,12 @@ public class StartForms implements Filter {
 		String dataIn = new Gson().toJson(form.getRequest().getParameterMap());
 		if (dataIn.length() > 60000)
 			dataIn = dataIn.substring(0, 60000);
-		BatchScript sql = new BatchScript(form.getHandle());
-		sql.add("insert into %s (CorpNo_,Page_,DataIn_,TickCount_,AppUser_) ",
-				SystemTable.get(SystemTable.getPageLogs));
-		sql.add("values ('%s','%s','%s',%s,'%s')", form.getHandle().getCorpNo(), pageCode, dataIn, "" + totalTime,
-				form.getHandle().getUserCode());
-		sql.exec();
+		LocalService ser = new LocalService(form.getHandle(), "SvrFormTimeout.save");
+		Record head = ser.getDataIn().getHead();
+		head.setField("pageCode", pageCode);
+		head.setField("dataIn", dataIn);
+		head.setField("tickCount", totalTime);
+		ser.exec();
 	}
 
 	private String getRequestForm(HttpServletRequest req) {
