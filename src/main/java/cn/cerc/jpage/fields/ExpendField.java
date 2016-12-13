@@ -1,24 +1,24 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.common.SearchItem;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class ExpendField extends AbstractField implements SearchItem, Expender {
 	private boolean search;
 	private String hiddenId = "hidden";
 
-	public ExpendField(DataView owner) {
+	public ExpendField(Component owner) {
 		this(owner, "", "_opera_", 5);
 	}
 
-	public ExpendField(DataView owner, String name, String field) {
+	public ExpendField(Component owner, String name, String field) {
 		this(owner, name, field, 0);
 	}
 
-	public ExpendField(DataView owner, String name, String field, int width) {
+	public ExpendField(Component owner, String name, String field, int width) {
 		super(owner, name, width);
 		this.setField(field);
 		this.setAlign("center");

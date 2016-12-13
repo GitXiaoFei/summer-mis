@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.extjs;
+package cn.cerc.jpage.grid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,12 @@ import java.util.List;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
+import cn.cerc.jpage.grid.extjs.GridColumns;
+import cn.cerc.jpage.grid.extjs.GridData;
+import cn.cerc.jpage.grid.extjs.GridFields;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.Grid;
 
-public class ExtGrid extends Grid {
+public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;

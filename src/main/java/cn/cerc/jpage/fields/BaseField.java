@@ -1,12 +1,12 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class BaseField extends AbstractField {
 
-	public BaseField(DataView dataView, String name, int width) {
+	public BaseField(Component dataView, String name, int width) {
 		super(dataView, name, width);
 	}
 

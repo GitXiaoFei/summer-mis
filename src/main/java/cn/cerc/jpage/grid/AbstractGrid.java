@@ -12,12 +12,14 @@ import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jui.vcl.columns.AbstractColumn;
+import cn.cerc.jui.vcl.columns.IColumn;
 
-public abstract class Grid extends Component implements DataView {
+public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
 	// PC专用表格列
-	private List<AbstractField> fields = new ArrayList<>();
+	private List<IColumn> columns = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -29,13 +31,14 @@ public abstract class Grid extends Component implements DataView {
 	//
 	private HttpServletRequest request;
 	protected ActionForm form;
+	private String primaryKey;
 
-	public Grid() {
+	public AbstractGrid() {
 		super();
 		this.setId("grid");
 	}
 
-	public Grid(Component owner) {
+	public AbstractGrid(Component owner) {
 		super(owner);
 		this.setId("grid");
 	}
@@ -65,8 +68,8 @@ public abstract class Grid extends Component implements DataView {
 		pages.setCurrent(pageno);
 	}
 
-	public void addField(AbstractField field) {
-		fields.add(field);
+	public void addField(IColumn field) {
+		columns.add(field);
 	}
 
 	public String getCSSClass_PC() {
@@ -97,8 +100,18 @@ public abstract class Grid extends Component implements DataView {
 		return pages;
 	}
 
+	public List<IColumn> getColumns() {
+		return this.columns;
+	}
+
 	public List<AbstractField> getFields() {
-		return this.fields;
+		List<AbstractField> items = new ArrayList<>();
+		for (IColumn obj : columns) {
+			if (obj instanceof AbstractField)
+				items.add((AbstractField) obj);
+		}
+		return items;
+
 	}
 
 	@Override
@@ -109,8 +122,12 @@ public abstract class Grid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (AbstractField field : this.getFields())
-			field.setReadonly(readonly);
+		for (IColumn column : this.getColumns()) {
+			if (column instanceof AbstractField)
+				((AbstractField) column).setReadonly(readonly);
+			else if (column instanceof AbstractColumn)
+				((AbstractColumn) column).setReadonly(readonly);
+		}
 		this.readonly = readonly;
 	}
 
@@ -124,7 +141,7 @@ public abstract class Grid extends Component implements DataView {
 		return form;
 	}
 
-	//FIXME: 此函数后需要去除！
+	// FIXME: 此函数后需要去除！
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}
@@ -135,6 +152,14 @@ public abstract class Grid extends Component implements DataView {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
 	}
 
 	public abstract void outputGrid(HtmlWriter html);

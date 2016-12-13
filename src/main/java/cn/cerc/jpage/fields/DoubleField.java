@@ -3,19 +3,19 @@ package cn.cerc.jpage.fields;
 import static cn.cerc.jdb.other.utils.roundTo;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 
 public class DoubleField extends AbstractField {
 	private int scale = -4;
 
-	public DoubleField(DataView owner, String title, String field) {
+	public DoubleField(Component owner, String title, String field) {
 		super(owner, title, field, 4);
 		this.setAlign("right");
 	}
 
-	public DoubleField(DataView owner, String title, String field, int width) {
+	public DoubleField(Component owner, String title, String field, int width) {
 		super(owner, title, field, width);
 		this.setAlign("right");
 	}
