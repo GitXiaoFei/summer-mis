@@ -8,12 +8,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class PhoneGrid extends Grid {
-	// 手机专用行
+	// 手机专用表格
 	private List<PhoneLine> lines = new ArrayList<>();
-
-	public PhoneGrid() {
-		super();
-	}
 
 	public PhoneGrid(Component owner) {
 		super(owner);
