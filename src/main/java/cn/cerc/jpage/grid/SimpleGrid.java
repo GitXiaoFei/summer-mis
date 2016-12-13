@@ -1,4 +1,4 @@
-package cn.cerc.jui.vcl;
+package cn.cerc.jpage.grid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jui.vcl.columns.CheckBoxColumn;
 import cn.cerc.jui.vcl.columns.ConvertColumn;
 import cn.cerc.jui.vcl.columns.FieldAsColumn;
@@ -21,7 +20,7 @@ import cn.cerc.jui.vcl.columns.IndexColumn;
 import cn.cerc.jui.vcl.columns.LinkColumn;
 import cn.cerc.jui.vcl.columns.OperatingColumn;
 
-public class DBGrid extends Component implements DataView {
+public class SimpleGrid extends Component implements DataView {
 	// private static final Logger log = Logger.getLogger(DBGrid.class);
 	private List<IColumn> columns = new ArrayList<>();
 	private HttpServletRequest request;
@@ -29,7 +28,7 @@ public class DBGrid extends Component implements DataView {
 	// 分页控制
 	private MutiPage pages = new MutiPage();
 
-	public DBGrid(Component owner) {
+	public SimpleGrid(Component owner) {
 		super(owner);
 	}
 
