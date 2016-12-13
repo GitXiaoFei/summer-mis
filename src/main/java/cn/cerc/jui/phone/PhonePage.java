@@ -27,7 +27,7 @@ import cn.cerc.jpage.form.FormView;
 import cn.cerc.jpage.form.GoBackButton;
 import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
-import cn.cerc.jpage.grid.Grid;
+import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.MutiGrid;
 import cn.cerc.jpage.tools.OperaPages;
@@ -70,8 +70,8 @@ public class PhonePage extends AbstractJspPage {
 	@Override
 	public void add(String id, Object value) {
 		HttpServletRequest request = getRequest();
-		if (value instanceof Grid) {
-			Grid grid = (Grid) value;
+		if (value instanceof AbstractGrid) {
+			AbstractGrid grid = (AbstractGrid) value;
 			request.setAttribute(id, value);
 			pages = grid.getPages();
 		} else if (value instanceof MutiGrid) {

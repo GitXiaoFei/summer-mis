@@ -14,7 +14,7 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.StringField;
 import cn.cerc.jui.vcl.columns.IColumn;
 
-public class BaseGrid extends Grid {
+public class BaseGrid extends AbstractGrid {
 	private IColumnsManager manager;
 	private String trId;
 

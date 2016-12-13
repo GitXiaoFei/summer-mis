@@ -7,7 +7,7 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class PhoneGrid extends Grid {
+public class PhoneGrid extends AbstractGrid {
 	// 手机专用表格
 	private List<PhoneLine> lines = new ArrayList<>();
 

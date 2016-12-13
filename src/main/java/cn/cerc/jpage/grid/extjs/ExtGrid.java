@@ -7,9 +7,9 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.Grid;
+import cn.cerc.jpage.grid.AbstractGrid;
 
-public class ExtGrid extends Grid {
+public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;
