@@ -15,6 +15,7 @@ public class StringField extends AbstractField {
 	private boolean init = false;
 	private DataSet dataSet;
 	private List<IColumn> columns;
+	private String onUpdate;
 
 	public StringField(Component owner, String name, String field) {
 		super(owner, name, 0);
@@ -23,6 +24,15 @@ public class StringField extends AbstractField {
 
 	public StringField(Component owner, String name, String field, int width) {
 		super(owner, name, field, width);
+	}
+
+	public String getOnUpdate() {
+		return onUpdate;
+	}
+
+	public StringField setOnUpdate(String onUpdate) {
+		this.onUpdate = onUpdate;
+		return this;
 	}
 
 	@Override
@@ -51,8 +61,10 @@ public class StringField extends AbstractField {
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
 			for (IColumn src : grid.getColumns()) {
-				if (src instanceof StringField)
-					columns.add(src);
+				if (src instanceof StringField) {
+					if (!((StringField) src).isReadonly())
+						columns.add(src);
+				}
 			}
 			this.init = true;
 		}
@@ -64,8 +76,16 @@ public class StringField extends AbstractField {
 		html.print(" name='%s'", this.getField());
 		html.print(" value='%s'", data);
 		html.print(" data-focus='[%s]'", this.getDataFocus());
+		html.print(" data-%s='[%s]'", this.getField(), data);
 		html.print(" onkeydown='tableDirection(event,this)'");
-		html.print(" oninput='tableOnChanged(this)'");
+		if (this.getOnclick() != null) {
+			html.print(" onclick=\"%s\"", this.getOnclick());
+		} else
+			html.print(" onclick='this.select()'");
+		if (onUpdate != null)
+			html.print(" oninput=\"tableOnChanged(this,'%s')\"", onUpdate);
+		else
+			html.print(" oninput='tableOnChanged(this)'");
 		html.println("/>");
 		return html.toString();
 	}

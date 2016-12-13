@@ -11,6 +11,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.StringField;
 import cn.cerc.jui.vcl.columns.IColumn;
 
@@ -131,10 +132,9 @@ public class DataGrid extends AbstractGrid {
 	private void outputField(HtmlWriter html, AbstractField field) {
 		Record record = getDataSet().getCurrent();
 
-		if (field instanceof StringField) {
-			StringField sf = (StringField) field;
-			if (!sf.isReadonly()) {
-				html.print(sf.format(getDataSet().getCurrent()));
+		if (field instanceof StringField || field instanceof BooleanField) {
+			if (!field.isReadonly()) {
+				html.print(field.format(getDataSet().getCurrent()));
 				return;
 			}
 		}
