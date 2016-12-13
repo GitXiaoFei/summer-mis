@@ -4,7 +4,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.BaseGrid;
+import cn.cerc.jui.vcl.ObjectGrid;
 
 public class AbstractColumn extends Component implements IColumn {
 	private String title;// 列头
@@ -70,9 +70,9 @@ public class AbstractColumn extends Component implements IColumn {
 		html.print("</div>");
 	}
 
-	public BaseGrid getGrid() {
-		if (this.getOwner() instanceof BaseGrid)
-			return (BaseGrid) this.getOwner();
+	public ObjectGrid getGrid() {
+		if (this.getOwner() instanceof ObjectGrid)
+			return (ObjectGrid) this.getOwner();
 		else
 			return null;
 	}

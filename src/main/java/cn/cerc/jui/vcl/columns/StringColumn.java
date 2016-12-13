@@ -25,7 +25,7 @@ public class StringColumn extends AbstractColumn {
 	}
 
 	public void add(String value) {
-		this.getGrid().getCurrent().add(this, value);
+		this.getGrid().getCurrent().addData(this, value);
 	}
 
 	@Override

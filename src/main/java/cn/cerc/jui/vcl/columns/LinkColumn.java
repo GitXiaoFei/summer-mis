@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jui.vcl.BaseGrid;
+import cn.cerc.jui.vcl.ObjectGrid;
 
 public class LinkColumn extends AbstractColumn {
 	private String url;
@@ -46,8 +46,8 @@ public class LinkColumn extends AbstractColumn {
 	}
 
 	public void add(String name, String url) {
-		BaseGrid grid = this.getGrid();
-		grid.getCurrent().add(this, new Url(name, url));
+		ObjectGrid grid = this.getGrid();
+		grid.getCurrent().addData(this, new Url(name, url));
 	}
 
 	public String getUrl() {

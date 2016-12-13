@@ -28,7 +28,7 @@ public class ImageColumn extends AbstractColumn {
 	}
 
 	public void add(String name, String imgUrl) {
-		this.getGrid().getCurrent().add(this, new Image(name, imgUrl));
+		this.getGrid().getCurrent().addData(this, new Image(name, imgUrl));
 	}
 
 	public Component getImage() {
