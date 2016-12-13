@@ -3,7 +3,6 @@ package cn.cerc.jmis.services;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.mysql.SqlQuery;
 
 public class SvrFormTimeout extends CustomService {
