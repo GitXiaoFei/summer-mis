@@ -66,12 +66,14 @@ public class StartForms implements Filter {
 		String funcCode = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
-		
-		//验证菜单是否启停
-		IFormFilter ff = Application.getBean("AppFormFilter", IFormFilter.class);
-		if(ff != null){
-			if(ff.doFilter(resp, formId, funcCode))
-				return;
+
+		// 验证菜单是否启停
+		if (Application.containsBean("AppFormFilter")) {
+			IFormFilter ff = Application.getBean("AppFormFilter", IFormFilter.class);
+			if (ff != null) {
+				if (ff.doFilter(resp, formId, funcCode))
+					return;
+			}
 		}
 
 		IForm form = null;
