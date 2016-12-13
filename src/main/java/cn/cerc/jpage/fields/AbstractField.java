@@ -93,6 +93,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.role = role;
 	}
 
+	@Override
 	public int getWidth() {
 		if (this.getExpender() != null)
 			return 0;
