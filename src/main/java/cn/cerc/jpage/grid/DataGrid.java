@@ -16,11 +16,9 @@ import cn.cerc.jui.vcl.columns.IColumn;
 
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
-	private String trId;
 
 	public DataGrid(Component owner) {
 		super(owner);
-		trId = "tr";
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class DataGrid extends AbstractGrid {
 			int expendSum = 0;
 			// 输出正常字段
 			html.println("<tr");
-			html.println(" id='%s'", trId + dataSet.getRecNo());
+			html.println(" id='%s'", "tr" + dataSet.getRecNo());
 			if (this.getPrimaryKey() != null)
 				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 			html.println(">");
@@ -159,14 +157,6 @@ public class DataGrid extends AbstractGrid {
 		} else {
 			html.print(field.getText(record));
 		}
-	}
-
-	public String getTrId() {
-		return trId;
-	}
-
-	public void setTrId(String trId) {
-		this.trId = trId;
 	}
 
 	public IColumnsManager getManager() {
