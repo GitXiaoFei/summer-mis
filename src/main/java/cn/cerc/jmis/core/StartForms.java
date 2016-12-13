@@ -289,7 +289,7 @@ public class StartForms implements Filter {
 		Record head = ser.getDataIn().getHead();
 		head.setField("pageCode", pageCode);
 		head.setField("dataIn", dataIn);
-		head.setField("tickCount", "" + totalTime);
+		head.setField("tickCount", totalTime);
 		ser.exec();
 	}
 
