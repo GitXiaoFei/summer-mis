@@ -18,11 +18,6 @@ public class BaseGrid extends Grid {
 	private IColumnsManager manager;
 	private String trId;
 
-	public BaseGrid() {
-		super();
-		trId = "tr";
-	}
-
 	public BaseGrid(Component owner) {
 		super(owner);
 		trId = "tr";
