@@ -60,10 +60,10 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
-		if (!(owner instanceof DataView))
-			throw new RuntimeException("owner not is DataView");
-		this.dataView = (DataView) owner;
-		if (dataView != null) {
+		if (owner != null) {
+			if (!(owner instanceof DataView))
+				throw new RuntimeException("owner not is DataView");
+			this.dataView = (DataView) owner;
 			dataView.addField(this);
 			this.setReadonly(dataView.isReadonly());
 		}
