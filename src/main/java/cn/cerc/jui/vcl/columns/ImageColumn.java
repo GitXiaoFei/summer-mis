@@ -28,7 +28,7 @@ public class ImageColumn extends AbstractColumn {
 	}
 
 	public void add(String name, String imgUrl) {
-		this.getGrid().getCurrent().add(this, new Image(name, imgUrl));
+		this.getGrid().getCurrent().addData(this, new Image(name, imgUrl));
 	}
 
 	public Component getImage() {
@@ -37,6 +37,43 @@ public class ImageColumn extends AbstractColumn {
 
 	public void setImage(Component image) {
 		this.image = image;
+	}
+	public class Image {
+		private String name;
+		private String url;
+		private int width=16;
+		private int height=16;
+		
+		
+		public int getWidth() {
+			return width;
+		}
+		public void setWidth(int width) {
+			this.width = width;
+		}
+		public int getHeight() {
+			return height;
+		}
+		public void setHeight(int height) {
+			this.height = height;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getUrl() {
+			return url;
+		}
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		public Image(String name, String url) {
+			super();
+			this.name = name;
+			this.url = url;
+		}
 	}
 
 }

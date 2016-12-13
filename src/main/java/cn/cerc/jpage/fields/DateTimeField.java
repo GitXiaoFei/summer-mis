@@ -1,16 +1,16 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class DateTimeField extends AbstractField {
 
-	public DateTimeField(DataView owner, String name, String field) {
+	public DateTimeField(Component owner, String name, String field) {
 		super(owner, name, field, 10);
 	}
 
-	public DateTimeField(DataView owner, String name, String field, int width) {
+	public DateTimeField(Component owner, String name, String field, int width) {
 		super(owner, name, field, width);
 	}
 

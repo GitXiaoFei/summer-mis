@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class OptionField extends AbstractField {
@@ -12,11 +12,11 @@ public class OptionField extends AbstractField {
 	private int size;// 默认显示行数
 	private Map<String, String> items = new LinkedHashMap<>();
 
-	public OptionField(DataView owner, String name, String field) {
+	public OptionField(Component owner, String name, String field) {
 		super(owner, name, field, 0);
 	}
 
-	public OptionField(DataView owner, String name, String field, int width) {
+	public OptionField(Component owner, String name, String field, int width) {
 		super(owner, name, field, width);
 	}
 

@@ -11,6 +11,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jui.vcl.columns.IColumn;
 
 public class PhoneLine extends Component implements DataView {
 	private DataView dataView;
@@ -129,9 +130,9 @@ public class PhoneLine extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(AbstractField field) {
-		if (field != null)
-			columns.add(field);
+	public void addField(IColumn field) {
+		if (field instanceof AbstractField)
+			columns.add((AbstractField) field);
 	}
 
 	public PhoneLine addItem(AbstractField... fields) {

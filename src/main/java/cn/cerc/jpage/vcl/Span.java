@@ -6,6 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class Span extends Component {
 	private String text;
 	private String role;
+	private String onclick;
 
 	public Span() {
 		super();
@@ -22,6 +23,8 @@ public class Span extends Component {
 			html.print(" id='%s'", this.getId());
 		if (role != null)
 			html.print(" role='%s'", this.role);
+		if (onclick != null)
+			html.print(" onclick='%s'", this.onclick);
 		html.print(">");
 		html.print(text);
 		html.println("</span>");
@@ -41,5 +44,13 @@ public class Span extends Component {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getOnclick() {
+		return onclick;
+	}
+
+	public void setOnclick(String onclick) {
+		this.onclick = onclick;
 	}
 }

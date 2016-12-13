@@ -11,9 +11,11 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.StringField;
+import cn.cerc.jui.vcl.columns.IColumn;
 
 public class BaseGrid extends Grid {
-
+	private IColumnsManager manager;
 	private String trId;
 
 	public BaseGrid() {
@@ -45,14 +47,13 @@ public class BaseGrid extends Grid {
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
-		List<AbstractField> fields = this.getFields();
-
+		List<IColumn> columns = this.getColumns();
+		if(manager != null)
+			columns = manager.Reindex(columns);
+		
 		double sumFieldWidth = 0;
-		for (AbstractField field : fields) {
-			if (field.getExpender() == null) {
-				sumFieldWidth += field.getWidth();
-			}
-		}
+		for (IColumn column : columns)
+			sumFieldWidth += column.getWidth();
 
 		if (sumFieldWidth < 0)
 			throw new RuntimeException("总列宽不允许小于1");
@@ -65,10 +66,10 @@ public class BaseGrid extends Grid {
 		html.println(">");
 
 		html.println("<tr>");
-		for (AbstractField field : fields) {
-			if (field.getExpender() == null) {
-				double val = roundTo(field.getWidth() / sumFieldWidth * 100, -2);
-				html.println("<th width=\"%f%%\">%s</th>", val, field.getName());
+		for (IColumn column : columns) {
+			if (column.getWidth() > 0) {
+				double val = roundTo(column.getWidth() / sumFieldWidth * 100, -2);
+				html.println("<th width=\"%f%%\">%s</th>", val, column.getTitle());
 			}
 		}
 		html.println("</tr>");
@@ -79,35 +80,50 @@ public class BaseGrid extends Grid {
 			// 输出正常字段
 			html.println("<tr");
 			html.println(" id='%s'", trId + dataSet.getRecNo());
+			if (this.getPrimaryKey() != null)
+				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 			html.println(">");
-			for (AbstractField field : fields) {
-				if (field.getExpender() == null) {
-					html.print("<td");
-					if (field.getAlign() != null)
-						html.print(" align=\"%s\"", field.getAlign());
-					if (field.getField() != null)
-						html.print(" role=\"%s\"", field.getField());
-					html.print(">");
-					outputField(html, field);
-					html.println("</td>");
+			for (IColumn column : columns) {
+				if (column instanceof AbstractField) {
+					AbstractField field = (AbstractField) column;
+					if (field.getExpender() == null) {
+						html.print("<td");
+						if (field.getAlign() != null)
+							html.print(" align=\"%s\"", field.getAlign());
+						if (field.getField() != null)
+							html.print(" role=\"%s\"", field.getField());
+						html.print(">");
+						outputField(html, field);
+						html.println("</td>");
+					} else {
+						expendSum++;
+					}
 				} else {
-					expendSum++;
+					html.print("<td");
+					if (column.getAlign() != null)
+						html.print(" align=\"%s\"", column.getAlign());
+					html.print(">");
+					html.print(column.format(getDataSet().getCurrent()));
+					html.println("</td>");
 				}
 			}
 			html.println("</tr>");
 			// 输出隐藏字段
 			if (expendSum > 0) {
 				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
-				html.println("<td colspan=\"%d\">", fields.size() - expendSum);
-				for (AbstractField field : fields) {
-					if (field.getExpender() != null) {
-						html.print("<span>");
-						if (!"".equals(field.getName())) {
-							html.print(field.getName());
-							html.print(": ");
+				html.println("<td colspan=\"%d\">", columns.size() - expendSum);
+				for (IColumn column : columns) {
+					if (column instanceof AbstractField) {
+						AbstractField field = (AbstractField) column;
+						if (field.getExpender() != null) {
+							html.print("<span>");
+							if (!"".equals(field.getName())) {
+								html.print(field.getName());
+								html.print(": ");
+							}
+							outputField(html, field);
+							html.println("</span>");
 						}
-						outputField(html, field);
-						html.println("</span>");
 					}
 				}
 				html.println("</tr>");
@@ -121,6 +137,15 @@ public class BaseGrid extends Grid {
 
 	private void outputField(HtmlWriter html, AbstractField field) {
 		Record record = getDataSet().getCurrent();
+
+		if (field instanceof StringField) {
+			StringField sf = (StringField) field;
+			if (!sf.isReadonly()) {
+				html.print(sf.format(getDataSet().getCurrent()));
+				return;
+			}
+		}
+
 		BuildUrl build = field.getBuildUrl();
 		if (build != null) {
 			UrlRecord url = new UrlRecord();
@@ -133,6 +158,9 @@ public class BaseGrid extends Grid {
 			} else {
 				html.println(field.getText(record));
 			}
+		} else if (field instanceof IColumn) {
+			IColumn col = (IColumn) field;
+			html.print(col.format(record));
 		} else {
 			html.print(field.getText(record));
 		}
@@ -145,4 +173,13 @@ public class BaseGrid extends Grid {
 	public void setTrId(String trId) {
 		this.trId = trId;
 	}
+
+	public IColumnsManager getManager() {
+		return manager;
+	}
+
+	public void setManager(IColumnsManager manager) {
+		this.manager = manager;
+	}
+
 }
