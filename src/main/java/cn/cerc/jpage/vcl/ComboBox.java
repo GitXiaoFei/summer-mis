@@ -10,13 +10,10 @@ public class ComboBox extends Component {
 	private LinkedHashMap<String, String> options = new LinkedHashMap<>(6);
 	private String selectId;
 	private String name;
-	private Label label;
 	private DataSet dataSet;
 
 	@Override
 	public void output(HtmlWriter html) {
-		if (label != null)
-			label.output(html);
 		html.println("<select id='%s' name='%s'>", this.getId(), name);
 		for (String key : options.keySet()) {
 			if (key.equals(selectId)) {
@@ -61,16 +58,6 @@ public class ComboBox extends Component {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Label getLabel() {
-		if (label == null)
-			label = new Label();
-		return label;
-	}
-
-	public void setLabel(Label label) {
-		this.label = label;
 	}
 
 	public DataSet getDataSet() {
