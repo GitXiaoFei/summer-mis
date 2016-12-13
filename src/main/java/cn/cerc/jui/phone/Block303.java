@@ -14,10 +14,10 @@ import cn.cerc.jpage.vcl.Image;
  * @author HuangRongjun
  *
  */
-public class BlockMenu extends Component {
+public class Block303 extends Component {
 	private Map<UrlRecord, Image> menus = new LinkedHashMap<>();
 
-	public BlockMenu(Component owner) {
+	public Block303(Component owner) {
 		super(owner);
 	}
 
