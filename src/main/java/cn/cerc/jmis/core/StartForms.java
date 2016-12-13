@@ -3,7 +3,6 @@ package cn.cerc.jmis.core;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,11 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
-
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.AppHandle;
@@ -70,6 +66,15 @@ public class StartForms implements Filter {
 		String funcCode = params.length == 1 ? "execute" : params[1];
 
 		req.setAttribute("logon", false);
+
+		// 验证菜单是否启停
+		if (Application.containsBean("AppFormFilter")) {
+			IFormFilter ff = Application.getBean("AppFormFilter", IFormFilter.class);
+			if (ff != null) {
+				if (ff.doFilter(resp, formId, funcCode))
+					return;
+			}
+		}
 
 		IForm form = null;
 		try {
@@ -286,7 +291,7 @@ public class StartForms implements Filter {
 		Record head = ser.getDataIn().getHead();
 		head.setField("pageCode", pageCode);
 		head.setField("dataIn", dataIn);
-		head.setField("tickCount", "" + totalTime);
+		head.setField("tickCount", totalTime);
 		ser.exec();
 	}
 

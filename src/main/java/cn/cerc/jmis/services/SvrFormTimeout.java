@@ -3,7 +3,6 @@ package cn.cerc.jmis.services;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.mysql.SqlQuery;
 
 public class SvrFormTimeout extends CustomService {
@@ -22,9 +21,8 @@ public class SvrFormTimeout extends CustomService {
 		ds.setField("CorpNo_", this.getCorpNo());
 		ds.setField("Page_", headIn.getSafeString("pageCode"));
 		ds.setField("DataIn_", headIn.getSafeString("dataIn"));
-		ds.setField("TickCount_", headIn.getSafeString("tickCount"));
+		ds.setField("TickCount_", headIn.getDouble("tickCount"));
 		ds.setField("AppUser_", this.getUserCode());
-		ds.setField("createTime_", TDateTime.Now());
 		ds.post();
 		
 		return true;
