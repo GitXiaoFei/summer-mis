@@ -14,6 +14,6 @@ public class MoneyColumn extends AbstractColumn {
 	}
 
 	public void add(double value) {
-		this.getGrid().getCurrent().add(this, "" + value);
+		this.getGrid().getCurrent().addData(this, "" + value);
 	}
 }

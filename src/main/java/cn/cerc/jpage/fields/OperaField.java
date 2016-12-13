@@ -1,18 +1,18 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class OperaField extends AbstractField {
 	private String value = "内容";
 
-	public OperaField(DataView owner) {
+	public OperaField(Component owner) {
 		this(owner, "操作", 3);
 		this.setReadonly(true);
 	}
 
-	public OperaField(DataView owner, String name, int width) {
+	public OperaField(Component owner, String name, int width) {
 		super(owner, name, width);
 		this.setAlign("center");
 		this.setField("_opera_");

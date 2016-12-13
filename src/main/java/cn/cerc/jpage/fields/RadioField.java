@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.Component;
 
 public class RadioField extends AbstractField {
 	private List<String> items = new ArrayList<>();
 
-	public RadioField(DataView owner, String name, String field, int width) {
+	public RadioField(Component owner, String name, String field, int width) {
 		super(owner, name, field, width);
 	}
 

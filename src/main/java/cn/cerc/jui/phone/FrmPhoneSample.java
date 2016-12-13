@@ -16,6 +16,7 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block105(page.getContent());
 		new Block112(page.getContent());
 		new Block107(page.getContent());
+		new Block118(page.getContent());
 
 		new Block301(page.getContent());
 
@@ -23,8 +24,8 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block402(page.getContent());
 
 		new Block901(page.getContent());
-		
-//		new Block991(page.getContent());
+
+		// new Block991(page.getContent());
 		Block992 b992 = new Block992(page.getContent());
 		b992.addButton("进入系统");
 		b992.addButton("进入系统");

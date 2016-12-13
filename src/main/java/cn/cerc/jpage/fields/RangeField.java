@@ -6,10 +6,11 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.vcl.columns.IColumn;
 
 public class RangeField extends AbstractField implements DataView {
 
-	public RangeField(DataView dataView, String name) {
+	public RangeField(Component dataView, String name) {
 		super(dataView, name, 0);
 	}
 
@@ -57,8 +58,11 @@ public class RangeField extends AbstractField implements DataView {
 	}
 
 	@Override
-	public void addField(AbstractField field) {
-		this.addComponent(field);
+	public void addField(IColumn field) {
+		if (field instanceof Component)
+			this.addComponent((Component) field);
+		else
+			throw new RuntimeException("不支持的数据类型：" + field.getClass().getName());
 	}
 
 	@Override

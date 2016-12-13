@@ -1,8 +1,8 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.SearchItem;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.extjs.Column;
 
@@ -12,11 +12,11 @@ public class BooleanField extends AbstractField implements SearchItem {
 	private String title;
 	private boolean search;
 
-	public BooleanField(DataView owner, String title, String field) {
+	public BooleanField(Component owner, String title, String field) {
 		this(owner, title, field, 0);
 	}
 
-	public BooleanField(DataView owner, String title, String field, int width) {
+	public BooleanField(Component owner, String title, String field, int width) {
 		super(owner, title, field, width);
 		this.setAlign("center");
 	}
