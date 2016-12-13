@@ -10,7 +10,6 @@ import cn.cerc.jpage.common.IField;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
-import cn.cerc.jpage.grid.Editor;
 import cn.cerc.jpage.grid.extjs.Column;
 import cn.cerc.jui.vcl.columns.IColumn;
 import net.sf.json.JSONObject;
@@ -418,5 +417,22 @@ public abstract class AbstractField extends Component implements IField, IColumn
 			return this.getText((Record) value);
 		else
 			throw new RuntimeException("不支持的数据类型：" + value.getClass().getName());
+	}
+
+	public class Editor {
+		private String xtype;
+
+		public Editor(String xtype) {
+			super();
+			this.xtype = xtype;
+		}
+
+		public String getXtype() {
+			return xtype;
+		}
+
+		public void setXtype(String xtype) {
+			this.xtype = xtype;
+		}
 	}
 }

@@ -14,16 +14,11 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.StringField;
 import cn.cerc.jui.vcl.columns.IColumn;
 
-public class BaseGrid extends Grid {
+public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
 	private String trId;
 
-	public BaseGrid() {
-		super();
-		trId = "tr";
-	}
-
-	public BaseGrid(Component owner) {
+	public DataGrid(Component owner) {
 		super(owner);
 		trId = "tr";
 	}

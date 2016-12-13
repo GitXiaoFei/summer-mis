@@ -15,7 +15,7 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 import cn.cerc.jui.vcl.columns.IColumn;
 
-public abstract class Grid extends Component implements DataView {
+public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
 	// PC专用表格列
@@ -33,12 +33,12 @@ public abstract class Grid extends Component implements DataView {
 	protected ActionForm form;
 	private String primaryKey;
 
-	public Grid() {
+	public AbstractGrid() {
 		super();
 		this.setId("grid");
 	}
 
-	public Grid(Component owner) {
+	public AbstractGrid(Component owner) {
 		super(owner);
 		this.setId("grid");
 	}

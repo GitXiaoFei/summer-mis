@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jui.vcl.ObjectGrid;
+import cn.cerc.jpage.grid.ObjectGrid;
 
 public class LinkColumn extends AbstractColumn {
 	private String url;
