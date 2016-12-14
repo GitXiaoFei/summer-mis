@@ -17,7 +17,8 @@ public class BooleanField extends AbstractField implements SearchItem {
 	}
 
 	public BooleanField(Component owner, String title, String field, int width) {
-		super(owner, title, field, width);
+		super(owner, title, width);
+		this.setField(field);
 		this.setAlign("center");
 	}
 
@@ -68,6 +69,7 @@ public class BooleanField extends AbstractField implements SearchItem {
 		html.print(">");
 	}
 
+	@Override
 	public String getTitle() {
 		return title;
 	}

@@ -8,7 +8,8 @@ public class CodeNameField extends AbstractField {
 	private String nameField;
 
 	public CodeNameField(Component owner, String name, String field) {
-		super(owner, name, field, 0);
+		super(owner, name, 0);
+		this.setField(field);
 	}
 
 	@Override

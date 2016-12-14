@@ -71,6 +71,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.width = width;
 	}
 
+	@Deprecated
 	public AbstractField(Component owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
