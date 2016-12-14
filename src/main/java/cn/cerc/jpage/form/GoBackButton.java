@@ -3,6 +3,7 @@ package cn.cerc.jpage.form;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+@Deprecated
 public class GoBackButton extends Component {
 
 	public GoBackButton(Component owner) {

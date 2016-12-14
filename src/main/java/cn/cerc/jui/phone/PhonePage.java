@@ -24,7 +24,6 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.form.FormView;
-import cn.cerc.jpage.form.GoBackButton;
 import cn.cerc.jpage.form.HeaderSide;
 import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.grid.AbstractGrid;
@@ -236,9 +235,9 @@ public class PhonePage extends AbstractJspPage {
 			if (barMenus == null) {
 				new UrlMenu(left, "首页", "/");
 				new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-				new GoBackButton(left);
+//				new GoBackButton(left);
 			} else {
-				new GoBackButton(left);
+//				new GoBackButton(left);
 				for (UrlRecord menu : barMenus) {
 					new UrlMenu(left, menu.getName(), menu.getUrl());
 				}
