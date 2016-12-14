@@ -22,13 +22,13 @@ public class Component {
 		setOwner(owner);
 	}
 
-	public void setOwner(Component owner) {
+	public final void setOwner(Component owner) {
 		this.owner = owner;
 		if (owner != null)
 			owner.addComponent(this);
 	}
 
-	public Component setId(String id) {
+	public final Component setId(String id) {
 		this.id = id;
 		if (owner != null && id != null)
 			owner.addComponent(this);
@@ -38,16 +38,17 @@ public class Component {
 	public void addComponent(Component component) {
 		if (!components.contains(component)) {
 			components.add(component);
-			if (component.getId() == null)
+			if (component.getId() == null) {
 				component.setId("component" + components.size());
+			}
 		}
 	}
 
-	public Component getOwner() {
+	public final Component getOwner() {
 		return owner;
 	}
 
-	public List<Component> getComponents() {
+	public final List<Component> getComponents() {
 		return components;
 	}
 
@@ -57,7 +58,7 @@ public class Component {
 		}
 	}
 
-	public String getHtml() {
+	public final String getHtml() {
 		HtmlWriter html = new HtmlWriter();
 		output(html);
 		return html.toString();
@@ -70,7 +71,7 @@ public class Component {
 		return html.toString();
 	}
 
-	public String getId() {
+	public final String getId() {
 		return id;
 	}
 

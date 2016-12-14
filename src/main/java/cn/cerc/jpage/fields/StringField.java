@@ -23,7 +23,9 @@ public class StringField extends AbstractField {
 	}
 
 	public StringField(Component owner, String name, String field, int width) {
-		super(owner, name, field, width);
+		super(owner, name, 0);
+		this.setField(field);
+		this.setWidth(width);
 	}
 
 	public String getOnUpdate() {

@@ -7,11 +7,13 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class DateTimeField extends AbstractField {
 
 	public DateTimeField(Component owner, String name, String field) {
-		super(owner, name, field, 10);
+		super(owner, name, 10);
+		this.setField(field);
 	}
 
 	public DateTimeField(Component owner, String name, String field, int width) {
-		super(owner, name, field, width);
+		super(owner, name, width);
+		this.setField(field);
 	}
 
 	@Override

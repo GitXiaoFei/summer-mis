@@ -71,6 +71,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.width = width;
 	}
 
+	@Deprecated
 	public AbstractField(Component owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
@@ -142,6 +143,8 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	public AbstractField setField(String field) {
 		this.field = field;
+		if (this.getId() == null || this.getId().startsWith("component"))
+			this.setId(field);
 		return this;
 	}
 
@@ -179,14 +182,6 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	public void setCSSClass_phone(String cSSClass_phone) {
 		CSSClass_phone = cSSClass_phone;
-	}
-
-	@Override
-	public String getId() {
-		if (super.getId() == null)
-			return field;
-		else
-			return super.getId();
 	}
 
 	public boolean isReadonly() {

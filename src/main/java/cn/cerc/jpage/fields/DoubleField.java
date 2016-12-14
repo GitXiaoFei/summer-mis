@@ -11,12 +11,14 @@ public class DoubleField extends AbstractField {
 	private int scale = -4;
 
 	public DoubleField(Component owner, String title, String field) {
-		super(owner, title, field, 4);
+		super(owner, title, 4);
+		this.setField(field);
 		this.setAlign("right");
 	}
 
 	public DoubleField(Component owner, String title, String field, int width) {
-		super(owner, title, field, width);
+		super(owner, title, width);
+		this.setField(field);
 		this.setAlign("right");
 	}
 
