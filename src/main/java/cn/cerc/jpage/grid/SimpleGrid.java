@@ -58,27 +58,28 @@ public class SimpleGrid extends Component implements DataView {
 		html.println("<tr>");
 
 		html.println("<tbody class='t-body tc'>");
-		pages.setPageSize(10);
-		for (int i = pages.getBegin(); i <= pages.getEnd(); i++) {
-			dataSet.setRecNo(i + 1);
-			Record record = dataSet.getCurrent();
-			html.print("<tr>");
-			for (IColumn column : columns) {
-				if (column instanceof HideColumn || column instanceof ConvertColumn || column instanceof OperatingColumn
-						|| column instanceof LinkColumn || column instanceof CheckBoxColumn) {
-					html.print(column.format(record));
-				} else if (column instanceof IndexColumn) {// 序号
-					html.print("<td>%s</td>", i + 1);
-				} else {
-					html.print("<td>");
-					html.print("%s", column.format(record));
-					html.print("</td>");
+		if (dataSet.size() > 0) {
+			for (int i = pages.getBegin(); i <= pages.getEnd(); i++) {
+				dataSet.setRecNo(i + 1);
+				Record record = dataSet.getCurrent();
+				html.print("<tr>");
+				for (IColumn column : columns) {
+					if (column instanceof HideColumn || column instanceof ConvertColumn
+							|| column instanceof OperatingColumn || column instanceof LinkColumn
+							|| column instanceof CheckBoxColumn) {
+						html.print(column.format(record));
+					} else if (column instanceof IndexColumn) {// 序号
+						html.print("<td>%s</td>", i + 1);
+					} else {
+						html.print("<td>");
+						html.print("%s", column.format(record));
+						html.print("</td>");
+					}
 				}
+				html.println("<tr>");
 			}
-			html.println("<tr>");
 		}
 		html.println("</tbody>");
-
 		html.println("</table>");
 	}
 
