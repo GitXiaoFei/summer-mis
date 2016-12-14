@@ -19,6 +19,7 @@ public class TextBox extends Component {
 	private String placeholder;
 	private boolean autofocus;
 	private boolean readonly;
+	private boolean required;
 	private String onclick;
 	private String oninput;
 
@@ -53,6 +54,9 @@ public class TextBox extends Component {
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.autofocus) {
 			html.print(" autofocus");
+		}
+		if (this.required) {
+			html.print(" required");
 		}
 		if (this.readonly)
 			html.print(" readonly='readonly'");
@@ -99,6 +103,14 @@ public class TextBox extends Component {
 
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
+	}
+
+	public boolean isRequired() {
+		return required;
+	}
+
+	public void setRequired(boolean required) {
+		this.required = required;
 	}
 
 	public boolean isAutofocus() {
