@@ -11,8 +11,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.BooleanField;
-import cn.cerc.jpage.fields.StringField;
+import cn.cerc.jpage.fields.IColumnChange;
 import cn.cerc.jui.vcl.columns.IColumn;
 
 public class DataGrid extends AbstractGrid {
@@ -42,9 +41,9 @@ public class DataGrid extends AbstractGrid {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
 		List<IColumn> columns = this.getColumns();
-		if(manager != null)
+		if (manager != null)
 			columns = manager.Reindex(columns);
-		
+
 		double sumFieldWidth = 0;
 		for (IColumn column : columns)
 			sumFieldWidth += column.getWidth();
@@ -80,7 +79,7 @@ public class DataGrid extends AbstractGrid {
 			for (IColumn column : columns) {
 				if (column instanceof AbstractField) {
 					AbstractField field = (AbstractField) column;
-					if (field.getExpender() == null) {
+					if (field.getExpender() == null && field.getWidth() > 0) {
 						html.print("<td");
 						if (field.getAlign() != null)
 							html.print(" align=\"%s\"", field.getAlign());
@@ -132,7 +131,7 @@ public class DataGrid extends AbstractGrid {
 	private void outputField(HtmlWriter html, AbstractField field) {
 		Record record = getDataSet().getCurrent();
 
-		if (field instanceof StringField || field instanceof BooleanField) {
+		if (field instanceof IColumnChange) {
 			if (!field.isReadonly()) {
 				html.print(field.format(getDataSet().getCurrent()));
 				return;
