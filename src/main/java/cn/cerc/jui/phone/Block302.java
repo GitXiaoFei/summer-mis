@@ -14,7 +14,7 @@ public class Block302 extends Component {
 	private String title = "(title)";
 	private String describe = "(describe)";
 	private Image rightIcon = new Image();
-	private UrlRecord operator;
+	private UrlRecord url;
 
 	/**
 	 * 用于显示会员资料
@@ -24,7 +24,7 @@ public class Block302 extends Component {
 	 */
 	public Block302(Component owner) {
 		super(owner);
-		operator = new UrlRecord();
+		url = new UrlRecord();
 		rightIcon.setSrc("jui/phone/block301-rightIcon.png");
 		rightIcon.setRole("right");
 	}
@@ -33,7 +33,7 @@ public class Block302 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block302'>");
-		html.print("<a href='%s'>", operator.getUrl());
+		html.print("<a href='%s'>", url.getUrl());
 		html.print("<div>");
 		html.print("<div role='title'>");
 		html.print("<span role='title'>%s</span>", this.title);
@@ -62,12 +62,12 @@ public class Block302 extends Component {
 		this.describe = describe;
 	}
 
-	public UrlRecord getOperator() {
-		return operator;
+	public UrlRecord getUrl() {
+		return url;
 	}
 
-	public void setOperator(UrlRecord operator) {
-		this.operator = operator;
+	public void setUrl(UrlRecord url) {
+		this.url = url;
 	}
 
 	public Image getRightIcon() {
