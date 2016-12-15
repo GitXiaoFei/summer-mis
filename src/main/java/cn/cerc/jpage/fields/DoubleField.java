@@ -6,8 +6,10 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
+import cn.cerc.jpage.grid.DataGrid;
 
 public class DoubleField extends AbstractField {
+	private ColumnEditor editor;
 	private int scale = -4;
 
 	public DoubleField(Component owner, String title, String field) {
@@ -53,5 +55,26 @@ public class DoubleField extends AbstractField {
 		Title title = super.createTitle();
 		title.setType("float");
 		return title;
+	}
+
+	@Override
+	public String format(Object value) {
+		if (!(value instanceof Record))
+			return value.toString();
+
+		Record ds = (Record) value;
+		if (this.isReadonly())
+			return getText(ds);
+
+		if (!(this.getOwner() instanceof DataGrid))
+			return getText(ds);
+
+		return getEditor().format(ds);
+	}
+
+	public ColumnEditor getEditor() {
+		if (editor == null)
+			editor = new ColumnEditor(this);
+		return editor;
 	}
 }
