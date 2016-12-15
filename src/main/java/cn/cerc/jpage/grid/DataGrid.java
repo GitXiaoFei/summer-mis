@@ -80,7 +80,8 @@ public class DataGrid extends AbstractGrid {
 			for (IColumn column : columns) {
 				if (column instanceof AbstractField) {
 					AbstractField field = (AbstractField) column;
-					if (field.getExpender() == null) {
+					// 设置展开以及宽度为0的栏位不显示
+					if (field.getExpender() == null && field.getWidth() > 0) {
 						html.print("<td");
 						if (field.getAlign() != null)
 							html.print(" align=\"%s\"", field.getAlign());
