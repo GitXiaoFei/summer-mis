@@ -8,7 +8,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.DataGrid;
 
-public class DoubleField extends AbstractField {
+public class DoubleField extends AbstractField implements IColumnChange {
 	private ColumnEditor editor;
 	private int scale = -4;
 

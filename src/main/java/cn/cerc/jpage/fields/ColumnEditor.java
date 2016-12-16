@@ -39,8 +39,8 @@ public class ColumnEditor {
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
 			for (IColumn src : grid.getColumns()) {
-				if (src instanceof StringField) {
-					if (!((StringField) src).isReadonly())
+				if (src instanceof IColumnChange) {
+					if (!((AbstractField) src).isReadonly())
 						columns.add(src);
 				}
 			}
@@ -72,14 +72,14 @@ public class ColumnEditor {
 
 	private String getDataId() {
 		int recNo = dataSet.getRecNo();
-		int colNo = columns.indexOf(this);
+		int colNo = columns.indexOf(owner);
 		String selfId = String.format("%d_%d", recNo, colNo);
 		return selfId;
 	}
 
 	private String getDataFocus() {
 		int recNo = dataSet.getRecNo();
-		int colNo = columns.indexOf(this);
+		int colNo = columns.indexOf(owner);
 
 		String prior = recNo > 1 ? String.format("%d_%d", recNo - 1, colNo) : "0";
 		String next = recNo < dataSet.size() ? String.format("%d_%d", recNo + 1, colNo) : "0";
