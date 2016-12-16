@@ -30,6 +30,7 @@ public class Block122 extends Component {
 		this.image.output(html);
 		this.title.output(html);
 		html.print("</div>");
+		html.print("</a>");
 		html.print("</div>");
 	}
 
