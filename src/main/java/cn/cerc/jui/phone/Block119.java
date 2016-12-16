@@ -7,7 +7,7 @@ import cn.cerc.jpage.vcl.Image;
 import cn.cerc.jpage.vcl.Span;
 
 /**
- * 左边图标右边文字
+ * 两组左边图标右边文字
  * 
  * @author 郭向军
  *
