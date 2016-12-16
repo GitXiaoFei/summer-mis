@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
 import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jpage.vcl.TextBox;
 
 /**
  * 一组左边图标右边文字
@@ -12,24 +12,37 @@ import cn.cerc.jpage.vcl.Span;
  * @author 郭向军
  *
  */
-public class Block122 extends Component {
+public class Block123 extends Component {
 	private Span title = new Span();
-	private Image image = new Image();
 	private UrlRecord urlRecord = new UrlRecord();
+	private TextBox textBox = new TextBox();
 
-	public Block122(Component owner) {
+	public TextBox getTextBox() {
+		return textBox;
+	}
+
+	public void setTextBox(TextBox textBox) {
+		this.textBox = textBox;
+	}
+
+	public Block123(Component owner) {
 		super(owner);
+		this.textBox.setMaxlength("20");
+		this.textBox.setPlaceholder("请输入");
+		this.textBox.setType("text");
+	}
+
+	public void setTitle(Span title) {
+		this.title = title;
 	}
 
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block122'>");
-		html.print("<a href='%s'>", this.urlRecord.getUrl());
-		html.print("<div class='item'>");
-		this.image.output(html);
+		html.print("<div class='block123'>");
+		textBox.output(html);
+		html.print("<a href='%s' class='save'>", this.urlRecord.getUrl());
 		this.title.output(html);
-		html.print("</div>");
 		html.print("</a>");
 		html.print("</div>");
 	}
@@ -40,14 +53,6 @@ public class Block122 extends Component {
 
 	public void setTitle(String title) {
 		this.title.setText(title);
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image.setSrc(image);
 	}
 
 	public UrlRecord getUrlRecord() {
