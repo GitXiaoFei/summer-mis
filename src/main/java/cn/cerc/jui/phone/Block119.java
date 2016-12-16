@@ -29,18 +29,22 @@ public class Block119 extends Component {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block119'>");
 		html.print("<ul class='cf'>");
+		html.print("<a href='%s'>",this.leftUrl.getUrl());
 		html.print("<li>");
 		html.print("<div class='item'>");
 		this.leftImage.output(html);
 		this.leftTitle.output(html);
 		html.print("</div>");
 		html.print("</li>");
+		html.print("</a>");
+		html.print("<a href='%s'>",this.rightUrl.getUrl());
 		html.print("<li>");
 		html.print("<div class='item'>");
 		this.rightImage.output(html);
 		this.rightTitle.output(html);
 		html.print("</div>");
 		html.print("</li>");
+		html.print("</a>");
 		html.print("</ul>");
 		html.print("</div>");
 	}
