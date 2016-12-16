@@ -499,7 +499,7 @@ em, i {
 	font-size: 0.875em;
 }
 
-.block120 li .m-right .icon {
+.block120 li .m-right img {
 	width: 1.31em;
 	margin-right: 0.3125em;
 	vertical-align: middle;
@@ -589,8 +589,23 @@ em, i {
 
 .block124 {
 	font-size: .875em;
-    color: #666;
-    padding:.625em;
+	color: #666;
+	padding: .625em;
+}
+
+.block125 li {
+	padding: .625em;
+	background: #fff;
+	font-size: 0.875em;
+	overflow: hidden;
+}
+
+.block125 li a {
+	display: block;
+}
+
+.block125 li:nth-child(even) {
+	background: #fafafa;
 }
 
 .block301 {
