@@ -7,10 +7,12 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
 	margin: 0;
 	padding: 0
 }
-html{
+
+html {
 	color: #333;
 	font-size: 100%;
 }
+
 body {
 	font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
 	line-height: 1.5;
@@ -31,10 +33,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0
 }
-img{
+
+img {
 	max-width: 100%;
 	vertical-align: middle;
 }
+
 fieldset, img {
 	border: 0
 }
@@ -59,26 +63,30 @@ button:focus, input:focus, select:focus, textarea:focus {
 
 a {
 	-webkit-touch-callout: none;
-	text-decoration: none!important;
+	text-decoration: none !important;
 	color: #333;
 	outline: 0
 }
 
-a:active, a:hover{
-	-webkit-tap-highlight-color:transparent;
+a:active, a:hover {
+	-webkit-tap-highlight-color: transparent;
 }
 
 em, i {
 	font-style: normal
 }
 
-.cf:after{ content: ''; height: 0; display: block; clear: both; visibility: hidden; }
+.cf:after {
+	content: '';
+	height: 0;
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
 /* 以上为样式基础样式重置 */
-
-.main_con{
+.main_con {
 	margin-top: 2.75em;
 }
-
 
 .block101 {
 	position: relative;
@@ -455,12 +463,11 @@ em, i {
 .block119 ul li .item img {
 	margin-right: .1rem;
 	display: inline-block;
-	width:4em;
+	width: 4em;
 	vertical-align: middle;
 	background-size: 100% 100% !important;
 	-webkit-background-size: 100% 100% !important;
 }
-
 
 .block120 li {
 	padding: .625em;
@@ -503,7 +510,7 @@ em, i {
 	top: 0;
 	left: 0;
 	width: 100%;
-	padding-left:2.75em;
+	padding-left: 2.75em;
 	padding-right: 2.75em;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -512,13 +519,15 @@ em, i {
 	-o-box-sizing: border-box;
 	background: #48b2bd;
 }
-.block121  .title{
+
+.block121  .title {
 	height: 2.75em;
 	line-height: 2.75em;
 	color: #fff;
 	text-align: center;
 }
-.block121  .arrow-left{
+
+.block121  .arrow-left {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -526,10 +535,12 @@ em, i {
 	width: 2.75em;
 	height: 100%;
 }
-.block121  .arrow-left img{
+
+.block121  .arrow-left img {
 	width: 2.75em;
 }
-.block121  .arrow-right{
+
+.block121  .arrow-right {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -538,9 +549,27 @@ em, i {
 	line-height: 2.75em;
 	color: #fff;
 }
-.block121 .arrow-left:active,
-.block121 .arrow-right:active{
+
+.block121 .arrow-left:active, .block121 .arrow-right:active {
 	background: #3aa8b4;
+}
+
+.block122 {
+	overflow: hidden;
+}
+
+.block122 .item {
+	margin-left: 1.5625em;
+	font-size: .875em;
+}
+
+.block122 .item img {
+	margin-right: .1rem;
+	display: inline-block;
+	width: 4em;
+	vertical-align: middle;
+	background-size: 100% 100% !important;
+	-webkit-background-size: 100% 100% !important;
 }
 
 .block301 {
