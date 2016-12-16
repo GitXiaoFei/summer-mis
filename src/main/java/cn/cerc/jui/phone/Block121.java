@@ -22,9 +22,6 @@ public class Block121 extends Component {
 	public Block121(Component owner) {
 		super(owner);
 	}
-	
-	public Block121() {
-	}
 
 	@Override
 	public void output(HtmlWriter html) {
