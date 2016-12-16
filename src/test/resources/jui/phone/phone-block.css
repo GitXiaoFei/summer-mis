@@ -576,7 +576,6 @@ em, i {
 	padding: .625em;
 	height: 25px;
 	background: #fff;
-	margin-bottom: 1.25em;
 }
 
 .block123 input[type="text"] {
@@ -588,6 +587,11 @@ em, i {
 	color: #48b2bd;
 }
 
+.block124 {
+	font-size: .875em;
+    color: #666;
+    padding:.625em;
+}
 
 .block301 {
 	padding: 0.8em;
