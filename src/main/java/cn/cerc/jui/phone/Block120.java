@@ -26,6 +26,8 @@ public class Block120 extends Component {
 		title.setText("item");
 		leftText.setText("修改");
 		rightText.setText("删除");
+		rightImage.setSrc("jui/phone/block120_delete.png");
+		leftImage.setSrc("jui/phone/block120_edit.png");
 	}
 
 	@Override
