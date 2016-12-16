@@ -79,7 +79,7 @@ em, i {
 	margin-top: 2.75em;
 }
 
-.block121 #header{
+.block121 {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -93,13 +93,13 @@ em, i {
 	-o-box-sizing: border-box;
 	background: #48b2bd;
 }
-.block121 #header .title{
+.block121  .title{
 	height: 2.75em;
 	line-height: 2.75em;
 	color: #fff;
 	text-align: center;
 }
-.block121 #header .arrow-left{
+.block121  .arrow-left{
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -107,10 +107,10 @@ em, i {
 	width: 2.75em;
 	height: 100%;
 }
-.block121 #header .arrow-left img{
+.block121  .arrow-left img{
 	width: 2.75em;
 }
-.block121 #header .arrow-right{
+.block121  .arrow-right{
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -119,7 +119,8 @@ em, i {
 	line-height: 2.75em;
 	color: #fff;
 }
-.block121 #header .arrow-left:active,#header .arrow-right:active{
+.block121 .arrow-left:active,
+.block121 .arrow-right:active{
 	background: #3aa8b4;
 }
 .block101 {

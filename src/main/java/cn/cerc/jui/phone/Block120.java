@@ -8,25 +8,25 @@ import cn.cerc.jpage.vcl.Span;
 
 /**
  * 部门管理
- * @author rascal.guo
+ * 
+ * @author 郭向军
  *
  */
 public class Block120 extends Component {
 	private Span title = new Span();
-	private Image delImage = new Image();
-	private Image editImage = new Image();
-	private Span delText = new Span();
-	private Span editText = new Span();
-	private UrlRecord delUrl = new UrlRecord();
-	private UrlRecord editUrl = new UrlRecord();
+	private Image rightImage = new Image();
+	private Image leftImage = new Image();
+	private Span leftText = new Span();
+	private Span rightText = new Span();
+	private UrlRecord rightUrl = new UrlRecord();
+	private UrlRecord leftUrl = new UrlRecord();
 
 	public Block120(Component owner) {
 		super(owner);
-		editText.setText("修改");
-		delText.setText("删除");
+		title.setText("item");
+		leftText.setText("修改");
+		rightText.setText("删除");
 	}
-
-
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -36,100 +36,75 @@ public class Block120 extends Component {
 		this.title.output(html);
 		html.print("</div>");
 		html.print("<div><div>");
-		this.editImage.output(html);
+		this.leftImage.output(html);
 		html.print("&nbsp;");
-		this.getEditText().output(html);
+		html.print("<a href='%s'>",this.getLeftUrl().getUrl());
+		this.leftText.output(html);
+		html.print("</a>");
 		html.print("<div>");
-		this.delImage.output(html);
+		this.rightImage.output(html);
 		html.print("&nbsp;");
-		this.delText.output(html);
+		html.print("<a href='%s'>",this.getRightUrl().getUrl());
+		this.rightText.output(html);
+		html.print("</a>");
 		html.print("</div>");
 		html.print("</div>");
 	}
-
-
 
 	public Span getTitle() {
 		return title;
 	}
 
-
-
 	public void setTitle(String title) {
 		this.title.setText(title);
 	}
 
-
-
-	public Image getDelImage() {
-		return delImage;
+	public Image getRightImage() {
+		return rightImage;
 	}
 
-
-
-	public void setDelImage(String delImage) {
-		this.delImage.setSrc(delImage);
+	public void setRightImage(Image rightImage) {
+		this.rightImage = rightImage;
 	}
 
-
-
-	public Image getEditImage() {
-		return editImage;
+	public Image getLeftImage() {
+		return leftImage;
 	}
 
-
-
-	public void setEditImage(String editImage) {
-		this.editImage.setSrc(editImage);
+	public void setLeftImage(Image leftImage) {
+		this.leftImage = leftImage;
 	}
 
-
-
-	public Span getDelText() {
-		return delText;
+	public Span getLeftText() {
+		return leftText;
 	}
 
-
-
-	public void setDelText(String delText) {
-		this.delText.setText(delText);
+	public void setLeftText(String leftText) {
+		this.leftText.setText(leftText);
 	}
 
-
-
-	public Span getEditText() {
-		return editText;
+	public Span getRightText() {
+		return rightText;
 	}
 
-
-
-	public void setEditText(String editText) {
-		this.editText.setText(editText);
+	public void setRightText(String rightText) {
+		this.rightText.setText(rightText);
 	}
 
-
-
-	public UrlRecord getDelUrl() {
-		return delUrl;
+	public UrlRecord getRightUrl() {
+		return rightUrl;
 	}
 
-
-
-	public void setDelUrl(UrlRecord delUrl) {
-		this.delUrl = delUrl;
+	public void setRightUrl(UrlRecord rightUrl) {
+		this.rightUrl = rightUrl;
 	}
 
-
-
-	public UrlRecord getEditUrl() {
-		return editUrl;
+	public UrlRecord getLeftUrl() {
+		return leftUrl;
 	}
 
-
-
-	public void setEditUrl(UrlRecord editUrl) {
-		this.editUrl = editUrl;
+	public void setLeftUrl(UrlRecord leftUrl) {
+		this.leftUrl = leftUrl;
 	}
-
 
 }

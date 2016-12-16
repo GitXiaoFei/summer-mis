@@ -7,8 +7,9 @@ import cn.cerc.jpage.vcl.Image;
 import cn.cerc.jpage.vcl.Span;
 
 /**
- * 左边图标右边图片
- * @author rascal.guo
+ * 左边图标右边文字
+ * 
+ * @author 郭向军
  *
  */
 public class Block119 extends Component {
@@ -22,10 +23,6 @@ public class Block119 extends Component {
 	public Block119(Component owner) {
 		super(owner);
 	}
-
-	
-
-
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -48,7 +45,6 @@ public class Block119 extends Component {
 		html.print("</div>");
 	}
 
-
 	public UrlRecord getLeftUrl() {
 		return leftUrl;
 	}
@@ -64,8 +60,7 @@ public class Block119 extends Component {
 	public void setRightUrl(UrlRecord rightUrl) {
 		this.rightUrl = rightUrl;
 	}
-	
-	
+
 	public Span getRightTitle() {
 		return rightTitle;
 	}
@@ -73,7 +68,7 @@ public class Block119 extends Component {
 	public void setRightTitle(String rightTitle) {
 		this.rightTitle.setText(rightTitle);
 	}
-	
+
 	public void setLeftTitle(String leftTitle) {
 		this.leftTitle.setText(leftTitle);
 	}
@@ -86,11 +81,9 @@ public class Block119 extends Component {
 		this.leftImage.setSrc(leftImage);
 	}
 
-
 	public Image getRightImage() {
 		return rightImage;
 	}
-
 
 	public void setRightImage(String rightImage) {
 		this.rightImage.setSrc(rightImage);
