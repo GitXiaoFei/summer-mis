@@ -572,6 +572,23 @@ em, i {
 	-webkit-background-size: 100% 100% !important;
 }
 
+.block123 {
+	padding: .625em;
+	height: 25px;
+	background: #fff;
+	margin-bottom: 1.25em;
+}
+
+.block123 input[type="text"] {
+	width: 80%;
+}
+
+.block123 a {
+	float: right;
+	color: #48b2bd;
+}
+
+
 .block301 {
 	padding: 0.8em;
 	border-bottom: 1px solid #bbb;

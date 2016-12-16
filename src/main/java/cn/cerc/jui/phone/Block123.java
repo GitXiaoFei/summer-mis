@@ -41,7 +41,7 @@ public class Block123 extends Component {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block123'>");
 		textBox.output(html);
-		html.print("<a href='%s' class='save'>", this.urlRecord.getUrl());
+		html.print("<a href='%s'>", this.urlRecord.getUrl());
 		this.title.output(html);
 		html.print("</a>");
 		html.print("</div>");
