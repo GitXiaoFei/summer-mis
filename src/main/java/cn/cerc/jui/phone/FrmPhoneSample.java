@@ -9,7 +9,7 @@ public class FrmPhoneSample extends AbstractForm {
 	public IPage execute() throws Exception {
 		PhonePage page = new PhonePage(this);
 
-	    new Block101(page.getContent());
+		new Block101(page.getContent());
 		new Block102(page.getContent());
 		new Block103(page.getContent());
 		new Block104(page.getContent());
@@ -27,7 +27,7 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block116(page.getContent());
 		new Block117(page.getContent());
 		new Block118(page.getContent());
-		
+
 		new Block301(page.getContent());
 		new Block302(page.getContent());
 		new Block303(page.getContent());
@@ -41,8 +41,6 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block602(page.getContent());
 		new Block603(page.getContent());
 
-		
-		
 		new Block901(page.getContent());
 		new Block902(page.getContent());
 
