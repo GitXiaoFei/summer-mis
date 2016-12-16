@@ -32,19 +32,17 @@ public class Block120 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block120'>");
-		html.print("<div>");
+		html.print("<ul><li>");
+		html.print("<div class='m-left'>");
 		this.title.output(html);
 		html.print("</div>");
-		html.print("<div><div>");
-		this.leftImage.output(html);
-		html.print("&nbsp;");
+		html.print("<div class='m-right'>");
 		html.print("<a href='%s'>",this.getLeftUrl().getUrl());
+		this.leftImage.output(html);
 		this.leftText.output(html);
 		html.print("</a>");
-		html.print("<div>");
-		this.rightImage.output(html);
-		html.print("&nbsp;");
 		html.print("<a href='%s'>",this.getRightUrl().getUrl());
+		this.rightImage.output(html);
 		this.rightText.output(html);
 		html.print("</a>");
 		html.print("</div>");

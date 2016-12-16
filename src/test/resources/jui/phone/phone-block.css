@@ -79,50 +79,7 @@ em, i {
 	margin-top: 2.75em;
 }
 
-.block121 {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding-left:2.75em;
-	padding-right: 2.75em;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	background: #48b2bd;
-}
-.block121  .title{
-	height: 2.75em;
-	line-height: 2.75em;
-	color: #fff;
-	text-align: center;
-}
-.block121  .arrow-left{
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: block;
-	width: 2.75em;
-	height: 100%;
-}
-.block121  .arrow-left img{
-	width: 2.75em;
-}
-.block121  .arrow-right{
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	padding: 0 .625em;
-	line-height: 2.75em;
-	color: #fff;
-}
-.block121 .arrow-left:active,
-.block121 .arrow-right:active{
-	background: #3aa8b4;
-}
+
 .block101 {
 	position: relative;
 	padding: 0 2em 0 0;
@@ -502,6 +459,88 @@ em, i {
 	vertical-align: middle;
 	background-size: 100% 100% !important;
 	-webkit-background-size: 100% 100% !important;
+}
+
+
+.block120 li {
+	padding: .625em;
+	background: #fff;
+	font-size: 0.875em;
+	overflow: hidden;
+}
+
+.block120 li:nth-child(even) {
+	background: #fafafa;
+}
+
+.block120 li .m-left, .block120 li .m-right {
+	float: left;
+	width: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.block120 li .m-right {
+	width: 40%;
+	text-align: right;
+	color: #666;
+}
+
+.block120 li .m-right a {
+	color: #666;
+	font-size: 0.875em;
+}
+
+.block120 li .m-right .icon {
+	width: 1.31em;
+	margin-right: 0.3125em;
+	vertical-align: middle;
+}
+
+.block121 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-left:2.75em;
+	padding-right: 2.75em;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	background: #48b2bd;
+}
+.block121  .title{
+	height: 2.75em;
+	line-height: 2.75em;
+	color: #fff;
+	text-align: center;
+}
+.block121  .arrow-left{
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	width: 2.75em;
+	height: 100%;
+}
+.block121  .arrow-left img{
+	width: 2.75em;
+}
+.block121  .arrow-right{
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	padding: 0 .625em;
+	line-height: 2.75em;
+	color: #fff;
+}
+.block121 .arrow-left:active,
+.block121 .arrow-right:active{
+	background: #3aa8b4;
 }
 
 .block301 {
