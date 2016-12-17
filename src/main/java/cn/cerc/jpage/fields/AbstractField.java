@@ -99,8 +99,6 @@ public abstract class AbstractField extends Component implements IField {
 
 	@Override
 	public int getWidth() {
-		if (this.getExpender() != null)
-			return 0;
 		return width;
 	}
 

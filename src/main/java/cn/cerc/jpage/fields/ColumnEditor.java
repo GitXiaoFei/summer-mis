@@ -40,8 +40,11 @@ public class ColumnEditor {
 			columns = new ArrayList<>();
 			for (IField src : grid.getColumns()) {
 				if (src instanceof IColumn) {
-					if (!((AbstractField) src).isReadonly())
-						columns.add(src);
+					if (((AbstractField) src).isReadonly())
+						continue;
+					if(src.getWidth() == 0)
+						continue;
+					columns.add(src);
 				}
 			}
 			this.init = true;
