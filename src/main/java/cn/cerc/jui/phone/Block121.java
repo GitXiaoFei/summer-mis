@@ -8,31 +8,56 @@ import cn.cerc.jpage.vcl.Span;
 
 /**
  * 标题
+ * 
  * @author 郭向军
  *
  */
 public class Block121 extends Component {
 	private Span title = new Span();
-	private Image leftImage = new Image();
+	private Image leftImage = null;
 	private UrlRecord leftUrl = new UrlRecord();
+	private UrlRecord rightUrl = new UrlRecord();
+	private Span rightText = null;
 
 	public Block121(Component owner) {
 		super(owner);
-		leftImage.setSrc("/img/icon/icon_arrow_left.png");
-		leftUrl.setSite("javascript:window.location.go(-1)");
 	}
 
 	@Override
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<header  class='block121'>");
-		html.print("<a href='%s'  class='arrow-left'>", this.leftUrl.getUrl());
-		this.leftImage.output(html);
-		html.print("</a>");
+		if (this.leftImage != null) {
+			html.print("<a href='%s'  class='arrow-left'>", this.leftUrl.getUrl());
+			this.leftImage.output(html);
+			html.print("</a>");
+		}
 		html.print("<h1 class='title'>");
 		this.title.output(html);
 		html.print("</h1>");
+		if (this.rightText != null) {
+			html.print("<a href='%s' class='arrow-right'>", this.rightUrl.getUrl());
+			this.rightText.output(html);
+			html.print("</a>");
+		}
 		html.print("</header>");
+	}
+
+	public UrlRecord getRightUrl() {
+		return rightUrl;
+	}
+
+	public void setRightUrl(UrlRecord rightUrl) {
+		this.rightUrl = rightUrl;
+	}
+
+	public Span getRightText() {
+		return rightText;
+	}
+
+	public void setRightText(String rightText) {
+		this.rightText = new Span();
+		this.rightText.setText(rightText);
 	}
 
 	public Span getTitle() {
@@ -44,6 +69,7 @@ public class Block121 extends Component {
 	}
 
 	public void setLeftImage(String leftImage) {
+		this.leftImage = new Image();
 		this.leftImage.setSrc(leftImage);
 	}
 
