@@ -6,7 +6,7 @@ import cn.cerc.jpage.fields.BooleanField;
 import cn.cerc.jpage.fields.DateField;
 import cn.cerc.jpage.fields.AbstractField;
 
-public class Column extends Component {
+public class ExtColumn extends Component {
 	private AbstractField field;
 	private String text;
 	private String width;
@@ -16,7 +16,7 @@ public class Column extends Component {
 	private boolean sortable;
 	private boolean locked;
 
-	public Column(AbstractField field) {
+	public ExtColumn(AbstractField field) {
 		this.field = field;
 	}
 
@@ -40,7 +40,7 @@ public class Column extends Component {
 		return editor;
 	}
 
-	public Column setEditor(String editor) {
+	public ExtColumn setEditor(String editor) {
 		this.editor = editor;
 		return this;
 	}
@@ -73,7 +73,7 @@ public class Column extends Component {
 		return renderer;
 	}
 
-	public Column setRenderer(String renderer) {
+	public ExtColumn setRenderer(String renderer) {
 		// 取值范例：
 		// 日期：Ext.util.Format.dateRenderer('m/d/Y')
 		// 金额：'usMoney' //注意要带上单引号！

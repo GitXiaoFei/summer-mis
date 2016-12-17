@@ -12,7 +12,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.fields.IField;
 
 public class PhoneGrid extends AbstractGrid {
 	// 手机专用表格
@@ -201,7 +201,7 @@ public class PhoneGrid extends AbstractGrid {
 		}
 
 		@Override
-		public void addField(IColumn field) {
+		public void addField(IField field) {
 			if (field instanceof AbstractField)
 				columns.add((AbstractField) field);
 		}

@@ -7,15 +7,15 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.grid.AbstractGrid;
+import cn.cerc.jpage.grid.ExtGrid;
 
-public class GridColumns extends Component {
-	private AbstractGrid grid;
+public class ExtGridColumns extends Component {
+	private ExtGrid grid;
 
 	@Override
 	public void output(HtmlWriter html) {
 		html.print("[");
-		List<Column> columns = new ArrayList<>();
+		List<ExtColumn> columns = new ArrayList<>();
 		double sumFieldWidth = 0;
 		for (AbstractField field : grid.getFields()) {
 			if (field instanceof ExpendField)
@@ -25,14 +25,14 @@ public class GridColumns extends Component {
 		for (AbstractField field : grid.getFields()) {
 			if (field instanceof ExpendField || field.getWidth() == 0)
 				continue;
-			Column col1 = field.getColumn();
+			ExtColumn col1 = field.getColumn();
 			String val = "" + (field.getWidth() / sumFieldWidth * 98);// 预留2%给滚动条
 			col1.setWidth(String.format("%s%%", val.substring(0, val.indexOf(".") + 2)));
 			columns.add(col1);
 		}
 
 		for (int i = 0; i < columns.size(); i++) {
-			Column column = columns.get(i);
+			ExtColumn column = columns.get(i);
 			column.output(html);
 			if (i < columns.size() - 1)
 				html.println(",");
@@ -40,11 +40,11 @@ public class GridColumns extends Component {
 		html.print("]");
 	}
 
-	public AbstractGrid getGrid() {
+	public ExtGrid getGrid() {
 		return grid;
 	}
 
-	public GridColumns setGrid(AbstractGrid grid) {
+	public ExtGridColumns setGrid(ExtGrid grid) {
 		this.grid = grid;
 		return this;
 	}

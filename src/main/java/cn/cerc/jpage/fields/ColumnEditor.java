@@ -13,7 +13,7 @@ public class ColumnEditor {
 	private AbstractField owner;
 	private boolean init = false;
 	private DataSet dataSet;
-	private List<IColumn> columns;
+	private List<IField> columns;
 	private String onUpdate;
 
 	public ColumnEditor(AbstractField owner) {
@@ -28,7 +28,7 @@ public class ColumnEditor {
 		this.onUpdate = onUpdate;
 	}
 
-	public String format(Record ds){
+	public String format(Record ds) {
 		String data = ds.getString(owner.getField());
 
 		if (!this.init) {
@@ -38,10 +38,13 @@ public class ColumnEditor {
 
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
-			for (IColumn src : grid.getColumns()) {
-				if (src instanceof IColumnChange) {
-					if (!((AbstractField) src).isReadonly())
-						columns.add(src);
+			for (IField src : grid.getColumns()) {
+				if (src instanceof IColumn) {
+					if (((AbstractField) src).isReadonly())
+						continue;
+					if(src.getWidth() == 0)
+						continue;
+					columns.add(src);
 				}
 			}
 			this.init = true;
@@ -55,7 +58,7 @@ public class ColumnEditor {
 		html.print(" value='%s'", data);
 		html.print(" data-focus='[%s]'", this.getDataFocus());
 		html.print(" data-%s='[%s]'", owner.getField(), data);
-		if(owner.getAlign() != null)
+		if (owner.getAlign() != null)
 			html.print(" style='text-align:%s;'", owner.getAlign());
 		html.print(" onkeydown='tableDirection(event,this)'");
 		if (owner.getOnclick() != null) {

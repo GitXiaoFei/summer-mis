@@ -12,7 +12,7 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.AbstractGrid;
 import net.sf.json.JSONArray;
 
-public class GridData extends Component {
+public class ExtGridData extends Component {
 	private AbstractGrid grid;
 
 	@Override
@@ -69,7 +69,7 @@ public class GridData extends Component {
 		return grid;
 	}
 
-	public GridData setGrid(AbstractGrid grid) {
+	public ExtGridData setGrid(AbstractGrid grid) {
 		this.grid = grid;
 		return this;
 	}

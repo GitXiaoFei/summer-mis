@@ -11,6 +11,7 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.IField;
 import cn.cerc.jui.vcl.columns.CheckBoxColumn;
 import cn.cerc.jui.vcl.columns.ConvertColumn;
 import cn.cerc.jui.vcl.columns.FieldAsColumn;
@@ -108,7 +109,7 @@ public class SimpleGrid extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(IColumn field) {
+	public void addField(IField field) {
 		if (field instanceof AbstractField) {
 			FieldAsColumn column = new FieldAsColumn(this);
 			column.setLink((AbstractField) field);

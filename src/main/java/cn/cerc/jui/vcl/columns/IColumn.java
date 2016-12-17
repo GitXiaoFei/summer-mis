@@ -1,18 +1,12 @@
 package cn.cerc.jui.vcl.columns;
 
-public interface IColumn {
-	public String getTitle();
+import cn.cerc.jpage.fields.IField;
 
-	public String getField();
+public interface IColumn extends IField {
 
 	public String format(Object value);
 
 	default public int getWidth() {
 		return 1;
 	}
-
-	default public String getAlign() {
-		return null;
-	}
-
 }

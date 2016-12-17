@@ -6,7 +6,6 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.columns.IColumn;
 
 public class RangeField extends AbstractField implements DataView {
 
@@ -58,7 +57,7 @@ public class RangeField extends AbstractField implements DataView {
 	}
 
 	@Override
-	public void addField(IColumn field) {
+	public void addField(IField field) {
 		if (field instanceof Component)
 			this.addComponent((Component) field);
 		else
