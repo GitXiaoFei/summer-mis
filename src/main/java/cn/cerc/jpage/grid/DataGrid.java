@@ -16,6 +16,8 @@ import cn.cerc.jui.vcl.columns.IColumn;
 
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
+	// 扩展对象
+	private Component expender;
 
 	public DataGrid(Component owner) {
 		super(owner);
@@ -80,7 +82,7 @@ public class DataGrid extends AbstractGrid {
 				if (column instanceof AbstractField) {
 					AbstractField field = (AbstractField) column;
 					// 设置展开以及宽度为0的栏位不显示
-					if (field.getExpender() == null && field.getWidth() > 0) {
+					if (field.getWidth() > 0) {
 						html.print("<td");
 						if (field.getAlign() != null)
 							html.print(" align=\"%s\"", field.getAlign());
@@ -103,21 +105,19 @@ public class DataGrid extends AbstractGrid {
 			}
 			html.println("</tr>");
 			// 输出隐藏字段
-			if (expendSum > 0) {
+			if (this.getExpender().getComponents().size() > 0) {
 				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
 				html.println("<td colspan=\"%d\">", columns.size() - expendSum);
-				for (IColumn column : columns) {
+				for (Component column : this.getExpender().getComponents()) {
 					if (column instanceof AbstractField) {
 						AbstractField field = (AbstractField) column;
-						if (field.getExpender() != null) {
-							html.print("<span>");
-							if (!"".equals(field.getName())) {
-								html.print(field.getName());
-								html.print(": ");
-							}
-							outputField(html, field);
-							html.println("</span>");
+						html.print("<span>");
+						if (!"".equals(field.getName())) {
+							html.print(field.getName());
+							html.print(": ");
 						}
+						outputField(html, field);
+						html.println("</span>");
 					}
 				}
 				html.println("</tr>");
@@ -167,4 +167,22 @@ public class DataGrid extends AbstractGrid {
 		this.manager = manager;
 	}
 
+	@Override
+	public Component getExpender() {
+		if (expender == null)
+			expender = new ExpenderBox();
+		return expender;
+	}
+
+	public class ExpenderBox extends Component {
+
+		@Override
+		public void addComponent(Component component) {
+			super.addComponent(component);
+			if (component instanceof AbstractField) {
+				AbstractField field = (AbstractField) component;
+				field.setVisible(false);
+			}
+		}
+	}
 }

@@ -228,4 +228,9 @@ public class PhoneGrid extends AbstractGrid {
 		}
 	}
 
+	@Override
+	public Component getExpender() {
+		return this;
+	}
+
 }
