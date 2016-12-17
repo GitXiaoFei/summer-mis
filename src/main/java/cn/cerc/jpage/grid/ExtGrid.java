@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jmis.page.AbstractJspPage;
+import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.extjs.GridColumns;
 import cn.cerc.jpage.grid.extjs.GridData;
 import cn.cerc.jpage.grid.extjs.GridFields;
-import cn.cerc.jpage.fields.AbstractField;
 
 public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;
+	private Component expender;
 
 	public ExtGrid(AbstractJspPage page) {
 		super(page);
@@ -82,9 +84,9 @@ public class ExtGrid extends AbstractGrid {
 		if (this.isMoreContext()) {
 			// 定义展开的内容
 			List<AbstractField> items = new ArrayList<>();
-			for (AbstractField field : this.getFields()) {
-				if (field.getExpender() != null)
-					items.add(field);
+			for (Component column: this.getExpender().getComponents()) {
+				if(column instanceof AbstractField)
+					items.add((AbstractField) column);
 			}
 			html.println("var tpl = new Ext.XTemplate(");
 			for (int i = 0; i < items.size(); i++) {
@@ -185,5 +187,24 @@ public class ExtGrid extends AbstractGrid {
 
 	public boolean isExtGrid() {
 		return true;
+	}
+
+	@Override
+	public Component getExpender() {
+		if (expender == null)
+			expender = new ExpenderBox();
+		return expender;
+	}
+
+	public class ExpenderBox extends Component {
+
+		@Override
+		public void addComponent(Component component) {
+			super.addComponent(component);
+			if (component instanceof AbstractField) {
+				AbstractField field = (AbstractField) component;
+				field.setVisible(false);
+			}
+		}
 	}
 }

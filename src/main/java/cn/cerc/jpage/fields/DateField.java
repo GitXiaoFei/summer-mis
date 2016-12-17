@@ -8,7 +8,8 @@ import cn.cerc.jpage.form.Title;
 public class DateField extends AbstractField {
 
 	public DateField(Component owner, String name, String field) {
-		super(owner, name, field, 5);
+		super(owner, name, 5);
+		this.setField(field);
 		this.setDialog("showDateDialog");
 	}
 

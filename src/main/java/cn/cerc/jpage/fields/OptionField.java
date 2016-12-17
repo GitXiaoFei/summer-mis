@@ -13,11 +13,13 @@ public class OptionField extends AbstractField {
 	private Map<String, String> items = new LinkedHashMap<>();
 
 	public OptionField(Component owner, String name, String field) {
-		super(owner, name, field, 0);
+		super(owner, name, 0);
+		this.setField(field);
 	}
 
 	public OptionField(Component owner, String name, String field, int width) {
-		super(owner, name, field, width);
+		super(owner, name, width);
+		this.setField(field);
 	}
 
 	public OptionField add(String key, String text) {

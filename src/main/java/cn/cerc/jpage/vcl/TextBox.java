@@ -15,10 +15,13 @@ public class TextBox extends Component {
 	private String name;
 	private String type;
 	private String value;
+	// 正则过滤
+	protected String pattern;
 	private String maxlength;
 	private String placeholder;
 	private boolean autofocus;
 	private boolean readonly;
+	private boolean required;
 	private String onclick;
 	private String oninput;
 
@@ -45,6 +48,8 @@ public class TextBox extends Component {
 			html.print(" maxlength=%s", this.maxlength);
 		if (value != null)
 			html.print(" value='%s'", this.value);
+		if (pattern != null)
+			html.print(" pattern=\"%s\"", this.pattern);
 		if (onclick != null)
 			html.print(" onclick='%s'", this.onclick);
 		if (oninput != null)
@@ -53,6 +58,9 @@ public class TextBox extends Component {
 			html.print(" placeholder='%s'", this.placeholder);
 		if (this.autofocus) {
 			html.print(" autofocus");
+		}
+		if (this.required) {
+			html.print(" required");
 		}
 		if (this.readonly)
 			html.print(" readonly='readonly'");
@@ -93,12 +101,28 @@ public class TextBox extends Component {
 		this.value = value;
 	}
 
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
 	public boolean isReadonly() {
 		return readonly;
 	}
 
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
+	}
+
+	public boolean isRequired() {
+		return required;
+	}
+
+	public void setRequired(boolean required) {
+		this.required = required;
 	}
 
 	public boolean isAutofocus() {
@@ -140,4 +164,5 @@ public class TextBox extends Component {
 	public void setOninput(String oninput) {
 		this.oninput = oninput;
 	}
+
 }

@@ -52,6 +52,8 @@ public abstract class AbstractField extends Component implements IField, IColumn
 	//
 	private Expender expender;
 
+	private boolean visible = true;
+	
 	protected String oninput;
 
 	protected String onclick;
@@ -61,16 +63,18 @@ public abstract class AbstractField extends Component implements IField, IColumn
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
 		if (owner != null) {
-			if (!(owner instanceof DataView))
-				throw new RuntimeException("owner not is DataView");
-			this.dataView = (DataView) owner;
-			dataView.addField(this);
-			this.setReadonly(dataView.isReadonly());
+			if ((owner instanceof DataView)) {
+				// throw new RuntimeException("owner not is DataView");
+				this.dataView = (DataView) owner;
+				dataView.addField(this);
+				this.setReadonly(dataView.isReadonly());
+			}
 		}
 		this.name = name;
 		this.width = width;
 	}
 
+	@Deprecated
 	public AbstractField(Component owner, String name, String field, int width) {
 		this(owner, name, width);
 		this.setField(field);
@@ -142,6 +146,8 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	public AbstractField setField(String field) {
 		this.field = field;
+		if (this.getId() == null || this.getId().startsWith("component"))
+			this.setId(field);
 		return this;
 	}
 
@@ -179,14 +185,6 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	public void setCSSClass_phone(String cSSClass_phone) {
 		CSSClass_phone = cSSClass_phone;
-	}
-
-	@Override
-	public String getId() {
-		if (super.getId() == null)
-			return field;
-		else
-			return super.getId();
 	}
 
 	public boolean isReadonly() {
@@ -348,11 +346,13 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		title.setName(this.getField());
 		return title;
 	}
-
+	
+	@Deprecated
 	public Expender getExpender() {
 		return expender;
 	}
 
+	@Deprecated
 	public AbstractField setExpender(Expender expender) {
 		this.expender = expender;
 		return this;
@@ -435,5 +435,14 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		public void setXtype(String xtype) {
 			this.xtype = xtype;
 		}
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public AbstractField setVisible(boolean visible) {
+		this.visible = visible;
+		return this;
 	}
 }

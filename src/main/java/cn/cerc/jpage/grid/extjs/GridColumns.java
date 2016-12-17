@@ -5,8 +5,8 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.AbstractGrid;
 
 public class GridColumns extends Component {
@@ -18,15 +18,15 @@ public class GridColumns extends Component {
 		List<Column> columns = new ArrayList<>();
 		double sumFieldWidth = 0;
 		for (AbstractField field : grid.getFields()) {
-			if (field instanceof ExpendField || field.getExpender() != null)
+			if (field instanceof ExpendField)
 				continue;
 			sumFieldWidth += field.getWidth();
 		}
 		for (AbstractField field : grid.getFields()) {
-			if (field instanceof ExpendField || field.getExpender() != null || field.getWidth() == 0)
+			if (field instanceof ExpendField || field.getWidth() == 0)
 				continue;
 			Column col1 = field.getColumn();
-			String val = "" + (field.getWidth() / sumFieldWidth * 98);//预留2%给滚动条
+			String val = "" + (field.getWidth() / sumFieldWidth * 98);// 预留2%给滚动条
 			col1.setWidth(String.format("%s%%", val.substring(0, val.indexOf(".") + 2)));
 			columns.add(col1);
 		}

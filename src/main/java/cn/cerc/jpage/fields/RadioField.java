@@ -10,7 +10,8 @@ public class RadioField extends AbstractField {
 	private List<String> items = new ArrayList<>();
 
 	public RadioField(Component owner, String name, String field, int width) {
-		super(owner, name, field, width);
+		super(owner, name, width);
+		this.setField(field);
 	}
 
 	@Override
