@@ -16,7 +16,7 @@ public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;
-	private Component expender;
+	private ExpenderBox expender;
 
 	public ExtGrid(AbstractJspPage page) {
 		super(page);
@@ -84,8 +84,8 @@ public class ExtGrid extends AbstractGrid {
 		if (this.isMoreContext()) {
 			// 定义展开的内容
 			List<AbstractField> items = new ArrayList<>();
-			for (Component column: this.getExpender().getComponents()) {
-				if(column instanceof AbstractField)
+			for (Component column : this.getExpender().getComponents()) {
+				if (column instanceof AbstractField)
 					items.add((AbstractField) column);
 			}
 			html.println("var tpl = new Ext.XTemplate(");
@@ -192,19 +192,7 @@ public class ExtGrid extends AbstractGrid {
 	@Override
 	public Component getExpender() {
 		if (expender == null)
-			expender = new ExpenderBox();
+			expender = new ExpenderBox(this);
 		return expender;
-	}
-
-	public class ExpenderBox extends Component {
-
-		@Override
-		public void addComponent(Component component) {
-			super.addComponent(component);
-			if (component instanceof AbstractField) {
-				AbstractField field = (AbstractField) component;
-				field.setVisible(false);
-			}
-		}
 	}
 }
