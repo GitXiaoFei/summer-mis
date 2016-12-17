@@ -62,55 +62,52 @@ public class DataGrid extends AbstractGrid {
 
 		html.println("<tr>");
 		for (IField column : columns) {
-			if (column.getWidth() > 0) {
+			html.println("<th");
+			if (column.getWidth() == 0)
+				html.print(" style=\"display:none\"");
+			else {
 				double val = roundTo(column.getWidth() / sumFieldWidth * 100, -2);
-				html.println("<th width=\"%f%%\">%s</th>", val, column.getTitle());
+				html.print(" width=\"%f%%\"", val);
 			}
+			html.print(">");
+			html.print(column.getTitle());
+			html.println("</th>");
 		}
 		html.println("</tr>");
 		int i = pages.getBegin();
 		while (i <= pages.getEnd()) {
 			dataSet.setRecNo(i + 1);
-			int expendSum = 0;
 			// 输出正常字段
 			html.println("<tr");
 			html.println(" id='%s'", "tr" + dataSet.getRecNo());
 			if (this.getPrimaryKey() != null)
 				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 			html.println(">");
-			for (IField define : columns) {
-				if (define instanceof IColumn) {
-					IColumn column = (IColumn) define;
-					html.print("<td");
-					if (column.getAlign() != null)
-						html.print(" align=\"%s\"", column.getAlign());
-					html.print(">");
-					html.print(column.format(getDataSet().getCurrent()));
-					html.println("</td>");
-				} else if (define instanceof AbstractField) {
-					AbstractField field = (AbstractField) define;
-					// 设置展开以及宽度为0的栏位不显示
-					if (field.getWidth() > 0) {
-						html.print("<td");
-						if (field.getAlign() != null)
-							html.print(" align=\"%s\"", field.getAlign());
-						if (field.getField() != null)
-							html.print(" role=\"%s\"", field.getField());
-						html.print(">");
-						outputField(html, field);
-						html.println("</td>");
-					} else {
-						expendSum++;
-					}
-				} else {
-					throw new RuntimeException("暂不支持的数据类型：" + define.getClass().getName());
-				}
+			for (IField field : columns) {
+				html.print("<td");
+				if (field.getWidth() == 0)
+					html.print(" style=\"display:none\"");
+				if (field.getAlign() != null)
+					html.print(" align=\"%s\"", field.getAlign());
+				if (field.getField() != null)
+					html.print(" role=\"%s\"", field.getField());
+				html.print(">");
+				
+				if (field instanceof IColumn)
+					html.print(((IColumn) field).format(getDataSet().getCurrent()));
+				else if (field instanceof AbstractField)
+					outputField(html, (AbstractField) field);
+				else
+					throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
+				
+				html.print("</td>");
 			}
 			html.println("</tr>");
+			
 			// 输出隐藏字段
 			if (this.getExpender().getComponents().size() > 0) {
 				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
-				html.println("<td colspan=\"%d\">", columns.size() - expendSum);
+				html.println("<td colspan=\"%d\">", columns.size());
 				for (Component column : this.getExpender().getComponents()) {
 					if (column instanceof AbstractField) {
 						AbstractField field = (AbstractField) column;
