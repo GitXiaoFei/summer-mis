@@ -5,9 +5,10 @@ import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jpage.grid.extjs.Column;
+import cn.cerc.jpage.grid.extjs.ExtColumn;
+import cn.cerc.jui.vcl.columns.IColumn;
 
-public class BooleanField extends AbstractField implements SearchItem, IColumnChange {
+public class BooleanField extends AbstractField implements SearchItem, IColumn {
 	private String trueText = "是";
 	private String falseText = "否";
 	private String title;
@@ -91,8 +92,8 @@ public class BooleanField extends AbstractField implements SearchItem, IColumnCh
 	}
 
 	@Override
-	public Column getColumn() {
-		Column column = super.getColumn();
+	public ExtColumn getColumn() {
+		ExtColumn column = super.getColumn();
 		column.setEditor(null);
 		return column;
 	}

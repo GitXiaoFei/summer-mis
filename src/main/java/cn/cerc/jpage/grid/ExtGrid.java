@@ -8,9 +8,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.grid.extjs.GridColumns;
-import cn.cerc.jpage.grid.extjs.GridData;
-import cn.cerc.jpage.grid.extjs.GridFields;
+import cn.cerc.jpage.grid.extjs.ExtGridColumns;
+import cn.cerc.jpage.grid.extjs.ExtGridData;
+import cn.cerc.jpage.grid.extjs.ExtGridFields;
 
 public class ExtGrid extends AbstractGrid {
 	private String title;
@@ -76,9 +76,9 @@ public class ExtGrid extends AbstractGrid {
 
 		html.println("Ext.onReady(function() {");
 		html.println("Ext.QuickTips.init();");
-		html.println("var myData=%s;", new GridData().setGrid(this).toString());
+		html.println("var myData=%s;", new ExtGridData().setGrid(this).toString());
 		html.println("store=Ext.create('Ext.data.ArrayStore', {");
-		html.println("fields:%s,", new GridFields().setGrid(this).toString());
+		html.println("fields:%s,", new ExtGridFields().setGrid(this).toString());
 		html.println("data: myData});");
 		html.println("var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {clicksToEdit: 1});");
 		if (this.isMoreContext()) {
@@ -105,7 +105,7 @@ public class ExtGrid extends AbstractGrid {
 		html.println("grid = Ext.create('Ext.grid.Panel', {");
 		html.println("store: store,");
 		html.println("columnLines: true,");
-		html.println("columns: %s,", new GridColumns().setGrid(this).toString());
+		html.println("columns: %s,", new ExtGridColumns().setGrid(this).toString());
 		html.print("selModel: {selType: 'cellmodel'},");
 		html.print("height: extGridHeight,");
 		html.print("width: '100%',");

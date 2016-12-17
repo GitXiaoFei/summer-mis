@@ -11,11 +11,10 @@ import cn.cerc.jpage.common.HtmlText;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
-import cn.cerc.jpage.grid.extjs.Column;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.grid.extjs.ExtColumn;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IColumn {
+public abstract class AbstractField extends Component implements IField {
 	private String name;
 	private String shortName;
 	private String align;
@@ -59,7 +58,7 @@ public abstract class AbstractField extends Component implements IColumn {
 
 	protected String onclick;
 	// 由extGrid调用
-	private Column column;
+	private ExtColumn column;
 
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
@@ -380,9 +379,9 @@ public abstract class AbstractField extends Component implements IColumn {
 		return this;
 	}
 
-	public Column getColumn() {
+	public ExtColumn getColumn() {
 		if (column == null) {
-			column = new Column(this);
+			column = new ExtColumn(this);
 			column.setText(this.getName());
 			column.setDataIndex(this.getField());
 			column.setLocked(false);
@@ -395,21 +394,13 @@ public abstract class AbstractField extends Component implements IColumn {
 		return column;
 	}
 
-	public void setColumn(Column column) {
+	public void setColumn(ExtColumn column) {
 		this.column = column;
 	}
 
 	@Override
 	public String getTitle() {
 		return this.getName();
-	}
-
-	@Override
-	public String format(Object value) {
-		if (value instanceof Record)
-			return this.getText((Record) value);
-		else
-			throw new RuntimeException("不支持的数据类型：" + value.getClass().getName());
 	}
 
 	public class Editor {

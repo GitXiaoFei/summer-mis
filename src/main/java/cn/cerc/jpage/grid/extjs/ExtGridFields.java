@@ -8,7 +8,7 @@ import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.AbstractGrid;
 
-public class GridFields extends Component {
+public class ExtGridFields extends Component {
 	private AbstractGrid grid;
 
 	@Override
@@ -30,7 +30,7 @@ public class GridFields extends Component {
 		return grid;
 	}
 
-	public GridFields setGrid(AbstractGrid grid) {
+	public ExtGridFields setGrid(AbstractGrid grid) {
 		this.grid = grid;
 		return this;
 	}

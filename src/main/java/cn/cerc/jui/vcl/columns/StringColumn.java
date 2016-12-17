@@ -7,14 +7,13 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jui.vcl.columns.AbstractColumn;
-import cn.cerc.jui.vcl.columns.IColumn;
 
 public class StringColumn extends AbstractColumn {
 	private boolean init = false;
 	private DataSet dataSet;
-	private List<IColumn> columns;
+	private List<IField> columns;
 
 	public StringColumn(Component owner) {
 		super(owner);
@@ -48,7 +47,7 @@ public class StringColumn extends AbstractColumn {
 			
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
-			for (IColumn src : grid.getColumns()) {
+			for (IField src : grid.getColumns()) {
 				if (src instanceof StringColumn)
 					columns.add(src);
 			}

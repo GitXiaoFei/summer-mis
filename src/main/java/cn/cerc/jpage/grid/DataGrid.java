@@ -11,7 +11,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IColumnChange;
+import cn.cerc.jpage.fields.IField;
 import cn.cerc.jui.vcl.columns.IColumn;
 
 public class DataGrid extends AbstractGrid {
@@ -42,12 +42,12 @@ public class DataGrid extends AbstractGrid {
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
-		List<IColumn> columns = this.getColumns();
+		List<IField> columns = this.getColumns();
 		if (manager != null)
 			columns = manager.Reindex(columns);
 
 		double sumFieldWidth = 0;
-		for (IColumn column : columns)
+		for (IField column : columns)
 			sumFieldWidth += column.getWidth();
 
 		if (sumFieldWidth < 0)
@@ -61,7 +61,7 @@ public class DataGrid extends AbstractGrid {
 		html.println(">");
 
 		html.println("<tr>");
-		for (IColumn column : columns) {
+		for (IField column : columns) {
 			if (column.getWidth() > 0) {
 				double val = roundTo(column.getWidth() / sumFieldWidth * 100, -2);
 				html.println("<th width=\"%f%%\">%s</th>", val, column.getTitle());
@@ -78,9 +78,17 @@ public class DataGrid extends AbstractGrid {
 			if (this.getPrimaryKey() != null)
 				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 			html.println(">");
-			for (IColumn column : columns) {
-				if (column instanceof AbstractField) {
-					AbstractField field = (AbstractField) column;
+			for (IField define : columns) {
+				if (define instanceof IColumn) {
+					IColumn column = (IColumn) define;
+					html.print("<td");
+					if (column.getAlign() != null)
+						html.print(" align=\"%s\"", column.getAlign());
+					html.print(">");
+					html.print(column.format(getDataSet().getCurrent()));
+					html.println("</td>");
+				} else if (define instanceof AbstractField) {
+					AbstractField field = (AbstractField) define;
 					// 设置展开以及宽度为0的栏位不显示
 					if (field.getWidth() > 0) {
 						html.print("<td");
@@ -95,12 +103,7 @@ public class DataGrid extends AbstractGrid {
 						expendSum++;
 					}
 				} else {
-					html.print("<td");
-					if (column.getAlign() != null)
-						html.print(" align=\"%s\"", column.getAlign());
-					html.print(">");
-					html.print(column.format(getDataSet().getCurrent()));
-					html.println("</td>");
+					throw new RuntimeException("暂不支持的数据类型：" + define.getClass().getName());
 				}
 			}
 			html.println("</tr>");
@@ -132,13 +135,6 @@ public class DataGrid extends AbstractGrid {
 	private void outputField(HtmlWriter html, AbstractField field) {
 		Record record = getDataSet().getCurrent();
 
-		if (field instanceof IColumnChange) {
-			if (!field.isReadonly()) {
-				html.print(field.format(getDataSet().getCurrent()));
-				return;
-			}
-		}
-
 		BuildUrl build = field.getBuildUrl();
 		if (build != null) {
 			UrlRecord url = new UrlRecord();
@@ -151,9 +147,6 @@ public class DataGrid extends AbstractGrid {
 			} else {
 				html.println(field.getText(record));
 			}
-		} else if (field instanceof IColumn) {
-			IColumn col = (IColumn) field;
-			html.print(col.format(record));
 		} else {
 			html.print(field.getText(record));
 		}

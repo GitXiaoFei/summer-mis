@@ -12,14 +12,14 @@ import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.IField;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
-import cn.cerc.jui.vcl.columns.IColumn;
 
 public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
 	// PC专用表格列
-	private List<IColumn> columns = new ArrayList<>();
+	private List<IField> columns = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -68,7 +68,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 		pages.setCurrent(pageno);
 	}
 
-	public void addField(IColumn field) {
+	public void addField(IField field) {
 		columns.add(field);
 	}
 
@@ -100,13 +100,13 @@ public abstract class AbstractGrid extends Component implements DataView {
 		return pages;
 	}
 
-	public List<IColumn> getColumns() {
+	public List<IField> getColumns() {
 		return this.columns;
 	}
 
 	public List<AbstractField> getFields() {
 		List<AbstractField> items = new ArrayList<>();
-		for (IColumn obj : columns) {
+		for (IField obj : columns) {
 			if (obj instanceof AbstractField)
 				items.add((AbstractField) obj);
 		}
@@ -122,7 +122,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (IColumn column : this.getColumns()) {
+		for (IField column : this.getColumns()) {
 			if (column instanceof AbstractField)
 				((AbstractField) column).setReadonly(readonly);
 			else if (column instanceof AbstractColumn)

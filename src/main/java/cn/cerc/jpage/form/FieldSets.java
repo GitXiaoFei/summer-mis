@@ -8,7 +8,7 @@ import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.fields.IField;
 
 public class FieldSets extends Component implements DataView {
 	private DataView dataView;
@@ -26,7 +26,7 @@ public class FieldSets extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(IColumn field) {
+	public void addField(IField field) {
 		if (field instanceof AbstractField)
 			fields.add((AbstractField) field);
 		else
