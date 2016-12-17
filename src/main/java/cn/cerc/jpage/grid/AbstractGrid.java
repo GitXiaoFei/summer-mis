@@ -163,4 +163,6 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public abstract void outputGrid(HtmlWriter html);
+
+	public abstract Component getExpender();
 }
