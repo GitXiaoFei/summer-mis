@@ -1,12 +1,13 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.TDate;
+import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jpage.common.BuildText;
 import cn.cerc.jpage.common.BuildUrl;
 import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.common.HtmlText;
-import cn.cerc.jpage.common.IField;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.form.Title;
@@ -14,7 +15,7 @@ import cn.cerc.jpage.grid.extjs.Column;
 import cn.cerc.jui.vcl.columns.IColumn;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField, IColumn {
+public abstract class AbstractField extends Component implements IColumn {
 	private String name;
 	private String shortName;
 	private String align;
@@ -53,7 +54,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 	private Expender expender;
 
 	private boolean visible = true;
-	
+
 	protected String oninput;
 
 	protected String onclick;
@@ -328,15 +329,6 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		return dataView;
 	}
 
-	@Override
-	public String getString() {
-		if (dataView == null)
-			throw new RuntimeException("owner is null.");
-		if (dataView.getRecord() == null)
-			throw new RuntimeException("owner.dataSet is null.");
-		return dataView.getRecord().getString(this.getField());
-	}
-
 	public BuildUrl getBuildUrl() {
 		return buildUrl;
 	}
@@ -346,7 +338,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		title.setName(this.getField());
 		return title;
 	}
-	
+
 	@Deprecated
 	public Expender getExpender() {
 		return expender;
@@ -445,4 +437,93 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.visible = visible;
 		return this;
 	}
+
+	public String getString() {
+		if (dataView == null)
+			throw new RuntimeException("owner is null.");
+		if (dataView.getRecord() == null)
+			throw new RuntimeException("owner.dataSet is null.");
+		return dataView.getRecord().getString(this.getField());
+	}
+
+	public boolean getBoolean() {
+		String val = this.getString();
+		return "1".equals(val) || "true".equals(val);
+	}
+
+	public boolean getBoolean(boolean def) {
+		String val = this.getString();
+		if (val == null)
+			return def;
+		return "1".equals(val) || "true".equals(val);
+	}
+
+	public int getInt() {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return 0;
+		return Integer.parseInt(val);
+	}
+
+	public int getInt(int def) {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return def;
+		try {
+			return Integer.parseInt(val);
+		} catch (Exception e) {
+			return def;
+		}
+	}
+
+	public double getDouble() {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return 0;
+		return Double.parseDouble(val);
+	}
+
+	public double getDouble(double def) {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return def;
+		try {
+			return Double.parseDouble(val);
+		} catch (Exception e) {
+			return def;
+		}
+	}
+
+	public TDateTime getDateTime() {
+		String val = this.getString();
+		if (val == null)
+			return null;
+		return TDateTime.fromDate(val);
+	}
+
+	public TDate getDate() {
+		String val = this.getString();
+		if (val == null)
+			return null;
+		TDateTime obj = TDateTime.fromDate(val);
+		if (obj == null)
+			return null;
+		return new TDate(obj.getData());
+	}
+
+	public String getString(String def) {
+		String result = this.getString();
+		return result != null ? result : def;
+	}
+
+	public TDate getDate(TDate def) {
+		TDate result = this.getDate();
+		return result != null ? result : def;
+	}
+
+	public TDateTime getDateTime(TDateTime def) {
+		TDateTime result = this.getDateTime();
+		return result != null ? result : def;
+	}
+
 }
