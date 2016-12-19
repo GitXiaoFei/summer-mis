@@ -1,5 +1,7 @@
 package cn.cerc.jui.phone;
 
+import org.apache.commons.lang.StringUtils;
+
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
@@ -29,22 +31,24 @@ public class Block119 extends Component {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block119'>");
 		html.print("<ul class='cf'>");
-		html.print("<a href='%s'>",this.leftUrl.getUrl());
 		html.print("<li>");
 		html.print("<div class='item'>");
+		html.print("<a href='%s'>", this.leftUrl.getUrl());
 		this.leftImage.output(html);
 		this.leftTitle.output(html);
+		html.print("</a>");
 		html.print("</div>");
 		html.print("</li>");
-		html.print("</a>");
-		html.print("<a href='%s'>",this.rightUrl.getUrl());
-		html.print("<li>");
-		html.print("<div class='item'>");
-		this.rightImage.output(html);
-		this.rightTitle.output(html);
-		html.print("</div>");
-		html.print("</li>");
-		html.print("</a>");
+		if (!StringUtils.isBlank(this.rightImage.getSrc()) && !StringUtils.isBlank(this.rightTitle.getText())) {
+			html.print("<li>");
+			html.print("<div class='item'>");
+			html.print("<a href='%s'>", this.rightUrl.getUrl());
+			this.rightImage.output(html);
+			this.rightTitle.output(html);
+			html.print("</a>");
+			html.print("</div>");
+			html.print("</li>");
+		}
 		html.print("</ul>");
 		html.print("</div>");
 	}
@@ -53,43 +57,25 @@ public class Block119 extends Component {
 		return leftUrl;
 	}
 
-	public void setLeftUrl(UrlRecord leftUrl) {
-		this.leftUrl = leftUrl;
-	}
-
 	public UrlRecord getRightUrl() {
 		return rightUrl;
-	}
-
-	public void setRightUrl(UrlRecord rightUrl) {
-		this.rightUrl = rightUrl;
 	}
 
 	public Span getRightTitle() {
 		return rightTitle;
 	}
+	
 
-	public void setRightTitle(String rightTitle) {
-		this.rightTitle.setText(rightTitle);
-	}
-
-	public void setLeftTitle(String leftTitle) {
-		this.leftTitle.setText(leftTitle);
+	public Span getLeftTitle() {
+		return leftTitle;
 	}
 
 	public Image getLeftImage() {
 		return leftImage;
 	}
 
-	public void setLeftImage(String leftImage) {
-		this.leftImage.setSrc(leftImage);
-	}
-
 	public Image getRightImage() {
 		return rightImage;
 	}
 
-	public void setRightImage(String rightImage) {
-		this.rightImage.setSrc(rightImage);
-	}
 }
