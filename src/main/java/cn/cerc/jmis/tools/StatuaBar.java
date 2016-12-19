@@ -7,7 +7,7 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.form.UrlMenu;
+import cn.cerc.jpage.other.UrlMenu;
 
 public class StatuaBar extends Component {
 	private IForm form;

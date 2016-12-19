@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
-import cn.cerc.jui.vcl.columns.CheckBoxColumn;
-import cn.cerc.jui.vcl.columns.ConvertColumn;
-import cn.cerc.jui.vcl.columns.FieldAsColumn;
-import cn.cerc.jui.vcl.columns.HideColumn;
-import cn.cerc.jui.vcl.columns.IColumn;
-import cn.cerc.jui.vcl.columns.IndexColumn;
-import cn.cerc.jui.vcl.columns.LinkColumn;
-import cn.cerc.jui.vcl.columns.OperatingColumn;
+import cn.cerc.jpage.grid.columns.CheckBoxColumn;
+import cn.cerc.jpage.grid.columns.ConvertColumn;
+import cn.cerc.jpage.grid.columns.FieldAsColumn;
+import cn.cerc.jpage.grid.columns.HideColumn;
+import cn.cerc.jpage.grid.columns.IndexColumn;
+import cn.cerc.jpage.grid.columns.LinkColumn;
+import cn.cerc.jpage.grid.columns.OperatingColumn;
 
-public class SimpleGrid extends Component implements DataView {
+public class SimpleGrid extends Component implements DataSource {
 	// private static final Logger log = Logger.getLogger(DBGrid.class);
 	private List<IColumn> columns = new ArrayList<>();
 	private HttpServletRequest request;

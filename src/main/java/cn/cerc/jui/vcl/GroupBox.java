@@ -3,6 +3,7 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+@Deprecated
 public class GroupBox extends Component {
 	private String name;
 	private boolean visible = false;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.core.IField;
 
 public class RowCell extends Component {
 	private List<IField> fields = new ArrayList<>();
