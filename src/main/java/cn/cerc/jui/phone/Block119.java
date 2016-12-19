@@ -1,5 +1,7 @@
 package cn.cerc.jui.phone;
 
+import org.apache.commons.lang.StringUtils;
+
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
@@ -13,10 +15,10 @@ import cn.cerc.jpage.vcl.Span;
  *
  */
 public class Block119 extends Component {
-	private Span leftTitle = null;
-	private Image leftImage = null;
-	private Span rightTitle = null;
-	private Image rightImage = null;
+	private Span leftTitle = new Span();
+	private Image leftImage = new Image();
+	private Span rightTitle = new Span();
+	private Image rightImage = new Image();
 	private UrlRecord leftUrl = new UrlRecord();
 	private UrlRecord rightUrl = new UrlRecord();
 
@@ -37,7 +39,7 @@ public class Block119 extends Component {
 		html.print("</a>");
 		html.print("</div>");
 		html.print("</li>");
-		if (this.rightImage != null && this.rightTitle != null) {
+		if (!StringUtils.isBlank(this.rightImage.getSrc()) && !StringUtils.isBlank(this.rightTitle.getText())) {
 			html.print("<li>");
 			html.print("<div class='item'>");
 			html.print("<a href='%s'>", this.rightUrl.getUrl());
@@ -55,47 +57,25 @@ public class Block119 extends Component {
 		return leftUrl;
 	}
 
-	public void setLeftUrl(UrlRecord leftUrl) {
-		this.leftUrl = leftUrl;
-	}
-
 	public UrlRecord getRightUrl() {
 		return rightUrl;
-	}
-
-	public void setRightUrl(UrlRecord rightUrl) {
-		this.rightUrl = rightUrl;
 	}
 
 	public Span getRightTitle() {
 		return rightTitle;
 	}
+	
 
-	public void setRightTitle(String rightTitle) {
-		this.rightTitle = new Span();
-		this.rightTitle.setText(rightTitle);
-	}
-
-	public void setLeftTitle(String leftTitle) {
-		this.leftTitle = new Span();
-		this.leftTitle.setText(leftTitle);
+	public Span getLeftTitle() {
+		return leftTitle;
 	}
 
 	public Image getLeftImage() {
 		return leftImage;
 	}
 
-	public void setLeftImage(String leftImage) {
-		this.leftImage = new Image();
-		this.leftImage.setSrc(leftImage);
-	}
-
 	public Image getRightImage() {
 		return rightImage;
 	}
 
-	public void setRightImage(String rightImage) {
-		this.rightImage = new Image();
-		this.rightImage.setSrc(rightImage);
-	}
 }
