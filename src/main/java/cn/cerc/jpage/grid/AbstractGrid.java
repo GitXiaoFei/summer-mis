@@ -13,13 +13,14 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.grid.row.AbstractGridLine;
+import cn.cerc.jpage.grid.row.ChildGridLine;
+import cn.cerc.jpage.grid.row.MasterGridLine;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 
 public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
-//	// PC专用表格列
-//	private List<IField> columns = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -31,14 +32,15 @@ public abstract class AbstractGrid extends Component implements DataView {
 	//
 	private HttpServletRequest request;
 	protected ActionForm form;
-	private String primaryKey;
-	private List<RowLine> lines = new ArrayList<>();
+	// 主行
+	private MasterGridLine masterLine;
+	private List<AbstractGridLine> lines = new ArrayList<>();
 
 	public AbstractGrid(Component owner) {
 		super(owner);
 		this.setId("grid");
-		RowLine line = new RowLine(this);
-		lines.add(line);
+		masterLine = new MasterGridLine(this);
+		lines.add(masterLine);
 	}
 
 	public AbstractGrid() {
@@ -101,11 +103,11 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public MutiPage getPages() {
 		return pages;
 	}
-//
-//	@Deprecated
-//	public List<IField> getColumns() {
-//		return this.lines.get(0).getFields();
-//	}
+	//
+	// @Deprecated
+	// public List<IField> getColumns() {
+	// return this.lines.get(0).getFields();
+	// }
 
 	public List<AbstractField> getFields() {
 		List<AbstractField> items = new ArrayList<>();
@@ -157,18 +159,24 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public String getPrimaryKey() {
-		return primaryKey;
+		return masterLine.getPrimaryKey();
 	}
 
 	public void setPrimaryKey(String primaryKey) {
-		this.primaryKey = primaryKey;
+		this.masterLine.setPrimaryKey(primaryKey);
 	}
 
-	public RowLine getLine(int index){
-		return lines.get(index);
-	}
-	
 	public abstract void outputGrid(HtmlWriter html);
 
 	public abstract Component getExpender();
+
+	public List<AbstractGridLine> getLines() {
+		return lines;
+	}
+
+	public AbstractGridLine getLine(int index) {
+		if (index == lines.size())
+			lines.add(new ChildGridLine(this));
+		return lines.get(index);
+	}
 }

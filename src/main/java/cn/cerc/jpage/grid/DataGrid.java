@@ -5,19 +5,16 @@ import static cn.cerc.jdb.other.utils.roundTo;
 import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.BuildUrl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.grid.row.AbstractGridLine;
+import cn.cerc.jpage.grid.row.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
 	// 扩展对象
-	private RowLine expender;
+	private AbstractGridLine expender;
 
 	public DataGrid(Component owner) {
 		super(owner);
@@ -62,7 +59,7 @@ public class DataGrid extends AbstractGrid {
 
 		html.println("<tr>");
 		for (IField column : fields) {
-			html.println("<th");
+			html.print("<th");
 			if (column.getWidth() == 0)
 				html.print(" style=\"display:none\"");
 			else {
@@ -77,76 +74,17 @@ public class DataGrid extends AbstractGrid {
 		int i = pages.getBegin();
 		while (i <= pages.getEnd()) {
 			dataSet.setRecNo(i + 1);
-			// 输出正常字段
-			html.println("<tr");
-			html.println(" id='%s'", "tr" + dataSet.getRecNo());
-			if (this.getPrimaryKey() != null)
-				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
-			html.println(">");
-			for (IField field : fields) {
-				html.print("<td");
-				if (field.getWidth() == 0)
-					html.print(" style=\"display:none\"");
-				if (field.getAlign() != null)
-					html.print(" align=\"%s\"", field.getAlign());
-				if (field.getField() != null)
-					html.print(" role=\"%s\"", field.getField());
-				html.print(">");
-				
-				if (field instanceof IColumn)
-					html.print(((IColumn) field).format(getDataSet().getCurrent()));
-				else if (field instanceof AbstractField)
-					outputField(html, (AbstractField) field);
-				else
-					throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
-				
-				html.print("</td>");
-			}
-			html.println("</tr>");
-			
-			// 输出隐藏字段
-			if (this.getExpender().getComponents().size() > 0) {
-				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
-				html.println("<td colspan=\"%d\">", fields.size());
-				for (Component column : this.getExpender().getComponents()) {
-					if (column instanceof AbstractField) {
-						AbstractField field = (AbstractField) column;
-						html.print("<span>");
-						if (!"".equals(field.getName())) {
-							html.print(field.getName());
-							html.print(": ");
-						}
-						outputField(html, field);
-						html.println("</span>");
-					}
-				}
-				html.println("</tr>");
+			for (int lineNo = 0; lineNo < this.getLines().size(); lineNo++) {
+				AbstractGridLine line = this.getLine(lineNo);
+				if (line instanceof ExpenderGridLine)
+					line.getCell(0).setColSpan(this.getLine(0).getFields().size());
+				line.output(html);
 			}
 			// 下一行
 			i++;
 		}
 		html.println("</table>");
 		return;
-	}
-
-	private void outputField(HtmlWriter html, AbstractField field) {
-		Record record = getDataSet().getCurrent();
-
-		BuildUrl build = field.getBuildUrl();
-		if (build != null) {
-			UrlRecord url = new UrlRecord();
-			build.buildUrl(record, url);
-			if (!"".equals(url.getUrl())) {
-				html.print("<a href=\"%s\"", url.getUrl());
-				if (url.getTitle() != null)
-					html.print(" title=\"%s\"", url.getTitle());
-				html.println(">%s</a>", field.getText(record));
-			} else {
-				html.println(field.getText(record));
-			}
-		} else {
-			html.print(field.getText(record));
-		}
 	}
 
 	public IColumnsManager getManager() {
@@ -159,9 +97,10 @@ public class DataGrid extends AbstractGrid {
 
 	@Override
 	public Component getExpender() {
-		if (expender == null){
-			expender = new RowLine(this);
+		if (expender == null) {
+			expender = new ExpenderGridLine(this);
 			expender.setVisible(false);
+			this.getLines().add(expender);
 		}
 		return expender;
 	}
