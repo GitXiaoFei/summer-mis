@@ -13,9 +13,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
-import cn.cerc.jpage.grid.row.AbstractGridLine;
-import cn.cerc.jpage.grid.row.ChildGridLine;
-import cn.cerc.jpage.grid.row.MasterGridLine;
+import cn.cerc.jpage.grid.line.AbstractGridLine;
+import cn.cerc.jpage.grid.line.ChildGridLine;
+import cn.cerc.jpage.grid.line.MasterGridLine;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 
 public abstract class AbstractGrid extends Component implements DataView {
@@ -126,7 +126,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (IField field : this.getLine(0).getFields()) {
+		for (IField field : this.getMasterLine().getFields()) {
 			if (field instanceof AbstractField)
 				((AbstractField) field).setReadonly(readonly);
 			else if (field instanceof AbstractColumn)
@@ -178,5 +178,9 @@ public abstract class AbstractGrid extends Component implements DataView {
 		if (index == lines.size())
 			lines.add(new ChildGridLine(this));
 		return lines.get(index);
+	}
+
+	public MasterGridLine getMasterLine() {
+		return masterLine;
 	}
 }

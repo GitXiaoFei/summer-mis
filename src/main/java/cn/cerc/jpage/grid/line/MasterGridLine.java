@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.row;
+package cn.cerc.jpage.grid.line;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.common.DataView;
@@ -8,31 +8,19 @@ import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.grid.RowCell;
 import cn.cerc.jui.vcl.columns.IColumn;
 
-public class ExpenderGridLine extends AbstractGridLine {
+public class MasterGridLine extends AbstractGridLine {
+	private String primaryKey;
 
-	public ExpenderGridLine(DataView dataSource) {
+	public MasterGridLine(DataView dataSource) {
 		super(dataSource);
-	}
-
-	@Override
-	public void addField(IField field) {
-		getFields().add(field);
-
-		RowCell col;
-		if (getCells().size() == 0) {
-			col = new RowCell();
-			getCells().add(col);
-		} else
-			col = getCells().get(0);
-		col.addField(field);
 	}
 
 	@Override
 	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
 		html.print("<tr");
-		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
-		html.print(" role=\"%s\"", dataSet.getRecNo());
-		html.print(" style=\"display:none\"");
+		html.print(" id='%s'", "tr" + dataSet.getRecNo());
+		if (this.getPrimaryKey() != null)
+			html.print(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");
@@ -49,22 +37,24 @@ public class ExpenderGridLine extends AbstractGridLine {
 			for (IField obj : item.getFields()) {
 				if (obj instanceof AbstractField) {
 					AbstractField field = (AbstractField) obj;
-					html.print("<span>");
-					if (!"".equals(field.getName())) {
-						html.print(field.getName());
-						html.print(": ");
-					}
 					if (field instanceof IColumn)
 						html.print(((IColumn) field).format(dataSource.getRecord()));
 					else if (field instanceof AbstractField)
 						outputField(html, (AbstractField) field);
 					else
 						throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
-					html.println("</span>");
 				}
 			}
 			html.println("</td>");
 		}
 		html.println("</tr>");
+	}
+
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
 	}
 }

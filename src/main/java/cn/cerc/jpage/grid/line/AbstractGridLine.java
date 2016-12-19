@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.row;
+package cn.cerc.jpage.grid.line;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ public abstract class AbstractGridLine extends Component implements DataView {
 	private List<IField> fields = new ArrayList<>();
 	private List<RowCell> cells = new ArrayList<>();
 	protected DataView dataSource;
-	private boolean visible = true;
 
 	public AbstractGridLine(DataView dataSource) {
 		this.dataSource = dataSource;
@@ -37,18 +36,10 @@ public abstract class AbstractGridLine extends Component implements DataView {
 	public void addField(IField field) {
 		fields.add(field);
 		RowCell col;
-		if (this.visible) {
-			col = new RowCell();
-			col.setAlign(field.getAlign());
-			col.setRole(field.getField());
-			cells.add(col);
-		} else {
-			if (cells.size() == 0) {
-				col = new RowCell();
-				cells.add(col);
-			} else
-				col = cells.get(0);
-		}
+		col = new RowCell();
+		col.setAlign(field.getAlign());
+		col.setRole(field.getField());
+		cells.add(col);
 		col.addField(field);
 	}
 
@@ -81,14 +72,6 @@ public abstract class AbstractGridLine extends Component implements DataView {
 
 	public List<IField> getFields() {
 		return fields;
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 
 	public RowCell getCell(int index) {

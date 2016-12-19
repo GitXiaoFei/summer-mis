@@ -38,7 +38,7 @@ public class ColumnEditor {
 
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
-			for (IField field : grid.getLine(0).getFields()) {
+			for (IField field : grid.getMasterLine().getFields()) {
 				if (field instanceof IColumn) {
 					if (((AbstractField) field).isReadonly())
 						continue;

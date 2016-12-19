@@ -8,8 +8,8 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.IField;
-import cn.cerc.jpage.grid.row.AbstractGridLine;
-import cn.cerc.jpage.grid.row.ExpenderGridLine;
+import cn.cerc.jpage.grid.line.AbstractGridLine;
+import cn.cerc.jpage.grid.line.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
@@ -39,7 +39,7 @@ public class DataGrid extends AbstractGrid {
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
-		List<IField> fields = this.getLine(0).getFields();
+		List<IField> fields = this.getMasterLine().getFields();
 		if (manager != null)
 			fields = manager.Reindex(fields);
 
@@ -99,7 +99,6 @@ public class DataGrid extends AbstractGrid {
 	public Component getExpender() {
 		if (expender == null) {
 			expender = new ExpenderGridLine(this);
-			expender.setVisible(false);
 			this.getLines().add(expender);
 		}
 		return expender;

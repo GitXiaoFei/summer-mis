@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.row;
+package cn.cerc.jpage.grid.line;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.common.DataView;
@@ -8,19 +8,16 @@ import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.grid.RowCell;
 import cn.cerc.jui.vcl.columns.IColumn;
 
-public class MasterGridLine extends AbstractGridLine {
-	private String primaryKey;
+public class ChildGridLine extends AbstractGridLine {
 
-	public MasterGridLine(DataView dataSource) {
+	public ChildGridLine(DataView dataSource) {
 		super(dataSource);
 	}
 
 	@Override
 	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
 		html.print("<tr");
-		html.print(" id='%s'", "tr" + dataSet.getRecNo());
-		if (this.getPrimaryKey() != null)
-			html.print(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
+		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");
@@ -48,13 +45,5 @@ public class MasterGridLine extends AbstractGridLine {
 			html.println("</td>");
 		}
 		html.println("</tr>");
-	}
-
-	public String getPrimaryKey() {
-		return primaryKey;
-	}
-
-	public void setPrimaryKey(String primaryKey) {
-		this.primaryKey = primaryKey;
 	}
 }
