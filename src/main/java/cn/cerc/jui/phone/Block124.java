@@ -30,8 +30,4 @@ public class Block124 extends Component {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title.setText(title);
-	}
-
 }

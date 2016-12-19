@@ -51,16 +51,8 @@ public class Block123 extends Component {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title.setText(title);
-	}
-
 	public UrlRecord getUrlRecord() {
 		return urlRecord;
-	}
-
-	public void setUrlRecord(UrlRecord urlRecord) {
-		this.urlRecord = urlRecord;
 	}
 
 }
