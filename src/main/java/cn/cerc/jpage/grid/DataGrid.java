@@ -17,7 +17,7 @@ import cn.cerc.jui.vcl.columns.IColumn;
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;
 	// 扩展对象
-	private ExpenderBox expender;
+	private RowLine expender;
 
 	public DataGrid(Component owner) {
 		super(owner);
@@ -160,7 +160,7 @@ public class DataGrid extends AbstractGrid {
 	@Override
 	public Component getExpender() {
 		if (expender == null)
-			expender = new ExpenderBox(this);
+			expender = new RowLine(this);
 		return expender;
 	}
 }

@@ -32,15 +32,17 @@ public abstract class AbstractGrid extends Component implements DataView {
 	private HttpServletRequest request;
 	protected ActionForm form;
 	private String primaryKey;
-
-	public AbstractGrid() {
-		super();
-		this.setId("grid");
-	}
+	private List<RowLine> lines = new ArrayList<>();
 
 	public AbstractGrid(Component owner) {
 		super(owner);
 		this.setId("grid");
+		RowLine line = new RowLine(this);
+		lines.add(line);
+	}
+
+	public AbstractGrid() {
+		this(null);
 	}
 
 	@Override
@@ -111,7 +113,6 @@ public abstract class AbstractGrid extends Component implements DataView {
 				items.add((AbstractField) obj);
 		}
 		return items;
-
 	}
 
 	@Override
@@ -162,6 +163,10 @@ public abstract class AbstractGrid extends Component implements DataView {
 		this.primaryKey = primaryKey;
 	}
 
+	public RowLine getLine(int index){
+		return lines.get(index);
+	}
+	
 	public abstract void outputGrid(HtmlWriter html);
 
 	public abstract Component getExpender();

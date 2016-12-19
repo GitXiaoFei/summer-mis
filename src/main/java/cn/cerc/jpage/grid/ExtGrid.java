@@ -16,7 +16,7 @@ public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;
-	private ExpenderBox expender;
+	private RowLine expender;
 
 	public ExtGrid(AbstractJspPage page) {
 		super(page);
@@ -192,7 +192,7 @@ public class ExtGrid extends AbstractGrid {
 	@Override
 	public Component getExpender() {
 		if (expender == null)
-			expender = new ExpenderBox(this);
+			expender = new RowLine(this);
 		return expender;
 	}
 }
