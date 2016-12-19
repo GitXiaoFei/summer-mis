@@ -27,12 +27,22 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block116(page.getContent());
 		new Block117(page.getContent());
 		new Block118(page.getContent());
+		new Block119(page.getContent());
+		new Block120(page.getContent());
+		new Block121(page.getContent());
+		new Block122(page.getContent());
+		new Block123(page.getContent());
+		new Block124(page.getContent());
+		new Block125(page.getContent());
+		new Block126(page.getContent());
+		new Block127(page.getContent());
 
 		new Block301(page.getContent());
 		new Block302(page.getContent());
 		new Block303(page.getContent());
 		new Block304(page.getContent());
 		new Block305(page.getContent());
+		new Block306(page.getContent());
 
 		new Block401(page.getContent());
 		new Block402(page.getContent());

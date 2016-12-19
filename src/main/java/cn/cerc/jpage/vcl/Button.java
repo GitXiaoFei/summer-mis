@@ -8,6 +8,7 @@ public class Button extends Component {
 	private String value;
 	private String text;
 	private String onclick;
+	private String role;
 
 	public Button() {
 		super();
@@ -28,6 +29,9 @@ public class Button extends Component {
 		}
 		if (value != null) {
 			html.print(String.format(" value=\"%s\"", value));
+		}
+		if (role != null) {
+			html.print(" role='%s'", this.role);
 		}
 		if (onclick != null) {
 			html.print(String.format(" onclick=\"%s\"", onclick));
@@ -72,4 +76,13 @@ public class Button extends Component {
 	public void setClickUrl(String url) {
 		this.setOnclick(String.format("location.href='%s'", url));
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }
