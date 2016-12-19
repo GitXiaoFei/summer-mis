@@ -11,8 +11,8 @@ import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.extjs.ExtGridColumns;
 import cn.cerc.jpage.grid.extjs.ExtGridData;
 import cn.cerc.jpage.grid.extjs.ExtGridFields;
-import cn.cerc.jpage.grid.line.AbstractGridLine;
-import cn.cerc.jpage.grid.line.ExpenderGridLine;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class ExtGrid extends AbstractGrid {
 	private String title;

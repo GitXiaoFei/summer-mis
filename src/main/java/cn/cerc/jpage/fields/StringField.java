@@ -2,8 +2,9 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.fields.editor.ColumnEditor;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jui.vcl.columns.IColumn;
 
 public class StringField extends AbstractField implements IColumn {
 	// private static final Logger log = Logger.getLogger(Field.class);
