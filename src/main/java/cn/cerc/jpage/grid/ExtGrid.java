@@ -191,8 +191,10 @@ public class ExtGrid extends AbstractGrid {
 
 	@Override
 	public Component getExpender() {
-		if (expender == null)
+		if (expender == null){
 			expender = new RowLine(this);
+			expender.setVisible(false);
+		}
 		return expender;
 	}
 }

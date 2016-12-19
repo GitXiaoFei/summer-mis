@@ -47,9 +47,9 @@ public class StringColumn extends AbstractColumn {
 			
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
-			for (IField src : grid.getColumns()) {
-				if (src instanceof StringColumn)
-					columns.add(src);
+			for (IField field : grid.getLine(0).getFields()) {
+				if (field instanceof StringColumn)
+					columns.add(field);
 			}
 			this.init = true;
 		}

@@ -42,12 +42,12 @@ public class DataGrid extends AbstractGrid {
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
-		List<IField> columns = this.getColumns();
+		List<IField> fields = this.getLine(0).getFields();
 		if (manager != null)
-			columns = manager.Reindex(columns);
+			fields = manager.Reindex(fields);
 
 		double sumFieldWidth = 0;
-		for (IField column : columns)
+		for (IField column : fields)
 			sumFieldWidth += column.getWidth();
 
 		if (sumFieldWidth < 0)
@@ -61,7 +61,7 @@ public class DataGrid extends AbstractGrid {
 		html.println(">");
 
 		html.println("<tr>");
-		for (IField column : columns) {
+		for (IField column : fields) {
 			html.println("<th");
 			if (column.getWidth() == 0)
 				html.print(" style=\"display:none\"");
@@ -83,7 +83,7 @@ public class DataGrid extends AbstractGrid {
 			if (this.getPrimaryKey() != null)
 				html.println(" data-rowid='%s'", dataSet.getString(this.getPrimaryKey()));
 			html.println(">");
-			for (IField field : columns) {
+			for (IField field : fields) {
 				html.print("<td");
 				if (field.getWidth() == 0)
 					html.print(" style=\"display:none\"");
@@ -107,7 +107,7 @@ public class DataGrid extends AbstractGrid {
 			// 输出隐藏字段
 			if (this.getExpender().getComponents().size() > 0) {
 				html.println("<tr role=\"%d\" style=\"display:none\">", dataSet.getRecNo());
-				html.println("<td colspan=\"%d\">", columns.size());
+				html.println("<td colspan=\"%d\">", fields.size());
 				for (Component column : this.getExpender().getComponents()) {
 					if (column instanceof AbstractField) {
 						AbstractField field = (AbstractField) column;
@@ -159,8 +159,10 @@ public class DataGrid extends AbstractGrid {
 
 	@Override
 	public Component getExpender() {
-		if (expender == null)
+		if (expender == null){
 			expender = new RowLine(this);
+			expender.setVisible(false);
+		}
 		return expender;
 	}
 }

@@ -18,8 +18,8 @@ import cn.cerc.jui.vcl.columns.AbstractColumn;
 public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
-	// PC专用表格列
-	private List<IField> columns = new ArrayList<>();
+//	// PC专用表格列
+//	private List<IField> columns = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -71,7 +71,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public void addField(IField field) {
-		columns.add(field);
+		lines.get(0).addField(field);
 	}
 
 	public String getCSSClass_PC() {
@@ -101,14 +101,15 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public MutiPage getPages() {
 		return pages;
 	}
-
-	public List<IField> getColumns() {
-		return this.columns;
-	}
+//
+//	@Deprecated
+//	public List<IField> getColumns() {
+//		return this.lines.get(0).getFields();
+//	}
 
 	public List<AbstractField> getFields() {
 		List<AbstractField> items = new ArrayList<>();
-		for (IField obj : columns) {
+		for (IField obj : lines.get(0).getFields()) {
 			if (obj instanceof AbstractField)
 				items.add((AbstractField) obj);
 		}
@@ -123,11 +124,11 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (IField column : this.getColumns()) {
-			if (column instanceof AbstractField)
-				((AbstractField) column).setReadonly(readonly);
-			else if (column instanceof AbstractColumn)
-				((AbstractColumn) column).setReadonly(readonly);
+		for (IField field : this.getLine(0).getFields()) {
+			if (field instanceof AbstractField)
+				((AbstractField) field).setReadonly(readonly);
+			else if (field instanceof AbstractColumn)
+				((AbstractColumn) field).setReadonly(readonly);
 		}
 		this.readonly = readonly;
 	}
