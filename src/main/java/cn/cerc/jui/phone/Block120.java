@@ -39,11 +39,11 @@ public class Block120 extends Component {
 		this.title.output(html);
 		html.print("</div>");
 		html.print("<div class='m-right'>");
-		html.print("<a href='%s'>",this.getLeftUrl().getUrl());
+		html.print("<a href='%s'>", this.getLeftUrl().getUrl());
 		this.leftImage.output(html);
 		this.leftText.output(html);
 		html.print("</a>");
-		html.print("<a href='%s'>",this.getRightUrl().getUrl());
+		html.print("<a href='%s'>", this.getRightUrl().getUrl());
 		this.rightImage.output(html);
 		this.rightText.output(html);
 		html.print("</a>");
@@ -55,56 +55,28 @@ public class Block120 extends Component {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title.setText(title);
-	}
-
 	public Image getRightImage() {
 		return rightImage;
-	}
-
-	public void setRightImage(Image rightImage) {
-		this.rightImage = rightImage;
 	}
 
 	public Image getLeftImage() {
 		return leftImage;
 	}
 
-	public void setLeftImage(Image leftImage) {
-		this.leftImage = leftImage;
-	}
-
 	public Span getLeftText() {
 		return leftText;
-	}
-
-	public void setLeftText(String leftText) {
-		this.leftText.setText(leftText);
 	}
 
 	public Span getRightText() {
 		return rightText;
 	}
 
-	public void setRightText(String rightText) {
-		this.rightText.setText(rightText);
-	}
-
 	public UrlRecord getRightUrl() {
 		return rightUrl;
 	}
 
-	public void setRightUrl(UrlRecord rightUrl) {
-		this.rightUrl = rightUrl;
-	}
-
 	public UrlRecord getLeftUrl() {
 		return leftUrl;
-	}
-
-	public void setLeftUrl(UrlRecord leftUrl) {
-		this.leftUrl = leftUrl;
 	}
 
 }

@@ -5,14 +5,14 @@ import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.Expender;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.fields.ExpendField;
+import cn.cerc.jpage.other.BuildUrl;
 
 public class PhoneGrid extends AbstractGrid {
 	// 手机专用表格
@@ -84,15 +84,15 @@ public class PhoneGrid extends AbstractGrid {
 		return line;
 	}
 
-	public class PhoneLine extends Component implements DataView {
-		private DataView dataView;
+	public class PhoneLine extends Component implements DataSource {
+		private DataSource dataView;
 		private boolean Table = false;
 		private String style;
-		private Expender expender;
+		private ExpendField expender;
 
 		private List<AbstractField> columns = new ArrayList<>();
 
-		public PhoneLine(DataView dataView) {
+		public PhoneLine(DataSource dataView) {
 			this.dataView = dataView;
 		}
 
@@ -219,11 +219,11 @@ public class PhoneGrid extends AbstractGrid {
 			return dataView.getRecord();
 		}
 
-		public Expender getExpender() {
+		public ExpendField getExpender() {
 			return expender;
 		}
 
-		public void setExpender(Expender expender) {
+		public void setExpender(ExpendField expender) {
 			this.expender = expender;
 		}
 	}

@@ -2,7 +2,6 @@ package cn.cerc.jpage.other;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.UrlMenu;
 
 public class StrongSide extends Component {
 	private String title;

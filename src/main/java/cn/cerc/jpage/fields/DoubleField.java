@@ -5,10 +5,10 @@ import static cn.cerc.jdb.other.utils.roundTo;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.form.Title;
+import cn.cerc.jpage.fields.editor.ColumnEditor;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jui.vcl.columns.IColumn;
 
 public class DoubleField extends AbstractField implements IColumn {
 	private ColumnEditor editor;
