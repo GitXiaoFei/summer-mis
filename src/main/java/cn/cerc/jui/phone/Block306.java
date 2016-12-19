@@ -54,8 +54,8 @@ public class Block306 extends Component {
 	}
 
 	public void addItems(String line) {
-		if (items.size() > 1) {
-			throw new RuntimeException("最多只能放2行信息");
+		if (items.size() > 2) {
+			throw new RuntimeException("最多只能放3行信息");
 		}
 		items.add(line);
 	}
