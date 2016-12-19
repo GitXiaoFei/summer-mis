@@ -77,8 +77,8 @@ public class DataGrid extends AbstractGrid {
 			for (int lineNo = 0; lineNo < this.getLines().size(); lineNo++) {
 				AbstractGridLine line = this.getLine(lineNo);
 				if (line instanceof ExpenderGridLine)
-					line.getCell(0).setColSpan(this.getLine(0).getFields().size());
-				line.output(html);
+					line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
+				line.output(html, this.getDataSet(), lineNo);
 			}
 			// 下一行
 			i++;

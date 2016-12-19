@@ -13,7 +13,7 @@ public class BaseField extends AbstractField {
 	@Override
 	public String getText(Record ds) {
 		if (buildText == null)
-			return null;
+			return "";
 		HtmlWriter html = new HtmlWriter();
 		buildText.outputText(ds, html);
 		return html.toString();
