@@ -5,6 +5,7 @@ import static cn.cerc.jdb.other.utils.roundTo;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jui.vcl.columns.IColumn;
@@ -35,8 +36,20 @@ public class DoubleField extends AbstractField implements IColumn {
 			return html.toString();
 		}
 		try {
-			double val = dataSet.getDouble(field);
-			return "" + roundTo(val, scale);
+			String val = "" + roundTo(dataSet.getDouble(field), scale);
+			if (buildUrl != null) {
+				HtmlWriter html = new HtmlWriter();
+				UrlRecord url = new UrlRecord();
+				buildUrl.buildUrl(dataSet, url);
+				if (!"".equals(url.getUrl())) {
+					html.print("<a href=\"%s\"", url.getUrl());
+					if (url.getTitle() != null)
+						html.print(" title=\"%s\"", url.getTitle());
+					html.println(">%s</a>", val);
+				}
+				return html.toString();
+			}
+			return val;
 		} catch (NumberFormatException e) {
 			return "0";
 		}
