@@ -29,6 +29,8 @@ public class MasterGridLine extends AbstractGridLine {
 				html.print(" colspan=\"%d\"", item.getColSpan());
 			if (item.getStyle() != null)
 				html.print(" style=\"%s\"", item.getStyle());
+			else if (obj.getWidth() == 0)
+				html.print(" style=\"%s\"", "display:none");
 
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
