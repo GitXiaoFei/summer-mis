@@ -11,8 +11,8 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.other.BuildUrl;
-import cn.cerc.jpage.other.Expender;
 
 public class PhoneGrid extends AbstractGrid {
 	// 手机专用表格
@@ -88,7 +88,7 @@ public class PhoneGrid extends AbstractGrid {
 		private DataSource dataView;
 		private boolean Table = false;
 		private String style;
-		private Expender expender;
+		private ExpendField expender;
 
 		private List<AbstractField> columns = new ArrayList<>();
 
@@ -219,11 +219,11 @@ public class PhoneGrid extends AbstractGrid {
 			return dataView.getRecord();
 		}
 
-		public Expender getExpender() {
+		public ExpendField getExpender() {
 			return expender;
 		}
 
-		public void setExpender(Expender expender) {
+		public void setExpender(ExpendField expender) {
 			this.expender = expender;
 		}
 	}

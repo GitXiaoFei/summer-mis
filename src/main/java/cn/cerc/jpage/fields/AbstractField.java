@@ -11,7 +11,6 @@ import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.extjs.ExtColumn;
 import cn.cerc.jpage.other.BuildText;
 import cn.cerc.jpage.other.BuildUrl;
-import cn.cerc.jpage.other.Expender;
 import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
@@ -50,7 +49,7 @@ public abstract class AbstractField extends Component implements IField {
 	//
 	protected DataSource dataView;
 	//
-	private Expender expender;
+	private ExpendField expender;
 
 	private boolean visible = true;
 
@@ -337,12 +336,12 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	@Deprecated
-	public Expender getExpender() {
+	public ExpendField getExpender() {
 		return expender;
 	}
 
 	@Deprecated
-	public AbstractField setExpender(Expender expender) {
+	public AbstractField setExpender(ExpendField expender) {
 		this.expender = expender;
 		return this;
 	}

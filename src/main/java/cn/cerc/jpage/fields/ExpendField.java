@@ -3,10 +3,9 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.other.Expender;
 import cn.cerc.jpage.other.SearchItem;
 
-public class ExpendField extends AbstractField implements SearchItem, Expender {
+public class ExpendField extends AbstractField implements SearchItem {
 	private boolean search;
 	private String hiddenId = "hidden";
 
@@ -57,7 +56,6 @@ public class ExpendField extends AbstractField implements SearchItem, Expender {
 		this.search = search;
 	}
 
-	@Override
 	public String getHiddenId() {
 		if (this.search)
 			return hiddenId;
