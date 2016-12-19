@@ -56,12 +56,10 @@ public class TextBox extends Component {
 			html.print(" oninput='%s'", this.oninput);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
-		if (this.autofocus) {
+		if (this.autofocus)
 			html.print(" autofocus");
-		}
-		if (this.required) {
+		if (this.required)
 			html.print(" required");
-		}
 		if (this.readonly)
 			html.print(" readonly='readonly'");
 		html.println(" />");
@@ -137,8 +135,9 @@ public class TextBox extends Component {
 		return type;
 	}
 
-	public void setType(String type) {
+	public TextBox setType(String type) {
 		this.type = type;
+		return this;
 	}
 
 	public String getOnclick() {

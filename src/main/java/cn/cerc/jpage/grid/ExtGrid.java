@@ -8,15 +8,17 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
-import cn.cerc.jpage.grid.extjs.GridColumns;
-import cn.cerc.jpage.grid.extjs.GridData;
-import cn.cerc.jpage.grid.extjs.GridFields;
+import cn.cerc.jpage.grid.extjs.ExtGridColumns;
+import cn.cerc.jpage.grid.extjs.ExtGridData;
+import cn.cerc.jpage.grid.extjs.ExtGridFields;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class ExtGrid extends AbstractGrid {
 	private String title;
 	private String postUrl;
 	private String onPostSuccess;
-	private Component expender;
+	private AbstractGridLine expender;
 
 	public ExtGrid(AbstractJspPage page) {
 		super(page);
@@ -76,16 +78,16 @@ public class ExtGrid extends AbstractGrid {
 
 		html.println("Ext.onReady(function() {");
 		html.println("Ext.QuickTips.init();");
-		html.println("var myData=%s;", new GridData().setGrid(this).toString());
+		html.println("var myData=%s;", new ExtGridData().setGrid(this).toString());
 		html.println("store=Ext.create('Ext.data.ArrayStore', {");
-		html.println("fields:%s,", new GridFields().setGrid(this).toString());
+		html.println("fields:%s,", new ExtGridFields().setGrid(this).toString());
 		html.println("data: myData});");
 		html.println("var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {clicksToEdit: 1});");
 		if (this.isMoreContext()) {
 			// 定义展开的内容
 			List<AbstractField> items = new ArrayList<>();
-			for (Component column: this.getExpender().getComponents()) {
-				if(column instanceof AbstractField)
+			for (Component column : this.getExpender().getComponents()) {
+				if (column instanceof AbstractField)
 					items.add((AbstractField) column);
 			}
 			html.println("var tpl = new Ext.XTemplate(");
@@ -105,7 +107,7 @@ public class ExtGrid extends AbstractGrid {
 		html.println("grid = Ext.create('Ext.grid.Panel', {");
 		html.println("store: store,");
 		html.println("columnLines: true,");
-		html.println("columns: %s,", new GridColumns().setGrid(this).toString());
+		html.println("columns: %s,", new ExtGridColumns().setGrid(this).toString());
 		html.print("selModel: {selType: 'cellmodel'},");
 		html.print("height: extGridHeight,");
 		html.print("width: '100%',");
@@ -191,20 +193,10 @@ public class ExtGrid extends AbstractGrid {
 
 	@Override
 	public Component getExpender() {
-		if (expender == null)
-			expender = new ExpenderBox();
-		return expender;
-	}
-
-	public class ExpenderBox extends Component {
-
-		@Override
-		public void addComponent(Component component) {
-			super.addComponent(component);
-			if (component instanceof AbstractField) {
-				AbstractField field = (AbstractField) component;
-				field.setVisible(false);
-			}
+		if (expender == null){
+			expender = new ExpenderGridLine(this);
+			this.getLines().add(expender);
 		}
+		return expender;
 	}
 }

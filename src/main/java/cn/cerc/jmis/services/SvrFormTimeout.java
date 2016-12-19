@@ -7,10 +7,7 @@ import cn.cerc.jdb.mysql.SqlQuery;
 
 public class SvrFormTimeout extends CustomService {
 
-	/**
-	 * 
-	 * 保存Form用户请求
-	 */
+	// 保存Form用户请求
 	public boolean save() {
 		Record headIn = getDataIn().getHead();
 		SqlQuery ds = new SqlQuery(handle);
@@ -24,9 +21,8 @@ public class SvrFormTimeout extends CustomService {
 		ds.setField("TickCount_", headIn.getDouble("tickCount"));
 		ds.setField("AppUser_", this.getUserCode());
 		ds.post();
-		
+
 		return true;
 	}
 
-	
 }

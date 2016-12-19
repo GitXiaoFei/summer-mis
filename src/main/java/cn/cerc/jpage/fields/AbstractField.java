@@ -1,20 +1,19 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.BuildText;
-import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.Expender;
-import cn.cerc.jpage.common.HtmlText;
-import cn.cerc.jpage.common.IField;
+import cn.cerc.jdb.core.TDate;
+import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
+import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.Title;
-import cn.cerc.jpage.grid.extjs.Column;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.core.IField;
+import cn.cerc.jpage.grid.extjs.ExtColumn;
+import cn.cerc.jpage.other.BuildText;
+import cn.cerc.jpage.other.BuildUrl;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField, IColumn {
+public abstract class AbstractField extends Component implements IField {
 	private String name;
 	private String shortName;
 	private String align;
@@ -46,26 +45,26 @@ public abstract class AbstractField extends Component implements IField, IColumn
 	// 栏位说明
 	private HtmlText mark;
 	//
-	private BuildUrl buildUrl;
+	protected BuildUrl buildUrl;
 	//
-	protected DataView dataView;
+	protected DataSource dataView;
 	//
-	private Expender expender;
+	private ExpendField expender;
 
 	private boolean visible = true;
-	
+
 	protected String oninput;
 
 	protected String onclick;
 	// 由extGrid调用
-	private Column column;
+	private ExtColumn column;
 
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
 		if (owner != null) {
-			if ((owner instanceof DataView)) {
+			if ((owner instanceof DataSource)) {
 				// throw new RuntimeException("owner not is DataView");
-				this.dataView = (DataView) owner;
+				this.dataView = (DataSource) owner;
 				dataView.addField(this);
 				this.setReadonly(dataView.isReadonly());
 			}
@@ -99,8 +98,6 @@ public abstract class AbstractField extends Component implements IField, IColumn
 
 	@Override
 	public int getWidth() {
-		if (this.getExpender() != null)
-			return 0;
 		return width;
 	}
 
@@ -324,17 +321,8 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.buildUrl = build;
 	}
 
-	public DataView getDataView() {
+	public DataSource getDataView() {
 		return dataView;
-	}
-
-	@Override
-	public String getString() {
-		if (dataView == null)
-			throw new RuntimeException("owner is null.");
-		if (dataView.getRecord() == null)
-			throw new RuntimeException("owner.dataSet is null.");
-		return dataView.getRecord().getString(this.getField());
 	}
 
 	public BuildUrl getBuildUrl() {
@@ -346,14 +334,14 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		title.setName(this.getField());
 		return title;
 	}
-	
+
 	@Deprecated
-	public Expender getExpender() {
+	public ExpendField getExpender() {
 		return expender;
 	}
 
 	@Deprecated
-	public AbstractField setExpender(Expender expender) {
+	public AbstractField setExpender(ExpendField expender) {
 		this.expender = expender;
 		return this;
 	}
@@ -366,7 +354,7 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		}
 	}
 
-	public void setDataView(DataView dataView) {
+	public void setDataView(DataSource dataView) {
 		this.dataView = dataView;
 	}
 
@@ -388,9 +376,9 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		return this;
 	}
 
-	public Column getColumn() {
+	public ExtColumn getColumn() {
 		if (column == null) {
-			column = new Column(this);
+			column = new ExtColumn(this);
 			column.setText(this.getName());
 			column.setDataIndex(this.getField());
 			column.setLocked(false);
@@ -403,21 +391,13 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		return column;
 	}
 
-	public void setColumn(Column column) {
+	public void setColumn(ExtColumn column) {
 		this.column = column;
 	}
 
 	@Override
 	public String getTitle() {
 		return this.getName();
-	}
-
-	@Override
-	public String format(Object value) {
-		if (value instanceof Record)
-			return this.getText((Record) value);
-		else
-			throw new RuntimeException("不支持的数据类型：" + value.getClass().getName());
 	}
 
 	public class Editor {
@@ -445,4 +425,134 @@ public abstract class AbstractField extends Component implements IField, IColumn
 		this.visible = visible;
 		return this;
 	}
+
+	public String getString() {
+		if (dataView == null)
+			throw new RuntimeException("owner is null.");
+		if (dataView.getRecord() == null)
+			throw new RuntimeException("owner.dataSet is null.");
+		return dataView.getRecord().getString(this.getField());
+	}
+
+	public boolean getBoolean() {
+		String val = this.getString();
+		return "1".equals(val) || "true".equals(val);
+	}
+
+	public boolean getBoolean(boolean def) {
+		String val = this.getString();
+		if (val == null)
+			return def;
+		return "1".equals(val) || "true".equals(val);
+	}
+
+	public int getInt() {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return 0;
+		return Integer.parseInt(val);
+	}
+
+	public int getInt(int def) {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return def;
+		try {
+			return Integer.parseInt(val);
+		} catch (Exception e) {
+			return def;
+		}
+	}
+
+	public double getDouble() {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return 0;
+		return Double.parseDouble(val);
+	}
+
+	public double getDouble(double def) {
+		String val = this.getString();
+		if (val == null || "".equals(val))
+			return def;
+		try {
+			return Double.parseDouble(val);
+		} catch (Exception e) {
+			return def;
+		}
+	}
+
+	public TDateTime getDateTime() {
+		String val = this.getString();
+		if (val == null)
+			return null;
+		return TDateTime.fromDate(val);
+	}
+
+	public TDate getDate() {
+		String val = this.getString();
+		if (val == null)
+			return null;
+		TDateTime obj = TDateTime.fromDate(val);
+		if (obj == null)
+			return null;
+		return new TDate(obj.getData());
+	}
+
+	public String getString(String def) {
+		String result = this.getString();
+		return result != null ? result : def;
+	}
+
+	public TDate getDate(TDate def) {
+		TDate result = this.getDate();
+		return result != null ? result : def;
+	}
+
+	public TDateTime getDateTime(TDateTime def) {
+		TDateTime result = this.getDateTime();
+		return result != null ? result : def;
+	}
+
+	public class Title {
+		private String name;
+		private String type;
+		private String dateFormat;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public String getDateFormat() {
+			return dateFormat;
+		}
+
+		public void setDateFormat(String dateFormat) {
+			this.dateFormat = dateFormat;
+		}
+
+		@Override
+		public String toString() {
+			JSONObject json = new JSONObject();
+			json.put("name", this.name);
+			if (this.type != null)
+				json.put("type", this.type);
+			if (this.dateFormat != null)
+				json.put("dateFormat", this.dateFormat);
+			return json.toString().replace("\"", "'");
+		}
+	}
+
 }
