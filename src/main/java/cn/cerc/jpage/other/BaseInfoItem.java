@@ -3,6 +3,7 @@ package cn.cerc.jpage.other;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+@Deprecated
 public class BaseInfoItem extends Component {
 	private String name;
 	private String value;

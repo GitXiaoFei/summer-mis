@@ -4,6 +4,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Label;
 
+@Deprecated
 public class DateBox extends Component {
 	private String name;
 	private String value;
