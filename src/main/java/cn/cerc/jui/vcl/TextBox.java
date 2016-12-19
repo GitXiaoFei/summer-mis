@@ -5,6 +5,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Label;
 import cn.cerc.jui.vcl.enums.TextEnum;
 
+@Deprecated
 public class TextBox extends Component {
 	private String name = "";
 	private String value = "";

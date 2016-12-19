@@ -73,7 +73,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public void addField(IField field) {
-		lines.get(0).addField(field);
+		masterLine.addField(field);
 	}
 
 	public String getCSSClass_PC() {

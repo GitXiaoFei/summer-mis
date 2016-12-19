@@ -7,6 +7,7 @@ public class GroupBox extends Component {
 	private String name;
 	private boolean visible = false;
 
+	@Deprecated
 	public GroupBox(Component owner) {
 		super(owner);
 	}
