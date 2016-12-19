@@ -1,6 +1,9 @@
 package cn.cerc.jui.phone;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.other.*;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.vcl.Span;
@@ -17,23 +20,11 @@ public class Block123 extends Component {
 	private UrlRecord urlRecord = new UrlRecord();
 	private TextBox textBox = new TextBox();
 
-	public TextBox getTextBox() {
-		return textBox;
-	}
-
-	public void setTextBox(TextBox textBox) {
-		this.textBox = textBox;
-	}
-
 	public Block123(Component owner) {
 		super(owner);
 		this.textBox.setMaxlength("20");
 		this.textBox.setPlaceholder("请输入");
 		this.textBox.setType("text");
-	}
-
-	public void setTitle(Span title) {
-		this.title = title;
 	}
 
 	@Override
@@ -49,6 +40,10 @@ public class Block123 extends Component {
 
 	public Span getTitle() {
 		return title;
+	}
+
+	public TextBox getTextBox() {
+		return textBox;
 	}
 
 	public UrlRecord getUrlRecord() {
