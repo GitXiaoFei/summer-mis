@@ -10,16 +10,16 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jui.vcl.columns.CheckBoxColumn;
-import cn.cerc.jui.vcl.columns.ConvertColumn;
-import cn.cerc.jui.vcl.columns.FieldAsColumn;
-import cn.cerc.jui.vcl.columns.HideColumn;
-import cn.cerc.jui.vcl.columns.IColumn;
-import cn.cerc.jui.vcl.columns.IndexColumn;
-import cn.cerc.jui.vcl.columns.LinkColumn;
-import cn.cerc.jui.vcl.columns.OperatingColumn;
+import cn.cerc.jpage.grid.column.CheckBoxColumn;
+import cn.cerc.jpage.grid.column.ConvertColumn;
+import cn.cerc.jpage.grid.column.FieldAsColumn;
+import cn.cerc.jpage.grid.column.HideColumn;
+import cn.cerc.jpage.grid.column.IndexColumn;
+import cn.cerc.jpage.grid.column.LinkColumn;
+import cn.cerc.jpage.grid.column.OperatingColumn;
 
 public class SimpleGrid extends Component implements DataSource {
 	// private static final Logger log = Logger.getLogger(DBGrid.class);

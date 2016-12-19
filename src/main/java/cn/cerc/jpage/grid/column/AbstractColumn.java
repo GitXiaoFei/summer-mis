@@ -1,9 +1,10 @@
-package cn.cerc.jui.vcl.columns;
+package cn.cerc.jpage.grid.column;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.grid.ObjectGrid;
 
 public class AbstractColumn extends Component implements IColumn {

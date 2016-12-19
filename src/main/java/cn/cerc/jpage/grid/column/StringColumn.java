@@ -1,4 +1,4 @@
-package cn.cerc.jui.vcl.columns;
+package cn.cerc.jpage.grid.column;
 
 import java.util.ArrayList;
 import java.util.List;

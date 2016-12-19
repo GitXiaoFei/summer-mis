@@ -13,10 +13,10 @@ import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
+import cn.cerc.jpage.grid.column.AbstractColumn;
 import cn.cerc.jpage.grid.line.AbstractGridLine;
 import cn.cerc.jpage.grid.line.ChildGridLine;
 import cn.cerc.jpage.grid.line.MasterGridLine;
-import cn.cerc.jui.vcl.columns.AbstractColumn;
 
 public abstract class AbstractGrid extends Component implements DataSource {
 	// 数据源
