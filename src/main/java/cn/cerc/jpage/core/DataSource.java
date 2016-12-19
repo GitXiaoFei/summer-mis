@@ -3,7 +3,6 @@ package cn.cerc.jpage.core;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.fields.IField;
 
 public interface DataSource {
 

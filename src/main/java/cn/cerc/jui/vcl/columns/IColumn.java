@@ -1,6 +1,6 @@
 package cn.cerc.jui.vcl.columns;
 
-import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.core.IField;
 
 public interface IColumn extends IField {
 

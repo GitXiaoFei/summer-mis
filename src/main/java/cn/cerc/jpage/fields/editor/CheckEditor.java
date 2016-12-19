@@ -1,7 +1,8 @@
-package cn.cerc.jpage.fields;
+package cn.cerc.jpage.fields.editor;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.AbstractField;
 
 public class CheckEditor {
 	private AbstractField owner;

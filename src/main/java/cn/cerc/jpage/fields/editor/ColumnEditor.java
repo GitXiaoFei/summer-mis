@@ -1,4 +1,4 @@
-package cn.cerc.jpage.fields;
+package cn.cerc.jpage.fields.editor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
+import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jui.vcl.columns.IColumn;
 

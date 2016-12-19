@@ -7,7 +7,7 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.DataGrid;
 
 public class StringColumn extends AbstractColumn {

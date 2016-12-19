@@ -3,8 +3,8 @@ package cn.cerc.jpage.grid.line;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.grid.RowCell;
 import cn.cerc.jui.vcl.columns.IColumn;
 

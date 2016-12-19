@@ -7,8 +7,8 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
 
 //此对象可以取消
 @Deprecated

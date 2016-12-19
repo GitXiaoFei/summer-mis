@@ -3,6 +3,7 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.fields.editor.CheckEditor;
 import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jpage.grid.extjs.ExtColumn;
 import cn.cerc.jpage.other.SearchItem;

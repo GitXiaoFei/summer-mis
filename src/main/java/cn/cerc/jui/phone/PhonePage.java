@@ -20,6 +20,7 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
@@ -27,7 +28,6 @@ import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.FormView;
 import cn.cerc.jpage.other.HeaderSide;
-import cn.cerc.jpage.other.HtmlContent;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
 

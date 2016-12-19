@@ -8,9 +8,9 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.other.BuildUrl;
 import cn.cerc.jpage.other.Expender;
 

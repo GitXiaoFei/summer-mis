@@ -1,4 +1,4 @@
-package cn.cerc.jpage.fields;
+package cn.cerc.jpage.core;
 
 public interface IField {
 	String getTitle();

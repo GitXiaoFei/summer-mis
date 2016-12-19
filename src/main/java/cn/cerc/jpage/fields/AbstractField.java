@@ -7,6 +7,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.extjs.ExtColumn;
 import cn.cerc.jpage.other.BuildText;
 import cn.cerc.jpage.other.BuildUrl;

@@ -10,8 +10,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.fields.IField;
 
 public class FormView extends Component implements DataSource {
 	protected String CSSClass = "info";

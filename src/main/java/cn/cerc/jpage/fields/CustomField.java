@@ -4,9 +4,9 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class BaseField extends AbstractField {
+public class CustomField extends AbstractField {
 
-	public BaseField(Component dataView, String name, int width) {
+	public CustomField(Component dataView, String name, int width) {
 		super(dataView, name, width);
 	}
 
