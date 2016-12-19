@@ -13,13 +13,13 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.column.CheckBoxColumn;
-import cn.cerc.jpage.grid.column.ConvertColumn;
-import cn.cerc.jpage.grid.column.FieldAsColumn;
-import cn.cerc.jpage.grid.column.HideColumn;
-import cn.cerc.jpage.grid.column.IndexColumn;
-import cn.cerc.jpage.grid.column.LinkColumn;
-import cn.cerc.jpage.grid.column.OperatingColumn;
+import cn.cerc.jpage.grid.columns.CheckBoxColumn;
+import cn.cerc.jpage.grid.columns.ConvertColumn;
+import cn.cerc.jpage.grid.columns.FieldAsColumn;
+import cn.cerc.jpage.grid.columns.HideColumn;
+import cn.cerc.jpage.grid.columns.IndexColumn;
+import cn.cerc.jpage.grid.columns.LinkColumn;
+import cn.cerc.jpage.grid.columns.OperatingColumn;
 
 public class SimpleGrid extends Component implements DataSource {
 	// private static final Logger log = Logger.getLogger(DBGrid.class);

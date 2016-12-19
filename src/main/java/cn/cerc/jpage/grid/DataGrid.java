@@ -8,8 +8,8 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
-import cn.cerc.jpage.grid.line.AbstractGridLine;
-import cn.cerc.jpage.grid.line.ExpenderGridLine;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
 	private IColumnsManager manager;

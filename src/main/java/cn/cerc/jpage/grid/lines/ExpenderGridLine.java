@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.line;
+package cn.cerc.jpage.grid.lines;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.DataSource;

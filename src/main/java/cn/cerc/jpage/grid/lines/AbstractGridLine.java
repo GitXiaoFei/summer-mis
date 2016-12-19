@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.line;
+package cn.cerc.jpage.grid.lines;
 
 import java.util.ArrayList;
 import java.util.List;

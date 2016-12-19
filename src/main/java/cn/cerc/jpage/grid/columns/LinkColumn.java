@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.column;
+package cn.cerc.jpage.grid.columns;
 
 import java.util.LinkedHashMap;
 

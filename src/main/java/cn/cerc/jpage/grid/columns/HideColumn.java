@@ -1,4 +1,4 @@
-package cn.cerc.jpage.grid.column;
+package cn.cerc.jpage.grid.columns;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;

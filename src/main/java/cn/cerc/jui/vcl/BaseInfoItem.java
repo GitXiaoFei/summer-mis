@@ -1,4 +1,4 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
