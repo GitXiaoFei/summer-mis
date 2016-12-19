@@ -1,4 +1,4 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jpage.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.grid.MutiPage;
+import cn.cerc.jpage.other.BeanRecord;
+import cn.cerc.jpage.other.BuildRecord;
 
 public class MutiGrid<T> {
 	private DataSet dataset;

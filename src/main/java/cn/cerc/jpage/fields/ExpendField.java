@@ -1,10 +1,10 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Expender;
-import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.other.Expender;
+import cn.cerc.jpage.other.SearchItem;
 
 public class ExpendField extends AbstractField implements SearchItem, Expender {
 	private boolean search;

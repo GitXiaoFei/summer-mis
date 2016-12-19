@@ -3,15 +3,14 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
-import cn.cerc.jpage.common.BuildText;
-import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.Expender;
-import cn.cerc.jpage.common.HtmlText;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
+import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.Title;
 import cn.cerc.jpage.grid.extjs.ExtColumn;
+import cn.cerc.jpage.other.BuildText;
+import cn.cerc.jpage.other.BuildUrl;
+import cn.cerc.jpage.other.Expender;
 import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
@@ -48,7 +47,7 @@ public abstract class AbstractField extends Component implements IField {
 	//
 	protected BuildUrl buildUrl;
 	//
-	protected DataView dataView;
+	protected DataSource dataView;
 	//
 	private Expender expender;
 
@@ -63,9 +62,9 @@ public abstract class AbstractField extends Component implements IField {
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
 		if (owner != null) {
-			if ((owner instanceof DataView)) {
+			if ((owner instanceof DataSource)) {
 				// throw new RuntimeException("owner not is DataView");
-				this.dataView = (DataView) owner;
+				this.dataView = (DataSource) owner;
 				dataView.addField(this);
 				this.setReadonly(dataView.isReadonly());
 			}
@@ -322,7 +321,7 @@ public abstract class AbstractField extends Component implements IField {
 		this.buildUrl = build;
 	}
 
-	public DataView getDataView() {
+	public DataSource getDataView() {
 		return dataView;
 	}
 
@@ -355,7 +354,7 @@ public abstract class AbstractField extends Component implements IField {
 		}
 	}
 
-	public void setDataView(DataView dataView) {
+	public void setDataView(DataSource dataView) {
 		this.dataView = dataView;
 	}
 
@@ -513,6 +512,47 @@ public abstract class AbstractField extends Component implements IField {
 	public TDateTime getDateTime(TDateTime def) {
 		TDateTime result = this.getDateTime();
 		return result != null ? result : def;
+	}
+
+	public class Title {
+		private String name;
+		private String type;
+		private String dateFormat;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public String getDateFormat() {
+			return dateFormat;
+		}
+
+		public void setDateFormat(String dateFormat) {
+			this.dateFormat = dateFormat;
+		}
+
+		@Override
+		public String toString() {
+			JSONObject json = new JSONObject();
+			json.put("name", this.name);
+			if (this.type != null)
+				json.put("type", this.type);
+			if (this.dateFormat != null)
+				json.put("dateFormat", this.dateFormat);
+			return json.toString().replace("\"", "'");
+		}
 	}
 
 }

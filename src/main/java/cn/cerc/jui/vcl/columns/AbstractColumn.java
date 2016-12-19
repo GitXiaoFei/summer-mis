@@ -1,8 +1,8 @@
 package cn.cerc.jui.vcl.columns;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.ObjectGrid;
 
@@ -15,8 +15,8 @@ public class AbstractColumn extends Component implements IColumn {
 
 	public AbstractColumn(Component owner) {
 		super(owner);
-		if (owner instanceof DataView) {
-			DataView dataView = (DataView) owner;
+		if (owner instanceof DataSource) {
+			DataSource dataView = (DataSource) owner;
 			dataView.addField(this);
 			this.setReadonly(dataView.isReadonly());
 		}

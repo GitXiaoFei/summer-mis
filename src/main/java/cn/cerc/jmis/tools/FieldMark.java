@@ -3,7 +3,7 @@ package cn.cerc.jmis.tools;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import cn.cerc.jpage.common.HtmlText;
+import cn.cerc.jpage.core.HtmlText;
 
 public class FieldMark {
 	private static ApplicationContext app;

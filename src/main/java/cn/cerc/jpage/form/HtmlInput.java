@@ -3,6 +3,8 @@ package cn.cerc.jpage.form;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+//请改使用TextBox
+@Deprecated
 public class HtmlInput extends Component {
 	private String type;
 	private String name;

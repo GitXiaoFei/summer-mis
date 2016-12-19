@@ -1,4 +1,4 @@
-package cn.cerc.jpage.form;
+package cn.cerc.jpage.other;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
-import cn.cerc.jpage.common.HtmlText;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
+import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
 
-public class FormView extends Component implements DataView {
+public class FormView extends Component implements DataSource {
 	protected String CSSClass = "info";
 	protected String method = "post";
 	protected HttpServletRequest request;

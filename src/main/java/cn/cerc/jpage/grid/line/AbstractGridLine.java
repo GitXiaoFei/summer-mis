@@ -5,21 +5,21 @@ import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.BuildUrl;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
 import cn.cerc.jpage.grid.RowCell;
+import cn.cerc.jpage.other.BuildUrl;
 
-public abstract class AbstractGridLine extends Component implements DataView {
+public abstract class AbstractGridLine extends Component implements DataSource {
 	private List<IField> fields = new ArrayList<>();
 	private List<RowCell> cells = new ArrayList<>();
-	protected DataView dataSource;
+	protected DataSource dataSource;
 
-	public AbstractGridLine(DataView dataSource) {
+	public AbstractGridLine(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 

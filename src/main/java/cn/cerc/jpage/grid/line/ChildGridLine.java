@@ -1,7 +1,7 @@
 package cn.cerc.jpage.grid.line;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.common.DataView;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
@@ -10,7 +10,7 @@ import cn.cerc.jui.vcl.columns.IColumn;
 
 public class ChildGridLine extends AbstractGridLine {
 
-	public ChildGridLine(DataView dataSource) {
+	public ChildGridLine(DataSource dataSource) {
 		super(dataSource);
 	}
 

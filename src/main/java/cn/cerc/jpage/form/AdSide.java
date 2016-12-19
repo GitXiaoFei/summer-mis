@@ -3,6 +3,7 @@ package cn.cerc.jpage.form;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+@Deprecated
 public class AdSide extends Component {
 	private String adJpg = "images/easypic4-pc.jpg";
 

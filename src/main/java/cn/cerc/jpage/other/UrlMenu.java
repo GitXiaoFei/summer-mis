@@ -1,4 +1,4 @@
-package cn.cerc.jpage.form;
+package cn.cerc.jpage.other;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;

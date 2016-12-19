@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
 
-public class FieldSets extends Component implements DataView {
-	private DataView dataView;
+//此对象可以取消
+@Deprecated
+public class FieldSets extends Component implements DataSource {
+	private DataSource dataView;
 	private List<AbstractField> fields = new ArrayList<>();
 
-	public FieldSets(DataView dataView) {
+	public FieldSets(DataSource dataView) {
 		this.dataView = dataView;
 	}
 

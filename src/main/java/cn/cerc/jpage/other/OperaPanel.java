@@ -1,4 +1,4 @@
-package cn.cerc.jpage.tools;
+package cn.cerc.jpage.other;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.UrlMenu;
 
 public class HelpSide extends Component {
 	private String title = "操作提示";

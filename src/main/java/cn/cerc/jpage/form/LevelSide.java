@@ -3,6 +3,8 @@ package cn.cerc.jpage.form;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+//请改使用GroupBox
+@Deprecated
 public class LevelSide extends Component {
 	private String title;
 

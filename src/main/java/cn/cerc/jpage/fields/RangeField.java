@@ -3,11 +3,11 @@ package cn.cerc.jpage.fields;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class RangeField extends AbstractField implements DataView {
+public class RangeField extends AbstractField implements DataSource {
 
 	public RangeField(Component dataView, String name) {
 		super(dataView, name, 0);

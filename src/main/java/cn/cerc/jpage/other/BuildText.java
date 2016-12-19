@@ -1,4 +1,4 @@
-package cn.cerc.jpage.common;
+package cn.cerc.jpage.other;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.HtmlWriter;
