@@ -13,10 +13,10 @@ import cn.cerc.jpage.vcl.Span;
  *
  */
 public class Block119 extends Component {
-	private Span leftTitle = new Span();
-	private Image leftImage = new Image();
-	private Span rightTitle = new Span();
-	private Image rightImage = new Image();
+	private Span leftTitle = null;
+	private Image leftImage = null;
+	private Span rightTitle = null;
+	private Image rightImage = null;
 	private UrlRecord leftUrl = new UrlRecord();
 	private UrlRecord rightUrl = new UrlRecord();
 
@@ -29,22 +29,24 @@ public class Block119 extends Component {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block119'>");
 		html.print("<ul class='cf'>");
-		html.print("<a href='%s'>",this.leftUrl.getUrl());
 		html.print("<li>");
 		html.print("<div class='item'>");
+		html.print("<a href='%s'>", this.leftUrl.getUrl());
 		this.leftImage.output(html);
 		this.leftTitle.output(html);
+		html.print("</a>");
 		html.print("</div>");
 		html.print("</li>");
-		html.print("</a>");
-		html.print("<a href='%s'>",this.rightUrl.getUrl());
-		html.print("<li>");
-		html.print("<div class='item'>");
-		this.rightImage.output(html);
-		this.rightTitle.output(html);
-		html.print("</div>");
-		html.print("</li>");
-		html.print("</a>");
+		if (this.rightImage != null && this.rightTitle != null) {
+			html.print("<li>");
+			html.print("<div class='item'>");
+			html.print("<a href='%s'>", this.rightUrl.getUrl());
+			this.rightImage.output(html);
+			this.rightTitle.output(html);
+			html.print("</a>");
+			html.print("</div>");
+			html.print("</li>");
+		}
 		html.print("</ul>");
 		html.print("</div>");
 	}
@@ -70,10 +72,12 @@ public class Block119 extends Component {
 	}
 
 	public void setRightTitle(String rightTitle) {
+		this.rightTitle = new Span();
 		this.rightTitle.setText(rightTitle);
 	}
 
 	public void setLeftTitle(String leftTitle) {
+		this.leftTitle = new Span();
 		this.leftTitle.setText(leftTitle);
 	}
 
@@ -82,6 +86,7 @@ public class Block119 extends Component {
 	}
 
 	public void setLeftImage(String leftImage) {
+		this.leftImage = new Image();
 		this.leftImage.setSrc(leftImage);
 	}
 
@@ -90,6 +95,7 @@ public class Block119 extends Component {
 	}
 
 	public void setRightImage(String rightImage) {
+		this.rightImage = new Image();
 		this.rightImage.setSrc(rightImage);
 	}
 }
