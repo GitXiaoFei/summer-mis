@@ -21,7 +21,7 @@ public class HeaderSide extends Component {
 		int i = 0;
 		html.println("<div class=\"menu\">");
 		for (Component item : left.getComponents()) {
-			if (i > 2)
+			if (i > 1)
 				html.println("<a style=\"padding: 0.5em 0\">→</a>");
 			item.output(html);
 			i++;

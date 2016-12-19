@@ -13,13 +13,14 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.IField;
+import cn.cerc.jpage.grid.line.AbstractGridLine;
+import cn.cerc.jpage.grid.line.ChildGridLine;
+import cn.cerc.jpage.grid.line.MasterGridLine;
 import cn.cerc.jui.vcl.columns.AbstractColumn;
 
 public abstract class AbstractGrid extends Component implements DataView {
 	// 数据源
 	private DataSet dataSet;
-	// PC专用表格列
-	private List<IField> columns = new ArrayList<>();
 	// 当前样式选择
 	private String CSSClass_PC = "dbgrid";
 	private String CSSClass_Phone = "context";
@@ -31,16 +32,19 @@ public abstract class AbstractGrid extends Component implements DataView {
 	//
 	private HttpServletRequest request;
 	protected ActionForm form;
-	private String primaryKey;
-
-	public AbstractGrid() {
-		super();
-		this.setId("grid");
-	}
+	// 主行
+	private MasterGridLine masterLine;
+	private List<AbstractGridLine> lines = new ArrayList<>();
 
 	public AbstractGrid(Component owner) {
 		super(owner);
 		this.setId("grid");
+		masterLine = new MasterGridLine(this);
+		lines.add(masterLine);
+	}
+
+	public AbstractGrid() {
+		this(null);
 	}
 
 	@Override
@@ -69,7 +73,7 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public void addField(IField field) {
-		columns.add(field);
+		lines.get(0).addField(field);
 	}
 
 	public String getCSSClass_PC() {
@@ -99,19 +103,19 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public MutiPage getPages() {
 		return pages;
 	}
-
-	public List<IField> getColumns() {
-		return this.columns;
-	}
+	//
+	// @Deprecated
+	// public List<IField> getColumns() {
+	// return this.lines.get(0).getFields();
+	// }
 
 	public List<AbstractField> getFields() {
 		List<AbstractField> items = new ArrayList<>();
-		for (IField obj : columns) {
+		for (IField obj : lines.get(0).getFields()) {
 			if (obj instanceof AbstractField)
 				items.add((AbstractField) obj);
 		}
 		return items;
-
 	}
 
 	@Override
@@ -122,11 +126,11 @@ public abstract class AbstractGrid extends Component implements DataView {
 	public void setReadonly(boolean readonly) {
 		if (this.readonly == readonly)
 			return;
-		for (IField column : this.getColumns()) {
-			if (column instanceof AbstractField)
-				((AbstractField) column).setReadonly(readonly);
-			else if (column instanceof AbstractColumn)
-				((AbstractColumn) column).setReadonly(readonly);
+		for (IField field : this.getMasterLine().getFields()) {
+			if (field instanceof AbstractField)
+				((AbstractField) field).setReadonly(readonly);
+			else if (field instanceof AbstractColumn)
+				((AbstractColumn) field).setReadonly(readonly);
 		}
 		this.readonly = readonly;
 	}
@@ -155,14 +159,28 @@ public abstract class AbstractGrid extends Component implements DataView {
 	}
 
 	public String getPrimaryKey() {
-		return primaryKey;
+		return masterLine.getPrimaryKey();
 	}
 
 	public void setPrimaryKey(String primaryKey) {
-		this.primaryKey = primaryKey;
+		this.masterLine.setPrimaryKey(primaryKey);
 	}
 
 	public abstract void outputGrid(HtmlWriter html);
 
 	public abstract Component getExpender();
+
+	public List<AbstractGridLine> getLines() {
+		return lines;
+	}
+
+	public AbstractGridLine getLine(int index) {
+		if (index == lines.size())
+			lines.add(new ChildGridLine(this));
+		return lines.get(index);
+	}
+
+	public MasterGridLine getMasterLine() {
+		return masterLine;
+	}
 }

@@ -38,13 +38,13 @@ public class ColumnEditor {
 
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
-			for (IField src : grid.getColumns()) {
-				if (src instanceof IColumn) {
-					if (((AbstractField) src).isReadonly())
+			for (IField field : grid.getMasterLine().getFields()) {
+				if (field instanceof IColumn) {
+					if (((AbstractField) field).isReadonly())
 						continue;
-					if(src.getWidth() == 0)
+					if(field.getWidth() == 0)
 						continue;
-					columns.add(src);
+					columns.add(field);
 				}
 			}
 			this.init = true;
