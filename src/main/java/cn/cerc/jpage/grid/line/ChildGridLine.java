@@ -48,4 +48,16 @@ public class ChildGridLine extends AbstractGridLine {
 		}
 		html.println("</tr>");
 	}
+
+	@Override
+	public void addField(IField field) {
+		getFields().add(field);
+		RowCell col;
+		col = new RowCell();
+		col.setAlign(field.getAlign());
+		col.setRole(field.getField());
+		getCells().add(col);
+		col.addField(field);
+	}
+
 }

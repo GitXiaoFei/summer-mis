@@ -33,15 +33,7 @@ public abstract class AbstractGridLine extends Component implements DataView {
 	}
 
 	@Override
-	public void addField(IField field) {
-		fields.add(field);
-		RowCell col;
-		col = new RowCell();
-		col.setAlign(field.getAlign());
-		col.setRole(field.getField());
-		cells.add(col);
-		col.addField(field);
-	}
+	public abstract void addField(IField field);
 
 	@Override
 	public Record getRecord() {
