@@ -37,6 +37,8 @@ public class FrmPhoneSample extends AbstractForm {
 		new Block126(page.getContent());
 		new Block127(page.getContent());
 
+		new Block201(page.getContent());
+
 		new Block301(page.getContent());
 		new Block302(page.getContent());
 		new Block303(page.getContent());
