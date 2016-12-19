@@ -46,7 +46,7 @@ public abstract class AbstractField extends Component implements IField {
 	// 栏位说明
 	private HtmlText mark;
 	//
-	private BuildUrl buildUrl;
+	protected BuildUrl buildUrl;
 	//
 	protected DataView dataView;
 	//

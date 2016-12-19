@@ -31,8 +31,8 @@ public class StringField extends AbstractField implements IColumn {
 			return value.toString();
 
 		Record ds = (Record) value;
-		String data = ds.getString(this.getField());
-		
+		String data = getDefaultText(ds);
+
 		if (this.isReadonly())
 			return data;
 
