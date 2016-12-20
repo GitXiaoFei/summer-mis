@@ -36,20 +36,8 @@ public class DoubleField extends AbstractField implements IColumn {
 			return html.toString();
 		}
 		try {
-			String val = "" + roundTo(dataSet.getDouble(field), scale);
-			if (buildUrl != null) {
-				HtmlWriter html = new HtmlWriter();
-				UrlRecord url = new UrlRecord();
-				buildUrl.buildUrl(dataSet, url);
-				if (!"".equals(url.getUrl())) {
-					html.print("<a href=\"%s\"", url.getUrl());
-					if (url.getTitle() != null)
-						html.print(" title=\"%s\"", url.getTitle());
-					html.println(">%s</a>", val);
-				}
-				return html.toString();
-			}
-			return val;
+			double val = dataSet.getDouble(field);
+			return "" + roundTo(val, scale);
 		} catch (NumberFormatException e) {
 			return "0";
 		}
@@ -77,9 +65,21 @@ public class DoubleField extends AbstractField implements IColumn {
 			return value.toString();
 
 		Record ds = (Record) value;
-		if (this.isReadonly())
-			return getText(ds);
-
+		if (this.isReadonly()) {
+			if (buildUrl != null) {
+				HtmlWriter html = new HtmlWriter();
+				UrlRecord url = new UrlRecord();
+				buildUrl.buildUrl(ds, url);
+				if (!"".equals(url.getUrl())) {
+					html.print("<a href=\"%s\"", url.getUrl());
+					if (url.getTitle() != null)
+						html.print(" title=\"%s\"", url.getTitle());
+					html.println(">%s</a>", getText(ds));
+				}
+				return html.toString();
+			} else
+				return getText(ds);
+		}
 		if (!(this.getOwner() instanceof DataGrid))
 			return getText(ds);
 
