@@ -1,6 +1,5 @@
 package cn.cerc.jpage.fields;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
@@ -49,8 +48,6 @@ public abstract class AbstractField extends Component implements IField {
 	protected BuildUrl buildUrl;
 	//
 	protected DataSource dataSource;
-	//
-	private ExpendField expender;
 
 	private boolean visible = true;
 
@@ -64,7 +61,6 @@ public abstract class AbstractField extends Component implements IField {
 		super(owner);
 		if (owner != null) {
 			if ((owner instanceof DataSource)) {
-				// throw new RuntimeException("owner not is DataView");
 				this.dataSource = (DataSource) owner;
 				dataSource.addField(this);
 				this.setReadonly(dataSource.isReadonly());
@@ -72,12 +68,6 @@ public abstract class AbstractField extends Component implements IField {
 		}
 		this.name = name;
 		this.width = width;
-	}
-
-	@Deprecated
-	public AbstractField(Component owner, String name, String field, int width) {
-		this(owner, name, width);
-		this.setField(field);
 	}
 
 	public HtmlText getMark() {
@@ -250,12 +240,12 @@ public abstract class AbstractField extends Component implements IField {
 
 	@Override
 	public void output(HtmlWriter html) {
-		DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
+		Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
 		if (this.hidden) {
-			outputInput(html, dataSet.getCurrent());
+			outputInput(html, record);
 		} else {
 			html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
-			outputInput(html, dataSet.getCurrent());
+			outputInput(html, record);
 			if (this.dialog != null) {
 				html.print("<span>");
 				html.print("<a href=\"javascript:%s('%s')\">", this.dialog, this.getId());
@@ -322,10 +312,6 @@ public abstract class AbstractField extends Component implements IField {
 		this.buildUrl = build;
 	}
 
-	public DataSource getDataView() {
-		return dataSource;
-	}
-
 	public BuildUrl getBuildUrl() {
 		return buildUrl;
 	}
@@ -334,17 +320,6 @@ public abstract class AbstractField extends Component implements IField {
 		Title title = new Title();
 		title.setName(this.getField());
 		return title;
-	}
-
-	@Deprecated
-	public ExpendField getExpender() {
-		return expender;
-	}
-
-	@Deprecated
-	public AbstractField setExpender(ExpendField expender) {
-		this.expender = expender;
-		return this;
 	}
 
 	public void updateField() {

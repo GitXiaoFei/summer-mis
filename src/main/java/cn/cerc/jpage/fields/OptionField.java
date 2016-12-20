@@ -3,7 +3,6 @@ package cn.cerc.jpage.fields;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -52,8 +51,8 @@ public class OptionField extends AbstractField {
 
 	@Override
 	public void output(HtmlWriter html) {
-		DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
-		String current = this.getText(dataSet.getCurrent());
+		Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
+		String current = this.getText(record);
 		html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
 		if (size > 0) {
 			html.println("<select id=\"%s\" name=\"%s\" size=\"%s\">", this.getId(), this.getId(), this.getSize());

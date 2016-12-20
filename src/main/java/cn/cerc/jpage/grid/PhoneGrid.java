@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
+import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -15,7 +16,7 @@ import cn.cerc.jpage.other.BuildUrl;
 
 // 手机专用表格
 public class PhoneGrid extends AbstractGrid {
-	private String CSSClass_Phone = "context";
+	private String CSSClass = "context";
 	private List<PhoneLine> lines = new ArrayList<>();
 
 	public PhoneGrid(Component owner) {
@@ -44,7 +45,7 @@ public class PhoneGrid extends AbstractGrid {
 		if (dataSet.size() == 0)
 			return;
 
-		html.println(String.format("<ol class=\"%s\">", this.getCSSClass_Phone()));
+		html.println(String.format("<ol class=\"%s\">", this.getCSSClass()));
 
 		int i = pages.getBegin();
 		while (i <= pages.getEnd()) {
@@ -121,9 +122,9 @@ public class PhoneGrid extends AbstractGrid {
 		private void outputTableString(HtmlWriter html) {
 			if (dataSource == null)
 				throw new RuntimeException("dataView is null");
-			DataSet dataSet = dataSource.getDataSet();
-			if (dataSet == null)
+			if (dataSource.getDataSet() == null)
 				throw new RuntimeException("dataSet is null");
+			Record record = dataSource.getDataSet().getCurrent();
 			html.print("<tr");
 			if (this.expender != null)
 				html.print(String.format(" role=\"%s\" style=\"display: none;\"", expender.getHiddenId()));
@@ -140,13 +141,13 @@ public class PhoneGrid extends AbstractGrid {
 					if (!"".equals(name))
 						html.print(name + ": ");
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet.getCurrent(), url);
+					build.buildUrl(record, url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
-						html.print(field.getText(dataSet.getCurrent()));
+						html.print(field.getText(record));
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet.getCurrent()));
+						html.println(field.getText(record));
 					}
 				} else {
 					outputColumn(field, html);
@@ -166,15 +167,15 @@ public class PhoneGrid extends AbstractGrid {
 				html.print(">");
 				BuildUrl build = field.getBuildUrl();
 				if (build != null) {
-					DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
+					Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet.getCurrent(), url);
+					build.buildUrl(record, url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
 						outputColumn(field, html);
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet.getCurrent()));
+						html.println(field.getText(record));
 					}
 				} else {
 					outputColumn(field, html);
@@ -231,12 +232,12 @@ public class PhoneGrid extends AbstractGrid {
 		return this;
 	}
 
-	public String getCSSClass_Phone() {
-		return CSSClass_Phone;
+	public String getCSSClass() {
+		return CSSClass;
 	}
 
-	public void setCSSClass_Phone(String cSSClass_Phone) {
-		CSSClass_Phone = cSSClass_Phone;
+	public void setCSSClass(String CSSClass) {
+		this.CSSClass = CSSClass;
 	}
 
 }
