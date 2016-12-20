@@ -1,6 +1,5 @@
 package cn.cerc.jpage.fields;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
