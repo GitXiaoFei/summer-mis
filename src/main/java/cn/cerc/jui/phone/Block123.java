@@ -1,9 +1,6 @@
 package cn.cerc.jui.phone;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.other.*;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.vcl.Span;
