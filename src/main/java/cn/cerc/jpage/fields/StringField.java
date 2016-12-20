@@ -37,17 +37,17 @@ public class StringField extends AbstractField implements IColumn {
 		String data = getDefaultText(ds);
 
 		if (buildUrl != null) {
-	      HtmlWriter html = new HtmlWriter();
-	      UrlRecord url = new UrlRecord();
-	      buildUrl.buildUrl(ds, url);
-	      if (!"".equals(url.getUrl())) {
-	        html.print("<a href=\"%s\"", url.getUrl());
-	        if (url.getTitle() != null)
-	          html.print(" title=\"%s\"", url.getTitle());
-	        html.println(">%s</a>", ds.getString(getField()));
-	      }
-	      return html.toString();
-	    }
+			HtmlWriter html = new HtmlWriter();
+			UrlRecord url = new UrlRecord();
+			buildUrl.buildUrl(ds, url);
+			if (!"".equals(url.getUrl())) {
+				html.print("<a href=\"%s\"", url.getUrl());
+				if (url.getTitle() != null)
+					html.print(" title=\"%s\"", url.getTitle());
+				html.println(">%s</a>", ds.getString(getField()));
+			}
+			return html.toString();
+		}
 
 		if (this.isReadonly())
 			return data;
