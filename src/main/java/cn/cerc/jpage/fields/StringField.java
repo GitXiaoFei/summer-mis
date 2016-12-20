@@ -2,7 +2,9 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
 import cn.cerc.jpage.grid.DataGrid;
 
@@ -33,6 +35,19 @@ public class StringField extends AbstractField implements IColumn {
 
 		Record ds = (Record) value;
 		String data = getDefaultText(ds);
+
+		if (buildUrl != null) {
+	      HtmlWriter html = new HtmlWriter();
+	      UrlRecord url = new UrlRecord();
+	      buildUrl.buildUrl(ds, url);
+	      if (!"".equals(url.getUrl())) {
+	        html.print("<a href=\"%s\"", url.getUrl());
+	        if (url.getTitle() != null)
+	          html.print(" title=\"%s\"", url.getTitle());
+	        html.println(">%s</a>", ds.getString(getField()));
+	      }
+	      return html.toString();
+	    }
 
 		if (this.isReadonly())
 			return data;
