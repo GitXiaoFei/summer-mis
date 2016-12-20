@@ -12,9 +12,13 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
-	private IColumnsManager manager;
+	// 当前样式选择
+	private String CSSClass = "dbgrid";
+	private String CSSStyle;
 	// 扩展对象
 	private AbstractGridLine expender;
+	// 列管理器，用于支持自定义栏位
+	private IColumnsManager manager;
 
 	public DataGrid(Component owner) {
 		super(owner);
@@ -52,7 +56,7 @@ public class DataGrid extends AbstractGrid {
 		if (sumFieldWidth > 60)
 			throw new RuntimeException("总列宽不允许大于60");
 
-		html.print("<table class=\"%s\"", this.getCSSClass_PC());
+		html.print("<table class=\"%s\"", this.getCSSClass());
 		if (this.getCSSStyle() != null)
 			html.print(" style=\"%s\"", this.getCSSStyle());
 		html.println(">");
@@ -102,5 +106,21 @@ public class DataGrid extends AbstractGrid {
 			this.getLines().add(expender);
 		}
 		return expender;
+	}
+
+	public String getCSSClass() {
+		return CSSClass;
+	}
+
+	public void setCSSClass(String CSSClass) {
+		this.CSSClass = CSSClass;
+	}
+
+	public String getCSSStyle() {
+		return CSSStyle;
+	}
+
+	public void setCSSStyle(String cSSStyle) {
+		CSSStyle = cSSStyle;
 	}
 }

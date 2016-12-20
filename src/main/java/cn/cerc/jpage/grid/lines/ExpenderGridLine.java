@@ -55,7 +55,7 @@ public class ExpenderGridLine extends AbstractGridLine {
 						html.print(": ");
 					}
 					if (field instanceof IColumn)
-						html.print(((IColumn) field).format(dataSource.getRecord()));
+						html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
 					else if (field instanceof AbstractField)
 						outputField(html, (AbstractField) field);
 					else

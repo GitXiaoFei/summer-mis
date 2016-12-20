@@ -21,7 +21,7 @@ public class ItField extends AbstractField {
 			buildText.outputText(dataSet, html);
 			return html.toString();
 		}
-		return "" + dataView.getRecNo();
+		return "" + dataSource.getDataSet().getRecNo();
 	}
 
 	@Override

@@ -36,14 +36,14 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 	public abstract void addField(IField field);
 
 	@Override
-	public Record getRecord() {
-		return dataSource.getRecord();
+	public DataSet getDataSet() {
+		return dataSource.getDataSet();
 	}
 
 	public abstract void output(HtmlWriter html, DataSet dataSet, int lineNo);
 
 	protected void outputField(HtmlWriter html, AbstractField field) {
-		Record record = dataSource.getRecord();
+		Record record = dataSource.getDataSet().getCurrent();
 
 		BuildUrl build = field.getBuildUrl();
 		if (build != null) {

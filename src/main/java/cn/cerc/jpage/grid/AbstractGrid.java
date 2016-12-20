@@ -6,14 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jpage.grid.columns.AbstractColumn;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.MasterGridLine;
@@ -21,20 +19,16 @@ import cn.cerc.jpage.grid.lines.MasterGridLine;
 public abstract class AbstractGrid extends Component implements DataSource {
 	// 数据源
 	private DataSet dataSet;
-	// 当前样式选择
-	private String CSSClass_PC = "dbgrid";
-	private String CSSClass_Phone = "context";
-	private String CSSStyle;
 	// 分页控制
 	private MutiPage pages = new MutiPage();
-	// 是否允许修改
-	private boolean readonly = true;
-	//
+	// 环境，用于读取分页信号
 	private HttpServletRequest request;
-	protected ActionForm form;
+	// 行管理器, 其中第1个一定为masterLine
+	private List<AbstractGridLine> lines = new ArrayList<>();
 	// 主行
 	private MasterGridLine masterLine;
-	private List<AbstractGridLine> lines = new ArrayList<>();
+	// 表单，后不得再使用
+	protected ActionForm form;
 
 	public AbstractGrid(Component owner) {
 		super(owner);
@@ -45,11 +39,6 @@ public abstract class AbstractGrid extends Component implements DataSource {
 
 	public AbstractGrid() {
 		this(null);
-	}
-
-	@Override
-	public Record getRecord() {
-		return dataSet.getCurrent();
 	}
 
 	public DataSet getDataSet() {
@@ -77,38 +66,9 @@ public abstract class AbstractGrid extends Component implements DataSource {
 		masterLine.addField(field);
 	}
 
-	public String getCSSClass_PC() {
-		return CSSClass_PC;
-	}
-
-	public void setCSSClass_PC(String cSSClass_PC) {
-		CSSClass_PC = cSSClass_PC;
-	}
-
-	public String getCSSClass_Phone() {
-		return CSSClass_Phone;
-	}
-
-	public void setCSSClass_Phone(String cSSClass_Phone) {
-		CSSClass_Phone = cSSClass_Phone;
-	}
-
-	public String getCSSStyle() {
-		return CSSStyle;
-	}
-
-	public void setCSSStyle(String cSSStyle) {
-		CSSStyle = cSSStyle;
-	}
-
 	public MutiPage getPages() {
 		return pages;
 	}
-	//
-	// @Deprecated
-	// public List<IField> getColumns() {
-	// return this.lines.get(0).getFields();
-	// }
 
 	public List<AbstractField> getFields() {
 		List<AbstractField> items = new ArrayList<>();
@@ -117,28 +77,6 @@ public abstract class AbstractGrid extends Component implements DataSource {
 				items.add((AbstractField) obj);
 		}
 		return items;
-	}
-
-	@Override
-	public boolean isReadonly() {
-		return readonly;
-	}
-
-	public void setReadonly(boolean readonly) {
-		if (this.readonly == readonly)
-			return;
-		for (IField field : this.getMasterLine().getFields()) {
-			if (field instanceof AbstractField)
-				((AbstractField) field).setReadonly(readonly);
-			else if (field instanceof AbstractColumn)
-				((AbstractColumn) field).setReadonly(readonly);
-		}
-		this.readonly = readonly;
-	}
-
-	@Override
-	public int getRecNo() {
-		return dataSet.getRecNo();
 	}
 
 	@Deprecated
