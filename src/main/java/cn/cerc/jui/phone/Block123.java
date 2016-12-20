@@ -1,8 +1,10 @@
 package cn.cerc.jui.phone;
 
+import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
@@ -14,8 +16,9 @@ import cn.cerc.jpage.vcl.TextBox;
  */
 public class Block123 extends Component {
 	private Span title = new Span();
-	private UrlRecord urlRecord = new UrlRecord();
 	private TextBox textBox = new TextBox();
+	private Button button = new Button();
+	private ActionForm form = new ActionForm();
 
 	public Block123(Component owner) {
 		super(owner);
@@ -28,10 +31,10 @@ public class Block123 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<div class='block123'>");
-		textBox.output(html);
-		html.print("<a href='%s'>", this.urlRecord.getUrl());
-		this.title.output(html);
-		html.print("</a>");
+		this.form.outHead(html);
+		this.textBox.output(html);
+		this.button.output(html);
+		this.form.outFoot(html);
 		html.print("</div>");
 	}
 
@@ -43,8 +46,12 @@ public class Block123 extends Component {
 		return textBox;
 	}
 
-	public UrlRecord getUrlRecord() {
-		return urlRecord;
+	public ActionForm getForm(String id) {
+		form.setId(id);
+		return form;
 	}
 
+	public Button getButton() {
+		return button;
+	}
 }
