@@ -116,17 +116,12 @@ public class SimpleGrid extends Component implements DataSource {
 		}
 	}
 
-	@Override
-	public Record getRecord() {
-		return dataSet.getCurrent();
-	}
-
-	@Override
-	public int getRecNo() {
-		return dataSet.getRecNo();
-	}
-
 	public MutiPage getPages() {
 		return pages;
+	}
+
+	@Override
+	public DataSet getDataSet() {
+		return dataSet;
 	}
 }

@@ -1,5 +1,6 @@
 package cn.cerc.jpage.fields;
 
+import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -61,7 +62,7 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 		html.print(String.format("<input type=\"checkbox\" id=\"%s\" name=\"%s\" value=\"1\"", this.getId(),
 				this.getId()));
 		boolean val = false;
-		Record dataSet = dataView != null ? dataView.getRecord() : null;
+		DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 		if (dataSet != null)
 			val = dataSet.getBoolean(field);
 		if (val)

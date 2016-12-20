@@ -12,9 +12,13 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
-	private IColumnsManager manager;
+	// 当前样式选择
+	private String CSSClass_PC = "dbgrid";
+	private String CSSStyle;
 	// 扩展对象
 	private AbstractGridLine expender;
+	// 列管理器，用于支持自定义栏位
+	private IColumnsManager manager;
 
 	public DataGrid(Component owner) {
 		super(owner);
@@ -102,5 +106,21 @@ public class DataGrid extends AbstractGrid {
 			this.getLines().add(expender);
 		}
 		return expender;
+	}
+
+	public String getCSSClass_PC() {
+		return CSSClass_PC;
+	}
+
+	public void setCSSClass_PC(String cSSClass_PC) {
+		CSSClass_PC = cSSClass_PC;
+	}
+
+	public String getCSSStyle() {
+		return CSSStyle;
+	}
+
+	public void setCSSStyle(String cSSStyle) {
+		CSSStyle = cSSStyle;
 	}
 }

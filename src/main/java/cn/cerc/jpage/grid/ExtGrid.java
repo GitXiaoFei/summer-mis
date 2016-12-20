@@ -6,8 +6,10 @@ import java.util.List;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
+import cn.cerc.jpage.grid.columns.AbstractColumn;
 import cn.cerc.jpage.grid.extjs.ExtGridColumns;
 import cn.cerc.jpage.grid.extjs.ExtGridData;
 import cn.cerc.jpage.grid.extjs.ExtGridFields;
@@ -19,6 +21,8 @@ public class ExtGrid extends AbstractGrid {
 	private String postUrl;
 	private String onPostSuccess;
 	private AbstractGridLine expender;
+	// 是否允许修改
+	private boolean readonly = true;
 
 	public ExtGrid(AbstractJspPage page) {
 		super(page);
@@ -198,5 +202,22 @@ public class ExtGrid extends AbstractGrid {
 			this.getLines().add(expender);
 		}
 		return expender;
+	}
+
+	@Override
+	public boolean isReadonly() {
+		return readonly;
+	}
+
+	public void setReadonly(boolean readonly) {
+		if (this.readonly == readonly)
+			return;
+		for (IField field : this.getMasterLine().getFields()) {
+			if (field instanceof AbstractField)
+				((AbstractField) field).setReadonly(readonly);
+			else if (field instanceof AbstractColumn)
+				((AbstractColumn) field).setReadonly(readonly);
+		}
+		this.readonly = readonly;
 	}
 }

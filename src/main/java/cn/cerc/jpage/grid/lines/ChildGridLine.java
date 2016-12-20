@@ -37,7 +37,7 @@ public class ChildGridLine extends AbstractGridLine {
 					if (field.getTitle() != null && !"".equals(field.getTitle()))
 						html.print("%s: ", field.getTitle());
 					if (field instanceof IColumn)
-						html.print(((IColumn) field).format(dataSource.getRecord()));
+						html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
 					else if (field instanceof AbstractField)
 						outputField(html, (AbstractField) field);
 					else
@@ -59,5 +59,6 @@ public class ChildGridLine extends AbstractGridLine {
 		getCells().add(col);
 		col.addField(field);
 	}
+
 
 }

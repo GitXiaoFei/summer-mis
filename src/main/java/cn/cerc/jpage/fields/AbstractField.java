@@ -1,5 +1,6 @@
 package cn.cerc.jpage.fields;
 
+import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
@@ -47,7 +48,7 @@ public abstract class AbstractField extends Component implements IField {
 	//
 	protected BuildUrl buildUrl;
 	//
-	protected DataSource dataView;
+	protected DataSource dataSource;
 	//
 	private ExpendField expender;
 
@@ -64,9 +65,9 @@ public abstract class AbstractField extends Component implements IField {
 		if (owner != null) {
 			if ((owner instanceof DataSource)) {
 				// throw new RuntimeException("owner not is DataView");
-				this.dataView = (DataSource) owner;
-				dataView.addField(this);
-				this.setReadonly(dataView.isReadonly());
+				this.dataSource = (DataSource) owner;
+				dataSource.addField(this);
+				this.setReadonly(dataSource.isReadonly());
 			}
 		}
 		this.name = name;
@@ -249,12 +250,12 @@ public abstract class AbstractField extends Component implements IField {
 
 	@Override
 	public void output(HtmlWriter html) {
-		Record dataSet = dataView != null ? dataView.getRecord() : null;
+		DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 		if (this.hidden) {
-			outputInput(html, dataSet);
+			outputInput(html, dataSet.getCurrent());
 		} else {
 			html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
-			outputInput(html, dataSet);
+			outputInput(html, dataSet.getCurrent());
 			if (this.dialog != null) {
 				html.print("<span>");
 				html.print("<a href=\"javascript:%s('%s')\">", this.dialog, this.getId());
@@ -322,7 +323,7 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	public DataSource getDataView() {
-		return dataView;
+		return dataSource;
 	}
 
 	public BuildUrl getBuildUrl() {
@@ -347,15 +348,15 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	public void updateField() {
-		if (dataView != null) {
+		if (dataSource != null) {
 			String field = this.getId();
 			if (field != null && !"".equals(field))
-				dataView.updateValue(this.getId(), this.getField());
+				dataSource.updateValue(this.getId(), this.getField());
 		}
 	}
 
 	public void setDataView(DataSource dataView) {
-		this.dataView = dataView;
+		this.dataSource = dataView;
 	}
 
 	public String getOninput() {
@@ -427,11 +428,11 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	public String getString() {
-		if (dataView == null)
+		if (dataSource == null)
 			throw new RuntimeException("owner is null.");
-		if (dataView.getRecord() == null)
+		if (dataSource.getDataSet() == null)
 			throw new RuntimeException("owner.dataSet is null.");
-		return dataView.getRecord().getString(this.getField());
+		return dataSource.getDataSet().getString(this.getField());
 	}
 
 	public boolean getBoolean() {

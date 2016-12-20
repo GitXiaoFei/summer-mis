@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -14,8 +13,9 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.other.BuildUrl;
 
+// 手机专用表格
 public class PhoneGrid extends AbstractGrid {
-	// 手机专用表格
+	private String CSSClass_Phone = "context";
 	private List<PhoneLine> lines = new ArrayList<>();
 
 	public PhoneGrid(Component owner) {
@@ -85,7 +85,7 @@ public class PhoneGrid extends AbstractGrid {
 	}
 
 	public class PhoneLine extends Component implements DataSource {
-		private DataSource dataView;
+		private DataSource dataSource;
 		private boolean Table = false;
 		private String style;
 		private ExpendField expender;
@@ -93,7 +93,7 @@ public class PhoneGrid extends AbstractGrid {
 		private List<AbstractField> columns = new ArrayList<>();
 
 		public PhoneLine(DataSource dataView) {
-			this.dataView = dataView;
+			this.dataSource = dataView;
 		}
 
 		public PhoneLine setStyle(String style) {
@@ -119,9 +119,9 @@ public class PhoneGrid extends AbstractGrid {
 		}
 
 		private void outputTableString(HtmlWriter html) {
-			if (dataView == null)
+			if (dataSource == null)
 				throw new RuntimeException("dataView is null");
-			Record dataSet = dataView.getRecord();
+			DataSet dataSet = dataSource.getDataSet();
 			if (dataSet == null)
 				throw new RuntimeException("dataSet is null");
 			html.print("<tr");
@@ -140,13 +140,13 @@ public class PhoneGrid extends AbstractGrid {
 					if (!"".equals(name))
 						html.print(name + ": ");
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet, url);
+					build.buildUrl(dataSet.getCurrent(), url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
-						html.print(field.getText(dataSet));
+						html.print(field.getText(dataSet.getCurrent()));
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet));
+						html.println(field.getText(dataSet.getCurrent()));
 					}
 				} else {
 					outputColumn(field, html);
@@ -166,15 +166,15 @@ public class PhoneGrid extends AbstractGrid {
 				html.print(">");
 				BuildUrl build = field.getBuildUrl();
 				if (build != null) {
-					Record dataSet = dataView != null ? dataView.getRecord() : null;
+					DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet, url);
+					build.buildUrl(dataSet.getCurrent(), url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
 						outputColumn(field, html);
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet));
+						html.println(field.getText(dataSet.getCurrent()));
 					}
 				} else {
 					outputColumn(field, html);
@@ -185,11 +185,11 @@ public class PhoneGrid extends AbstractGrid {
 		}
 
 		private void outputColumn(AbstractField field, HtmlWriter html) {
-			Record dataSet = dataView != null ? dataView.getRecord() : null;
+			DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 			String name = field.getShortName();
 			if (!"".equals(name))
 				html.print(name + ": ");
-			html.print(field.getText(dataSet));
+			html.print(field.getText(dataSet.getCurrent()));
 		}
 
 		@Override
@@ -212,13 +212,6 @@ public class PhoneGrid extends AbstractGrid {
 			return this;
 		}
 
-		@Override
-		public Record getRecord() {
-			if (dataView == null)
-				return null;
-			return dataView.getRecord();
-		}
-
 		public ExpendField getExpender() {
 			return expender;
 		}
@@ -226,11 +219,24 @@ public class PhoneGrid extends AbstractGrid {
 		public void setExpender(ExpendField expender) {
 			this.expender = expender;
 		}
+
+		@Override
+		public DataSet getDataSet() {
+			return dataSource.getDataSet();
+		}
 	}
 
 	@Override
 	public Component getExpender() {
 		return this;
+	}
+
+	public String getCSSClass_Phone() {
+		return CSSClass_Phone;
+	}
+
+	public void setCSSClass_Phone(String cSSClass_Phone) {
+		CSSClass_Phone = cSSClass_Phone;
 	}
 
 }

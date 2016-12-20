@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
@@ -17,7 +18,7 @@ public class FormView extends Component implements DataSource {
 	protected String CSSClass = "info";
 	protected String method = "post";
 	protected HttpServletRequest request;
-	protected Record record;
+	protected DataSet dataSet;
 	protected List<AbstractField> fields = new ArrayList<>();
 	protected String action;
 	private String submit;
@@ -27,7 +28,8 @@ public class FormView extends Component implements DataSource {
 		super(null);
 		this.setId("form1");
 		this.request = request;
-		this.record = new Record();
+		this.dataSet = new DataSet();
+		dataSet.append();
 	}
 
 	public String getCSSClass() {
@@ -36,11 +38,6 @@ public class FormView extends Component implements DataSource {
 
 	public void setCSSClass(String cSSClass) {
 		CSSClass = cSSClass;
-	}
-
-	@Override
-	public Record getRecord() {
-		return record;
 	}
 
 	@Override
@@ -137,10 +134,10 @@ public class FormView extends Component implements DataSource {
 	public void updateValue(String id, String code) {
 		String val = request.getParameter(id);
 		if (submit != null) {
-			record.setField(code, val);
+			dataSet.setField(code, val);
 		} else {
 			if (val != null)
-				record.setField(code, val);
+				dataSet.setField(code, val);
 		}
 	}
 
@@ -154,6 +151,17 @@ public class FormView extends Component implements DataSource {
 	}
 
 	public void setRecord(Record record) {
-		this.record = record;
+		dataSet.getRecords().add(record);
+		dataSet.setRecNo(dataSet.size());
+		// this.record = record;
+	}
+
+	@Override
+	public DataSet getDataSet() {
+		return dataSet;
+	}
+
+	public Record getRecord() {
+		return dataSet.getCurrent();
 	}
 }
