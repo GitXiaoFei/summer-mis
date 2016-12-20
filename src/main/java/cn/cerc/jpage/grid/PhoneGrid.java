@@ -93,8 +93,8 @@ public class PhoneGrid extends AbstractGrid {
 
 		private List<AbstractField> columns = new ArrayList<>();
 
-		public PhoneLine(DataSource dataView) {
-			this.dataSource = dataView;
+		public PhoneLine(DataSource dataSource) {
+			this.dataSource = dataSource;
 		}
 
 		public PhoneLine setStyle(String style) {
