@@ -3,8 +3,6 @@ package cn.cerc.jpage.grid;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.ActionForm;
@@ -20,10 +18,8 @@ import cn.cerc.jpage.grid.lines.MasterGridLine;
 public abstract class AbstractGrid extends Component implements DataSource {
 	// 数据源
 	private DataSet dataSet;
-	// 分页控制
+	// 支持表格分页
 	private MutiPage pages = new MutiPage();
-	// 环境，用于读取分页信号
-	private HttpServletRequest request;
 	// 行管理器, 其中第1个一定为masterLine
 	private List<AbstractGridLine> lines = new ArrayList<>();
 	// 主行
@@ -36,25 +32,17 @@ public abstract class AbstractGrid extends Component implements DataSource {
 		this.setId("grid");
 		masterLine = new MasterGridLine(this);
 		lines.add(masterLine);
-		// 支持表格分页
-		this.request = form.getRequest();
-		if (request == null)
-			throw new RuntimeException("request is null");
-		String tmp = request.getParameter("pageno");
-		if (tmp != null && !tmp.equals(""))
-			pages.setCurrent(Integer.parseInt(tmp));
+		pages.setRequest(form.getRequest());
 	}
 
+	@Override
 	public DataSet getDataSet() {
 		return dataSet;
 	}
 
 	public void setDataSet(DataSet dataSet) {
-		if (this.dataSet == dataSet)
-			return;
 		this.dataSet = dataSet;
-		if (dataSet != null)
-			pages.setRecordCount(dataSet.size());
+		pages.setDataSet(dataSet);
 	}
 
 	@Override

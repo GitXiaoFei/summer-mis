@@ -11,50 +11,46 @@ import cn.cerc.jpage.other.BeanRecord;
 import cn.cerc.jpage.other.BuildRecord;
 
 public class MutiGrid<T> {
-	private DataSet dataset;
+	private DataSet dataSet;
+	// 支持表格分页
 	private MutiPage pages = new MutiPage();
 	private List<T> items = new ArrayList<T>();
 
-	public MutiGrid(DataSet dataset) {
-		this.setDataset(dataset);
+	public MutiGrid(DataSet dataSet) {
+		this.setDataset(dataSet);
 	}
 
 	public DataSet getDataset() {
-		return dataset;
+		return dataSet;
 	}
 
 	public void setDataset(DataSet dataset) {
-		this.dataset = dataset;
+		this.dataSet = dataset;
+		pages.setDataSet(dataSet);
 	}
 
 	public int map(HttpServletRequest req, Class<T> clazz) {
 		return this.map(req, clazz, null, true);
 	}
 
-	public int map(HttpServletRequest req, Class<T> clazz, BuildRecord make, boolean defProcess) {
+	public int map(HttpServletRequest request, Class<T> clazz, BuildRecord make, boolean defProcess) {
 		BeanRecord<T> defMake = null;
 		try {
 			if (defProcess)
 				defMake = new BeanRecord<T>();
 			T item = null;
-			int pageno = 1;
-			String tmp = req.getParameter("pageno");
-			if (tmp != null && !tmp.equals("")) {
-				pageno = Integer.parseInt(tmp);
-			}
-			pages.setRecordCount(dataset.size());
-			pages.setCurrent(pageno);
-			if (dataset.size() == 0)
+			if (dataSet.size() == 0)
 				return 0;
+			pages.setRequest(request);
 
 			int i = pages.getBegin();
 			while (i <= pages.getEnd()) {
-				dataset.setRecNo(i + 1);
+				dataSet.setRecNo(i + 1);
 				item = clazz.newInstance();
 				if (defProcess)
-					defMake.build(item, dataset.getCurrent());
+					defMake.build(item, dataSet.getCurrent());
 				if (make != null)
-					make.build(item, dataset.getCurrent());
+					make.build(item, dataSet.getCurrent());
 
 				items.add(item);
 				i++;

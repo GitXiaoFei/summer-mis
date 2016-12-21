@@ -26,7 +26,7 @@ public class SimpleGrid extends Component implements DataSource {
 	private List<IColumn> columns = new ArrayList<>();
 	private HttpServletRequest request;
 	private DataSet dataSet;
-	// 分页控制
+	// 支持表格分页
 	private MutiPage pages = new MutiPage();
 
 	public SimpleGrid(Component owner) {
@@ -85,19 +85,8 @@ public class SimpleGrid extends Component implements DataSource {
 	}
 
 	public void setDataSet(DataSet dataSet) {
-		if (this.dataSet == dataSet)
-			return;
 		this.dataSet = dataSet;
-		if (request == null)
-			throw new RuntimeException("request is null");
-
-		int pageno = 1;
-		String tmp = request.getParameter("pageno");
-		if (tmp != null && !tmp.equals("")) {
-			pageno = Integer.parseInt(tmp);
-		}
-		pages.setRecordCount(dataSet.size());
-		pages.setCurrent(pageno);
+		pages.setDataSet(dataSet);
 	}
 
 	public HttpServletRequest getRequest() {
@@ -106,6 +95,7 @@ public class SimpleGrid extends Component implements DataSource {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+		pages.setRequest(request);
 	}
 
 	@Override

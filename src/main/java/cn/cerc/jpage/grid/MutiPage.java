@@ -1,8 +1,13 @@
 package cn.cerc.jpage.grid;
 
+import javax.servlet.http.HttpServletRequest;
+
+import cn.cerc.jdb.core.DataSet;
 import net.sf.json.JSONObject;
 
 public class MutiPage {
+	// 数据源
+	private DataSet dataSet;
 	// 总记录数
 	private int recordCount;
 	// 页面大小
@@ -19,18 +24,11 @@ public class MutiPage {
 	private int end;
 	// 总页数
 	private int count;
+	// 请求环境
+	private HttpServletRequest request;
 
 	public MutiPage() {
 
-	}
-
-	public MutiPage(int recordCount) {
-		this.setRecordCount(recordCount);
-	}
-
-	public MutiPage(int recordCount, int current) {
-		this.setRecordCount(recordCount);
-		this.setCurrent(current);
 	}
 
 	public int getRecordCount() {
@@ -55,14 +53,6 @@ public class MutiPage {
 		return current;
 	}
 
-	public void setCurrent(int current) {
-		if (current > 0 && current != this.current) {
-			this.current = current;
-			reset();
-		}
-
-	}
-
 	public int getPrior() {
 		return prior;
 	}
@@ -79,12 +69,10 @@ public class MutiPage {
 	}
 
 	public final int getBegin() {
-
 		return begin;
 	}
 
 	public final int getEnd() {
-
 		return end;
 	}
 
@@ -144,5 +132,35 @@ public class MutiPage {
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public DataSet getDataSet() {
+		return dataSet;
+	}
+
+	public void setDataSet(DataSet dataSet) {
+		this.dataSet = dataSet;
+		if (dataSet != null) {
+			this.setRecordCount(dataSet.size());
+			reset();
+		}
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+		if (request != null) {
+			String tmp = request.getParameter("pageno");
+			if (tmp != null && !tmp.equals("")) {
+				int current = Integer.parseInt(tmp);
+				if (current > 0 && current != this.current) {
+					this.current = current;
+					reset();
+				}
+			}
+		}
 	}
 }
