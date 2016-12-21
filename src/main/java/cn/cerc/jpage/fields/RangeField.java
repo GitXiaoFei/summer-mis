@@ -1,7 +1,5 @@
 package cn.cerc.jpage.fields;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -69,11 +67,6 @@ public class RangeField extends AbstractField implements DataSource {
 	@Override
 	public boolean isReadonly() {
 		return dataSource.isReadonly();
-	}
-
-	@Override
-	public HttpServletRequest getRequest() {
-		return dataSource.getRequest();
 	}
 
 	@Override

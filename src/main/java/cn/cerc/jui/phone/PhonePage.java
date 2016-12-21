@@ -26,7 +26,6 @@ import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.FormView;
 import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
@@ -222,13 +221,6 @@ public class PhonePage extends AbstractJspPage {
 		return html;
 	}
 
-	public FormView createForm() {
-		FormView form = new FormView(this.getRequest());
-		form.setId("search");
-		form.setOwner(this.getContent());
-		return form;
-	}
-
 	public Component getBody() {
 		if (body == null) {
 			body = new Component();
@@ -288,7 +280,7 @@ public class PhonePage extends AbstractJspPage {
 	public void setHeader(Component header) {
 		this.header = header;
 	}
-	
+
 	public void addDefaultHeader() {
 		HeaderSide header = null;
 		HttpServletRequest request = this.getRequest();

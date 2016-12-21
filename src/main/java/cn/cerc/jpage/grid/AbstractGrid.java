@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
@@ -30,15 +31,18 @@ public abstract class AbstractGrid extends Component implements DataSource {
 	// 表单，后不得再使用
 	protected ActionForm form;
 
-	public AbstractGrid(Component owner) {
+	public AbstractGrid(IForm form, Component owner) {
 		super(owner);
 		this.setId("grid");
 		masterLine = new MasterGridLine(this);
 		lines.add(masterLine);
-	}
-
-	public AbstractGrid() {
-		this(null);
+		// 支持表格分页
+		this.request = form.getRequest();
+		if (request == null)
+			throw new RuntimeException("request is null");
+		String tmp = request.getParameter("pageno");
+		if (tmp != null && !tmp.equals(""))
+			pages.setCurrent(Integer.parseInt(tmp));
 	}
 
 	public DataSet getDataSet() {
@@ -49,16 +53,8 @@ public abstract class AbstractGrid extends Component implements DataSource {
 		if (this.dataSet == dataSet)
 			return;
 		this.dataSet = dataSet;
-		if (request == null)
-			throw new RuntimeException("request is null");
-
-		int pageno = 1;
-		String tmp = request.getParameter("pageno");
-		if (tmp != null && !tmp.equals("")) {
-			pageno = Integer.parseInt(tmp);
-		}
-		pages.setRecordCount(dataSet.size());
-		pages.setCurrent(pageno);
+		if (dataSet != null)
+			pages.setRecordCount(dataSet.size());
 	}
 
 	@Override
@@ -87,15 +83,6 @@ public abstract class AbstractGrid extends Component implements DataSource {
 	@Deprecated
 	public void setForm(ActionForm form) {
 		this.form = form;
-	}
-
-	@Override
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
 	}
 
 	public abstract void outputGrid(HtmlWriter html);

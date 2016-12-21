@@ -4,6 +4,7 @@ import static cn.cerc.jdb.other.utils.roundTo;
 
 import java.util.List;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -12,6 +13,10 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
+	public DataGrid(IForm form, Component owner) {
+		super(form, owner);
+	}
+
 	// 当前样式选择
 	private String CSSClass = "dbgrid";
 	private String CSSStyle;
@@ -19,10 +24,6 @@ public class DataGrid extends AbstractGrid {
 	private AbstractGridLine expender;
 	// 列管理器，用于支持自定义栏位
 	private IColumnsManager manager;
-
-	public DataGrid(Component owner) {
-		super(owner);
-	}
 
 	@Override
 	public void output(HtmlWriter html) {

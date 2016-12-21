@@ -1,7 +1,5 @@
 package cn.cerc.jpage.core;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.cerc.jdb.core.DataSet;
 
 public interface DataSource {
@@ -16,9 +14,5 @@ public interface DataSource {
 
 	default public boolean isReadonly() {
 		return true;
-	}
-
-	default public HttpServletRequest getRequest() {
-		return null;
 	}
 }

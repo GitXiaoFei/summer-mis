@@ -3,6 +3,7 @@ package cn.cerc.jpage.grid;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -16,11 +17,12 @@ import cn.cerc.jpage.other.BuildUrl;
 
 // 手机专用表格
 public class PhoneGrid extends AbstractGrid {
+
 	private String CSSClass = "scrollArea";
 	private List<PhoneLine> lines = new ArrayList<>();
 
-	public PhoneGrid(Component owner) {
-		super(owner);
+	public PhoneGrid(IForm form, Component owner) {
+		super(form, owner);
 	}
 
 	@Override
