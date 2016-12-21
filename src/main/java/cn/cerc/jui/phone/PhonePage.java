@@ -45,6 +45,7 @@ public class PhonePage extends AbstractJspPage {
 	private List<HtmlContent> contents = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private Component body;
+	private boolean defaultHeader = false;
 
 	public PhonePage(IForm form) {
 		super(form);
@@ -102,6 +103,8 @@ public class PhonePage extends AbstractJspPage {
 			this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
 			if (mainMenu.getRightMenus().size() > 0)
 				this.add("subMenus", mainMenu.getRightMenus());
+			if (this.defaultHeader)
+				loadDefaultHeader();
 		}
 
 		// 右边区域
@@ -282,6 +285,10 @@ public class PhonePage extends AbstractJspPage {
 	}
 
 	public void addDefaultHeader() {
+		defaultHeader = true;
+	}
+
+	private void loadDefaultHeader() {
 		HeaderSide header = null;
 		HttpServletRequest request = this.getRequest();
 		boolean _showMenu_ = "true".equals(this.getForm().getParam("showMenus", "true"));
