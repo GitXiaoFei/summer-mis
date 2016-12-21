@@ -8,7 +8,6 @@ import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
-import cn.cerc.jpage.grid.extjs.ExtColumn;
 import cn.cerc.jpage.other.BuildText;
 import cn.cerc.jpage.other.BuildUrl;
 import net.sf.json.JSONObject;
@@ -54,8 +53,6 @@ public abstract class AbstractField extends Component implements IField {
 	protected String oninput;
 
 	protected String onclick;
-	// 由extGrid调用
-	private ExtColumn column;
 
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
@@ -350,25 +347,6 @@ public abstract class AbstractField extends Component implements IField {
 	public AbstractField setOnclick(String onclick) {
 		this.onclick = onclick;
 		return this;
-	}
-
-	public ExtColumn getColumn() {
-		if (column == null) {
-			column = new ExtColumn(this);
-			column.setText(this.getName());
-			column.setDataIndex(this.getField());
-			column.setLocked(false);
-			column.setSortable(true);
-			if (!this.isReadonly()) {
-				Editor editor = new Editor("textfield");
-				column.setEditor(JSONObject.fromObject(editor).toString().replace("\"", "'"));
-			}
-		}
-		return column;
-	}
-
-	public void setColumn(ExtColumn column) {
-		this.column = column;
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.fields.editor.CheckEditor;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jpage.grid.extjs.ExtColumn;
 import cn.cerc.jpage.other.SearchItem;
 
 public class BooleanField extends AbstractField implements SearchItem, IColumn {
@@ -91,13 +90,6 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 	@Override
 	public void setSearch(boolean search) {
 		this.search = search;
-	}
-
-	@Override
-	public ExtColumn getColumn() {
-		ExtColumn column = super.getColumn();
-		column.setEditor(null);
-		return column;
 	}
 
 	@Override
