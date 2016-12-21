@@ -84,4 +84,9 @@ public class RangeField extends AbstractField implements DataSource {
 	public DataSet getDataSet() {
 		return dataSource.getDataSet();
 	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		dataSource.updateValue(id, code);
+	}
 }

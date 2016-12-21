@@ -10,7 +10,5 @@ public interface DataSource {
 
 	public boolean isReadonly();
 
-	default public void updateValue(String id, String code) {
-
-	}
+	public void updateValue(String id, String code);
 }

@@ -139,4 +139,9 @@ public class DataGrid extends AbstractGrid {
 		return true;
 	}
 
+	@Override
+	public void updateValue(String id, String code) {
+		
+	}
+
 }

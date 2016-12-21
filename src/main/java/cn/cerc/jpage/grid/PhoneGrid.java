@@ -232,6 +232,11 @@ public class PhoneGrid extends AbstractGrid {
 		public boolean isReadonly() {
 			return dataSource.isReadonly();
 		}
+
+		@Override
+		public void updateValue(String id, String code) {
+			dataSource.updateValue(id, code);
+		}
 	}
 
 	@Override
@@ -250,6 +255,11 @@ public class PhoneGrid extends AbstractGrid {
 	@Override
 	public boolean isReadonly() {
 		return true;
+	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		
 	}
 
 }

@@ -119,4 +119,9 @@ public class SimpleGrid extends Component implements DataSource {
 	public boolean isReadonly() {
 		return true;
 	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		
+	}
 }
