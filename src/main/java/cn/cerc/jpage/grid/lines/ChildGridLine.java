@@ -27,8 +27,11 @@ public class ChildGridLine extends AbstractGridLine {
 				html.print(" style=\"%s\"", item.getStyle());
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
+			
 			if (item.getRole() != null)
 				html.print(" role=\"%s\"", item.getRole());
+			else if (item.getFields().get(0).getField() != null)
+				html.print(" role=\"%s\"", item.getFields().get(0).getField());
 
 			html.println(">");
 			for (IField obj : item.getFields()) {
