@@ -8,6 +8,8 @@ import net.sf.json.JSONObject;
 public class MutiPage {
 	// 数据源
 	private DataSet dataSet;
+	// 请求环境
+	private HttpServletRequest request;
 	// 总记录数
 	private int recordCount;
 	// 页面大小
@@ -24,12 +26,6 @@ public class MutiPage {
 	private int end;
 	// 总页数
 	private int count;
-	// 请求环境
-	private HttpServletRequest request;
-
-	public MutiPage() {
-
-	}
 
 	public int getRecordCount() {
 		return recordCount;
