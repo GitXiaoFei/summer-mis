@@ -123,4 +123,14 @@ public class DataGrid extends AbstractGrid {
 	public void setCSSStyle(String cSSStyle) {
 		CSSStyle = cSSStyle;
 	}
+
+	public String getPrimaryKey() {
+		return masterLine.getPrimaryKey();
+	}
+
+	public DataGrid setPrimaryKey(String primaryKey) {
+		this.masterLine.setPrimaryKey(primaryKey);
+		return this;
+	}
+
 }

@@ -15,7 +15,7 @@ public interface DataSource {
 	}
 
 	default public boolean isReadonly() {
-		return false;
+		return true;
 	}
 
 	default public HttpServletRequest getRequest() {

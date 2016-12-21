@@ -16,7 +16,7 @@ import cn.cerc.jpage.other.BuildUrl;
 
 // 手机专用表格
 public class PhoneGrid extends AbstractGrid {
-	private String CSSClass = "context";
+	private String CSSClass = "scrollArea";
 	private List<PhoneLine> lines = new ArrayList<>();
 
 	public PhoneGrid(Component owner) {
@@ -25,7 +25,7 @@ public class PhoneGrid extends AbstractGrid {
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<div class='scrollArea'>");
+		html.print("<div class='%s'>", this.getCSSClass());
 		if (this.getDataSet().size() > 0) {
 			if (form != null) {
 				form.outHead(html);
@@ -45,7 +45,7 @@ public class PhoneGrid extends AbstractGrid {
 		if (dataSet.size() == 0)
 			return;
 
-		html.println(String.format("<ol class=\"%s\">", this.getCSSClass()));
+		html.println(String.format("<ol class=\"%s\">", "context"));
 
 		int i = pages.getBegin();
 		while (i <= pages.getEnd()) {

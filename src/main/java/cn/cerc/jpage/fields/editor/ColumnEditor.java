@@ -35,8 +35,6 @@ public class ColumnEditor {
 
 		if (!this.init) {
 			DataGrid grid = (DataGrid) owner.getOwner();
-			if (grid.getPrimaryKey() == null)
-				throw new RuntimeException("BaseGrid.primaryKey is null");
 
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
@@ -44,11 +42,13 @@ public class ColumnEditor {
 				if (field instanceof IColumn) {
 					if (((AbstractField) field).isReadonly())
 						continue;
-					if(field.getWidth() == 0)
+					if (field.getWidth() == 0)
 						continue;
 					columns.add(field);
 				}
 			}
+			if (columns.size() > 0 && grid.getPrimaryKey() == null)
+				throw new RuntimeException("BaseGrid.primaryKey is null");
 			this.init = true;
 		}
 

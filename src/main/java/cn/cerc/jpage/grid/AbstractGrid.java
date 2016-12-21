@@ -26,7 +26,7 @@ public abstract class AbstractGrid extends Component implements DataSource {
 	// 行管理器, 其中第1个一定为masterLine
 	private List<AbstractGridLine> lines = new ArrayList<>();
 	// 主行
-	private MasterGridLine masterLine;
+	protected MasterGridLine masterLine;
 	// 表单，后不得再使用
 	protected ActionForm form;
 
@@ -84,25 +84,18 @@ public abstract class AbstractGrid extends Component implements DataSource {
 		return form;
 	}
 
-	// FIXME: 此函数后需要去除！
+	@Deprecated
 	public void setForm(ActionForm form) {
 		this.form = form;
 	}
 
+	@Override
 	public HttpServletRequest getRequest() {
 		return request;
 	}
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
-	}
-
-	public String getPrimaryKey() {
-		return masterLine.getPrimaryKey();
-	}
-
-	public void setPrimaryKey(String primaryKey) {
-		this.masterLine.setPrimaryKey(primaryKey);
 	}
 
 	public abstract void outputGrid(HtmlWriter html);
