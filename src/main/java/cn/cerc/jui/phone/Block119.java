@@ -64,7 +64,6 @@ public class Block119 extends Component {
 	public Span getRightTitle() {
 		return rightTitle;
 	}
-	
 
 	public Span getLeftTitle() {
 		return leftTitle;

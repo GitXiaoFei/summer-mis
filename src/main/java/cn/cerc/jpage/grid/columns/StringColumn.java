@@ -44,7 +44,7 @@ public class StringColumn extends AbstractColumn {
 			DataGrid grid = (DataGrid) this.getOwner();
 			if (grid.getPrimaryKey() == null)
 				throw new RuntimeException("BaseGrid.primaryKey is null");
-			
+
 			dataSet = grid.getDataSet();
 			columns = new ArrayList<>();
 			for (IField field : grid.getMasterLine().getFields()) {

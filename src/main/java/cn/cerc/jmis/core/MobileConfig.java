@@ -133,8 +133,8 @@ public class MobileConfig {
 	public List<String> getCacheFiles() {
 		return cacheFiles;
 	}
-	
+
 	public void setCacheFiles(List<String> cacheFiles) {
-		 this.cacheFiles = cacheFiles;
+		this.cacheFiles = cacheFiles;
 	}
 }

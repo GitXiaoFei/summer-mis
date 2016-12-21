@@ -24,7 +24,7 @@ public class FieldAsColumn extends AbstractColumn {
 		Record rs = (Record) value;
 		return link.getText(rs);
 	}
-	
+
 	@Override
 	public String getTitle() {
 		return link.getName();

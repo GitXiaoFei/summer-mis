@@ -102,7 +102,7 @@ public class SvrUserLogin extends CustomService {
 		if (dsUser.getBoolean("Encrypt_"))
 			if (!headIn.exists("wx") && !"000000".equals(password))
 				password = MD5.get(dsUser.getString("Code_") + password);
-		
+
 		if (!isAutoLogin(userCode, deviceId) && !"000000".equals(password)) {
 			if (!dsUser.getString("Password_").equals(password))
 				throw new SecurityCheckException("您的登录密码错误，禁止登录！");

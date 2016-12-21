@@ -8,10 +8,10 @@ public class CheckEditor {
 	private AbstractField owner;
 	private String onUpdate;
 
-	public CheckEditor(AbstractField owner){
+	public CheckEditor(AbstractField owner) {
 		this.owner = owner;
 	}
-	
+
 	public String getOnUpdate() {
 		return onUpdate;
 	}
@@ -19,8 +19,8 @@ public class CheckEditor {
 	public void setOnUpdate(String onUpdate) {
 		this.onUpdate = onUpdate;
 	}
-	
-	public String format(Record  ds){
+
+	public String format(Record ds) {
 		String data = ds.getString(owner.getField());
 
 		HtmlWriter html = new HtmlWriter();
@@ -37,5 +37,6 @@ public class CheckEditor {
 		else
 			html.print(" onclick='tableOnChanged(this)'");
 		html.println("/>");
-		return html.toString();}
+		return html.toString();
+	}
 }

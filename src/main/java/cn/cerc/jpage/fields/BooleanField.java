@@ -103,12 +103,12 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 
 		if (!(this.getOwner() instanceof DataGrid))
 			return getText(ds);
-		
+
 		return getEditor().format(ds);
 	}
-	
+
 	public CheckEditor getEditor() {
-		if(editor == null)
+		if (editor == null)
 			editor = new CheckEditor(this);
 		return editor;
 	}

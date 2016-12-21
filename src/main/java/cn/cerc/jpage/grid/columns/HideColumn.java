@@ -21,14 +21,13 @@ public class HideColumn extends AbstractColumn {
 	public String format(Object value) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<td class='hide'>");
-		if(value instanceof Record){
+		if (value instanceof Record) {
 			sb.append(super.format(value));
-		}else{
+		} else {
 			sb.append(value);
 		}
 		sb.append("</td>");
 		return sb.toString();
 	}
-	
-	
+
 }

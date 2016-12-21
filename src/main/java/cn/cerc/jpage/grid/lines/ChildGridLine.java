@@ -60,5 +60,4 @@ public class ChildGridLine extends AbstractGridLine {
 		col.addField(field);
 	}
 
-
 }
