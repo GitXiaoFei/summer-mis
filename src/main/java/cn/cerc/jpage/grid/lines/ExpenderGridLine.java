@@ -67,4 +67,9 @@ public class ExpenderGridLine extends AbstractGridLine {
 		}
 		html.println("</tr>");
 	}
+
+	@Override
+	public boolean isReadonly() {
+		return dataSource.isReadonly();
+	}
 }

@@ -114,4 +114,9 @@ public class SimpleGrid extends Component implements DataSource {
 	public DataSet getDataSet() {
 		return dataSet;
 	}
+
+	@Override
+	public boolean isReadonly() {
+		return true;
+	}
 }

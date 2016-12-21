@@ -8,11 +8,9 @@ public interface DataSource {
 
 	public DataSet getDataSet();
 
+	public boolean isReadonly();
+
 	default public void updateValue(String id, String code) {
 
-	}
-
-	default public boolean isReadonly() {
-		return true;
 	}
 }

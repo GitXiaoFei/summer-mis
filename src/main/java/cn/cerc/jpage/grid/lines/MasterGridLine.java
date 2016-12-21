@@ -76,4 +76,9 @@ public class MasterGridLine extends AbstractGridLine {
 		col.addField(field);
 	}
 
+	@Override
+	public boolean isReadonly() {
+		return dataSource.isReadonly();
+	}
+
 }

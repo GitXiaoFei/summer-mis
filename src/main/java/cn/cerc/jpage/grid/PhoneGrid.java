@@ -227,6 +227,11 @@ public class PhoneGrid extends AbstractGrid {
 		public DataSet getDataSet() {
 			return dataSource.getDataSet();
 		}
+
+		@Override
+		public boolean isReadonly() {
+			return dataSource.isReadonly();
+		}
 	}
 
 	@Override
@@ -240,6 +245,11 @@ public class PhoneGrid extends AbstractGrid {
 
 	public void setCSSClass(String CSSClass) {
 		this.CSSClass = CSSClass;
+	}
+
+	@Override
+	public boolean isReadonly() {
+		return true;
 	}
 
 }

@@ -134,4 +134,9 @@ public class DataGrid extends AbstractGrid {
 		return this;
 	}
 
+	@Override
+	public boolean isReadonly() {
+		return true;
+	}
+
 }
