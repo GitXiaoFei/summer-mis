@@ -17,6 +17,7 @@ public class ColumnEditor {
 	private DataSet dataSet;
 	private List<IField> columns;
 	private String onUpdate;
+	private List<String> dataField = new ArrayList<>(); //设置的字段列表
 
 	public ColumnEditor(AbstractField owner) {
 		this.owner = owner;
@@ -59,7 +60,12 @@ public class ColumnEditor {
 		html.print(" name='%s'", owner.getField());
 		html.print(" value='%s'", data);
 		html.print(" data-focus='[%s]'", this.getDataFocus());
-		html.print(" data-%s='[%s]'", owner.getField(), data);
+		html.print(" data-%s='%s'", owner.getField(), data);
+		if(dataField.size() > 0){
+			for(String field : dataField){
+				html.print(" data-%s='%s'", field, ds.getString(field));
+			}
+		}
 		if (owner.getAlign() != null)
 			html.print(" style='text-align:%s;'", owner.getAlign());
 		html.print(" onkeydown='tableDirection(event,this)'");
@@ -91,5 +97,13 @@ public class ColumnEditor {
 		String left = colNo > 0 ? String.format("%d_%d", recNo, colNo - 1) : "0";
 		String right = colNo < columns.size() - 1 ? String.format("%d_%d", recNo, colNo + 1) : "0";
 		return String.format("\"%s\",\"%s\",\"%s\",\"%s\"", left, prior, right, next);
+	}
+
+	/**
+	 * 给元素设置data-*属性
+	 * @return 要设置的字段列表
+	 */
+	public List<String> getDataField() {
+		return dataField;
 	}
 }
