@@ -13,8 +13,8 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
-import cn.cerc.jpage.common.HtmlContent;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public abstract class AbstractJspPage extends Component implements IPage {

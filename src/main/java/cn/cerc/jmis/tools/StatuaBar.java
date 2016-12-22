@@ -7,7 +7,7 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.form.UrlMenu;
+import cn.cerc.jpage.other.UrlMenu;
 
 public class StatuaBar extends Component {
 	private IForm form;
@@ -20,7 +20,7 @@ public class StatuaBar extends Component {
 		this.setId("bottom");
 	}
 
-	public void addMenu(String caption, String url) {
+	public void addButton(String caption, String url) {
 		int count = 1;
 		for (Component obj : this.getComponents()) {
 			if (obj instanceof UrlMenu) {

@@ -3,7 +3,6 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.Title;
 
 public class ItField extends AbstractField {
 	public ItField(Component owner) {
@@ -22,7 +21,7 @@ public class ItField extends AbstractField {
 			buildText.outputText(dataSet, html);
 			return html.toString();
 		}
-		return "" + dataView.getRecNo();
+		return "" + dataSource.getDataSet().getRecNo();
 	}
 
 	@Override

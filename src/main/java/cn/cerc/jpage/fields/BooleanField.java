@@ -1,18 +1,20 @@
 package cn.cerc.jpage.fields;
 
+import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.fields.editor.CheckEditor;
 import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jpage.grid.extjs.Column;
+import cn.cerc.jpage.other.SearchItem;
 
-public class BooleanField extends AbstractField implements SearchItem {
+public class BooleanField extends AbstractField implements SearchItem, IColumn {
 	private String trueText = "是";
 	private String falseText = "否";
 	private String title;
 	private boolean search;
-	private String onUpdate;
+	private CheckEditor editor;
 
 	public BooleanField(Component owner, String title, String field) {
 		this(owner, title, field, 0);
@@ -59,7 +61,7 @@ public class BooleanField extends AbstractField implements SearchItem {
 		html.print(String.format("<input type=\"checkbox\" id=\"%s\" name=\"%s\" value=\"1\"", this.getId(),
 				this.getId()));
 		boolean val = false;
-		Record dataSet = dataView != null ? dataView.getRecord() : null;
+		DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 		if (dataSet != null)
 			val = dataSet.getBoolean(field);
 		if (val)
@@ -91,13 +93,6 @@ public class BooleanField extends AbstractField implements SearchItem {
 	}
 
 	@Override
-	public Column getColumn() {
-		Column column = super.getColumn();
-		column.setEditor(null);
-		return column;
-	}
-
-	@Override
 	public String format(Object value) {
 		if (!(value instanceof Record))
 			return value.toString();
@@ -108,31 +103,13 @@ public class BooleanField extends AbstractField implements SearchItem {
 
 		if (!(this.getOwner() instanceof DataGrid))
 			return getText(ds);
-		String data = ds.getString(this.getField());
 
-		HtmlWriter html = new HtmlWriter();
-		html.print("<input");
-		html.print(" id='%s'", this.getId());
-		html.print(" type='checkbox'");
-		html.print(" name='%s'", this.getField());
-		html.print(" value='true'");
-		html.print(" data-%s='[%s]'", this.getField(), data);
-		if (ds.getBoolean(this.getField()))
-			html.print(" checked");
-		if (onUpdate != null)
-			html.print(" onclick=\"tableOnChanged(this,'%s')\"", onUpdate);
-		else
-			html.print(" onclick='tableOnChanged(this)'");
-		html.println("/>");
-		return html.toString();
+		return getEditor().format(ds);
 	}
 
-	public String getOnUpdate() {
-		return onUpdate;
-	}
-
-	public BooleanField setOnUpdate(String onUpdate) {
-		this.onUpdate = onUpdate;
-		return this;
+	public CheckEditor getEditor() {
+		if (editor == null)
+			editor = new CheckEditor(this);
+		return editor;
 	}
 }

@@ -1,5 +1,93 @@
 @CHARSET "UTF-8";
 
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
+	code, form, fieldset, legend, input, textarea, p, blockquote, th, td,
+	header, hgroup, nav, section, article, aside, footer, figure,
+	figcaption, menu, button {
+	margin: 0;
+	padding: 0
+}
+
+html {
+	color: #333;
+	font-size: 100%;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+	line-height: 1.5;
+	color: #333;
+	font-size: 1em;
+	-webkit-text-size-adjust: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	outline: 0;
+	background: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: inherit;
+	font-weight: 400
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+img {
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+fieldset, img {
+	border: 0
+}
+
+li {
+	list-style: none
+}
+
+input, button, textarea, select {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	border: 0;
+	background: 0 0;
+	outline: 0
+}
+
+button:focus, input:focus, select:focus, textarea:focus {
+	outline: 0;
+	-webkit-tap-highlight-color: transparent
+}
+
+a {
+	-webkit-touch-callout: none;
+	text-decoration: none !important;
+	color: #333;
+	outline: 0
+}
+
+a:active, a:hover {
+	-webkit-tap-highlight-color: transparent;
+}
+
+em, i {
+	font-style: normal
+}
+
+.cf:after {
+	content: '';
+	height: 0;
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+/* 以上为样式基础样式重置 */
+.main_con {
+	margin-top: 2.75em;
+}
+
 .block101 {
 	position: relative;
 	padding: 0 2em 0 0;
@@ -104,9 +192,9 @@
 /* 段落标题栏 */
 .block105 {
 	padding: 0.75em;
-	background-color: floralwhite;
+	background-color: #48b3bd;
 	text-align: center;
-	border-bottom: 1px solid #bbbbbb;
+	color: #fff;
 }
 
 .block105 span {
@@ -321,6 +409,210 @@
 	border: 1px solid #bbbbbb;
 }
 
+.block119 {
+	overflow: hidden;
+}
+
+.block119 ul {
+	margin-bottom: 0.625em;
+	background-color: #fff;
+}
+
+.block119 ul:last-child {
+	margin-bottom: 0em;
+}
+
+.block119 ul li {
+	position: relative;
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	float: left;
+	width: 50%;
+	height: 3.75em;
+	border-bottom: 1px solid #e8e8e8;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.block119 ul li:active {
+	background: #f5f5f5;
+}
+
+.block119 ul li:nth-child(2n-1):after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1px;
+	background: #e6e6e6;
+	height: 100%;
+}
+
+.block119 ul li.none {
+	border-bottom: 0
+}
+
+.block119 ul li .item {
+	margin-left: 1.5625em;
+	font-size: .875em;
+}
+
+.block119 ul li .item img {
+	margin-right: .1rem;
+	display: inline-block;
+	width: 4em;
+	vertical-align: middle;
+	background-size: 100% 100% !important;
+	-webkit-background-size: 100% 100% !important;
+}
+
+.block120 li {
+	padding: .625em;
+	background: #fff;
+	font-size: 0.875em;
+	overflow: hidden;
+}
+
+.block120 li:nth-child(even) {
+	background: #fafafa;
+}
+
+.block120 li .m-left, .block120 li .m-right {
+	float: left;
+	width: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.block120 li .m-right {
+	width: 40%;
+	text-align: right;
+	color: #666;
+}
+
+.block120 li .m-right a {
+	color: #666;
+	font-size: 0.875em;
+}
+
+.block120 li .m-right img {
+	width: 1.31em;
+	margin-right: 0.3125em;
+	vertical-align: middle;
+}
+
+.block121 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-left: 2.75em;
+	padding-right: 2.75em;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	background: #48b2bd;
+}
+
+.block121  .title {
+	height: 2.75em;
+	line-height: 2.75em;
+	color: #fff;
+	text-align: center;
+}
+
+.block121  .arrow-left {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	width: 2.75em;
+	height: 100%;
+}
+
+.block121  .arrow-left img {
+	width: 2.75em;
+}
+
+.block121  .arrow-right {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	padding: 0 .625em;
+	line-height: 2.75em;
+	color: #fff;
+}
+
+.block121 .arrow-left:active, .block121 .arrow-right:active {
+	background: #3aa8b4;
+}
+
+.block122 {
+	overflow: hidden;
+}
+
+.block122 .item {
+	margin-left: 1.5625em;
+	font-size: .875em;
+}
+
+.block122 .item img {
+	margin-right: .1rem;
+	display: inline-block;
+	width: 4em;
+	vertical-align: middle;
+	background-size: 100% 100% !important;
+	-webkit-background-size: 100% 100% !important;
+}
+
+.block123 {
+	padding: .625em;
+	height: 25px;
+	background: #fff;
+}
+
+.block123 input[type="text"] {
+	width: 80%;
+}
+
+.block123 a {
+	float: right;
+	color: #48b2bd;
+}
+
+.block124 {
+	font-size: .875em;
+	color: #666;
+	padding: .625em;
+}
+
+.block125 li {
+	padding: .625em;
+	background: #fff;
+	font-size: 0.875em;
+	overflow: hidden;
+}
+
+.block125 li a {
+	display: block;
+}
+
+.block125 li:nth-child(even) {
+	background: #fafafa;
+}
+
+.block126 {
+	font-size: .875em;
+	color: #48b2bd;
+	padding: .625em;
+}
 .block301 {
 	padding: 0.8em;
 	border-bottom: 1px solid #bbb;
@@ -360,6 +652,31 @@
 	line-height: 1.6em;
 	overflow: hidden;
 	max-height: 3.2em;
+}
+
+.block303 {
+	padding: 0.5em;
+	width: 27%;
+	display: inline-block;
+	text-align: center;
+}
+
+.block303 a {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.block303 img {
+	width: 2em;
+	height: auto;
+	margin-bottom: 0.5em;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+.block303 span {
+	display: block;
+	color: #000;
 }
 
 /* 详情中的列表*/
@@ -429,7 +746,7 @@
 	overflow: hidden;
 	line-height: 1.25em;
 	display: inline-block;
-	color: #3c0000;	
+	color: #3c0000;
 }
 
 .block401 .info {
@@ -446,8 +763,8 @@
 
 .block401 span[role='sales'] {
 	border: 1px solid;
-    color: #ff0000;
-    padding: 0 0.125em;
+	color: #ff0000;
+	padding: 0 0.125em;
 }
 
 .block401 .info button {
@@ -579,6 +896,58 @@
 .block603 {
 	margin: 3em 2em;
 	text-align: center;
+}
+
+.block604 {
+	border: 1px solid #bbbbbb;
+	margin: 0
+}
+
+.block604 a {
+	text-decoration: none;
+	width: 50%;
+	text-align: center;
+	display: inline-block;
+}
+
+.block604 img {
+	width: 4em;
+	height: 4.1em;
+	margin-top: 0.4em
+}
+
+.block604 span {
+	display: block;
+	color: #999
+}
+
+.block604 span.title {
+	padding: 0.5rem;
+	color: #333;
+}
+
+.block604 ul {
+	width: 50%;
+	text-align: center;
+	display: inline-block;
+	padding-left: 0;
+}
+
+.block604 ul li {
+	padding: 0.2em;
+	border-style: solid;
+	border-width: 0 0 1px 1px;
+	border-color: #e6e6e6;
+	line-height: inherit;
+	list-style: none;
+}
+
+.block604 ul li img {
+	width: 1.5em;
+	height: auto;
+	margin-left: 0.2em;
+	max-width: 100%;
+	vertical-align: middle;
 }
 
 .block901 {

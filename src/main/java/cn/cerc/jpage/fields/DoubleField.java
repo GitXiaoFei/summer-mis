@@ -5,9 +5,13 @@ import static cn.cerc.jdb.other.utils.roundTo;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.form.Title;
+import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jpage.fields.editor.ColumnEditor;
+import cn.cerc.jpage.grid.DataGrid;
 
-public class DoubleField extends AbstractField {
+public class DoubleField extends AbstractField implements IColumn {
+	private ColumnEditor editor;
 	private int scale = -4;
 
 	public DoubleField(Component owner, String title, String field) {
@@ -53,5 +57,38 @@ public class DoubleField extends AbstractField {
 		Title title = super.createTitle();
 		title.setType("float");
 		return title;
+	}
+
+	@Override
+	public String format(Object value) {
+		if (!(value instanceof Record))
+			return value.toString();
+
+		Record ds = (Record) value;
+		if (this.isReadonly()) {
+			if (buildUrl != null) {
+				HtmlWriter html = new HtmlWriter();
+				UrlRecord url = new UrlRecord();
+				buildUrl.buildUrl(ds, url);
+				if (!"".equals(url.getUrl())) {
+					html.print("<a href=\"%s\"", url.getUrl());
+					if (url.getTitle() != null)
+						html.print(" title=\"%s\"", url.getTitle());
+					html.println(">%s</a>", getText(ds));
+				}
+				return html.toString();
+			} else
+				return getText(ds);
+		}
+		if (!(this.getOwner() instanceof DataGrid))
+			return getText(ds);
+
+		return getEditor().format(ds);
+	}
+
+	public ColumnEditor getEditor() {
+		if (editor == null)
+			editor = new ColumnEditor(this);
+		return editor;
 	}
 }

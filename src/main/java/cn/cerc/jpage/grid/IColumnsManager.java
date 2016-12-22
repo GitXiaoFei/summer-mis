@@ -2,10 +2,10 @@ package cn.cerc.jpage.grid;
 
 import java.util.List;
 
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.core.IField;
 
 public interface IColumnsManager {
 
-	List<IColumn> Reindex(List<IColumn> columns);
+	List<IField> Reindex(List<IField> columns);
 
 }

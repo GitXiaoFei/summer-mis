@@ -21,7 +21,7 @@ public class MemoryBookInfo {
 			LocalService svr = new LocalService(handle, "SvrBookInfo.getRecord");
 			if (!svr.exec("corpNo", corpNo))
 				return null;
-			
+
 			BookInfoRecord result = new BookInfoRecord();
 			Record ds = svr.getDataOut().getHead();
 			result.setCode(ds.getString("corpNo"));
@@ -36,7 +36,7 @@ public class MemoryBookInfo {
 
 			result.setStatus(ds.getInt("status"));
 			result.setCorpType(ds.getInt("type"));
-			
+
 			Gson gson = new Gson();
 			buff.set(getBuffKey(corpNo), gson.toJson(result));
 

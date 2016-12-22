@@ -127,6 +127,7 @@ public class StartForms implements Filter {
 				}
 			}
 		} catch (Exception e) {
+			log.error(e);
 			req.setAttribute("message", e.getMessage());
 			AppConfig conf = Application.getConfig();
 			req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);

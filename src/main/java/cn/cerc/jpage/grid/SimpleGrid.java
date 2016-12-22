@@ -7,25 +7,26 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.DataView;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
-import cn.cerc.jui.vcl.columns.CheckBoxColumn;
-import cn.cerc.jui.vcl.columns.ConvertColumn;
-import cn.cerc.jui.vcl.columns.FieldAsColumn;
-import cn.cerc.jui.vcl.columns.HideColumn;
-import cn.cerc.jui.vcl.columns.IColumn;
-import cn.cerc.jui.vcl.columns.IndexColumn;
-import cn.cerc.jui.vcl.columns.LinkColumn;
-import cn.cerc.jui.vcl.columns.OperatingColumn;
+import cn.cerc.jpage.grid.columns.CheckBoxColumn;
+import cn.cerc.jpage.grid.columns.ConvertColumn;
+import cn.cerc.jpage.grid.columns.FieldAsColumn;
+import cn.cerc.jpage.grid.columns.HideColumn;
+import cn.cerc.jpage.grid.columns.IndexColumn;
+import cn.cerc.jpage.grid.columns.LinkColumn;
+import cn.cerc.jpage.grid.columns.OperatingColumn;
 
-public class SimpleGrid extends Component implements DataView {
+public class SimpleGrid extends Component implements DataSource {
 	// private static final Logger log = Logger.getLogger(DBGrid.class);
 	private List<IColumn> columns = new ArrayList<>();
 	private HttpServletRequest request;
 	private DataSet dataSet;
-	// 分页控制
+	// 支持表格分页
 	private MutiPage pages = new MutiPage();
 
 	public SimpleGrid(Component owner) {
@@ -84,19 +85,8 @@ public class SimpleGrid extends Component implements DataView {
 	}
 
 	public void setDataSet(DataSet dataSet) {
-		if (this.dataSet == dataSet)
-			return;
 		this.dataSet = dataSet;
-		if (request == null)
-			throw new RuntimeException("request is null");
-
-		int pageno = 1;
-		String tmp = request.getParameter("pageno");
-		if (tmp != null && !tmp.equals("")) {
-			pageno = Integer.parseInt(tmp);
-		}
-		pages.setRecordCount(dataSet.size());
-		pages.setCurrent(pageno);
+		pages.setDataSet(dataSet);
 	}
 
 	public HttpServletRequest getRequest() {
@@ -105,27 +95,33 @@ public class SimpleGrid extends Component implements DataView {
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+		pages.setRequest(request);
 	}
 
 	@Override
-	public void addField(IColumn field) {
+	public void addField(IField field) {
 		if (field instanceof AbstractField) {
 			FieldAsColumn column = new FieldAsColumn(this);
 			column.setLink((AbstractField) field);
 		}
 	}
 
-	@Override
-	public Record getRecord() {
-		return dataSet.getCurrent();
-	}
-
-	@Override
-	public int getRecNo() {
-		return dataSet.getRecNo();
-	}
-
 	public MutiPage getPages() {
 		return pages;
+	}
+
+	@Override
+	public DataSet getDataSet() {
+		return dataSet;
+	}
+
+	@Override
+	public boolean isReadonly() {
+		return true;
+	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		
 	}
 }

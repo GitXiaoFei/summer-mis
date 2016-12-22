@@ -7,7 +7,7 @@ import java.util.Map;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.columns.IColumn;
+import cn.cerc.jpage.core.IColumn;
 
 public class ObjectGrid extends Component {
 	private List<IColumn> columns = new ArrayList<>();

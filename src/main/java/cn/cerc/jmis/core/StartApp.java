@@ -49,8 +49,8 @@ public class StartApp implements Filter {
 				form.setRequest((HttpServletRequest) request);
 				form.setResponse((HttpServletResponse) response);
 				try (AppHandle handle = new AppHandle()) {
-						handle.setProperty(Application.sessionId, req.getSession().getId());
-						form.setHandle(handle);
+					handle.setProperty(Application.sessionId, req.getSession().getId());
+					form.setHandle(handle);
 				}
 				IPage page = form.execute();
 				page.execute();

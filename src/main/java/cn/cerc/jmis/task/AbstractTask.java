@@ -49,6 +49,6 @@ public abstract class AbstractTask extends AbstractHandle implements Runnable {
 		}
 	}
 
-	//具体业务逻辑代码
+	// 具体业务逻辑代码
 	public abstract void execute() throws Exception;
 }

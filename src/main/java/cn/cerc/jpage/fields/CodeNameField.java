@@ -14,9 +14,9 @@ public class CodeNameField extends AbstractField {
 
 	@Override
 	public void updateField() {
-		if (dataView != null) {
-			dataView.updateValue(this.getId(), this.getField());
-			dataView.updateValue(getNameField(), getNameField());
+		if (dataSource != null) {
+			dataSource.updateValue(this.getId(), this.getField());
+			dataSource.updateValue(getNameField(), getNameField());
 		}
 	}
 
@@ -34,13 +34,13 @@ public class CodeNameField extends AbstractField {
 
 	@Override
 	public void output(HtmlWriter html) {
-		Record dataSet = dataView != null ? dataView.getRecord() : null;
+		Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
 		if (this.isHidden()) {
 			html.print("<input");
 			html.print(" type=\"hidden\"");
 			html.print(" name=\"%s\"", this.getId());
 			html.print(" id=\"%s\"", this.getId());
-			String value = this.getText(dataSet);
+			String value = this.getText(record);
 			if (value != null)
 				html.print(" value=\"%s\"", value);
 			html.println("/>");
@@ -51,7 +51,7 @@ public class CodeNameField extends AbstractField {
 			html.print(" type=\"hidden\"");
 			html.print(" name=\"%s\"", this.getId());
 			html.print(" id=\"%s\"", this.getId());
-			String codeValue = this.getText(dataSet);
+			String codeValue = this.getText(record);
 			if (codeValue != null)
 				html.print(" value=\"%s\"", codeValue);
 			html.println("/>");
@@ -61,8 +61,8 @@ public class CodeNameField extends AbstractField {
 			html.print(" name=\"%s\"", getNameField());
 			html.print(" id=\"%s\"", getNameField());
 			String nameValue = null;
-			if (dataSet != null) {
-				nameValue = dataSet.getString(getNameField());
+			if (record != null) {
+				nameValue = record.getString(getNameField());
 				if (nameValue != null)
 					html.print(" value=\"%s\"", nameValue);
 			}

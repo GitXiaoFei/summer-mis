@@ -1,12 +1,11 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.common.Expender;
-import cn.cerc.jpage.common.SearchItem;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.other.SearchItem;
 
-public class ExpendField extends AbstractField implements SearchItem, Expender {
+public class ExpendField extends AbstractField implements SearchItem {
 	private boolean search;
 	private String hiddenId = "hidden";
 
@@ -36,7 +35,7 @@ public class ExpendField extends AbstractField implements SearchItem, Expender {
 			buildText.outputText(dataSet, html);
 			return html.toString();
 		}
-		return String.format("<a href=\"javascript:displaySwitch('%d')\">展开</a>", dataView.getRecNo());
+		return String.format("<a href=\"javascript:displaySwitch('%d')\">展开</a>", dataSource.getDataSet().getRecNo());
 	}
 
 	@Override
@@ -57,11 +56,10 @@ public class ExpendField extends AbstractField implements SearchItem, Expender {
 		this.search = search;
 	}
 
-	@Override
 	public String getHiddenId() {
 		if (this.search)
 			return hiddenId;
-		return "" + dataView.getRecNo();
+		return "" + dataSource.getDataSet().getRecNo();
 	}
 
 	public void setHiddenId(String hiddenId) {

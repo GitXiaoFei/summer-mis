@@ -19,17 +19,16 @@ import cn.cerc.jmis.form.RightMenus;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
-import cn.cerc.jpage.common.HtmlContent;
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.form.FormView;
-import cn.cerc.jpage.form.HeaderSide;
-import cn.cerc.jpage.form.UrlMenu;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.MutiGrid;
-import cn.cerc.jpage.tools.OperaPages;
+import cn.cerc.jpage.other.HeaderSide;
+import cn.cerc.jpage.other.OperaPages;
+import cn.cerc.jpage.other.UrlMenu;
 
 /**
  * 主体子页面(公用)
@@ -42,10 +41,11 @@ public class PhonePage extends AbstractJspPage {
 	private MutiPage pages;
 	private String searchWaitingId = "";
 	private Component content;
-	private HeaderSide header;
+	private Component header;
 	private List<HtmlContent> contents = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private Component body;
+	private boolean defaultHeader = false;
 
 	public PhonePage(IForm form) {
 		super(form);
@@ -103,8 +103,8 @@ public class PhonePage extends AbstractJspPage {
 			this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
 			if (mainMenu.getRightMenus().size() > 0)
 				this.add("subMenus", mainMenu.getRightMenus());
-
-			this.header = registerContent(this, content);
+			if (this.defaultHeader)
+				loadDefaultHeader();
 		}
 
 		// 右边区域
@@ -149,7 +149,8 @@ public class PhonePage extends AbstractJspPage {
 		out.println("</script>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println(header);
+		if (header != null)
+			out.println(header);
 
 		out.write("<div class=\"main\">\n");
 		if (bottom != null)
@@ -171,7 +172,7 @@ public class PhonePage extends AbstractJspPage {
 		out.println("</div>");
 		out.println("<div class='rightSide'>");
 
-		if (rightSite != null){
+		if (rightSite != null) {
 			out.print(rightSite);
 		}
 		// 添加分页控制
@@ -221,55 +222,6 @@ public class PhonePage extends AbstractJspPage {
 			html.println("</script>");
 		}
 		return html;
-	}
-
-	public static HeaderSide registerContent(AbstractJspPage page, Component content) {
-		HeaderSide header = null;
-		HttpServletRequest request = page.getRequest();
-		boolean _showMenu_ = "true".equals(page.getForm().getParam("showMenus", "true"));
-		if (_showMenu_) {
-			header = new HeaderSide();
-			Component left = header.getLeft();
-			@SuppressWarnings("unchecked")
-			List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-			if (barMenus == null) {
-				new UrlMenu(left, "首页", "/");
-				new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-//				new GoBackButton(left);
-			} else {
-//				new GoBackButton(left);
-				for (UrlRecord menu : barMenus) {
-					new UrlMenu(left, menu.getName(), menu.getUrl());
-				}
-			}
-
-			Component right = header.getRight();
-			@SuppressWarnings("unchecked")
-			List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-			if (subMenus != null) {
-				int i = subMenus.size() - 1;
-				while (i > -1) {
-					UrlRecord menu = subMenus.get(i);
-					new UrlMenu(right, menu.getName(), menu.getUrl());
-					i--;
-				}
-			}
-		}
-
-		if (content != null) {
-			request.setAttribute(content.getId(), content);
-			for (Component component : content.getComponents()) {
-				request.setAttribute(component.getId(), component);
-			}
-		}
-		return header;
-	}
-
-	public FormView createForm() {
-		FormView form = new FormView(this.getRequest());
-		form.setId("search");
-		form.setOwner(this.getContent());
-		return form;
 	}
 
 	public Component getBody() {
@@ -323,4 +275,59 @@ public class PhonePage extends AbstractJspPage {
 	public void setContent(Component content) {
 		this.content = content;
 	}
+
+	public Component getHeader() {
+		return header;
+	}
+
+	public void setHeader(Component header) {
+		this.header = header;
+	}
+
+	public void addDefaultHeader() {
+		defaultHeader = true;
+	}
+
+	private void loadDefaultHeader() {
+		HeaderSide header = null;
+		HttpServletRequest request = this.getRequest();
+		boolean _showMenu_ = "true".equals(this.getForm().getParam("showMenus", "true"));
+		if (_showMenu_) {
+			header = new HeaderSide();
+			Component left = header.getLeft();
+			@SuppressWarnings("unchecked")
+			List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
+			if (barMenus == null) {
+				new UrlMenu(left, "首页", "/");
+				new UrlMenu(left, "刷新", "javascript:history.go(-1);");
+				// new GoBackButton(left);
+			} else {
+				// new GoBackButton(left);
+				for (UrlRecord menu : barMenus) {
+					new UrlMenu(left, menu.getName(), menu.getUrl());
+				}
+			}
+
+			Component right = header.getRight();
+			@SuppressWarnings("unchecked")
+			List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
+			if (subMenus != null) {
+				int i = subMenus.size() - 1;
+				while (i > -1) {
+					UrlRecord menu = subMenus.get(i);
+					new UrlMenu(right, menu.getName(), menu.getUrl());
+					i--;
+				}
+			}
+		}
+
+		if (content != null) {
+			request.setAttribute(content.getId(), content);
+			for (Component component : content.getComponents()) {
+				request.setAttribute(component.getId(), component);
+			}
+		}
+		this.setHeader(header);
+	}
+
 }

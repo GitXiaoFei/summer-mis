@@ -20,7 +20,7 @@ public class ErrorPage implements IPage {
 		super();
 		this.setForm(page);
 	}
-	
+
 	public ErrorPage(IForm form, Throwable error) {
 		super();
 		this.setForm(form);
