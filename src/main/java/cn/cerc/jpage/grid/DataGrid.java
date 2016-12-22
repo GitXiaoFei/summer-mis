@@ -24,6 +24,8 @@ public class DataGrid extends AbstractGrid {
 	private AbstractGridLine expender;
 	// 列管理器，用于支持自定义栏位
 	private IColumnsManager manager;
+	//输出每列时的事件
+	private OutputEvent beforeOutput;
 
 	@Override
 	public void output(HtmlWriter html) {
@@ -83,7 +85,9 @@ public class DataGrid extends AbstractGrid {
 				AbstractGridLine line = this.getLine(lineNo);
 				if (line instanceof ExpenderGridLine)
 					line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
-				line.output(html, this.getDataSet(), lineNo);
+				if(this.beforeOutput != null)
+					beforeOutput.process(line);
+				line.output(html, lineNo);
 			}
 			// 下一行
 			i++;
@@ -142,6 +146,14 @@ public class DataGrid extends AbstractGrid {
 	@Override
 	public void updateValue(String id, String code) {
 		
+	}
+
+	public OutputEvent getBeforeOutput() {
+		return beforeOutput;
+	}
+
+	public void setBeforeOutput(OutputEvent beforeOutput) {
+		this.beforeOutput = beforeOutput;
 	}
 
 }

@@ -1,6 +1,5 @@
 package cn.cerc.jpage.grid.lines;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
@@ -15,9 +14,11 @@ public class ChildGridLine extends AbstractGridLine {
 	}
 
 	@Override
-	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
+	public void output(HtmlWriter html, int lineNo) {
 		html.print("<tr");
-		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
+		html.print(" id='%s_%s'", "tr" + dataSource.getDataSet().getRecNo(), lineNo);
+		if (!this.isVisible())
+			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");

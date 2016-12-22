@@ -18,6 +18,7 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 	private List<IField> fields = new ArrayList<>();
 	private List<RowCell> cells = new ArrayList<>();
 	protected DataSource dataSource;
+	private boolean visible = true;
 
 	public AbstractGridLine(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -40,7 +41,7 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 		return dataSource.getDataSet();
 	}
 
-	public abstract void output(HtmlWriter html, DataSet dataSet, int lineNo);
+	public abstract void output(HtmlWriter html, int lineNo);
 
 	protected void outputField(HtmlWriter html, AbstractField field) {
 		Record record = dataSource.getDataSet().getCurrent();
@@ -72,5 +73,13 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 
 	protected List<RowCell> getCells() {
 		return cells;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }

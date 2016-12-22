@@ -47,6 +47,10 @@ public abstract class AbstractGrid extends Component implements DataSource {
 
 	@Override
 	public void addField(IField field) {
+		if(field instanceof AbstractField){
+			AbstractField obj = (AbstractField) field;
+			obj.setOwner(masterLine);
+		}
 		masterLine.addField(field);
 	}
 

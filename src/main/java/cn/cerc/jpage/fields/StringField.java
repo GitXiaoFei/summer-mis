@@ -6,8 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
-import cn.cerc.jpage.grid.DataGrid;
-import cn.cerc.jpage.grid.lines.ChildGridLine;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class StringField extends AbstractField implements IColumn {
 	// private static final Logger log = Logger.getLogger(Field.class);
@@ -53,21 +52,7 @@ public class StringField extends AbstractField implements IColumn {
 				return data;
 		}
 
-		if (this.getOwner() instanceof ChildGridLine){
-			HtmlWriter html = new HtmlWriter();
-			html.print("<input");
-			html.print(" id='%s'", this.getId());
-			html.print(" type='text'");
-			html.print(" name='%s'", this.getField());
-			html.print(" value='%s'", data);
-			html.print(" oninput='tableOnChanged(this)'");
-			html.print(" style='width:80%;");
-			if (this.getAlign() != null)
-				html.print(" text-align:%s;", this.getAlign());
-			html.println("'/>");
-			return html.toString();
-		}
-		if (!(this.getOwner() instanceof DataGrid))
+		if (!(this.getOwner() instanceof AbstractGridLine))
 			return data;
 
 		return getEditor().format(ds);
