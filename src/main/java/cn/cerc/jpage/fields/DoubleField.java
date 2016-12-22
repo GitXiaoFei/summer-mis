@@ -8,7 +8,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
-import cn.cerc.jpage.grid.DataGrid;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class DoubleField extends AbstractField implements IColumn {
 	private ColumnEditor editor;
@@ -80,7 +80,7 @@ public class DoubleField extends AbstractField implements IColumn {
 			} else
 				return getText(ds);
 		}
-		if (!(this.getOwner() instanceof DataGrid))
+		if (!(this.getOwner() instanceof AbstractGridLine))
 			return getText(ds);
 
 		return getEditor().format(ds);

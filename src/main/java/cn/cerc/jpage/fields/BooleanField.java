@@ -6,7 +6,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.fields.editor.CheckEditor;
-import cn.cerc.jpage.grid.DataGrid;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.other.SearchItem;
 
 public class BooleanField extends AbstractField implements SearchItem, IColumn {
@@ -101,7 +101,7 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 		if (this.isReadonly())
 			return getText(ds);
 
-		if (!(this.getOwner() instanceof DataGrid))
+		if (!(this.getOwner() instanceof AbstractGridLine))
 			return getText(ds);
 
 		return getEditor().format(ds);
