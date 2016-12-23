@@ -75,7 +75,8 @@ public class DoubleField extends AbstractField implements IColumn {
 					if (url.getTitle() != null)
 						html.print(" title=\"%s\"", url.getTitle());
 					html.println(">%s</a>", getText(ds));
-				}
+				} else
+					html.println(getText(ds));
 				return html.toString();
 			} else
 				return getText(ds);
