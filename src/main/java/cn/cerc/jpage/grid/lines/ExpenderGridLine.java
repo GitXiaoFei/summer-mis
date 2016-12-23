@@ -12,6 +12,7 @@ public class ExpenderGridLine extends AbstractGridLine {
 
 	public ExpenderGridLine(DataSource dataSource) {
 		super(dataSource);
+		this.setVisible(false);
 	}
 
 	@Override
@@ -28,11 +29,13 @@ public class ExpenderGridLine extends AbstractGridLine {
 	}
 
 	@Override
-	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
+	public void output(HtmlWriter html, int lineNo) {
+		DataSet dataSet = dataSource.getDataSet();
 		html.print("<tr");
-		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
+		html.print(" id='%s_%s'", "tr" +  dataSet.getRecNo(), lineNo);
 		html.print(" role=\"%s\"", dataSet.getRecNo());
-		html.print(" style=\"display:none\"");
+		if (!this.isVisible())
+			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");
