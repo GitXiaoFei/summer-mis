@@ -1,6 +1,5 @@
 package cn.cerc.jpage.grid.lines;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
@@ -15,9 +14,11 @@ public class ChildGridLine extends AbstractGridLine {
 	}
 
 	@Override
-	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
+	public void output(HtmlWriter html, int lineNo) {
 		html.print("<tr");
-		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
+		html.print(" id='%s_%s'", "tr" + dataSource.getDataSet().getRecNo(), lineNo);
+		if (!this.isVisible())
+			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");
@@ -27,8 +28,11 @@ public class ChildGridLine extends AbstractGridLine {
 				html.print(" style=\"%s\"", item.getStyle());
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
+			
 			if (item.getRole() != null)
 				html.print(" role=\"%s\"", item.getRole());
+			else if (item.getFields().get(0).getField() != null)
+				html.print(" role=\"%s\"", item.getFields().get(0).getField());
 
 			html.println(">");
 			for (IField obj : item.getFields()) {

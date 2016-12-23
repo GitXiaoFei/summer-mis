@@ -6,7 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
-import cn.cerc.jpage.grid.DataGrid;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class StringField extends AbstractField implements IColumn {
 	// private static final Logger log = Logger.getLogger(Field.class);
@@ -52,7 +52,7 @@ public class StringField extends AbstractField implements IColumn {
 				return data;
 		}
 
-		if (!(this.getOwner() instanceof DataGrid))
+		if (!(this.getOwner() instanceof AbstractGridLine))
 			return data;
 
 		return getEditor().format(ds);

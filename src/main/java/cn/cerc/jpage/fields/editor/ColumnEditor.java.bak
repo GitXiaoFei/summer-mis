@@ -83,6 +83,13 @@ public class ColumnEditor {
 				html.print(" data-%s='%s'", field, ds.getString(field));
 			}
 		}
+		if (owner.getAlign() != null)
+			html.print(" style='text-align:%s;'", owner.getAlign());
+		html.print(" onkeydown='tableDirection(event,this)'");
+		if (owner.getOnclick() != null) {
+			html.print(" onclick=\"%s\"", owner.getOnclick());
+		} else
+			html.print(" onclick='this.select()'");
 		if (onUpdate != null)
 			html.print(" oninput=\"tableOnChanged(this,'%s')\"", onUpdate);
 		else
