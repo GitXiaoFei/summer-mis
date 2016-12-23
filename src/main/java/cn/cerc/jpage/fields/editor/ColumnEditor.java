@@ -19,6 +19,7 @@ public class ColumnEditor {
 	private DataSet dataSet;
 	private List<IField> columns;
 	private String onUpdate;
+	private List<String> dataField = new ArrayList<>(); //设置的字段列表
 	private AbstractGridLine gridLine;
 
 	public ColumnEditor(AbstractField owner) {
@@ -77,6 +78,11 @@ public class ColumnEditor {
 			} else
 				html.print(" onclick='this.select()'");
 		}
+		if(dataField.size() > 0){
+			for(String field : dataField){
+				html.print(" data-%s='%s'", field, ds.getString(field));
+			}
+		}
 		if (onUpdate != null)
 			html.print(" oninput=\"tableOnChanged(this,'%s')\"", onUpdate);
 		else
@@ -109,5 +115,13 @@ public class ColumnEditor {
 
 	public void setGridLine(AbstractGridLine gridLine) {
 		this.gridLine = gridLine;
+	}
+
+	/**
+	 * 给元素设置data-*属性
+	 * @return 要设置的字段列表
+	 */
+	public List<String> getDataField() {
+		return dataField;
 	}
 }
