@@ -10,6 +10,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
@@ -85,7 +86,7 @@ public class DataGrid extends AbstractGrid {
 				AbstractGridLine line = this.getLine(lineNo);
 				if (line instanceof ExpenderGridLine)
 					line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
-				if (this.beforeOutput != null)
+				if (line instanceof ChildGridLine && this.beforeOutput != null)
 					beforeOutput.process(line);
 				line.output(html, lineNo);
 			}
