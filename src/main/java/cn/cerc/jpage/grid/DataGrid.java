@@ -10,6 +10,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 
 public class DataGrid extends AbstractGrid {
@@ -24,7 +25,7 @@ public class DataGrid extends AbstractGrid {
 	private AbstractGridLine expender;
 	// 列管理器，用于支持自定义栏位
 	private IColumnsManager manager;
-	//输出每列时的事件
+	// 输出每列时的事件
 	private OutputEvent beforeOutput;
 
 	@Override
@@ -85,7 +86,7 @@ public class DataGrid extends AbstractGrid {
 				AbstractGridLine line = this.getLine(lineNo);
 				if (line instanceof ExpenderGridLine)
 					line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
-				if(this.beforeOutput != null)
+				if (line instanceof ChildGridLine && this.beforeOutput != null)
 					beforeOutput.process(line);
 				line.output(html, lineNo);
 			}
@@ -145,7 +146,7 @@ public class DataGrid extends AbstractGrid {
 
 	@Override
 	public void updateValue(String id, String code) {
-		
+
 	}
 
 	public OutputEvent getBeforeOutput() {
