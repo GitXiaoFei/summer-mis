@@ -13,6 +13,10 @@ public class ActionForm extends Component {
 
 	}
 
+	public ActionForm(Component owner, String id) {
+		super(owner, id);
+	}
+
 	public ActionForm(String id) {
 		super();
 		this.setId(id);
