@@ -46,7 +46,8 @@ public class StringField extends AbstractField implements IColumn {
 					if (url.getTitle() != null)
 						html.print(" title=\"%s\"", url.getTitle());
 					html.println(">%s</a>", data);
-				}
+				} else
+					html.println(data);
 				return html.toString();
 			} else
 				return data;
