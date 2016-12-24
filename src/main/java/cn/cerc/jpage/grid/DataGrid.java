@@ -2,8 +2,6 @@ package cn.cerc.jpage.grid;
 
 import static cn.cerc.jdb.other.utils.roundTo;
 
-import java.util.List;
-
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
@@ -23,8 +21,6 @@ public class DataGrid extends AbstractGrid {
 	private String CSSStyle;
 	// 扩展对象
 	private AbstractGridLine expender;
-	// 列管理器，用于支持自定义栏位
-	private IColumnsManager manager;
 	// 输出每列时的事件
 	private OutputEvent beforeOutput;
 
@@ -47,13 +43,10 @@ public class DataGrid extends AbstractGrid {
 	public void outputGrid(HtmlWriter html) {
 		DataSet dataSet = this.getDataSet();
 		MutiPage pages = this.getPages();
-		List<IField> fields = this.getMasterLine().getFields();
-		if (manager != null)
-			fields = manager.Reindex(fields);
 
 		double sumFieldWidth = 0;
-		for (IField column : fields)
-			sumFieldWidth += column.getWidth();
+		for (RowCell cell : this.getMasterLine().getOutputCells())
+			sumFieldWidth += cell.getFields().get(0).getWidth();
 
 		if (sumFieldWidth < 0)
 			throw new RuntimeException("总列宽不允许小于1");
@@ -66,16 +59,17 @@ public class DataGrid extends AbstractGrid {
 		html.println(">");
 
 		html.println("<tr>");
-		for (IField column : fields) {
+		for (RowCell cell : this.getMasterLine().getOutputCells()) {
+			IField field = cell.getFields().get(0);
 			html.print("<th");
-			if (column.getWidth() == 0)
+			if (field.getWidth() == 0)
 				html.print(" style=\"display:none\"");
 			else {
-				double val = roundTo(column.getWidth() / sumFieldWidth * 100, -2);
+				double val = roundTo(field.getWidth() / sumFieldWidth * 100, -2);
 				html.print(" width=\"%f%%\"", val);
 			}
 			html.print(">");
-			html.print(column.getTitle());
+			html.print(field.getTitle());
 			html.println("</th>");
 		}
 		html.println("</tr>");
@@ -95,14 +89,6 @@ public class DataGrid extends AbstractGrid {
 		}
 		html.println("</table>");
 		return;
-	}
-
-	public IColumnsManager getManager() {
-		return manager;
-	}
-
-	public void setManager(IColumnsManager manager) {
-		this.manager = manager;
 	}
 
 	@Override
