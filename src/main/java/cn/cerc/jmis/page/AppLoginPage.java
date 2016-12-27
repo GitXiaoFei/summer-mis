@@ -74,12 +74,12 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		req.setAttribute("password", password);
 		req.setAttribute("needVerify", "false");
 		// 如长度大于10表示用手机号码登入
-		/*if (userCode.length() > 10) {
+		if (userCode.length() > 10) {
 			String oldCode = userCode;
 			userCode = getAccountFromTel(form.getHandle(), oldCode);
 			log.debug(String.format("将手机号 %s 转化成帐号 %s", oldCode, userCode));
 		}
-*/
+
 		boolean result = false;
 		log.debug(String.format("进行用户帐号(%s)与密码认证", userCode));
 		// 进行用户名、密码认证
