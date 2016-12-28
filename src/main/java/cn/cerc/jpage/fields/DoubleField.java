@@ -1,6 +1,6 @@
 package cn.cerc.jpage.fields;
 
-import static cn.cerc.jdb.other.utils.roundTo;
+import java.text.DecimalFormat;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -12,7 +12,6 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class DoubleField extends AbstractField implements IColumn {
 	private ColumnEditor editor;
-	private int scale = -4;
 
 	public DoubleField(Component owner, String title, String field) {
 		super(owner, title, 4);
@@ -37,19 +36,11 @@ public class DoubleField extends AbstractField implements IColumn {
 		}
 		try {
 			double val = dataSet.getDouble(field);
-			return "" + roundTo(val, scale);
+			DecimalFormat df = new DecimalFormat("0.####");
+			return df.format(val);
 		} catch (NumberFormatException e) {
 			return "0";
 		}
-	}
-
-	public int getScale() {
-		return scale;
-	}
-
-	public DoubleField setScale(int scale) {
-		this.scale = scale;
-		return this;
 	}
 
 	@Override
