@@ -16,6 +16,7 @@ public class DataGrid extends AbstractGrid {
 		super(form, owner);
 	}
 
+	private final double MaxWidth = 600;
 	// 当前样式选择
 	private String CSSClass = "dbgrid";
 	private String CSSStyle;
@@ -50,8 +51,8 @@ public class DataGrid extends AbstractGrid {
 
 		if (sumFieldWidth < 0)
 			throw new RuntimeException("总列宽不允许小于1");
-		if (sumFieldWidth > 60)
-			throw new RuntimeException("总列宽不允许大于60");
+		if (sumFieldWidth > MaxWidth)
+			throw new RuntimeException("总列宽不允许大于600");
 
 		html.print("<table class=\"%s\"", this.getCSSClass());
 		if (this.getCSSStyle() != null)
