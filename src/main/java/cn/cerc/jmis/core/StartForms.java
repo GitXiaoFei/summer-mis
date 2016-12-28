@@ -90,7 +90,7 @@ public class StartForms implements Filter {
 			ClientDevice info = new ClientDevice(form);
 			info.setRequest(req);
 			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
-
+			form.setClient(info);
 			// 查找菜单定义
 			IMenu menu = form.getMenu();
 			if (menu == null) {
