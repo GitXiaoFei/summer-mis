@@ -1,5 +1,6 @@
 package cn.cerc.jpage.fields.editor;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ColumnEditor {
 	private DataSet dataSet;
 	private List<IField> columns;
 	private String onUpdate;
-	private List<String> dataField = new ArrayList<>(); //设置的字段列表
+	private List<String> dataField = new ArrayList<>(); // 设置的字段列表
 	private AbstractGridLine gridLine;
 
 	public ColumnEditor(AbstractField owner) {
@@ -39,6 +40,11 @@ public class ColumnEditor {
 
 	public String format(Record ds) {
 		String data = ds.getString(owner.getField());
+		if (ds.getField(owner.getField()) instanceof Double) {
+			DecimalFormat df = new DecimalFormat("0.####");
+			data = df.format(ds.getDouble(owner.getField()));
+		}
+
 		if (!this.init) {
 			dataSet = gridLine.getDataSet();
 			columns = new ArrayList<>();
@@ -60,7 +66,7 @@ public class ColumnEditor {
 		}
 		HtmlWriter html = new HtmlWriter();
 		html.print("<input");
-		if (gridLine instanceof MasterGridLine) 
+		if (gridLine instanceof MasterGridLine)
 			html.print(" id='%s'", this.getDataId());
 		else
 			html.print(" style=\"width:80%;\"");
@@ -78,8 +84,8 @@ public class ColumnEditor {
 			} else
 				html.print(" onclick='this.select()'");
 		}
-		if(dataField.size() > 0){
-			for(String field : dataField){
+		if (dataField.size() > 0) {
+			for (String field : dataField) {
 				html.print(" data-%s='%s'", field, ds.getString(field));
 			}
 		}
@@ -119,6 +125,7 @@ public class ColumnEditor {
 
 	/**
 	 * 给元素设置data-*属性
+	 * 
 	 * @return 要设置的字段列表
 	 */
 	public List<String> getDataField() {
