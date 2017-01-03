@@ -69,6 +69,8 @@ public class DataGrid extends AbstractGrid {
 				double val = roundTo(field.getWidth() / sumFieldWidth * 100, -2);
 				html.print(" width=\"%f%%\"", val);
 			}
+
+			html.print("onclick=\"gridSort(this,'%s')\"", field.getField());
 			html.print(">");
 			html.print(field.getTitle());
 			html.println("</th>");
