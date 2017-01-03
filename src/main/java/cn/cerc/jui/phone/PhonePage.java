@@ -50,8 +50,7 @@ public class PhonePage extends AbstractJspPage {
 	public PhonePage(IForm form) {
 		super(form);
 		this.addScriptFile("js/jquery-1.11.1.min.js");
-		this.addScriptFile("js/delphi.vcl.js");
-		this.addScriptFile("js/TApplication.js");
+		this.addScriptFile("js/summer.js");
 		this.addScriptFile("js/vine.js");
 		this.addScriptFile("jui/phone/phone-block.js");
 		//
