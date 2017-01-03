@@ -28,14 +28,12 @@ public class DataGrid extends AbstractGrid {
 	@Override
 	public void output(HtmlWriter html) {
 		html.print("<div class='scrollArea'>");
-		if (this.getDataSet().size() > 0) {
-			if (form != null) {
-				form.outHead(html);
-				outputGrid(html);
-				form.outFoot(html);
-			} else {
-				outputGrid(html);
-			}
+		if (form != null) {
+			form.outHead(html);
+			outputGrid(html);
+			form.outFoot(html);
+		} else {
+			outputGrid(html);
 		}
 		html.print("</div>");
 	}
@@ -69,24 +67,28 @@ public class DataGrid extends AbstractGrid {
 				double val = roundTo(field.getWidth() / sumFieldWidth * 100, -2);
 				html.print(" width=\"%f%%\"", val);
 			}
+
+			html.print("onclick=\"gridSort(this,'%s')\"", field.getField());
 			html.print(">");
 			html.print(field.getTitle());
 			html.println("</th>");
 		}
 		html.println("</tr>");
-		int i = pages.getBegin();
-		while (i <= pages.getEnd()) {
-			dataSet.setRecNo(i + 1);
-			for (int lineNo = 0; lineNo < this.getLines().size(); lineNo++) {
-				AbstractGridLine line = this.getLine(lineNo);
-				if (line instanceof ExpenderGridLine)
-					line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
-				if (line instanceof ChildGridLine && this.beforeOutput != null)
-					beforeOutput.process(line);
-				line.output(html, lineNo);
+		if (dataSet.size() > 0) {
+			int i = pages.getBegin();
+			while (i <= pages.getEnd()) {
+				dataSet.setRecNo(i + 1);
+				for (int lineNo = 0; lineNo < this.getLines().size(); lineNo++) {
+					AbstractGridLine line = this.getLine(lineNo);
+					if (line instanceof ExpenderGridLine)
+						line.getCell(0).setColSpan(this.getMasterLine().getFields().size());
+					if (line instanceof ChildGridLine && this.beforeOutput != null)
+						beforeOutput.process(line);
+					line.output(html, lineNo);
+				}
+				// 下一行
+				i++;
 			}
-			// 下一行
-			i++;
 		}
 		html.println("</table>");
 		return;
