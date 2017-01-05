@@ -78,12 +78,12 @@ public class ColumnEditor {
 			html.print(" data-focus='[%s]'", this.getDataFocus());
 			if (owner.getAlign() != null)
 				html.print(" style='text-align:%s;'", owner.getAlign());
-			html.print(" onkeydown='tableDirection(event,this)'");
 			if (owner.getOnclick() != null) {
 				html.print(" onclick=\"%s\"", owner.getOnclick());
 			} else
 				html.print(" onclick='this.select()'");
 		}
+		html.print(" onkeydown='tableDirection(event,this)'");
 		if (dataField.size() > 0) {
 			for (String field : dataField) {
 				html.print(" data-%s='%s'", field, ds.getString(field));
