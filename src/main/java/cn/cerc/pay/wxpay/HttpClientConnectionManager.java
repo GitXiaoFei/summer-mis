@@ -11,12 +11,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 @SuppressWarnings("deprecation")
 public class HttpClientConnectionManager {
 
-    /**
-     * 获取SSL验证的HttpClient
-     * 
-     * @param httpClient
-     * @return
-     */
+    // 获取SSL验证的HttpClient
     public static HttpClient getSSLInstance(HttpClient httpClient) {
         ClientConnectionManager ccm = httpClient.getConnectionManager();
         SchemeRegistry sr = ccm.getSchemeRegistry();
@@ -25,12 +20,7 @@ public class HttpClientConnectionManager {
         return httpClient;
     }
 
-    /**
-     * 模拟浏览器post提交
-     * 
-     * @param url
-     * @return
-     */
+    // 模拟浏览器post提交
     public static HttpPost getPostMethod(String url) {
         HttpPost pmethod = new HttpPost(url); // 设置响应头信息
         pmethod.addHeader("Connection", "keep-alive");
@@ -43,12 +33,7 @@ public class HttpClientConnectionManager {
         return pmethod;
     }
 
-    /**
-     * 模拟浏览器GET提交
-     * 
-     * @param url
-     * @return
-     */
+    // 模拟浏览器GET提交
     public static HttpGet getGetMethod(String url) {
         HttpGet pmethod = new HttpGet(url);
         // 设置响应头信息

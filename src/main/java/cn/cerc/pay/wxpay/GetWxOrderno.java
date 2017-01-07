@@ -1,12 +1,12 @@
 package cn.cerc.pay.wxpay;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
@@ -16,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 @SuppressWarnings("deprecation")
@@ -29,15 +28,7 @@ public class GetWxOrderno {
         httpclient = (DefaultHttpClient) HttpClientConnectionManager.getSSLInstance(httpclient);
     }
 
-    /**
-     * description:获取预支付id
-     * 
-     * @param url
-     * @param xmlParam
-     * @return
-     * @author ex_yangxiaoyi
-     * @see
-     */
+    // 获取预支付id
     @SuppressWarnings({ "resource", "unchecked" })
     public static Map<String, String> getPayNo(String url, String xmlParam) {
         DefaultHttpClient client = new DefaultHttpClient();
@@ -78,15 +69,7 @@ public class GetWxOrderno {
         return map;
     }
 
-    /**
-     * description:获取扫码支付连接
-     * 
-     * @param url
-     * @param xmlParam
-     * @return
-     * @author ex_yangxiaoyi
-     * @see
-     */
+    // 获取扫码支付连接
     @SuppressWarnings({ "resource", "rawtypes" })
     public static String getCodeUrl(String url, String xmlParam) {
         DefaultHttpClient client = new DefaultHttpClient();
@@ -108,14 +91,7 @@ public class GetWxOrderno {
         return code_url;
     }
 
-    /**
-     * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
-     * 
-     * @param strxml
-     * @return
-     * @throws JDOMException
-     * @throws IOException
-     */
+    // 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Map doXMLParse(String strxml) throws Exception {
         if (null == strxml || "".equals(strxml)) {
@@ -149,12 +125,7 @@ public class GetWxOrderno {
         return m;
     }
 
-    /**
-     * 获取子结点的xml
-     * 
-     * @param children
-     * @return String
-     */
+    // 获取子结点的xml
     @SuppressWarnings("rawtypes")
     public static String getChildrenText(List children) {
         StringBuffer sb = new StringBuffer();

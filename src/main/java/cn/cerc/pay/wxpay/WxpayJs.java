@@ -48,19 +48,6 @@ public class WxpayJs {
         }
     }
 
-    /**
-     * 
-     * @param body
-     *            商品描述
-     * @param amount
-     *            商品金额 0.00
-     * @param notifyUrl
-     *            回调地址
-     * @param userCode
-     * @param spbillCreateIp
-     *            当前登录ip
-     * @return
-     */
     @SuppressWarnings("static-access")
     public String requestPay(String body) {
         String trade_type = "JSAPI";

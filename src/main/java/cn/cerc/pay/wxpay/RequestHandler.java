@@ -42,11 +42,7 @@ public class RequestHandler {
 
     private HttpServletResponse response;
 
-    /**
-     * 初始构造函数。
-     * 
-     * @return
-     */
+    // 初始构造函数。
     public RequestHandler(HttpServletRequest request, HttpServletResponse response) {
         this.last_errcode = "0";
         this.request = request;
@@ -55,18 +51,14 @@ public class RequestHandler {
         this.parameters = new TreeMap<String, String>();
     }
 
-    /**
-     * 初始化函数。
-     */
+    // 初始化函数。
     public void init(String app_id, String app_secret, String partner_key) {
         this.last_errcode = "0";
         this.debugInfo = "";
         this.key = partner_key;
     }
 
-    /**
-     * 初始化函数。
-     */
+    // 初始化函数。
     public void init(String app_id, String partner_key) {
         this.key = partner_key;
     }
@@ -74,20 +66,12 @@ public class RequestHandler {
     public void init() {
     }
 
-    /**
-     * 获取最后错误号
-     */
+    // 获取最后错误号
     public String getLasterrCode() {
         return last_errcode;
     }
 
-    /**
-     * 获取参数值
-     * 
-     * @param parameter
-     *            参数名称
-     * @return String
-     */
+    // 获取参数值
     public String getParameter(String parameter) {
         String s = (String) this.parameters.get(parameter);
         return (null == s) ? "" : s;
@@ -98,9 +82,7 @@ public class RequestHandler {
         return URLEncoder.encode(src, this.charset).replace("+", "%20");
     }
 
-    /**
-     * 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
-     */
+    // 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
     @SuppressWarnings("rawtypes")
     public String createSign(SortedMap<String, String> packageParams) {
         StringBuffer sb = new StringBuffer();
@@ -122,9 +104,7 @@ public class RequestHandler {
 
     }
 
-    /**
-     * 创建package签名
-     */
+    // 创建package签名
     @SuppressWarnings("rawtypes")
     public boolean createMd5Sign(String signParams) {
         StringBuffer sb = new StringBuffer();
@@ -170,13 +150,7 @@ public class RequestHandler {
         return sb.toString();
     }
 
-    /**
-     * 获取编码字符集
-     * 
-     * @param request
-     * @param response
-     * @return String
-     */
+    // 获取编码字符集
     private String getCharacterEncoding(HttpServletRequest request, HttpServletResponse response) {
         if (null == request || null == response) {
             return "gbk";
@@ -191,9 +165,7 @@ public class RequestHandler {
         return enc;
     }
 
-    /**
-     * 设置debug信息
-     */
+    // 设置debug信息
     protected void setDebugInfo(String debugInfo) {
         this.debugInfo = debugInfo;
     }

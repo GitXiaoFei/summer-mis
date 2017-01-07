@@ -45,12 +45,7 @@ public class ResponseHandler {
         return smap;
     }
 
-    /**
-     * 构造函数
-     * 
-     * @param request
-     * @param response
-     */
+    // 构造函数
     @SuppressWarnings("rawtypes")
     public ResponseHandler(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
@@ -90,11 +85,7 @@ public class ResponseHandler {
 
     }
 
-    /**
-     * 是否微信V3签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
-     * 
-     * @return boolean
-     */
+    // 是否微信V3签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
     @SuppressWarnings("rawtypes")
     public boolean isWechatSign() {
         StringBuffer sb = new StringBuffer();
@@ -120,40 +111,23 @@ public class ResponseHandler {
         return ValidSign.equals(sign);
     }
 
-    /**
-     * 获取密钥
-     */
+    // 获取密钥
     public String getKey() {
         return key;
     }
 
-    /**
-     * 设置密钥
-     */
+    // 设置密钥
     public void setKey(String key) {
         this.key = key;
     }
 
-    /**
-     * 获取参数值
-     * 
-     * @param parameter
-     *            参数名称
-     * @return String
-     */
+    // 获取参数值
     public String getParameter(String parameter) {
         String s = (String) this.parameters.get(parameter);
         return (null == s) ? "" : s;
     }
 
-    /**
-     * 设置参数值
-     * 
-     * @param parameter
-     *            参数名称
-     * @param parameterValue
-     *            参数值
-     */
+    // 设置参数值
     public void setParameter(String parameter, String parameterValue) {
         String v = "";
         if (null != parameterValue) {
@@ -162,22 +136,12 @@ public class ResponseHandler {
         this.parameters.put(parameter, v);
     }
 
-    /**
-     * 返回所有的参数
-     * 
-     * @return SortedMap
-     */
+    // 返回所有的参数
     public SortedMap<String, String> getAllParameters() {
         return this.parameters;
     }
 
-    /**
-     * 返回处理结果给财付通服务器。
-     * 
-     * @param msg
-     *            Success or fail
-     * @throws IOException
-     */
+    // 返回处理结果给财付通服务器。
     public void sendToCFT(String msg) throws IOException {
         String strHtml = msg;
         PrintWriter out = this.getHttpServletResponse().getWriter();
@@ -186,25 +150,17 @@ public class ResponseHandler {
         out.close();
     }
 
-    /**
-     * 获取uri编码
-     * 
-     * @return String
-     */
+    // 获取uri编码
     public String getUriEncoding() {
         return uriEncoding;
     }
 
-    /**
-     * 获取debug信息
-     */
+    // 获取debug信息
     public String getDebugInfo() {
         return debugInfo;
     }
 
-    /**
-     * 设置debug信息
-     */
+    // 获取debug信息
     protected void setDebugInfo(String debugInfo) {
         this.debugInfo = debugInfo;
     }
