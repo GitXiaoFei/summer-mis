@@ -83,7 +83,7 @@ public class ColumnEditor {
 			} else
 				html.print(" onclick='this.select()'");
 		}
-		html.print(" onkeydown='tableDirection(event,this)'");
+		html.print(" onkeydown='return tableDirection(event,this)'");
 		if (dataField.size() > 0) {
 			for (String field : dataField) {
 				html.print(" data-%s='%s'", field, ds.getString(field));
