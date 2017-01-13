@@ -222,8 +222,8 @@ public class StartForms implements Filter {
 						form.getParam("procCode", null)))
 					throw new RuntimeException("对不起，您没有权限执行此功能！");
 			}
-			// 检验此设备是否需要设备验证码
-			if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
+			// 增加91100128账号跳过设备认证的判断，用于苹果公司测试，后需删除此判断
+			if ("91100128".equals(request.getParameter("login_usr"))) {
 				try {
 					if (form.getClient().isPhone()) {
 						try {
@@ -238,9 +238,27 @@ public class StartForms implements Filter {
 					form.setParam("message", e.getMessage());
 					pageOutput = e.getViewFile();
 				}
-			else {
-				log.debug("没有进行认证过，跳转到设备认证页面");
-				pageOutput = new RedirectPage(form, Application.getConfig().getFormVerifyDevice());
+			} else {
+				// 检验此设备是否需要设备验证码
+				if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
+					try {
+						if (form.getClient().isPhone()) {
+							try {
+								method = form.getClass().getMethod(funcCode + "_phone");
+							} catch (NoSuchMethodException e) {
+								method = form.getClass().getMethod(funcCode);
+							}
+						} else
+							method = form.getClass().getMethod(funcCode);
+						pageOutput = method.invoke(form);
+					} catch (PageException e) {
+						form.setParam("message", e.getMessage());
+						pageOutput = e.getViewFile();
+					}
+				else {
+					log.debug("没有进行认证过，跳转到设备认证页面");
+					pageOutput = new RedirectPage(form, Application.getConfig().getFormVerifyDevice());
+				}
 			}
 
 			// FIXME: 此处代码用于ee关闭问题，后续改进
