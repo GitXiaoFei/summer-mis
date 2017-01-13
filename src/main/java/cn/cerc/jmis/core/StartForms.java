@@ -151,6 +151,9 @@ public class StartForms implements Filter {
 
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
+		// 91100128暂时跳过验证
+		if ("91100128".equals(form.getHandle().getUserCode()))
+			return true;
 		String deviceId = form.getClient().getId();
 		String verifyCode = form.getRequest().getParameter("verifyCode");
 		log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
