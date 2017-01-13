@@ -255,7 +255,7 @@ public class StartForms implements Filter {
 					IPage output = (IPage) pageOutput;
 					output.execute();
 				} else {
-					log.warn(String.format("%s pageOutput is not IPage: %s" + funcCode, pageOutput));
+					log.warn(String.format("%s pageOutput is not IPage: %s", funcCode, pageOutput));
 					JspPage output = new JspPage(form);
 					output.setJspFile((String) pageOutput);
 					output.execute();
