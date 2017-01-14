@@ -52,8 +52,12 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 			build.buildUrl(record, url);
 			if (!"".equals(url.getUrl())) {
 				html.print("<a href=\"%s\"", url.getUrl());
-				if (url.getTitle() != null)
+				if (url.getTitle() != null) {
 					html.print(" title=\"%s\"", url.getTitle());
+				}
+				if (url.getTarget() != null) {
+					html.print(" target=\"%s\"", url.getTarget());
+				}
 				html.println(">%s</a>", field.getText(record));
 			} else {
 				html.println(field.getText(record));

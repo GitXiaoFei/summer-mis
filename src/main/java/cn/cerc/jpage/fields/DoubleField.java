@@ -63,8 +63,12 @@ public class DoubleField extends AbstractField implements IColumn {
 				buildUrl.buildUrl(ds, url);
 				if (!"".equals(url.getUrl())) {
 					html.print("<a href=\"%s\"", url.getUrl());
-					if (url.getTitle() != null)
+					if (url.getTitle() != null) {
 						html.print(" title=\"%s\"", url.getTitle());
+					}
+					if (url.getTarget() != null) {
+						html.print(" target=\"%s\"", url.getTarget());
+					}
 					html.println(">%s</a>", getText(ds));
 				} else
 					html.println(getText(ds));
