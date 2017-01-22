@@ -90,7 +90,7 @@ public class StartForms implements Filter {
 			ClientDevice info = new ClientDevice(form);
 			info.setRequest(req);
 			req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
-
+			form.setClient(info);
 			// 查找菜单定义
 			IMenu menu = form.getMenu();
 			if (menu == null) {
@@ -151,6 +151,9 @@ public class StartForms implements Filter {
 
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
+		// 91100128暂时跳过验证
+		if ("91100128".equals(form.getHandle().getUserCode()))
+			return true;
 		String deviceId = form.getClient().getId();
 		String verifyCode = form.getRequest().getParameter("verifyCode");
 		log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
@@ -222,8 +225,8 @@ public class StartForms implements Filter {
 						form.getParam("procCode", null)))
 					throw new RuntimeException("对不起，您没有权限执行此功能！");
 			}
-			// 检验此设备是否需要设备验证码
-			if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
+			// 增加91100128账号跳过设备认证的判断，用于苹果公司测试，后需删除此判断
+			if ("91100128".equals(request.getParameter("login_usr"))) {
 				try {
 					if (form.getClient().isPhone()) {
 						try {
@@ -238,9 +241,27 @@ public class StartForms implements Filter {
 					form.setParam("message", e.getMessage());
 					pageOutput = e.getViewFile();
 				}
-			else {
-				log.debug("没有进行认证过，跳转到设备认证页面");
-				pageOutput = new RedirectPage(form, Application.getConfig().getFormVerifyDevice());
+			} else {
+				// 检验此设备是否需要设备验证码
+				if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
+					try {
+						if (form.getClient().isPhone()) {
+							try {
+								method = form.getClass().getMethod(funcCode + "_phone");
+							} catch (NoSuchMethodException e) {
+								method = form.getClass().getMethod(funcCode);
+							}
+						} else
+							method = form.getClass().getMethod(funcCode);
+						pageOutput = method.invoke(form);
+					} catch (PageException e) {
+						form.setParam("message", e.getMessage());
+						pageOutput = e.getViewFile();
+					}
+				else {
+					log.debug("没有进行认证过，跳转到设备认证页面");
+					pageOutput = new RedirectPage(form, Application.getConfig().getFormVerifyDevice());
+				}
 			}
 
 			// FIXME: 此处代码用于ee关闭问题，后续改进
@@ -255,7 +276,7 @@ public class StartForms implements Filter {
 					IPage output = (IPage) pageOutput;
 					output.execute();
 				} else {
-					log.warn(String.format("%s pageOutput is not IPage: %s" + funcCode, pageOutput));
+					log.warn(String.format("%s pageOutput is not IPage: %s", funcCode, pageOutput));
 					JspPage output = new JspPage(form);
 					output.setJspFile((String) pageOutput);
 					output.execute();

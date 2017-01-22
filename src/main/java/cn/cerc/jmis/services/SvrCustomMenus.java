@@ -50,20 +50,6 @@ public class SvrCustomMenus extends CustomService {
 		return true;
 	}
 
-	public boolean list() {
-		BuildQuery f = new BuildQuery(this);
-		String corpNo = getDataIn().getHead().getSafeString("CorpNo_");
-		if (corpNo == null || corpNo.equals(""))
-			throw new RuntimeException("您输入的公司别为空，请检查！");
-		f.byField("s.Custom_", true);
-		// FIXME: 后续须把*改为具体字段
-		f.add("select s.*,c.Code_ as CostomCode_ from %s s ", SystemTable.get(SystemTable.getAppMenus));
-		f.add("left join %s c on s.Code_ = c.Code_ and c.CorpNo_='%s'", SystemTable.get(SystemTable.getCustomMenus),
-				corpNo);
-		getDataOut().appendDataSet(f.open());
-		return true;
-	}
-
 	public boolean search() {
 		if (!SystemTable.ManageBook.equals(handle.getCorpNo()))
 			throw new RuntimeException("您不是运营商账号不允许操作！");

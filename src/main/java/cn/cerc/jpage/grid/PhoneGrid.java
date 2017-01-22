@@ -3,6 +3,7 @@ package cn.cerc.jpage.grid;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -14,17 +15,19 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.other.BuildUrl;
 
+// 手机专用表格
 public class PhoneGrid extends AbstractGrid {
-	// 手机专用表格
+
+	private String CSSClass = "scrollArea";
 	private List<PhoneLine> lines = new ArrayList<>();
 
-	public PhoneGrid(Component owner) {
-		super(owner);
+	public PhoneGrid(IForm form, Component owner) {
+		super(form, owner);
 	}
 
 	@Override
 	public void output(HtmlWriter html) {
-		html.print("<div class='scrollArea'>");
+		html.print("<div class='%s'>", this.getCSSClass());
 		if (this.getDataSet().size() > 0) {
 			if (form != null) {
 				form.outHead(html);
@@ -44,7 +47,7 @@ public class PhoneGrid extends AbstractGrid {
 		if (dataSet.size() == 0)
 			return;
 
-		html.println(String.format("<ol class=\"%s\">", this.getCSSClass_Phone()));
+		html.println(String.format("<ol class=\"%s\">", "context"));
 
 		int i = pages.getBegin();
 		while (i <= pages.getEnd()) {
@@ -85,15 +88,15 @@ public class PhoneGrid extends AbstractGrid {
 	}
 
 	public class PhoneLine extends Component implements DataSource {
-		private DataSource dataView;
+		private DataSource dataSource;
 		private boolean Table = false;
 		private String style;
 		private ExpendField expender;
 
 		private List<AbstractField> columns = new ArrayList<>();
 
-		public PhoneLine(DataSource dataView) {
-			this.dataView = dataView;
+		public PhoneLine(DataSource dataSource) {
+			this.dataSource = dataSource;
 		}
 
 		public PhoneLine setStyle(String style) {
@@ -119,11 +122,11 @@ public class PhoneGrid extends AbstractGrid {
 		}
 
 		private void outputTableString(HtmlWriter html) {
-			if (dataView == null)
+			if (dataSource == null)
 				throw new RuntimeException("dataView is null");
-			Record dataSet = dataView.getRecord();
-			if (dataSet == null)
+			if (dataSource.getDataSet() == null)
 				throw new RuntimeException("dataSet is null");
+			Record record = dataSource.getDataSet().getCurrent();
 			html.print("<tr");
 			if (this.expender != null)
 				html.print(String.format(" role=\"%s\" style=\"display: none;\"", expender.getHiddenId()));
@@ -140,13 +143,13 @@ public class PhoneGrid extends AbstractGrid {
 					if (!"".equals(name))
 						html.print(name + ": ");
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet, url);
+					build.buildUrl(record, url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
-						html.print(field.getText(dataSet));
+						html.print(field.getText(record));
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet));
+						html.println(field.getText(record));
 					}
 				} else {
 					outputColumn(field, html);
@@ -166,15 +169,15 @@ public class PhoneGrid extends AbstractGrid {
 				html.print(">");
 				BuildUrl build = field.getBuildUrl();
 				if (build != null) {
-					Record dataSet = dataView != null ? dataView.getRecord() : null;
+					Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
 					UrlRecord url = new UrlRecord();
-					build.buildUrl(dataSet, url);
+					build.buildUrl(record, url);
 					if (!"".equals(url.getUrl())) {
 						html.println("<a href=\"%s\">", url.getUrl());
 						outputColumn(field, html);
 						html.println("</a>");
 					} else {
-						html.println(field.getText(dataSet));
+						html.println(field.getText(record));
 					}
 				} else {
 					outputColumn(field, html);
@@ -185,11 +188,11 @@ public class PhoneGrid extends AbstractGrid {
 		}
 
 		private void outputColumn(AbstractField field, HtmlWriter html) {
-			Record dataSet = dataView != null ? dataView.getRecord() : null;
+			DataSet dataSet = dataSource != null ? dataSource.getDataSet() : null;
 			String name = field.getShortName();
 			if (!"".equals(name))
 				html.print(name + ": ");
-			html.print(field.getText(dataSet));
+			html.print(field.getText(dataSet.getCurrent()));
 		}
 
 		@Override
@@ -212,13 +215,6 @@ public class PhoneGrid extends AbstractGrid {
 			return this;
 		}
 
-		@Override
-		public Record getRecord() {
-			if (dataView == null)
-				return null;
-			return dataView.getRecord();
-		}
-
 		public ExpendField getExpender() {
 			return expender;
 		}
@@ -226,11 +222,44 @@ public class PhoneGrid extends AbstractGrid {
 		public void setExpender(ExpendField expender) {
 			this.expender = expender;
 		}
+
+		@Override
+		public DataSet getDataSet() {
+			return dataSource.getDataSet();
+		}
+
+		@Override
+		public boolean isReadonly() {
+			return dataSource.isReadonly();
+		}
+
+		@Override
+		public void updateValue(String id, String code) {
+			dataSource.updateValue(id, code);
+		}
 	}
 
 	@Override
 	public Component getExpender() {
 		return this;
+	}
+
+	public String getCSSClass() {
+		return CSSClass;
+	}
+
+	public void setCSSClass(String CSSClass) {
+		this.CSSClass = CSSClass;
+	}
+
+	@Override
+	public boolean isReadonly() {
+		return true;
+	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		
 	}
 
 }

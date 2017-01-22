@@ -1,6 +1,5 @@
 package cn.cerc.jpage.grid.lines;
 
-import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
@@ -15,9 +14,11 @@ public class ChildGridLine extends AbstractGridLine {
 	}
 
 	@Override
-	public void output(HtmlWriter html, DataSet dataSet, int lineNo) {
+	public void output(HtmlWriter html, int lineNo) {
 		html.print("<tr");
-		html.print(" id='%s_%s'", "tr" + dataSet.getRecNo(), lineNo);
+		html.print(" id='%s_%s'", "tr" + dataSource.getDataSet().getRecNo(), lineNo);
+		if (!this.isVisible())
+			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
 			html.print("<td");
@@ -27,19 +28,22 @@ public class ChildGridLine extends AbstractGridLine {
 				html.print(" style=\"%s\"", item.getStyle());
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
+
 			if (item.getRole() != null)
 				html.print(" role=\"%s\"", item.getRole());
+			else if (item.getFields().get(0).getField() != null)
+				html.print(" role=\"%s\"", item.getFields().get(0).getField());
 
 			html.println(">");
 			for (IField obj : item.getFields()) {
 				if (obj instanceof AbstractField) {
 					AbstractField field = (AbstractField) obj;
 					if (field.getTitle() != null && !"".equals(field.getTitle()))
-						html.print("%s: ", field.getTitle());
+						html.print("%s： ", field.getTitle());
 					if (field instanceof IColumn)
-						html.print(((IColumn) field).format(dataSource.getRecord()));
+						html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
 					else if (field instanceof AbstractField)
-						outputField(html, (AbstractField) field);
+						outputField(html, field);
 					else
 						throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
 				}
@@ -58,6 +62,16 @@ public class ChildGridLine extends AbstractGridLine {
 		col.setRole(field.getField());
 		getCells().add(col);
 		col.addField(field);
+	}
+
+	@Override
+	public boolean isReadonly() {
+		return dataSource.isReadonly();
+	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		dataSource.updateValue(id, code);
 	}
 
 }

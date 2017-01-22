@@ -9,6 +9,7 @@ public class UrlRecord {
 	private String site;
 	private String name;
 	private String title;
+	private String target;
 	private Map<String, String> params = new HashMap<>();
 
 	public UrlRecord() {
@@ -85,6 +86,14 @@ public class UrlRecord {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 }

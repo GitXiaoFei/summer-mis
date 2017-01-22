@@ -58,12 +58,12 @@ public class Block402 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<section class='block402'");
-		
-		if(!"".equals(this.role))
-			html.print(" role='%s'",this.role);
-		if(!"".equals(this.dataName))
-			html.print(" data-%s='%s'",this.dataName, this.dataJson);
-		
+
+		if (!"".equals(this.role))
+			html.print(" role='%s'", this.role);
+		if (!"".equals(this.dataName))
+			html.print(" data-%s='%s'", this.dataName, this.dataJson);
+
 		html.print(">");
 		html.print("<div class='up_con'>");
 		product.output(html);

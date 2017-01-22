@@ -37,6 +37,8 @@ public class MobileConfig {
 	private String lastModified;
 	// Debug标志, true: 显示自定义首页框，否则不允许更改默认首页
 	private boolean debug;
+	
+	private String ocrDataPath;
 
 	public String getWebVersion() {
 		return webVersion;
@@ -133,8 +135,18 @@ public class MobileConfig {
 	public List<String> getCacheFiles() {
 		return cacheFiles;
 	}
-	
+
 	public void setCacheFiles(List<String> cacheFiles) {
-		 this.cacheFiles = cacheFiles;
+		this.cacheFiles = cacheFiles;
 	}
+
+	public String getOcrDataPath() {
+		return ocrDataPath;
+	}
+
+	public void setOcrDataPath(String ocrDataPath) {
+		this.ocrDataPath = ocrDataPath;
+	}
+
+
 }

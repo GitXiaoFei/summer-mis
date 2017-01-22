@@ -42,8 +42,12 @@ public class UrlSide extends Component {
 		html.println("<div class=\"contents\">");
 		for (UrlRecord url : urls) {
 			html.print("<a href=\"%s\"", url.getUrl());
-			if (url.getTitle() != null)
+			if (url.getTitle() != null) {
 				html.print(" title=\"%s\"", url.getTitle());
+			}
+			if (url.getTarget() != null) {
+				html.print(" target=\"%s\"", url.getTarget());
+			}
 			html.println(">%s</a>", url.getName());
 		}
 		for (String key : items.keySet())

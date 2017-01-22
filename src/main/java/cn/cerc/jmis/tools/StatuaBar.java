@@ -20,7 +20,7 @@ public class StatuaBar extends Component {
 		this.setId("bottom");
 	}
 
-	public void addMenu(String caption, String url) {
+	public void addButton(String caption, String url) {
 		int count = 1;
 		for (Component obj : this.getComponents()) {
 			if (obj instanceof UrlMenu) {

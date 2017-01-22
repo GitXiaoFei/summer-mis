@@ -1,7 +1,6 @@
 package cn.cerc.jpage.fields;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
@@ -21,13 +20,13 @@ public class RangeField extends AbstractField implements DataSource {
 
 	@Override
 	public void output(HtmlWriter html) {
-		Record dataSet = dataView != null ? dataView.getRecord() : null;
+		Record record = dataSource != null ? dataSource.getDataSet().getCurrent() : null;
 		if (this.hidden) {
 			html.print("<input");
 			html.print(" type=\"hidden\"");
 			html.print(" name=\"%s\"", this.getId());
 			html.print(" id=\"%s\"", this.getId());
-			String value = this.getText(dataSet);
+			String value = this.getText(record);
 			if (value != null)
 				html.print(" value=\"%s\"", value);
 			html.println("/>");
@@ -41,7 +40,7 @@ public class RangeField extends AbstractField implements DataSource {
 					child = (AbstractField) component;
 					String val = child.getCSSClass_phone();
 					child.setCSSClass_phone("price");
-					child.outputInput(html, dataSet);
+					child.outputInput(html, record);
 					child.setCSSClass_phone(val);
 				}
 			}
@@ -66,18 +65,8 @@ public class RangeField extends AbstractField implements DataSource {
 	}
 
 	@Override
-	public Record getRecord() {
-		return dataView.getRecord();
-	}
-
-	@Override
 	public boolean isReadonly() {
-		return dataView.isReadonly();
-	}
-
-	@Override
-	public HttpServletRequest getRequest() {
-		return dataView.getRequest();
+		return dataSource.isReadonly();
 	}
 
 	@Override
@@ -89,5 +78,15 @@ public class RangeField extends AbstractField implements DataSource {
 				child.updateField();
 			}
 		}
+	}
+
+	@Override
+	public DataSet getDataSet() {
+		return dataSource.getDataSet();
+	}
+
+	@Override
+	public void updateValue(String id, String code) {
+		dataSource.updateValue(id, code);
 	}
 }

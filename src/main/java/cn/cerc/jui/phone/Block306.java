@@ -10,7 +10,7 @@ import cn.cerc.jpage.vcl.Span;
 /**
  * 三行文字列表显示
  * <p>
- * 标题 + 2行信息说明
+ * 标题 + 3行信息说明
  * 
  * @author HuangRongjun
  *
@@ -29,7 +29,7 @@ public class Block306 extends Component {
 	@Override
 	public void output(HtmlWriter html) {
 		if (items.size() == 0) {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 3; i++) {
 				items.add("line" + i);
 			}
 		}
@@ -53,7 +53,7 @@ public class Block306 extends Component {
 		return items.size();
 	}
 
-	public void addItems(String line) {
+	public void addItem(String line) {
 		if (items.size() > 2) {
 			throw new RuntimeException("最多只能放3行信息");
 		}

@@ -1,6 +1,6 @@
 package cn.cerc.jpage.fields;
 
-import static cn.cerc.jdb.other.utils.roundTo;
+import java.text.DecimalFormat;
 
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -8,11 +8,10 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
-import cn.cerc.jpage.grid.DataGrid;
+import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class DoubleField extends AbstractField implements IColumn {
 	private ColumnEditor editor;
-	private int scale = -4;
 
 	public DoubleField(Component owner, String title, String field) {
 		super(owner, title, 4);
@@ -36,32 +35,12 @@ public class DoubleField extends AbstractField implements IColumn {
 			return html.toString();
 		}
 		try {
-			String val = "" + roundTo(dataSet.getDouble(field), scale);
-			if (buildUrl != null) {
-				HtmlWriter html = new HtmlWriter();
-				UrlRecord url = new UrlRecord();
-				buildUrl.buildUrl(dataSet, url);
-				if (!"".equals(url.getUrl())) {
-					html.print("<a href=\"%s\"", url.getUrl());
-					if (url.getTitle() != null)
-						html.print(" title=\"%s\"", url.getTitle());
-					html.println(">%s</a>", val);
-				}
-				return html.toString();
-			}
-			return val;
+			double val = dataSet.getDouble(field);
+			DecimalFormat df = new DecimalFormat("0.####");
+			return df.format(val);
 		} catch (NumberFormatException e) {
 			return "0";
 		}
-	}
-
-	public int getScale() {
-		return scale;
-	}
-
-	public DoubleField setScale(int scale) {
-		this.scale = scale;
-		return this;
 	}
 
 	@Override
@@ -77,10 +56,27 @@ public class DoubleField extends AbstractField implements IColumn {
 			return value.toString();
 
 		Record ds = (Record) value;
-		if (this.isReadonly())
-			return getText(ds);
-
-		if (!(this.getOwner() instanceof DataGrid))
+		if (this.isReadonly()) {
+			if (buildUrl != null) {
+				HtmlWriter html = new HtmlWriter();
+				UrlRecord url = new UrlRecord();
+				buildUrl.buildUrl(ds, url);
+				if (!"".equals(url.getUrl())) {
+					html.print("<a href=\"%s\"", url.getUrl());
+					if (url.getTitle() != null) {
+						html.print(" title=\"%s\"", url.getTitle());
+					}
+					if (url.getTarget() != null) {
+						html.print(" target=\"%s\"", url.getTarget());
+					}
+					html.println(">%s</a>", getText(ds));
+				} else
+					html.println(getText(ds));
+				return html.toString();
+			} else
+				return getText(ds);
+		}
+		if (!(this.getOwner() instanceof AbstractGridLine))
 			return getText(ds);
 
 		return getEditor().format(ds);

@@ -14,10 +14,10 @@ import cn.cerc.jpage.vcl.Span;
  */
 public class Block121 extends Component {
 	private Span title = new Span();
-	private Image leftImage = null;
+	private Image leftImage = new Image();
 	private UrlRecord leftUrl = new UrlRecord();
 	private UrlRecord rightUrl = new UrlRecord();
-	private Span rightText = null;
+	private Span rightText = new Span();
 
 	public Block121(Component owner) {
 		super(owner);
@@ -27,7 +27,7 @@ public class Block121 extends Component {
 	public void output(HtmlWriter html) {
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.print("<header  class='block121'>");
-		if (this.leftImage != null) {
+		if (this.leftImage.getSrc() != null && !this.leftImage.getSrc().equals("")) {
 			html.print("<a href='%s'  class='arrow-left'>", this.leftUrl.getUrl());
 			this.leftImage.output(html);
 			html.print("</a>");
@@ -35,7 +35,7 @@ public class Block121 extends Component {
 		html.print("<h1 class='title'>");
 		this.title.output(html);
 		html.print("</h1>");
-		if (this.rightText != null) {
+		if (this.rightText.getText() != null && !this.rightText.getText().equals("")) {
 			html.print("<a href='%s' class='arrow-right'>", this.rightUrl.getUrl());
 			this.rightText.output(html);
 			html.print("</a>");
@@ -47,30 +47,12 @@ public class Block121 extends Component {
 		return rightUrl;
 	}
 
-	public void setRightUrl(UrlRecord rightUrl) {
-		this.rightUrl = rightUrl;
-	}
-
 	public Span getRightText() {
 		return rightText;
 	}
 
-	public void setRightText(String rightText) {
-		this.rightText = new Span();
-		this.rightText.setText(rightText);
-	}
-
 	public Span getTitle() {
 		return title;
-	}
-
-	public void setTitle(String text) {
-		this.title.setText(text);
-	}
-
-	public void setLeftImage(String leftImage) {
-		this.leftImage = new Image();
-		this.leftImage.setSrc(leftImage);
 	}
 
 	public Image getLeftImage() {
@@ -79,10 +61,6 @@ public class Block121 extends Component {
 
 	public UrlRecord getLeftUrl() {
 		return leftUrl;
-	}
-
-	public void setLeftUrl(UrlRecord leftUrl) {
-		this.leftUrl = leftUrl;
 	}
 
 }

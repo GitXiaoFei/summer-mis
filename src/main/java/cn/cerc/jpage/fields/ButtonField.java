@@ -6,6 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class ButtonField extends AbstractField {
 	private String data;
+	private String type;
 
 	public ButtonField() {
 		super(null, null, 0);
@@ -44,7 +45,22 @@ public class ButtonField extends AbstractField {
 		html.print("<button name=\"%s\"", this.getId());
 		if (this.data != null)
 			html.print(" value=\"%s\"", this.data);
+		if (getCSSClass_phone() != null)
+			html.print(" class=\"%s\"", getCSSClass_phone());
+		if (this.getOnclick() != null)
+			html.print(" onclick=\"%s\"", this.getOnclick());
+		if (this.type != null)
+			html.print(" type=\"%s\"", this.type);
 		html.print(">");
 		html.print("%s</button>", this.getName());
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public ButtonField setType(String type) {
+		this.type = type;
+		return this;
 	}
 }

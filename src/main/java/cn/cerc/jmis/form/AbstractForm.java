@@ -88,6 +88,7 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 		return client;
 	}
 
+	@Override
 	public void setClient(IClient client) {
 		this.client = client;
 	}

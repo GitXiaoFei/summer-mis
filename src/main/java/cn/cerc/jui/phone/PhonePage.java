@@ -26,7 +26,6 @@ import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.FormView;
 import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
@@ -46,14 +45,13 @@ public class PhonePage extends AbstractJspPage {
 	private List<HtmlContent> contents = new ArrayList<>();
 	private List<HtmlContent> codes1 = new ArrayList<>();
 	private Component body;
+	private boolean defaultHeader = false;
 
 	public PhonePage(IForm form) {
 		super(form);
 		this.addScriptFile("js/jquery-1.11.1.min.js");
-		this.addScriptFile("js/delphi.vcl.js");
-		this.addScriptFile("js/TApplication.js");
-		this.addScriptFile("js/dialog.js");
-		this.addScriptFile("js/Shopping.js");
+		this.addScriptFile("js/summer.js");
+		this.addScriptFile("js/vine.js");
 		this.addScriptFile("jui/phone/phone-block.js");
 		//
 		this.addStyleFile("jui/phone/phone-block.css");
@@ -103,6 +101,8 @@ public class PhonePage extends AbstractJspPage {
 			this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
 			if (mainMenu.getRightMenus().size() > 0)
 				this.add("subMenus", mainMenu.getRightMenus());
+			if (this.defaultHeader)
+				loadDefaultHeader();
 		}
 
 		// 右边区域
@@ -222,13 +222,6 @@ public class PhonePage extends AbstractJspPage {
 		return html;
 	}
 
-	public FormView createForm() {
-		FormView form = new FormView(this.getRequest());
-		form.setId("search");
-		form.setOwner(this.getContent());
-		return form;
-	}
-
 	public Component getBody() {
 		if (body == null) {
 			body = new Component();
@@ -288,8 +281,12 @@ public class PhonePage extends AbstractJspPage {
 	public void setHeader(Component header) {
 		this.header = header;
 	}
-	
+
 	public void addDefaultHeader() {
+		defaultHeader = true;
+	}
+
+	private void loadDefaultHeader() {
 		HeaderSide header = null;
 		HttpServletRequest request = this.getRequest();
 		boolean _showMenu_ = "true".equals(this.getForm().getParam("showMenus", "true"));

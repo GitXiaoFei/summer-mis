@@ -52,4 +52,8 @@ public class RowCell extends Component {
 	public void setStyle(String style) {
 		this.style = style;
 	}
+
+	public String getFirstField() {
+		return this.fields.get(0).getField();
+	}
 }

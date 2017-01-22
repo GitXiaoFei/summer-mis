@@ -1,7 +1,6 @@
 package cn.cerc.jmis.page;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
@@ -101,22 +99,9 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			// 登陆验证失败，进行判断，手机号为空，则回到登陆页，手机不为空，密码为空，则跳到发送验证码页面
 			String mobile = app.getDataOut().getHead().getSafeString("Mobile_");
 			if (mobile == null || "".equals(mobile)) {
-				if(!getForm().getClient().isPhone()){
-					//后台登录失败是，调用首页模板Page，返回后台首页
-					try {
-						form.getRequest().setAttribute("loginError", "true");
-						Method method = form.getClass().getMethod("execute");
-						IPage output = (IPage) method.invoke(form);
-						output.execute();
-					} catch (Exception e) {
-						e.printStackTrace();
-						this.execute();
-					}
-				}else{
-					log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
-					req.setAttribute("loginMsg", app.getMessage());
-					this.execute();
-				}
+				log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
+				req.setAttribute("loginMsg", app.getMessage());
+				this.execute();
 			} else if (password == null || "".equals(password)) {
 				getResponse().sendRedirect("TFrmEasyReg?phone=" + mobile);
 				return false;

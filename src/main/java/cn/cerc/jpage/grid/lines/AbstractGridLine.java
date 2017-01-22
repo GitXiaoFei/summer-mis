@@ -18,6 +18,7 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 	private List<IField> fields = new ArrayList<>();
 	private List<RowCell> cells = new ArrayList<>();
 	protected DataSource dataSource;
+	private boolean visible = true;
 
 	public AbstractGridLine(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -36,14 +37,14 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 	public abstract void addField(IField field);
 
 	@Override
-	public Record getRecord() {
-		return dataSource.getRecord();
+	public DataSet getDataSet() {
+		return dataSource.getDataSet();
 	}
 
-	public abstract void output(HtmlWriter html, DataSet dataSet, int lineNo);
+	public abstract void output(HtmlWriter html, int lineNo);
 
 	protected void outputField(HtmlWriter html, AbstractField field) {
-		Record record = dataSource.getRecord();
+		Record record = dataSource.getDataSet().getCurrent();
 
 		BuildUrl build = field.getBuildUrl();
 		if (build != null) {
@@ -51,8 +52,12 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 			build.buildUrl(record, url);
 			if (!"".equals(url.getUrl())) {
 				html.print("<a href=\"%s\"", url.getUrl());
-				if (url.getTitle() != null)
+				if (url.getTitle() != null) {
 					html.print(" title=\"%s\"", url.getTitle());
+				}
+				if (url.getTarget() != null) {
+					html.print(" target=\"%s\"", url.getTarget());
+				}
 				html.println(">%s</a>", field.getText(record));
 			} else {
 				html.println(field.getText(record));
@@ -72,5 +77,13 @@ public abstract class AbstractGridLine extends Component implements DataSource {
 
 	protected List<RowCell> getCells() {
 		return cells;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }

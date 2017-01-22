@@ -39,10 +39,6 @@ public class Block125 extends Component {
 		html.print("</div>");
 	}
 
-	public List<Span> getItems() {
-		return items;
-	}
-
 	public void addItems(String text, UrlRecord url) {
 		Span span = new Span();
 		span.setText(text);
@@ -52,10 +48,6 @@ public class Block125 extends Component {
 
 	public List<UrlRecord> getUrlRecords() {
 		return urlRecords;
-	}
-
-	public void setUrlRecord(List<UrlRecord> urlRecords) {
-		this.urlRecords = urlRecords;
 	}
 
 }
