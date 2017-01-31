@@ -49,7 +49,7 @@ public class WxpayAPI {
 
     @SuppressWarnings({ "static-access", "unchecked" })
     public Map<String, String> requestPay(String body) {
-        String notify_url = String.format("%s/%s/%s", rootSite, Application.getConfig().getPathForms(), this.notifyUrl);
+        String notify_url = String.format("%s/%s/%s", rootSite, Application.getAppConfig().getPathForms(), this.notifyUrl);
         String trade_type = "APP";
         String nonce_str = Sha1Util.getNonceStr();
         String total_fee = String.valueOf(new BigDecimal(amount).multiply(new BigDecimal(100)).intValue());// 金额

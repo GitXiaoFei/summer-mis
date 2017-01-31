@@ -42,8 +42,8 @@ public class ErrorPage implements IPage {
 		error.printStackTrace();
 		String message = error.toString();
 		getRequest().setAttribute("msg", message.substring(message.indexOf(":") + 1));
-		String jspFile = Application.getConfig().getJspErrorFile();
-		String url = String.format("/WEB-INF/%s/%s", Application.getConfig().getPathForms(), jspFile);
+		String jspFile = Application.getAppConfig().getJspErrorFile();
+		String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), jspFile);
 		getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
 	}
 

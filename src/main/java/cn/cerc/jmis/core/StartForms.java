@@ -57,7 +57,7 @@ public class StartForms implements Filter {
 		String childCode = getRequestForm(req);
 		if (childCode == null) {
 			req.setAttribute("message", "无效的请求：" + childCode);
-			req.getRequestDispatcher(Application.getConfig().getJspErrorFile()).forward(req, resp);
+			req.getRequestDispatcher(Application.getAppConfig().getJspErrorFile()).forward(req, resp);
 			return;
 		}
 
@@ -81,7 +81,7 @@ public class StartForms implements Filter {
 			form = Application.getForm(req, resp, formId);
 			if (form == null) {
 				req.setAttribute("message", "error servlet:" + req.getServletPath());
-				AppConfig conf = Application.getConfig();
+				AppConfig conf = Application.getAppConfig();
 				req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 				return;
 			}
@@ -129,7 +129,7 @@ public class StartForms implements Filter {
 		} catch (Exception e) {
 			log.error(e);
 			req.setAttribute("message", e.getMessage());
-			AppConfig conf = Application.getConfig();
+			AppConfig conf = Application.getAppConfig();
 			req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
 			return;
 		}
@@ -260,7 +260,7 @@ public class StartForms implements Filter {
 					}
 				else {
 					log.debug("没有进行认证过，跳转到设备认证页面");
-					pageOutput = new RedirectPage(form, Application.getConfig().getFormVerifyDevice());
+					pageOutput = new RedirectPage(form, Application.getAppConfig().getFormVerifyDevice());
 				}
 			}
 
@@ -326,7 +326,7 @@ public class StartForms implements Filter {
 					url = args[2];
 				else {
 					String sid = (String) req.getAttribute(RequestData.appSession_Key);
-					AppConfig conf = Application.getConfig();
+					AppConfig conf = Application.getAppConfig();
 					if (sid != null && !"".equals(sid))
 						url = conf.getFormDefault();
 					else
