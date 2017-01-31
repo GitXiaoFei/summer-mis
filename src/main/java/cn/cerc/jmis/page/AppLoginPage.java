@@ -23,7 +23,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	@Override
 	public void init(IForm form) {
 		this.setForm(form);
-		AppConfig conf = Application.getConfig();
+		AppConfig conf = Application.getAppConfig();
 		this.setJspFile(conf.getJspLoginFile());
 		this.add("homePage", conf.getFormWelcome());
 		this.add("needVerify", "false");

@@ -92,7 +92,7 @@ public class PhonePage extends AbstractJspPage {
 			for (IMenuBar item : menus.getItems())
 				item.enrollMenu(form, rightMenus);
 		} else {
-			mainMenu.getHomePage().setSite(Application.getConfig().getFormWelcome());
+			mainMenu.getHomePage().setSite(Application.getAppConfig().getFormWelcome());
 		}
 
 		// 系统通知消息
