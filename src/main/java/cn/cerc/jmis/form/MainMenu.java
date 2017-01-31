@@ -20,7 +20,7 @@ public class MainMenu {
 	private List<UrlRecord> rightMenus = new ArrayList<>();
 
 	public MainMenu() {
-		homePage = new UrlRecord(Application.getConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
+		homePage = new UrlRecord(Application.getAppConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
 		leftMenus.add(homePage);
 	}
 
