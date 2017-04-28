@@ -33,11 +33,11 @@ public class AsyncService implements IServiceProxy {
 	private int process = 1;
 	// 处理时间
 	private String processTime;
-	//
+	//处理
 	private IHandle handle;
-	//
+	//信息等级
 	private MessageLevel messageLevel = MessageLevel.Service;
-	//
+	//信息id
 	private int msgId;
 
 	static {

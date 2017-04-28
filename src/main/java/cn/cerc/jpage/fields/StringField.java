@@ -10,6 +10,7 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class StringField extends AbstractField implements IColumn {
 	// private static final Logger log = Logger.getLogger(Field.class);
+	//编辑者
 	private ColumnEditor editor;
 
 	public StringField(Component owner, String name, String field) {

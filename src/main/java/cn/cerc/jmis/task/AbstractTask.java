@@ -7,9 +7,12 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 
 public abstract class AbstractTask extends AbstractHandle implements Runnable {
+	//加载日志
 	private static final Logger log = Logger.getLogger(AbstractTask.class);
+	//描述
 	private String describe;
 	private int interval;
+	//时间
 	private String time = "";
 
 	public String getDescribe() {

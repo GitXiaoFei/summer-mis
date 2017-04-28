@@ -2,9 +2,17 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * LabelBox
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:15:02
+ *
+ */
 public class LabelBox extends Component {
+	//文本
 	private String text;
+	//角色
 	private String role;
 	private String forid;
 

@@ -2,12 +2,23 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * 图片
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:13:26
+ *
+ */
 public class Image extends Component {
+	//宽
 	private String width;
+	//高度
 	private String height;
+	//连接
 	private String src;
+	//角色
 	private String role;
+	//单击事件
 	private String onclick;
 	private String alt;
 

@@ -5,7 +5,9 @@ import java.util.Map;
 
 public class ActionForm extends Component {
 	private String action;
+	//获取方式
 	private String method = "post";
+	//集合
 	private Map<String, String> items = new HashMap<>();
 	private String enctype;
 

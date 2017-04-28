@@ -14,9 +14,12 @@ import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jmis.core.ClientDevice;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
+	//请求
 	private HttpServletRequest request;
+	//响应
 	private HttpServletResponse response;
 	private IClient client;
+	//菜单
 	private IMenu menu;
 	private Map<String, String> params = new HashMap<>();
 

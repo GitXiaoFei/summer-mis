@@ -6,7 +6,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import cn.cerc.jdb.core.DataSet;
-
+/**
+ * 
+ * 电话数据设置
+ * @author hp
+ * @time 2017年4月28日下午6:26:28
+ *
+ */
 public class ExtDataSet extends DataSet {
 	private static final long serialVersionUID = 1L;
 

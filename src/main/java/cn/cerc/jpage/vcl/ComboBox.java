@@ -6,6 +6,13 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
+/**
+ * 
+ * 组合框
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:11:44
+ *
+ */
 public class ComboBox extends Component {
 	private LinkedHashMap<String, String> options = new LinkedHashMap<>(6);
 	private String selectId;

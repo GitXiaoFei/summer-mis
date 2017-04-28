@@ -9,6 +9,7 @@ import cn.cerc.jpage.grid.MutiPage;
 
 public class OperaPages extends Component {
 	private IForm form;
+	//页数
 	private MutiPage pages;
 
 	public OperaPages(IForm form, MutiPage pages) {

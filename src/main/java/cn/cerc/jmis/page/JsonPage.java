@@ -10,8 +10,9 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 
 public class JsonPage implements IPage {
+	//数据
 	private Object data;
-
+   //表单
 	protected IForm form;
 
 	public JsonPage() {

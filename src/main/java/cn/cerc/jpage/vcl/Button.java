@@ -2,12 +2,22 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * 按钮
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:09:54
+ *
+ */
 public class Button extends Component {
+	//名称
 	private String name;
 	private String value;
+	//文本
 	private String text;
+	//单击事件
 	private String onclick;
+	//角色
 	private String role;
 
 	public Button() {

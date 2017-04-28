@@ -18,12 +18,25 @@ public class MainMenu {
 	private List<UrlRecord> leftMenus = new ArrayList<>();
 	// 右边菜单
 	private List<UrlRecord> rightMenus = new ArrayList<>();
-
+	/**
+	 * 
+	 * 主菜单
+	 * @author 陈炙宏
+	 * @time 2017年4月28日下午5:47:38
+	 * @return
+	 */
 	public MainMenu() {
 		homePage = new UrlRecord(Application.getAppConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
 		leftMenus.add(homePage);
 	}
 
+	/**
+	 * 
+	 * 得到菜单
+	 * @author 陈炙宏
+	 * @time 2017年4月28日下午5:47:38
+	 * @return
+	 */
 	public List<UrlRecord> getBarMenus(IForm form) {
 		// 刷新
 		if (this.pageTitle != null) {

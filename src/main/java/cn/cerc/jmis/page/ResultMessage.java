@@ -3,8 +3,11 @@ package cn.cerc.jmis.page;
 import com.google.gson.Gson;
 
 public class ResultMessage {
+	//结果
 	private boolean result;
+	//信息
 	private String message;
+	//数据
 	private String data;
 
 	public ResultMessage() {

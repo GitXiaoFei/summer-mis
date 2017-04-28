@@ -12,6 +12,7 @@ import cn.cerc.jpage.other.UrlMenu;
 public class StatuaBar extends Component {
 	private IForm form;
 	private static final int MAX_MENUS = 6;
+	//核查全部
 	protected UrlRecord checkAll;
 
 	public StatuaBar(IPage owner) {

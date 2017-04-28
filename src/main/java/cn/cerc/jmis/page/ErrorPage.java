@@ -9,7 +9,9 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 
 public class ErrorPage implements IPage {
+	//错误信息
 	private Throwable error;
+	//表单
 	protected IForm form;
 
 	public ErrorPage() {

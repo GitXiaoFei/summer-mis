@@ -2,7 +2,13 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * 单选按钮
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:16:05
+ *
+ */
 public class RadioBox extends Component {
 	private String name = "";
 	private String value = "";

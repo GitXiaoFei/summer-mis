@@ -4,7 +4,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class StrongSide extends Component {
+	//标题
 	private String title;
+	//路径
 	private UrlMenu operaUrl;
 
 	public StrongSide(Component owner) {

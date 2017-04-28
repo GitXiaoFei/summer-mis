@@ -6,6 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class UrlMenu extends Component {
 	private String name;
 	private String url;
+	//样式类
 	private String cssClass;
 	private String style;
 
