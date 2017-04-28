@@ -8,6 +8,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class OptionField extends AbstractField {
+	//默认值
 	private String defaultValue;
 	private int size;// 默认显示行数
 	private Map<String, String> items = new LinkedHashMap<>();

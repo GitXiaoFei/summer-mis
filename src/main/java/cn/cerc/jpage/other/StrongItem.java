@@ -6,7 +6,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class StrongItem extends Component {
+	//名称
 	private String name;
+	//值
 	private Double value;
 
 	public StrongItem(Component owner) {

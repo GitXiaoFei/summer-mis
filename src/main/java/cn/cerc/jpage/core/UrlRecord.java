@@ -6,9 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UrlRecord {
+	//数据
 	private String site;
+	//名称
 	private String name;
+	//标题
 	private String title;
+	//对象
 	private String target;
 	private Map<String, String> params = new HashMap<>();
 

@@ -37,7 +37,7 @@ public class MobileConfig {
 	private String lastModified;
 	// Debug标志, true: 显示自定义首页框，否则不允许更改默认首页
 	private boolean debug;
-	
+	//数据路径
 	private String ocrDataPath;
 
 	public String getWebVersion() {

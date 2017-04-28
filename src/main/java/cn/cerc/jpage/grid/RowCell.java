@@ -7,10 +7,14 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.IField;
 
 public class RowCell extends Component {
+	//文件集合
 	private List<IField> fields = new ArrayList<>();
 	private int colSpan = 1;
+	//位置
 	private String align;
+	//角色
 	private String role;
+	//风格样式
 	private String style;
 
 	public String getAlign() {

@@ -2,7 +2,13 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * span标签
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:16:21
+ *
+ */
 public class Span extends Component {
 	private String text;
 	private String role;

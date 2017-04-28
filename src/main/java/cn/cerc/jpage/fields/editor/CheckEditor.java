@@ -5,7 +5,9 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.fields.AbstractField;
 
 public class CheckEditor {
+	//拥有者
 	private AbstractField owner;
+	//修改
 	private String onUpdate;
 
 	public CheckEditor(AbstractField owner) {

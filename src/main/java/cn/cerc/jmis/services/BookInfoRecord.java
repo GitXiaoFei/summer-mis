@@ -1,15 +1,23 @@
 package cn.cerc.jmis.services;
 
 public class BookInfoRecord {
+	//状态
 	private int status;
 	private String code;
+	//简化名称
 	private String shortName;
+	//名称
 	private String name;
+	//类型
 	private int corpType;
+	//地址
 	private String address;
+	//电话
 	private String tel;
+	//主管电话
 	private String managerPhone;
 	private String startHost;
+	//摘要
 	private String contact;
 	private boolean authentication;
 

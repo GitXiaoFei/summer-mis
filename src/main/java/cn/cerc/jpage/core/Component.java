@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Component {
 	private List<Component> components = new ArrayList<>();
+	//拥有者
 	private Component owner;
 
 	private String id;

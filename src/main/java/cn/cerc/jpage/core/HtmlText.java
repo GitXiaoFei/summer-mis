@@ -7,6 +7,7 @@ import java.util.List;
  * 专用于简单或原始文字输出
  */
 public class HtmlText extends Component {
+	//文本内容
 	private String content;
 	private List<String> lines;
 

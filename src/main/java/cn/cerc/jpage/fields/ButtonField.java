@@ -5,7 +5,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class ButtonField extends AbstractField {
+	//数据
 	private String data;
+	//类型
 	private String type;
 
 	public ButtonField() {

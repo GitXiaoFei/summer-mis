@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 
 public class RequestData {
+	//获取日志
 	private static final Logger log = Logger.getLogger(RequestData.class);
 	public static final String appSession_Key = "sid";
 	public static final String webclient = "webclient";

@@ -15,10 +15,14 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.MasterGridLine;
 
 public class ColumnEditor {
+	//拥有者
 	private AbstractField owner;
 	private boolean init = false;
+	//数据设置
 	private DataSet dataSet;
+	//列
 	private List<IField> columns;
+	//修改
 	private String onUpdate;
 	private List<String> dataField = new ArrayList<>(); // 设置的字段列表
 	private AbstractGridLine gridLine;

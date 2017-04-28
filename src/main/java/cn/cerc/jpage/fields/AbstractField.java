@@ -13,8 +13,11 @@ import cn.cerc.jpage.other.BuildUrl;
 import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
+	//名称
 	private String name;
+	//简化名称
 	private String shortName;
+	//位置
 	private String align;
 	private int width;
 	// 数据库相关

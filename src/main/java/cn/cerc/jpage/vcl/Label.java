@@ -2,10 +2,18 @@ package cn.cerc.jpage.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-
+/**
+ * 
+ * Label标签
+ * @author 陈炙宏
+ * @time 2017年4月28日下午6:14:40
+ *
+ */
 public class Label extends Component {
 	private String caption;
+	//链接
 	private String url;
+	//集中对象
 	private String focusTarget;
 
 	public String getFocusTarget() {

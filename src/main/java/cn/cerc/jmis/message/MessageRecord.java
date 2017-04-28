@@ -11,8 +11,11 @@ public class MessageRecord {
 	private String corpNo;
 	// 收信用户
 	private String userCode;
+	//收信项目
 	private String subject;
+	//文本内容
 	private StringBuffer content = new StringBuffer();
+	//等级水平
 	private MessageLevel level = MessageLevel.General;
 	private int process;
 

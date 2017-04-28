@@ -32,7 +32,14 @@ import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
-
+/**
+ * 
+ * 实现过滤器接口
+ * 开启表单
+ * @author 陈炙宏
+ * @time 2017年4月28日下午5:41:28
+ *
+ */
 public class StartForms implements Filter {
 	private static final Logger log = Logger.getLogger(StartForms.class);
 

@@ -14,6 +14,7 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 	private String falseText = "否";
 	private String title;
 	private boolean search;
+	//编辑者
 	private CheckEditor editor;
 
 	public BooleanField(Component owner, String title, String field) {

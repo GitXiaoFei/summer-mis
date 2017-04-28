@@ -16,7 +16,13 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
-
+/**
+ * 
+ * 接口开启APP
+ * @author 陈炙宏
+ * @time 2017年4月28日下午5:40:18
+ *
+ */
 public class StartApp implements Filter {
 	// private static final Logger log = Logger.getLogger(AppStart.class);
 
